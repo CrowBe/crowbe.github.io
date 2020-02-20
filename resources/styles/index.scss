@@ -311,17 +311,48 @@ nav {
 // Project Section
 
 .project-section {
+    margin-bottom: 10vh;
     .project-images {
         display: flex;
         flex-direction: column;
         height: 100%;
-        margin-bottom: 10vh;
         div {
             img {
                 width: 100%;
                 height: auto;
             }
         }
+    }
+    .project-description-container {
+        padding-bottom: 1vh;
+        z-index: 3;
+        button {
+            display: none;
+            color: $secondary-color;
+            margin: auto;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .revealed {
+            display: block;
+        }
+    }
+    .project-description {
+        display: none;
+        top: 0;
+        color: $primary-black;
+        font-size: 10px;
+        margin: 0 auto;
+        a {
+            color: $secondary-color;
+            font-size: 10px;
+            text-decoration: underline;
+            &:visited {
+                color: $secondary-color;
+            }
+        }
+
     }
 }
 
@@ -412,4 +443,54 @@ footer {
     justify-content: center;
     background-color: $primary-black;
     color: $primary-white;
+}
+
+@media only screen and (min-width: 768px){
+    body {
+        p {
+            font-size: larger;
+        }
+        .header-container {
+            font-size: larger;
+        }
+        .landing-container {
+            font-size: larger;
+        }
+
+    }
+    nav {
+        .dropdown-content {
+            a {
+                padding: 0 5vw;
+            }
+        }
+    }
+    .attributes-container {
+        display: grid;
+        margin: 5vh 0;
+        grid-template-columns: 25vw 25vw 25vw 25vw;
+        grid-template-rows: auto;
+        grid-template-areas: 
+        "one two three four"
+        ;
+        div {
+            i {
+                font-size: 45px;
+            }
+            h4 {
+                font-size: larger;
+            }
+            p {
+                font-size: 15px;
+            }
+        }
+    }
+    .project-section {
+        .project-images {
+            flex-direction: row;
+            div {
+                width: 50%;
+            }
+        }
+    }
 }

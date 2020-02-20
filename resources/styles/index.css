@@ -280,15 +280,47 @@ nav .clicked .dropdown-content:hover {
   color: #FFFFFC;
 }
 
+.project-section {
+  margin-bottom: 10vh;
+}
 .project-section .project-images {
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin-bottom: 10vh;
 }
 .project-section .project-images div img {
   width: 100%;
   height: auto;
+}
+.project-section .project-description-container {
+  padding-bottom: 1vh;
+  z-index: 3;
+}
+.project-section .project-description-container button {
+  display: none;
+  color: #0A2463;
+  margin: auto;
+}
+.project-section .project-description-container button:hover {
+  cursor: pointer;
+}
+.project-section .project-description-container .revealed {
+  display: block;
+}
+.project-section .project-description {
+  display: none;
+  top: 0;
+  color: #0D0221;
+  font-size: 10px;
+  margin: 0 auto;
+}
+.project-section .project-description a {
+  color: #0A2463;
+  font-size: 10px;
+  text-decoration: underline;
+}
+.project-section .project-description a:visited {
+  color: #0A2463;
 }
 
 .contact-section {
@@ -371,6 +403,46 @@ footer {
   justify-content: center;
   background-color: #0D0221;
   color: #FFFFFC;
+}
+
+@media only screen and (min-width: 768px) {
+  body p {
+    font-size: larger;
+  }
+  body .header-container {
+    font-size: larger;
+  }
+  body .landing-container {
+    font-size: larger;
+  }
+
+  nav .dropdown-content a {
+    padding: 0 5vw;
+  }
+
+  .attributes-container {
+    display: grid;
+    margin: 5vh 0;
+    grid-template-columns: 25vw 25vw 25vw 25vw;
+    grid-template-rows: auto;
+    grid-template-areas: "one two three four";
+  }
+  .attributes-container div i {
+    font-size: 45px;
+  }
+  .attributes-container div h4 {
+    font-size: larger;
+  }
+  .attributes-container div p {
+    font-size: 15px;
+  }
+
+  .project-section .project-images {
+    flex-direction: row;
+  }
+  .project-section .project-images div {
+    width: 50%;
+  }
 }
 
 /*# sourceMappingURL=index.css.map */
