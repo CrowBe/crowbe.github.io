@@ -298,8 +298,10 @@ nav .clicked .dropdown-content:hover {
 }
 .project-section .project-description-container button {
   display: none;
-  color: #0A2463;
+  color: #FFFFFC;
   margin: auto;
+  padding: 5px;
+  background-color: #A6CFD5;
 }
 .project-section .project-description-container button:hover {
   cursor: pointer;
@@ -324,7 +326,7 @@ nav .clicked .dropdown-content:hover {
 }
 
 .contact-section {
-  padding-bottom: 2vh;
+  padding-bottom: 5vh;
   background-color: #0A2463;
   color: #FFFFFC;
   border: none;
@@ -403,6 +405,12 @@ footer {
   justify-content: center;
   background-color: #0D0221;
   color: #FFFFFC;
+}
+footer #to-top-button {
+  position: absolute;
+  background-color: #0A2463;
+  color: #0D0221;
+  transform: translateY(-50%);
 }
 
 @media only screen and (min-width: 768px) {

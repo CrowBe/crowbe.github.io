@@ -328,8 +328,10 @@ nav {
         z-index: 3;
         button {
             display: none;
-            color: $secondary-color;
+            color: $primary-white;
             margin: auto;
+            padding: 5px;
+            background-color: $primary-color;
             &:hover {
                 cursor: pointer;
             }
@@ -359,7 +361,7 @@ nav {
 // Contact section styling
 
 .contact-section {
-    padding-bottom: 2vh;
+    padding-bottom: 5vh;
     background-color: $secondary-color;
     color: $primary-white;
     border: none;
@@ -443,6 +445,12 @@ footer {
     justify-content: center;
     background-color: $primary-black;
     color: $primary-white;
+    #to-top-button {
+        position: absolute;
+        background-color: $secondary-color;
+        color: $primary-black;
+        transform: translateY(-50%);
+    }
 }
 
 @media only screen and (min-width: 768px){
