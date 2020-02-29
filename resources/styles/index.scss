@@ -356,6 +356,20 @@ nav {
         }
 
     }
+    #git-profile-link {
+        padding-top: 2vh;
+        max-width: 80vw;
+        margin: auto;
+        a {
+            font-size: 12px;
+            text-decoration: underline;
+
+        }
+        a:visited {
+            color: $primary-black;
+        }
+
+    }
 }
 
 // Contact section styling

@@ -324,6 +324,18 @@ nav .clicked .dropdown-content:hover {
 .project-section .project-description a:visited {
   color: #0A2463;
 }
+.project-section #git-profile-link {
+  padding-top: 2vh;
+  max-width: 80vw;
+  margin: auto;
+}
+.project-section #git-profile-link a {
+  font-size: 12px;
+  text-decoration: underline;
+}
+.project-section #git-profile-link a:visited {
+  color: #0D0221;
+}
 
 .contact-section {
   padding-bottom: 5vh;
