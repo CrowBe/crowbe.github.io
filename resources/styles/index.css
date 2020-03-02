@@ -35,7 +35,7 @@ body .header-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 1vh;
+  padding: 8vh 0 1vh;
   background: linear-gradient(to left, #0A2463, #0D0221);
   background-size: 100px 2px;
   background-position-y: bottom;
@@ -166,7 +166,6 @@ nav .clicked .dropdown-content:hover {
 
 .about-section {
   color: #0D0221;
-  padding-top: 5vh;
 }
 
 .intro-container {
@@ -210,7 +209,7 @@ nav .clicked .dropdown-content:hover {
 .attributes-container {
   display: grid;
   margin-bottom: 5vh;
-  grid-template-columns: 50vw 50vw;
+  grid-template-columns: 50% 50%;
   grid-template-rows: auto;
   grid-template-areas: "one two" "three four";
 }
@@ -324,24 +323,17 @@ nav .clicked .dropdown-content:hover {
 .project-section .project-description a:visited {
   color: #0A2463;
 }
-.project-section #git-profile-link {
+.project-section #git-profile-referral {
   padding-top: 2vh;
-  max-width: 80vw;
   margin: auto;
-}
-.project-section #git-profile-link a {
   font-size: 12px;
-  text-decoration: underline;
-}
-.project-section #git-profile-link a:visited {
   color: #0D0221;
 }
 
 .contact-section {
-  padding-bottom: 5vh;
+  padding-bottom: 10vh;
   background-color: #0A2463;
   color: #FFFFFC;
-  border: none;
 }
 .contact-section p {
   margin: 0 auto 2vh;
@@ -354,6 +346,7 @@ nav .clicked .dropdown-content:hover {
   height: 100%;
   background-color: #FFFFFC;
   clip-path: polygon(0 0, 50% 100%, 100% 0);
+  margin-top: -1vh;
 }
 
 .icon-bar {
@@ -440,13 +433,18 @@ footer #to-top-button {
     padding: 0 5vw;
   }
 
-  .attributes-container {
-    display: grid;
-    margin: 5vh 0;
-    grid-template-columns: 25vw 25vw 25vw 25vw;
-    grid-template-rows: auto;
-    grid-template-areas: "one two three four";
+  .skills-attributes-container {
+    display: flex;
+    flex-direction: row-reverse;
+    padding-top: 5vh;
   }
+  .skills-attributes-container .attributes-container {
+    width: 50%;
+  }
+  .skills-attributes-container .skills-graph-container {
+    width: 50%;
+  }
+
   .attributes-container div i {
     font-size: 45px;
   }
@@ -457,6 +455,12 @@ footer #to-top-button {
     font-size: 15px;
   }
 
+  .project-section .project-description-container p {
+    font-size: larger;
+  }
+  .project-section .project-description-container p a {
+    font-size: larger;
+  }
   .project-section .project-images {
     flex-direction: row;
   }

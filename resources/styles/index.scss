@@ -46,7 +46,7 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-bottom: 1vh;
+        padding: 8vh 0 1vh;
         background: linear-gradient(to left, $secondary-color, $primary-black);
         background-size: 100px 2px;
         background-position-y: bottom;
@@ -185,7 +185,6 @@ nav {
 // Style the about section
 .about-section{
     color: $primary-black;
-    padding-top: 5vh;
 }
 
 
@@ -232,7 +231,7 @@ nav {
 .attributes-container {
     display: grid;
     margin-bottom: 5vh;
-    grid-template-columns: 50vw 50vw;
+    grid-template-columns: 50% 50%;
     grid-template-rows: auto;
     grid-template-areas: 
     "one two"
@@ -354,31 +353,21 @@ nav {
                 color: $secondary-color;
             }
         }
-
     }
-    #git-profile-link {
+    #git-profile-referral {
         padding-top: 2vh;
-        max-width: 80vw;
         margin: auto;
-        a {
-            font-size: 12px;
-            text-decoration: underline;
-
-        }
-        a:visited {
-            color: $primary-black;
-        }
-
+        font-size: 12px;
+        color: $primary-black;
     }
 }
 
 // Contact section styling
 
 .contact-section {
-    padding-bottom: 5vh;
+    padding-bottom: 10vh;
     background-color: $secondary-color;
     color: $primary-white;
-    border: none;
     p {
         margin: 0 auto 2vh;
     }
@@ -389,6 +378,7 @@ nav {
             height: 100%;
             background-color: $primary-white;
             clip-path: polygon(0 0, 50% 100%, 100% 0);
+            margin-top: -1vh;
         }
     }
 }
@@ -487,14 +477,18 @@ footer {
             }
         }
     }
+    .skills-attributes-container {
+        display: flex;
+        flex-direction: row-reverse;
+        padding-top: 5vh;
+        .attributes-container {
+            width: 50%;
+        }
+        .skills-graph-container {
+            width: 50%
+        }
+    }
     .attributes-container {
-        display: grid;
-        margin: 5vh 0;
-        grid-template-columns: 25vw 25vw 25vw 25vw;
-        grid-template-rows: auto;
-        grid-template-areas: 
-        "one two three four"
-        ;
         div {
             i {
                 font-size: 45px;
@@ -508,6 +502,14 @@ footer {
         }
     }
     .project-section {
+        .project-description-container {
+            p {
+                font-size: larger;
+                a {
+                    font-size: larger;
+                }
+            }
+        }
         .project-images {
             flex-direction: row;
             div {
