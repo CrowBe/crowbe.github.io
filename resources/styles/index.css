@@ -352,6 +352,19 @@ nav .clicked .dropdown-content:hover {
   clip-path: polygon(0 0, 50% 100%, 100% 0);
   margin-top: -1vh;
 }
+.contact-section .angle-container #to-top-button {
+  background-color: #0A2463;
+  transform: translateY(-50%);
+}
+.contact-section .angle-container #to-top-button:hover {
+  border-color: #FE5F55;
+}
+.contact-section .angle-container #to-top-button:hover a {
+  color: #FE5F55;
+}
+.contact-section .angle-container #to-top-button a i {
+  font-size: 30px;
+}
 
 .icon-bar {
   display: flex;
@@ -414,12 +427,6 @@ footer {
   justify-content: center;
   background-color: #0D0221;
   color: #FFFFFC;
-}
-footer #to-top-button {
-  position: absolute;
-  background-color: #0A2463;
-  color: #0D0221;
-  transform: translateY(-50%);
 }
 
 @media only screen and (min-width: 768px) {

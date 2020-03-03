@@ -387,6 +387,21 @@ nav {
             clip-path: polygon(0 0, 50% 100%, 100% 0);
             margin-top: -1vh;
         }
+        #to-top-button {
+            background-color: $secondary-color;
+            transform: translateY(-50%);
+            &:hover {
+                border-color: $contrast-color;
+                a {
+                    color: $contrast-color;
+                }
+            }
+            a {
+                i {
+                    font-size: 30px;
+                }
+            }
+        }
     }
 }
 
@@ -456,12 +471,6 @@ footer {
     justify-content: center;
     background-color: $primary-black;
     color: $primary-white;
-    #to-top-button {
-        position: absolute;
-        background-color: $secondary-color;
-        color: $primary-black;
-        transform: translateY(-50%);
-    }
 }
 
 @media only screen and (min-width: 768px){
