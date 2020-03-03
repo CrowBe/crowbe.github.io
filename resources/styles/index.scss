@@ -9,6 +9,8 @@ $primary-white: #FFFFFC;
 $primary-font: 'Montserrat', sans-serif;
 $secondary-font: 'Fira Mono', monospace;
 
+
+// CSS Variables for JS manipulation
 :root {
     --box-size: 15px;
     --box-position: 70%;
@@ -16,6 +18,7 @@ $secondary-font: 'Fira Mono', monospace;
     --animation-delay: 2s;
     --skill-width: 0%; 
 }
+
 
 // Common Styling
 
@@ -370,6 +373,10 @@ nav {
     color: $primary-white;
     p {
         margin: 0 auto 2vh;
+        a {
+            color: $contrast-color;
+            text-decoration: underline;
+        }
     }
     .angle-container {
         height: 10vh;
@@ -515,6 +522,9 @@ footer {
             div {
                 width: 50%;
             }
+        }
+        #git-profile-referral {
+            font-size: larger;
         }
     }
 }

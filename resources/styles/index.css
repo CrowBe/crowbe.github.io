@@ -338,6 +338,10 @@ nav .clicked .dropdown-content:hover {
 .contact-section p {
   margin: 0 auto 2vh;
 }
+.contact-section p a {
+  color: #FE5F55;
+  text-decoration: underline;
+}
 .contact-section .angle-container {
   height: 10vh;
 }
@@ -466,6 +470,9 @@ footer #to-top-button {
   }
   .project-section .project-images div {
     width: 50%;
+  }
+  .project-section #git-profile-referral {
+    font-size: larger;
   }
 }
 
