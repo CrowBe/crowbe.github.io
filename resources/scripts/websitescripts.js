@@ -172,7 +172,7 @@ const indicators = document.getElementsByClassName("skills-graph-indicator");
 
 /* 
 Function that triggers the animation. An if condition is used to ignore the initial
-entry that occurs upon load and returns an interSectionRatio of 0
+entry that occurs upon load and returns an intersectionRatio of 0
 */
 const handleIntersect = (entries, observer) => { 
     entries.forEach(entry => {

@@ -11,8 +11,9 @@ body {
   text-align: center;
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  background-color: #FFFFFC;
+  background-color: #fffffc;
   overflow-x: hidden;
+  width: 100vw;
 }
 body p {
   font-family: "Fira Mono", monospace;
@@ -23,20 +24,20 @@ body a {
   font-family: "Fira Mono", monospace;
   text-decoration: unset;
   font-size: 20px;
-  color: #FFFFFC;
+  color: #fffffc;
 }
 body a:visited {
-  color: #FFFFFC;
+  color: #fffffc;
 }
 body a:active {
-  color: #FE5F55;
+  color: #fe5f55;
 }
 body .header-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 8vh 0 1vh;
-  background: linear-gradient(to left, #0A2463, #0D0221);
+  background: linear-gradient(to left, #0a2463, #0d0221);
   background-size: 100px 2px;
   background-position-y: bottom;
   background-position-x: center;
@@ -55,8 +56,8 @@ body .header-container h2 {
   text-align: center;
   width: 100%;
   height: 100vh;
-  color: #FFFFFC;
-  background: linear-gradient(to left, #0A2463, #0D0221);
+  color: #fffffc;
+  background: linear-gradient(to left, #0a2463, #0d0221);
   font-size: smaller;
 }
 .landing-container h1 {
@@ -64,7 +65,7 @@ body .header-container h2 {
 }
 .landing-container h1 em {
   font-style: unset;
-  color: #FE5F55;
+  color: #fe5f55;
 }
 .landing-container h2 {
   margin: 0;
@@ -108,7 +109,7 @@ nav {
   position: sticky;
   top: 0;
   font-size: 40px;
-  background-color: #0D0221;
+  background-color: #0d0221;
   z-index: 2;
   overflow-x: hidden;
 }
@@ -126,14 +127,14 @@ nav .dropdown-container .dropdown-content {
   transition: opacity 2s;
 }
 nav .dropdown-container .dropdown-content a:hover {
-  color: #FE5F55;
+  color: #fe5f55;
 }
 nav .dropdown-container .dropdown-button {
   display: block;
   margin-right: 20px;
   transition: all 2s;
   transform: rotate(0deg);
-  color: #FFFFFC;
+  color: #fffffc;
 }
 nav .dropdown-container .dropdown-button:hover {
   cursor: pointer;
@@ -144,28 +145,28 @@ nav .clicked {
 }
 nav .clicked .dropdown-button {
   transform: rotate(180deg);
-  color: #FE5F55;
+  color: #fe5f55;
   transition: all 2s;
 }
 nav .clicked .dropdown-content {
   display: block;
   opacity: 1;
-  color: #FFFFFC;
+  color: #fffffc;
   transition: all 2s;
 }
 nav .clicked .dropdown-content:hover {
-  color: #FE5F55;
+  color: #fe5f55;
 }
 
 .contrast-bar {
   margin: 0;
   height: 10px;
-  background-color: #A6CFD5;
+  background-color: #a6cfd5;
   width: 100%;
 }
 
 .about-section {
-  color: #0D0221;
+  color: #0d0221;
 }
 
 .intro-container {
@@ -180,14 +181,14 @@ nav .clicked .dropdown-content:hover {
 }
 
 .avatar-container {
-  background-image: url("/resources/images/myAvatar.png");
-  background-position: center center;
-  background-size: contain;
-  background-repeat: no-repeat;
   height: 25vh;
   width: 25vh;
   clip-path: circle(50% at 50% 50%);
   -webkit-clip-path: circle(50% at 50% 50%);
+}
+.avatar-container img {
+  display: block;
+  width: 100%;
 }
 
 #grid-one {
@@ -214,9 +215,9 @@ nav .clicked .dropdown-content:hover {
   grid-template-areas: "one two" "three four";
 }
 .attributes-container div i {
-  background-color: #A6CFD5;
+  background-color: #a6cfd5;
   background-position: bottom;
-  color: #FFFFFC;
+  color: #fffffc;
   font-size: 40px;
   border-radius: 50%;
   width: 80px;
@@ -244,18 +245,19 @@ nav .clicked .dropdown-content:hover {
   width: 90%;
   justify-content: space-between;
   height: min-content;
-  border: 10px solid #FFFFFC;
+  border: 10px solid #fffffc;
 }
 
 .skills-graph-label {
   white-space: nowrap;
   text-align: left;
   width: 30%;
-  color: #FFFFFC;
-  background-color: #A6CFD5;
+  color: #fffffc;
+  background-color: #a6cfd5;
   padding: 5px 0 5px 10px;
 }
 .skills-graph-label h4 {
+  font-size: 12px;
   margin: 0 auto;
 }
 
@@ -265,7 +267,7 @@ nav .clicked .dropdown-content:hover {
 }
 .skills-graph-indicator div {
   width: var(--skill-width);
-  background-color: #FE5F55;
+  background-color: #fe5f55;
   height: 100%;
   transition: width 2s;
 }
@@ -276,91 +278,171 @@ nav .clicked .dropdown-content:hover {
 }
 .skills-graph-number p {
   margin: 0;
-  color: #FFFFFC;
+  color: #fffffc;
 }
 
 .project-section {
-  margin-bottom: 10vh;
+  text-align: left;
+  color: white;
+  width: 100vw;
 }
-.project-section .project-images {
+.project-section .project-list {
+  display: flex;
+  padding: 3rem;
+  overflow-x: scroll;
+}
+.project-section .project-list::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.project-section .project-list::-webkit-scrollbar-thumb {
+  background: #201c29;
+  border-radius: 10px;
+  box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+}
+.project-section .project-list::-webkit-scrollbar-track {
+  background: linear-gradient(90deg, #201c29, #201c29 1px, #17141d 0, #17141d);
+}
+.project-section .project-card {
+  min-height: 500px;
+  flex-grow: 1;
+  width: 400px;
+  min-width: 250px;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: #17141d;
+  box-shadow: -1rem 0 3rem #000;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  transition: 0.2s;
+  margin: 0;
+  scroll-snap-align: start;
+  clear: both;
+  position: relative;
 }
-.project-section .project-images div img {
+.project-section .project-card:focus-within ~ .project-card,
+.project-section .project-card:hover ~ .project-card {
+  transform: translateX(130px);
+}
+.project-section .project-card:hover {
+  transform: translateY(-1rem);
+}
+.project-section .project-card:not(:first-child) {
+  margin-left: -130px;
+}
+.project-section .project-header p {
+  margin: 0;
+  font-size: 14px;
+  color: #7a7a8c;
+}
+.project-section .project-header h2 {
+  font-size: 20px;
+  margin: 1vh 0 2vh;
+  text-decoration: none;
+  color: white;
+  border: 0;
+  display: inline-block;
+  cursor: pointer;
+}
+.project-section .project-header h2:hover {
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
+  text-shadow: none;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.project-section .project-info-container {
+  max-width: 100%;
+  overflow: hidden;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.project-section .project-image-container {
+  display: flex;
+  margin-bottom: auto;
+  justify-content: center;
+  width: 100%;
+}
+.project-section .project-image-container img {
   width: 100%;
   height: auto;
 }
-.project-section .project-description-container {
-  padding-bottom: 1vh;
-  z-index: 3;
-}
-.project-section .project-description-container button {
-  display: none;
-  color: #FFFFFC;
-  margin: auto;
-  padding: 5px;
-  background-color: #A6CFD5;
-}
-.project-section .project-description-container button:hover {
-  cursor: pointer;
-}
-.project-section .project-description-container .revealed {
-  display: block;
-}
 .project-section .project-description {
-  display: none;
-  top: 0;
-  color: #0D0221;
-  font-size: 10px;
-  margin: 0 auto;
+  font-size: 15px;
+  margin: 2vh 0;
+  flex-grow: 1;
 }
-.project-section .project-description a {
-  color: #0A2463;
-  font-size: 10px;
+.project-section .project-links a {
+  color: #fe5f55;
+  font-size: 14px;
   text-decoration: underline;
+  margin-right: 2vw;
 }
-.project-section .project-description a:visited {
-  color: #0A2463;
+.project-section .project-tags {
+  margin: 0;
+  padding: 0.5rem 0 1rem;
+  line-height: 2;
+  margin-bottom: 0;
 }
-.project-section #git-profile-referral {
-  padding-top: 2vh;
-  margin: auto;
-  font-size: 12px;
-  color: #0D0221;
+.project-section .project-tags a {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.5rem;
+  color: #7a7a8c;
+  text-transform: uppercase;
+  font-size: 0.66rem;
+  border: 3px solid white;
+  border-radius: 2rem;
+  padding: 0.2rem 0.85rem 0.25rem;
+  position: relative;
+}
+.project-section .project-tags a:nth-child(2) {
+  margin: 0 0.5vw;
+}
+.project-section .project-tags a:hover {
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
+  text-shadow: none;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-box-decoration-break: clone;
+  background-clip: text;
+  border-color: white;
 }
 
 .contact-section {
   padding-bottom: 10vh;
-  background-color: #0A2463;
-  color: #FFFFFC;
+  background-color: #0a2463;
+  color: #fffffc;
+  margin-top: -1.5vh;
+  border-top: 5px solid white;
 }
 .contact-section p {
   margin: 0 auto 2vh;
 }
 .contact-section p a {
-  color: #FE5F55;
+  color: #fe5f55;
   text-decoration: underline;
 }
 .contact-section .angle-container {
   height: 10vh;
+  margin-top: -1vh;
 }
 .contact-section .angle-container div {
   width: 100%;
   height: 100%;
-  background-color: #FFFFFC;
+  background-color: #fffffc;
   clip-path: polygon(0 0, 50% 100%, 100% 0);
-  margin-top: -1vh;
 }
 .contact-section .angle-container #to-top-button {
-  background-color: #0A2463;
+  background-color: #0a2463;
   transform: translateY(-50%);
 }
 .contact-section .angle-container #to-top-button:hover {
-  border-color: #FE5F55;
+  border-color: #fe5f55;
 }
 .contact-section .angle-container #to-top-button:hover a {
-  color: #FE5F55;
+  color: #fe5f55;
 }
 .contact-section .angle-container #to-top-button a i {
   font-size: 30px;
@@ -375,27 +457,27 @@ nav .clicked .dropdown-content:hover {
   text-align: center;
   padding: 2vh;
   transition: all 0.3s ease;
-  color: #FFFFFC;
+  color: #fffffc;
   font-size: 3vh;
 }
 .icon-bar a:hover {
-  background-color: #FFFFFC;
+  background-color: #fffffc;
 }
 
 .facebook {
-  background: #3B5998;
+  background: #3b5998;
   color: white;
 }
 .facebook:hover {
-  color: #3B5998;
+  color: #3b5998;
 }
 
 .twitter {
-  background: #55ACEE;
+  background: #55acee;
   color: white;
 }
 .twitter:hover {
-  color: #55ACEE;
+  color: #55acee;
 }
 
 .gmail {
@@ -425,8 +507,8 @@ nav .clicked .dropdown-content:hover {
 footer {
   display: flex;
   justify-content: center;
-  background-color: #0D0221;
-  color: #FFFFFC;
+  background-color: #0d0221;
+  color: #fffffc;
 }
 
 @media only screen and (min-width: 768px) {
@@ -464,22 +546,6 @@ footer {
   }
   .attributes-container div p {
     font-size: 15px;
-  }
-
-  .project-section .project-description-container p {
-    font-size: larger;
-  }
-  .project-section .project-description-container p a {
-    font-size: larger;
-  }
-  .project-section .project-images {
-    flex-direction: row;
-  }
-  .project-section .project-images div {
-    width: 50%;
-  }
-  .project-section #git-profile-referral {
-    font-size: larger;
   }
 }
 
