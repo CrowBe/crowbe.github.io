@@ -23,7 +23,6 @@ window.addEventListener('hashchange', anchorScroller);
 
 
 // Animation script for landing section background
-
 // Target the animation container
 const boxArea = document.getElementById("animation-area");
 
@@ -33,7 +32,6 @@ const getRandomInt = (min, max) => {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
 }
-
 
 /*
 Function that assigns the randomly generated numbers to named css variables
@@ -171,11 +169,11 @@ const pcts = document.getElementsByClassName("skills-graph-number");
 const indicators = document.getElementsByClassName("skills-graph-indicator");
 
 /* 
-Function that triggers the animation. An if condition is used to ignore the initial
-entry that occurs upon load and returns an intersectionRatio of 0
+Function that triggers the animation. 
 */
 const handleIntersect = (entries, observer) => { 
     entries.forEach(entry => {
+        // ignore the initial entry that occurs upon load and returns an intersectionRatio of 0
       if (entry.intersectionRatio > 0.6) {
         // Loop through for each skills bar
         for (let i = 0; i < pcts.length; i++) {

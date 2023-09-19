@@ -435,7 +435,7 @@ nav {
     margin-bottom: 0;
   }
 
-  .project-tags a {
+  .project-tags span {
     font-style: normal;
     font-weight: 700;
     font-size: 0.5rem;
@@ -451,7 +451,7 @@ nav {
     }
   }
 
-  .project-tags a:hover {
+  .project-tags span:hover {
     background: linear-gradient(90deg, #ff8a00, #e52e71);
     text-shadow: none;
     -webkit-text-fill-color: transparent;
