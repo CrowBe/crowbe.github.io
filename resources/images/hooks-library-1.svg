@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="340" viewBox="0 0 600 340">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a2463;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d0221;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a6cfd5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a6cfd5;stop-opacity:0.4" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="340" fill="url(#bg)" />
+
+  <!-- Subtle grid lines -->
+  <line x1="0" y1="85" x2="600" y2="85" stroke="#a6cfd5" stroke-opacity="0.07" stroke-width="1"/>
+  <line x1="0" y1="170" x2="600" y2="170" stroke="#a6cfd5" stroke-opacity="0.07" stroke-width="1"/>
+  <line x1="0" y1="255" x2="600" y2="255" stroke="#a6cfd5" stroke-opacity="0.07" stroke-width="1"/>
+  <line x1="150" y1="0" x2="150" y2="340" stroke="#a6cfd5" stroke-opacity="0.07" stroke-width="1"/>
+  <line x1="300" y1="0" x2="300" y2="340" stroke="#a6cfd5" stroke-opacity="0.07" stroke-width="1"/>
+  <line x1="450" y1="0" x2="450" y2="340" stroke="#a6cfd5" stroke-opacity="0.07" stroke-width="1"/>
+
+  <!-- NPM badge top-right -->
+  <rect x="490" y="22" width="86" height="26" rx="4" fill="#fe5f55" opacity="0.9"/>
+  <text x="533" y="40" font-family="'Fira Mono', monospace" font-size="13" font-weight="bold" fill="white" text-anchor="middle">npm</text>
+
+  <!-- Package name -->
+  <text x="40" y="68" font-family="'Fira Mono', monospace" font-size="12" fill="#a6cfd5" opacity="0.7">package</text>
+  <text x="40" y="98" font-family="'Fira Mono', monospace" font-size="22" font-weight="bold" fill="#fffffc">bc-react-hooks-library</text>
+
+  <!-- Accent underline -->
+  <rect x="40" y="108" width="320" height="2" fill="url(#accent)" rx="1"/>
+
+  <!-- Hook list - two columns -->
+  <!-- Left column -->
+  <text x="40" y="148" font-family="'Fira Mono', monospace" font-size="13" fill="#fe5f55">●</text>
+  <text x="60" y="148" font-family="'Fira Mono', monospace" font-size="13" fill="#a6cfd5">useLocalStorage</text>
+
+  <text x="40" y="174" font-family="'Fira Mono', monospace" font-size="13" fill="#fe5f55">●</text>
+  <text x="60" y="174" font-family="'Fira Mono', monospace" font-size="13" fill="#a6cfd5">useDebounce</text>
+
+  <text x="40" y="200" font-family="'Fira Mono', monospace" font-size="13" fill="#fe5f55">●</text>
+  <text x="60" y="200" font-family="'Fira Mono', monospace" font-size="13" fill="#a6cfd5">useMediaQuery</text>
+
+  <text x="40" y="226" font-family="'Fira Mono', monospace" font-size="13" fill="#fe5f55">●</text>
+  <text x="60" y="226" font-family="'Fira Mono', monospace" font-size="13" fill="#a6cfd5">useClickOutside</text>
+
+  <text x="40" y="252" font-family="'Fira Mono', monospace" font-size="13" fill="#fe5f55">●</text>
+  <text x="60" y="252" font-family="'Fira Mono', monospace" font-size="13" fill="#a6cfd5">useToggle</text>
+
+  <text x="40" y="278" font-family="'Fira Mono', monospace" font-size="13" fill="#fe5f55">●</text>
+  <text x="60" y="278" font-family="'Fira Mono', monospace" font-size="13" fill="#a6cfd5">useWindowSize</text>
+
+  <!-- Right column -->
+  <text x="310" y="148" font-family="'Fira Mono', monospace" font-size="13" fill="#fe5f55">●</text>
+  <text x="330" y="148" font-family="'Fira Mono', monospace" font-size="13" fill="#a6cfd5">useCopyToClipboard</text>
+
+  <text x="310" y="174" font-family="'Fira Mono', monospace" font-size="13" fill="#fe5f55">●</text>
+  <text x="330" y="174" font-family="'Fira Mono', monospace" font-size="13" fill="#a6cfd5">useEventListener</text>
+
+  <text x="310" y="200" font-family="'Fira Mono', monospace" font-size="13" fill="#fe5f55">●</text>
+  <text x="330" y="200" font-family="'Fira Mono', monospace" font-size="13" fill="#a6cfd5">usePrevious</text>
+
+  <text x="310" y="226" font-family="'Fira Mono', monospace" font-size="13" fill="#fe5f55">●</text>
+  <text x="330" y="226" font-family="'Fira Mono', monospace" font-size="13" fill="#a6cfd5">useSearchParamsState</text>
+
+  <text x="310" y="252" font-family="'Fira Mono', monospace" font-size="13" fill="#fe5f55">●</text>
+  <text x="330" y="252" font-family="'Fira Mono', monospace" font-size="13" fill="#a6cfd5">useIsFirstRender</text>
+
+  <!-- Footer bar -->
+  <rect x="0" y="308" width="600" height="32" fill="#a6cfd5" opacity="0.08"/>
+  <text x="40" y="329" font-family="'Fira Mono', monospace" font-size="12" fill="#a6cfd5" opacity="0.6">TypeScript  ·  React 18/19  ·  Vite  ·  tree-shakeable  ·  11 hooks</text>
+</svg>
