@@ -38,9 +38,10 @@
             <div class="avatar-container">
                 <img src="./resources/images/my-avatar.png" alt="cartoon man with brown hair and white skin on a blue background" />
             </div>
-            <p>  
-                I'm a Full Stack Engineer with experience across multiple stacks and a desire to learn more.
+            <p>
+                I'm a Full Stack Engineer with experience across multiple stacks and a drive to stay at the leading edge of the craft.
                 Recent roles have seen me responsible for features all the way from ideation and design through to testing and deployment.
+                An early adopter of AI-augmented development — I build with AI APIs, MCP servers and Claude tools, and document effective patterns for working with modern AI.
                 I'm an excellent communicator and facilitator, capable of engaging with people from a wide range of professional backgrounds and perspectives.
             </p>
         </div>
@@ -69,7 +70,7 @@
             </div>
             <div class="skills-graph-container">
                 <div class="skills-graph-bar">
-                    <div class="skills-graph-label"><h4>JavaScript/TypeScript</h4></div>
+                    <div class="skills-graph-label"><h4>TypeScript</h4></div>
                     <div class="skills-graph-indicator"><div></div></div>
                     <div class="skills-graph-number"><p>90%</p></div>
                 </div>
@@ -89,7 +90,7 @@
                     <div class="skills-graph-number"><p>90%</p></div>
                 </div>
                 <div class="skills-graph-bar">
-                    <div class="skills-graph-label"><h4>NodeJS/AdonisJS</h4></div>
+                    <div class="skills-graph-label"><h4>Node.js / Express</h4></div>
                     <div class="skills-graph-indicator"><div></div></div>
                     <div class="skills-graph-number"><p>60%</p></div>
                 </div>
@@ -109,7 +110,7 @@
                     <div class="skills-graph-number"><p>60%</p></div>
                 </div>
                 <div class="skills-graph-bar">
-                    <div class="skills-graph-label"><h4>Project Tools (Trello etc.)</h4></div>
+                    <div class="skills-graph-label"><h4>AI / LLM Integration</h4></div>
                     <div class="skills-graph-indicator"><div></div></div>
                     <div class="skills-graph-number"><p>75%</p></div>
                 </div>
@@ -125,11 +126,34 @@
         <div class=header-container>
             <h2>Projects</h2>
         </div>
-        <h5>React - Ruby on Rails - HTML/CSS - ES6+ - React Native</h5>
+        <h5>React - TypeScript - Ruby on Rails - Node.js - AI/LLM</h5>
         <div class="project-list">
             <article class="project-card">
                 <header class="project-header">
-                    <p>June 2024</p>
+                    <h2 id="project-head-hooks">React Hooks Library</h2>
+                </header>
+                <div class="project-info-container">
+                    <div class="project-image-container">
+                        <img src="resources/images/hooks-library-1.svg" alt="bc-react-hooks-library package listing all 11 hooks" />
+                    </div>
+                    <div class="project-description">
+                        A lightweight, tree-shakeable collection of 11 React hooks published to NPM as <em>bc-react-hooks-library</em>.
+                        Built with TypeScript and Vite, the library includes hooks for local storage, debounce, media queries, clipboard, event listeners, window size and more.
+                        Designed for reuse across projects with full TypeScript support and React 18/19 compatibility.
+                    </div>
+                </div>
+                <div class="project-tags">
+                    <span>TypeScript</span>
+                    <span>React</span>
+                    <span>NPM</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/CrowBe/react-hooks-library" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://www.npmjs.com/package/bc-react-hooks-library" target="_blank" rel="noopener noreferrer">NPM</a>
+                </div>
+            </article>
+            <article class="project-card">
+                <header class="project-header">
                     <h2 id="project-head-tmdb">Rails AI 20 Questions</h2>
                 </header>
                 <div class="project-info-container">
@@ -137,13 +161,14 @@
                         <img src="resources\images\rails_20_q_login.png" alt="Pixel art sky and grass with login form centered" />
                     </div>
                     <div class="project-description">
-                        A Ruby on Rails app, built with my wife Niki. The app uses a postgres database and integrates with Chat GPT, prompted to play the game 20 questions with you.
-                        The game is behind basic username and password authentication to limit API hits. We've used the bcrypt gem for secure password management/verification and rails sessions for authorization.
+                        A Ruby on Rails app built with my wife Niki. Integrates with OpenAI to play 20 questions — the AI thinks of something and responds to yes/no questions until you guess it or run out of turns.
+                        Authentication via bcrypt and Rails sessions keeps API usage in check. Containerised with Docker and deployed on Render.
                     </div>
                 </div>
                 <div class="project-tags">
                     <span>Ruby on Rails</span>
-                    <span>Chat GPT</span>
+                    <span>OpenAI</span>
+                    <span>Docker</span>
                 </div>
                 <div class="project-links">
                     <a href="https://github.com/CrowBe/rails_twenty_questions_ai_bot" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -152,7 +177,6 @@
             </article>
             <article class="project-card">
                 <header class="project-header">
-                    <p>May 2020, September 2023</p>
                     <h2 id="project-head-tmdb">Movie Finder Widget</h2>
                 </header>
                 <div class="project-info-container">
@@ -160,8 +184,8 @@
                         <img src="resources/images/movie-widget-1.png" alt="web app with search bar and movie info cards" />
                     </div>
                     <div class="project-description">
-                        React UI for searching TMDB. Returns results based on user search queries and client side filtering.
-                        Uses ES6 syntax and React functional components with Hooks for state and context management. Updated to use TypeScript, cleaned up and redeployed on Vercel September 2023
+                        React UI for searching TMDB via the multi-search endpoint. Functional components with hooks for state and context management.
+                        Migrated from Create React App to TypeScript and Vite, redeployed on Vercel.
                     </div>
                 </div>
                 <div class="project-tags">
@@ -175,7 +199,6 @@
             </article>
             <article class="project-card">
                 <header class="project-header">
-                    <p>August 2020</p>
                     <h2 id="project-head-tmdb">Uzenlend</h2>
                 </header>
                 <div class="project-info-container">
@@ -198,73 +221,28 @@
             </article>
             <article class="project-card">
                 <header class="project-header">
-                    <p>April 2020</p>
                     <h2 id="project-head-tmdb">Crypto Price Tracker</h2>
                 </header>
                 <div class="project-info-container">
                     <div id="cryptotracker" class="project-image-container">
-                        <img src="resources/images/cryptotracker-1.png" alt="Crpto price information sorted based on coin and date" />
+                        <img src="resources/images/cryptotracker-1.png" alt="Crypto price tracker showing coin prices across multiple currencies" />
                     </div>
                     <div class="project-description">
-                        React PWA that provides up to date price information on selected cryptocurrencies.
-                        The node/express server regularly polls an API for information before updating the client.
+                        React PWA tracking live prices for seven cryptocurrencies across four currencies, with real-time updates via Pusher Channels.
+                        Features historical charts (Recharts), customisable price alerts with browser notifications, dark/light mode, and offline support via service workers.
+                        Built with React 18, TypeScript 5, Vite and Tailwind CSS. Test coverage with Vitest and React Testing Library.
                     </div>
                 </div>
                 <div class="project-tags">
+                    <span>TypeScript</span>
                     <span>React PWA</span>
                     <span>Node/Express</span>
+                    <span>Tailwind</span>
                 </div>
                 <div class="project-links">
                     <a href="https://github.com/CrowBe/crypto-price-pwa" target="_blank" rel="noopener noreferrer">Frontend</a>
                     <a href="https://github.com/CrowBe/crypto-price-server" target="_blank" rel="noopener noreferrer">Backend</a>
                     <a href="https://build-six-delta.now.sh/" target="_blank" rel="noopener noreferrer">Deployed</a>
-                </div>
-            </article>
-            <article class="project-card">
-                <header class="project-header">
-                    <p>February 2020</p>
-                    <h2 id="project-head-tmdb">Looking Up Landscapes Website</h2>
-                </header>
-                <div class="project-info-container">
-                    <div class="project-image-container">
-                        <img src="resources/images/website-1.png" alt="Landscaping scene with Looking Up Landscapes logo" />
-                    </div>
-                    <div class="project-description">
-                        Small Business website build with HTML5, SCSS and JavaScript.
-                        Website design was developed in consultation with the customer based on their logo and chosen themes.
-                        Hosted on Google's App Engine with a custom domain.
-                    </div>
-                </div>
-                <div class="project-tags">
-                    <span>HTML5</span>
-                    <span>SCSS</span>
-                    <span>GCS</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/CrowBe/lul-website" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <!-- <a href="https://lookinguplandscapes.com.au" target="_blank" rel="noopener noreferrer">Deployed*</a> -->
-                </div>
-            </article>
-            <article class="project-card">
-                <header class="project-header">
-                    <p>June 2019</p>
-                    <h2 id="project-head-tmdb">Hobbybuddies Marketplace</h2>
-                </header>
-                <div class="project-info-container">
-                    <div class="project-image-container">
-                        <img src="resources/images/hobbybuddies-1.png" alt="Beach shot with centralised search bar" />
-                    </div>
-                    <div class="project-description">
-                        Ruby on Rails project, deployed on Heroku. Designed and built with a project partner during my studies.
-                        The app incorporated authentication, authorization, search, Stripe payments and AWS file uploading.
-                    </div>
-                </div>
-                <div class="project-tags">
-                    <span>Ruby on Rails</span>
-                    <span>AWS</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/CrowBe/Market" target="_blank" rel="noopener noreferrer">GitHub</a>
                 </div>
             </article>
         </div>
@@ -277,7 +255,7 @@
         <div class=header-container>
             <h2>Contact Me</h2>
         </div>
-        <p>I'm currently looking for work in Sydney so contact me anytime!</p>
+        <p>Sydney-based developer — open to a chat!</p>
         <p>
             My resumé can be found
             <a href="https://drive.google.com/file/d/1p9CZnYI2FAJfh_jskyf0WgMFwTSnW0bn/view?usp=drive_link" style="font-size: 15px;" target="_blank" rel="noopener noreferrer"> here.</a>
@@ -285,13 +263,11 @@
         <div class="icon-bar">
             <a href="https://www.linkedin.com/in/benjamin-crow1991" target='_blank' rel="noopener noreferrer" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
             <a href="https://github.com/CrowBe" target='_blank' rel="noopener noreferrer" class="github"><i class="fab fa-github"></i></a>
-            <a href="https://twitter.com/BenCrow95406267" target='_blank' rel="noopener noreferrer" class="twitter"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.facebook.com/ben.crow.921" target='_blank' rel="noopener noreferrer" class="facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="mailto:bennycrow91@gmail.com" target="_blank" rel="noopener noreferrer" class="gmail"><i class="far fa-envelope"></i></a>
         </div>
     </section>
     <footer>
-        <p>© 2020 Benjamin Crow.</p>
+        <p>© 2026 Benjamin Crow.</p>
     </footer>
     <script src="resources/scripts/websitescripts.js" ></script>
 </body>
