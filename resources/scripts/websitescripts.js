@@ -1,191 +1,114 @@
-// Script to smooth scroll between anchor tags
-
-/*
-Function that checks the url, isolates the relevant node and uses the
-scrollIntoView api to smooth scroll to the appropriate section.
-*/
-const anchorScroller = (e) => {
-    const { hash } = window.location;
-    if (hash) {
-      let node = document.getElementsByName(hash.replace('#', ''));
-      if (node.length > 0) {
-          node[0].scrollIntoView({
-            block: "start",
-            behavior: "smooth"
-          });
-      }
+// ── Smooth scroll for anchor navigation ──
+const anchorScroller = () => {
+  const { hash } = window.location;
+  if (hash) {
+    const node = document.querySelector(hash);
+    if (node) {
+      node.scrollIntoView({ block: "start", behavior: "smooth" });
     }
-}
+  }
+};
 
-// Add an event listener that fires my scroller function when the url changes
-window.addEventListener('hashchange', anchorScroller);
+window.addEventListener("hashchange", anchorScroller);
 
-
-
-// Animation script for landing section background
-// Target the animation container
+// ── Landing background animation ──
 const boxArea = document.getElementById("animation-area");
 
-// Function to randomly generate a whole number in a given range
 const getRandomInt = (min, max) => {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-}
+  return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min))) + Math.ceil(min);
+};
 
-/*
-Function that assigns the randomly generated numbers to named css variables
-controlling key elements of the background animation
-*/
 const setCssVariables = (box) => {
-    let duration = getRandomInt(5, 20);
-    box.style.setProperty('--animation-duration', duration +'s');
-    let delay = getRandomInt(0, 8);
-    box.style.setProperty('--animation-delay', delay +'s');
-    let size = getRandomInt(15, 100);
-    box.style.setProperty('--box-size', size +'px');
-    let position = getRandomInt(5, 75);
-    box.style.setProperty('--box-position', position +'%');
-}
+  box.style.setProperty("--animation-duration", getRandomInt(5, 20) + "s");
+  box.style.setProperty("--animation-delay", getRandomInt(0, 8) + "s");
+  box.style.setProperty("--box-size", getRandomInt(15, 100) + "px");
+  box.style.setProperty("--box-position", getRandomInt(5, 75) + "%");
+};
 
-/*
-Event handler that removes a box once it has completed it's animation
-and then adds another box with newly generated properties.
-*/
-boxUpdater = (event) => {
-    let { target } = event;
-    target.parentNode.removeChild(target);
-    newBox();
-}
+const boxUpdater = (event) => {
+  event.target.remove();
+  newBox();
+};
 
-/*
-Calls all of the above functions to create an animated box and add the event listener.
-Fortunately JavaScript lets me call it in the previous function before definition
-*/
 const newBox = () => {
-    let box = document.createElement("LI");
-    setCssVariables(box);
-    boxArea.appendChild(box);
-    box.addEventListener('animationend', boxUpdater)
-}
+  const box = document.createElement("li");
+  setCssVariables(box);
+  boxArea.appendChild(box);
+  box.addEventListener("animationend", boxUpdater);
+};
 
-/*
-Initiate the animation by creating 10 boxes using the newBox function.
-The function will assign each random size, speed and delay.
-*/
 for (let i = 0; i < 10; i++) {
-    newBox();
+  newBox();
 }
 
+// ── Mobile nav toggle ──
+const navToggle = document.querySelector(".nav-toggle");
+const navLinks = document.querySelector(".nav-links");
 
+navToggle.addEventListener("click", () => {
+  const expanded = navToggle.getAttribute("aria-expanded") === "true";
+  navToggle.setAttribute("aria-expanded", !expanded);
+  navLinks.classList.toggle("open");
+});
 
-// Script to control the animation/transition of the navigation menu
+// Close mobile nav when a link is clicked
+navLinks.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    navToggle.setAttribute("aria-expanded", "false");
+    navLinks.classList.remove("open");
+  });
+});
 
-// target and store the button that triggers the animation
-const menuButton = document.querySelector(".dropdown-button");
-// target and store the container that will be revealed on animation
-const menuContainer = document.querySelector(".dropdown-container")
+// ── Dark mode toggle ──
+const themeToggle = document.querySelector(".theme-toggle");
+const themeIcon = themeToggle.querySelector("i");
 
-
-// Function that toggles the css class that contains the transition sequence
-const navRevealHandler = (e) => {
-    // Using toggle here allows for the transition to occur both directions
-    menuContainer.classList.toggle("clicked")
+const applyTheme = (theme) => {
+  document.documentElement.setAttribute("data-theme", theme);
+  themeIcon.className = theme === "dark" ? "fas fa-sun" : "fas fa-moon";
+  localStorage.setItem("theme", theme);
 };
 
-// Add an event listener that fires the toggler on click
-menuButton.addEventListener('click', navRevealHandler);
-
-
-// Script to toggle between button and project description
-
-// Target all project description containers
-const containers = document.getElementsByClassName("project-description-container");
-
-/*
-Function to toggle the revealed class.
-Targets the button and description simultaneously toggling a revealed class
-*/
-const revealHandler = (e) => {
-    const { target } = e;
-    /*
-    First condition triggers if the button was directly clicked
-    Second condition triggers if the description is revealed and toggles the reverse
-    Else captures a click elsewhere on the container and thus targets differently
-    */
-    if (target.tagName === "BUTTON") {
-        e.target.parentNode.firstElementChild.classList.toggle("revealed");
-        e.target.parentNode.lastElementChild.classList.toggle("revealed");
-    } else if (target.tagName === "P") {
-        target.parentNode.firstElementChild.classList.toggle("revealed");
-        target.parentNode.lastElementChild.classList.toggle("revealed");
-    } else {
-        e.target.firstElementChild.classList.toggle("revealed");
-        e.target.lastElementChild.classList.toggle("revealed");
-    }
+// Initialize from saved preference or system preference
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+  applyTheme(savedTheme);
+} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+  applyTheme("dark");
 }
 
-/* 
-Add event listeners to the containers. An alternative is to bind separate
-event listeners to the button and the description but this is probably 
-more difficult with the current method of revealing/hiding.
-*/
-for (let container of containers) {
-    container.addEventListener('click', revealHandler);
-}
+themeToggle.addEventListener("click", () => {
+  const current = document.documentElement.getAttribute("data-theme");
+  applyTheme(current === "dark" ? "light" : "dark");
+});
 
+// ── FAB back-to-top ──
+const fabTop = document.querySelector(".fab-top");
 
-
-// Script to control the animation of the skill indicator bar
-
-/* 
-Function that will be used to create an Intersection Observer.
-It targets the area to be animated and will be handed a callback that
-triggers the animation.
-*/
-const createObserver = (callback) => {
-    let observer;
-    const container = document.querySelector('.skills-graph-container');
-
-    /*
-    root is given a null value to assign it to the viewport by default.
-    threshold defines how much of the observed object must intersect to trigger the callback.
-    0 triggers at first intersection and 1 will trigger when the object is
-    fully within the root area. Thus 0.6 waits for 60% of the object to be visible.
-    */
-    let options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.6
-    };
-  
-    observer = new IntersectionObserver(callback, options);
-    observer.observe(container);
-}
-
-// Target the html text containing the percentages listed next to each skill
-const pcts = document.getElementsByClassName("skills-graph-number");
-// Target the indicator bars for each skill
-const indicators = document.getElementsByClassName("skills-graph-indicator");
-
-/* 
-Function that triggers the animation. 
-*/
-const handleIntersect = (entries, observer) => { 
-    entries.forEach(entry => {
-        // ignore the initial entry that occurs upon load and returns an intersectionRatio of 0
-      if (entry.intersectionRatio > 0.6) {
-        // Loop through for each skills bar
-        for (let i = 0; i < pcts.length; i++) {
-            // Isolate an index from the html string containing the percentage
-            const numberPattern = /\d+/g;
-            let pct = Number(pcts[i].innerHTML.match(numberPattern));
-            // Use that number to set the css variable that controls the indicator width
-            indicators[i].firstChild.style.setProperty('--skill-width', pct +'%');
-        }
-      }
-    });
+const handleFabVisibility = () => {
+  if (window.scrollY > window.innerHeight * 0.5) {
+    fabTop.classList.add("visible");
+  } else {
+    fabTop.classList.remove("visible");
+  }
 };
 
-// Hand the above function to the Intersection Observer as a callback
-createObserver(handleIntersect);
+window.addEventListener("scroll", handleFabVisibility, { passive: true });
+
+fabTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// ── Keyboard navigation for project carousel ──
+const projectList = document.querySelector(".project-list");
+
+projectList.addEventListener("keydown", (e) => {
+  const cardWidth = 290; // approximate card visible width with overlap
+  if (e.key === "ArrowRight") {
+    e.preventDefault();
+    projectList.scrollBy({ left: cardWidth, behavior: "smooth" });
+  } else if (e.key === "ArrowLeft") {
+    e.preventDefault();
+    projectList.scrollBy({ left: -cardWidth, behavior: "smooth" });
+  }
+});
