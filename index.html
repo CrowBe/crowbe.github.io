@@ -3,138 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Ben Crow — Full Stack Software Engineer in Sydney. Building with Next.js, TypeScript, Ruby on Rails, and AI/LLM integrations.">
     <link rel="stylesheet" type="text/css" href="/resources/styles/index.css">
     <!-- [if IE]><link rel="shortcut icon" href="resources/icons/favicon.ico"><![endif] -->
     <link rel="icon" href="resources/icons/favicon.png">
-    <script src="https://kit.fontawesome.com/aefacc78af.js" crossorigin="anonymous"` samesite='none' secure></script>
-    <title>Ben Crow - Web Portfolio</title>
+    <script src="https://kit.fontawesome.com/aefacc78af.js" crossorigin="anonymous"></script>
+    <title>Ben Crow - Full Stack Engineer</title>
 </head>
 <body>
-    <div name="top" class="landing-container">
+    <div id="top" class="landing-container">
         <h1>I'm <em>Ben Crow</em></h1>
-        <h2>Full Stack Developer</h2>
-        <ul id="animation-area" >
+        <h2>Full Stack Engineer</h2>
+        <ul id="animation-area" aria-hidden="true">
         </ul>
     </div>
-    <nav>
-        <div class="dropdown-container">
-            <div class="dropdown-button">
-                <i class="fas fa-compass"></i>
-            </div>
-            <div class="dropdown-content">
-                <a href="/#about" class="nav-hash">About</a>
-                <a href="/#projects" class="nav-hash">Projects</a>
-                <a href="/#contact" class="nav-hash">Contact</a>
+    <nav aria-label="Main navigation">
+        <div class="nav-inner">
+            <a href="#top" class="nav-brand">BC</a>
+            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+            <div id="nav-links" class="nav-links">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+                <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
         </div>
         <div class="contrast-bar"></div>
     </nav>
-    <section class="about-section" name="about">
-        <div class=header-container>
+    <section class="about-section" id="about">
+        <div class="header-container">
             <h2>About Me</h2>
         </div>
         <div class="intro-container">
             <div class="avatar-container">
-                <img src="./resources/images/my-avatar.png" alt="cartoon man with brown hair and white skin on a blue background" />
+                <img src="./resources/images/my-avatar.png" alt="Ben Crow — cartoon avatar with brown hair on a blue background" loading="lazy" />
             </div>
             <p>
-                Currently a Software Engineer at Culture Amp (Nov 2024–present). I'm a Full Stack Engineer with experience across multiple stacks and a drive to stay at the leading edge of the craft.
-                Recent roles have seen me responsible for features all the way from ideation and design through to testing and deployment.
-                An early adopter of AI-augmented development — I build with AI APIs, MCP servers and Claude tools, and document effective patterns for working with modern AI.
-                I'm an excellent communicator and facilitator, capable of engaging with people from a wide range of professional backgrounds and perspectives.
+                Full Stack Engineer at Culture Amp (Nov 2024–present), building features end-to-end in Next.js, TypeScript and Ruby on Rails at scale.
+                I integrate LLMs into development workflows — from AI-powered tooling with MCP servers and Claude Code, to shipping AI features in production.
+                I'm focused on how agentic coding patterns change the way teams build software.
+                A strong communicator and facilitator, I engage effectively with people from a wide range of professional backgrounds and perspectives.
             </p>
         </div>
-        <div class="skills-attributes-container">
-            <div class="attributes-container">
-                <div id="grid-one">
-                    <i class="fas fa-users"></i>
-                    <h4>Teamwork</h4>
-                    <p>I want to work <em>with</em> people to => a better product.</p>
+        <div class="tech-grid-wrapper">
+            <h3>Technologies</h3>
+            <div class="tech-grid">
+                <div class="tech-category">
+                    <h4>Frontend</h4>
+                    <ul>
+                        <li>Next.js</li>
+                        <li>React</li>
+                        <li>TypeScript</li>
+                        <li>HTML / CSS</li>
+                        <li>Tailwind CSS</li>
+                    </ul>
                 </div>
-                <div id="grid-two">
-                    <i class="fas fa-fingerprint"></i>
-                    <h4>Detail Oriented</h4>
-                    <p>A detailed approach that ensures <em>quality</em> products.</p>
+                <div class="tech-category">
+                    <h4>Backend</h4>
+                    <ul>
+                        <li>Ruby on Rails</li>
+                        <li>Node.js</li>
+                        <li>Express</li>
+                        <li>PostgreSQL</li>
+                        <li>REST / GraphQL</li>
+                    </ul>
                 </div>
-                <div id="grid-three">
-                    <i class="fas fa-file-alt"></i>
-                    <h4>Process Oriented</h4>
-                    <p>Building on and integrating best-practice for <em>efficient</em> development.</p>
+                <div class="tech-category">
+                    <h4>AI &amp; Agentic</h4>
+                    <ul>
+                        <li>Claude Code</li>
+                        <li>MCP Servers</li>
+                        <li>OpenAI API</li>
+                        <li>LLM Integration</li>
+                        <li>Prompt Engineering</li>
+                    </ul>
                 </div>
-                <div id="grid-four">
-                    <i class="fas fa-brain"></i>
-                    <h4>Growth Mindset</h4>
-                    <p>A fast learner, <em>always</em> working to improve.</p>
-                </div>
-            </div>
-            <div class="skills-graph-container">
-                <div class="skills-graph-bar">
-                    <div class="skills-graph-label"><h4>TypeScript</h4></div>
-                    <div class="skills-graph-indicator"><div></div></div>
-                    <div class="skills-graph-number"><p>90%</p></div>
-                </div>
-                <div class="skills-graph-bar">
-                    <div class="skills-graph-label"><h4>React</h4></div>
-                    <div class="skills-graph-indicator"><div></div></div>
-                    <div class="skills-graph-number"><p>85%</p></div>
-                </div>
-                <div class="skills-graph-bar">
-                    <div class="skills-graph-label"><h4>HTML/CSS</h4></div>
-                    <div class="skills-graph-indicator"><div></div></div>
-                    <div class="skills-graph-number"><p>80%</p></div>
-                </div>
-                <div class="skills-graph-bar">
-                    <div class="skills-graph-label"><h4>Ruby on Rails</h4></div>
-                    <div class="skills-graph-indicator"><div></div></div>
-                    <div class="skills-graph-number"><p>90%</p></div>
-                </div>
-                <div class="skills-graph-bar">
-                    <div class="skills-graph-label"><h4>Node.js / Express</h4></div>
-                    <div class="skills-graph-indicator"><div></div></div>
-                    <div class="skills-graph-number"><p>60%</p></div>
-                </div>
-                <div class="skills-graph-bar">
-                    <div class="skills-graph-label"><h4>Application Testing</h4></div>
-                    <div class="skills-graph-indicator"><div></div></div>
-                    <div class="skills-graph-number"><p>75%</p></div>
-                </div>
-                <div class="skills-graph-bar">
-                    <div class="skills-graph-label"><h4>Development Operations</h4></div>
-                    <div class="skills-graph-indicator"><div></div></div>
-                    <div class="skills-graph-number"><p>60%</p></div>
-                </div>
-                <div class="skills-graph-bar">
-                    <div class="skills-graph-label"><h4>Cloud Services</h4></div>
-                    <div class="skills-graph-indicator"><div></div></div>
-                    <div class="skills-graph-number"><p>60%</p></div>
-                </div>
-                <div class="skills-graph-bar">
-                    <div class="skills-graph-label"><h4>AI / LLM Integration</h4></div>
-                    <div class="skills-graph-indicator"><div></div></div>
-                    <div class="skills-graph-number"><p>75%</p></div>
-                </div>
-                <div class="skills-graph-bar">
-                    <div class="skills-graph-label"><h4>Source Control</h4></div>
-                    <div class="skills-graph-indicator"><div></div></div>
-                    <div class="skills-graph-number"><p>80%</p></div>
+                <div class="tech-category">
+                    <h4>Infrastructure</h4>
+                    <ul>
+                        <li>Docker</li>
+                        <li>CI / CD</li>
+                        <li>AWS / Cloud</li>
+                        <li>Git</li>
+                        <li>Testing (Vitest, RSpec)</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
-    <section class="project-section" name="projects" >
-        <div class=header-container>
+    <section class="project-section" id="projects">
+        <div class="header-container">
             <h2>Projects</h2>
         </div>
-        <h5>React - TypeScript - Ruby on Rails - Node.js - AI/LLM</h5>
-        <div class="project-list">
-            <article class="project-card">
+        <h3 class="project-tagline">Next.js - TypeScript - Ruby on Rails - Node.js - AI/LLM</h3>
+        <div class="project-list" role="list" tabindex="0" aria-label="Project cards — scroll horizontally to browse">
+            <article class="project-card" role="listitem">
                 <header class="project-header">
-                    <h2 id="project-head-hooks">React Hooks Library</h2>
+                    <h3 id="project-head-rails-ai">Rails AI 20 Questions</h3>
                 </header>
                 <div class="project-info-container">
                     <div class="project-image-container">
-                        <img src="resources/images/hooks-library-1.svg" alt="bc-react-hooks-library package listing all 11 hooks" />
+                        <img src="resources/images/rails_20_q_login.png" alt="Pixel art sky and grass with login form centered" loading="lazy" />
+                    </div>
+                    <div class="project-description">
+                        A Ruby on Rails app built with my wife Niki. Integrates with OpenAI to play 20 questions — the AI thinks of something and responds to yes/no questions until you guess it or run out of turns.
+                        Authentication via bcrypt and Rails sessions keeps API usage in check. Containerised with Docker and deployed on Render.
+                    </div>
+                </div>
+                <div class="project-tags">
+                    <span>Ruby on Rails</span>
+                    <span>OpenAI</span>
+                    <span>Docker</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/CrowBe/rails_twenty_questions_ai_bot" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://mysite-i0j9.onrender.com/" target="_blank" rel="noopener noreferrer">Deployment</a>
+                </div>
+            </article>
+            <article class="project-card" role="listitem">
+                <header class="project-header">
+                    <h3 id="project-head-hooks">React Hooks Library</h3>
+                </header>
+                <div class="project-info-container">
+                    <div class="project-image-container">
+                        <img src="resources/images/hooks-library-1.svg" alt="bc-react-hooks-library package listing all 11 hooks" loading="lazy" />
                     </div>
                     <div class="project-description">
                         A lightweight, tree-shakeable collection of 11 React hooks published to NPM as <em>bc-react-hooks-library</em>.
@@ -152,36 +150,13 @@
                     <a href="https://www.npmjs.com/package/bc-react-hooks-library" target="_blank" rel="noopener noreferrer">NPM</a>
                 </div>
             </article>
-            <article class="project-card">
+            <article class="project-card" role="listitem">
                 <header class="project-header">
-                    <h2 id="project-head-tmdb">Rails AI 20 Questions</h2>
+                    <h3 id="project-head-movie">Movie Finder Widget</h3>
                 </header>
                 <div class="project-info-container">
                     <div class="project-image-container">
-                        <img src="resources\images\rails_20_q_login.png" alt="Pixel art sky and grass with login form centered" />
-                    </div>
-                    <div class="project-description">
-                        A Ruby on Rails app built with my wife Niki. Integrates with OpenAI to play 20 questions — the AI thinks of something and responds to yes/no questions until you guess it or run out of turns.
-                        Authentication via bcrypt and Rails sessions keeps API usage in check. Containerised with Docker and deployed on Render.
-                    </div>
-                </div>
-                <div class="project-tags">
-                    <span>Ruby on Rails</span>
-                    <span>OpenAI</span>
-                    <span>Docker</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/CrowBe/rails_twenty_questions_ai_bot" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a href="https://mysite-i0j9.onrender.com/" target="_blank" rel="noopener noreferrer">Deployment</a>
-                </div>
-            </article>
-            <article class="project-card">
-                <header class="project-header">
-                    <h2 id="project-head-tmdb">Movie Finder Widget</h2>
-                </header>
-                <div class="project-info-container">
-                    <div class="project-image-container">
-                        <img src="resources/images/movie-widget-1.png" alt="web app with search bar and movie info cards" />
+                        <img src="resources/images/movie-widget-1.png" alt="Web app with search bar and movie info cards" loading="lazy" />
                     </div>
                     <div class="project-description">
                         React UI for searching TMDB via the multi-search endpoint. Functional components with hooks for state and context management.
@@ -197,35 +172,13 @@
                     <a href="https://movie-finder-widget.vercel.app/" target="_blank" rel="noopener noreferrer">Deployment</a>
                 </div>
             </article>
-            <article class="project-card">
+            <article class="project-card" role="listitem">
                 <header class="project-header">
-                    <h2 id="project-head-tmdb">Uzenlend</h2>
+                    <h3 id="project-head-crypto">Crypto Price Tracker</h3>
                 </header>
                 <div class="project-info-container">
-                    <div id="uzenlend" class="project-image-container">
-                        <img src="resources/images/uzenlend-1.png" alt="screenshot of website uzenlend.com main page" />
-                    </div>
-                    <div class="project-description">
-                        Built a lightweight PWA, hooking into the main site's Flask server sockets for authentication and chat rooms.
-                        Implemented push notifications and worked on adapting to React Native for app store release.
-                        Conducted a full range of testing including distributed load testing, automated testing and penetration testing.
-                    </div>
-                </div>
-                <div class="project-tags">
-                    <span>React/PWA</span>
-                    <span>Flask/Sockets</span>
-                </div>
-                <div class="project-links">
-                    <a href="">GitHub (Private)</a>
-                </div>
-            </article>
-            <article class="project-card">
-                <header class="project-header">
-                    <h2 id="project-head-tmdb">Crypto Price Tracker</h2>
-                </header>
-                <div class="project-info-container">
-                    <div id="cryptotracker" class="project-image-container">
-                        <img src="resources/images/cryptotracker-1.png" alt="Crypto price tracker showing coin prices across multiple currencies" />
+                    <div class="project-image-container">
+                        <img src="resources/images/cryptotracker-1.png" alt="Crypto price tracker showing coin prices across multiple currencies" loading="lazy" />
                     </div>
                     <div class="project-description">
                         React PWA tracking live prices for seven cryptocurrencies across four currencies, with real-time updates via Pusher Channels.
@@ -245,30 +198,54 @@
                     <a href="https://build-six-delta.now.sh/" target="_blank" rel="noopener noreferrer">Deployed</a>
                 </div>
             </article>
+            <article class="project-card" role="listitem">
+                <header class="project-header">
+                    <h3 id="project-head-uzenlend">Uzenlend</h3>
+                </header>
+                <div class="project-info-container">
+                    <div class="project-image-container">
+                        <img src="resources/images/uzenlend-1.png" alt="Screenshot of website uzenlend.com main page" loading="lazy" />
+                    </div>
+                    <div class="project-description">
+                        Built a lightweight PWA, hooking into the main site's Flask server sockets for authentication and chat rooms.
+                        Implemented push notifications and worked on adapting to React Native for app store release.
+                        Conducted a full range of testing including distributed load testing, automated testing and penetration testing.
+                    </div>
+                </div>
+                <div class="project-tags">
+                    <span>React/PWA</span>
+                    <span>Flask/Sockets</span>
+                </div>
+                <div class="project-links">
+                    <a href="">GitHub (Private)</a>
+                </div>
+            </article>
         </div>
     </section>
-    <section class="contact-section" name="contact">
+    <section class="contact-section" id="contact">
         <div class="angle-container">
             <div></div>
-        <button id="to-top-button"><a href="#top"><i class="fas fa-angle-double-up"></i></a></button>
         </div>
-        <div class=header-container>
+        <div class="header-container">
             <h2>Contact Me</h2>
         </div>
         <p>Sydney-based developer — open to a chat!</p>
         <p>
             My resumé can be found
-            <a href="https://drive.google.com/file/d/1Z3nAYR_MQlDyYbbcZNa09Q5ZAtpxQ40I/view?usp=sharing" style="font-size: 15px;" target="_blank" rel="noopener noreferrer"> here.</a>
+            <a href="https://drive.google.com/file/d/1Z3nAYR_MQlDyYbbcZNa09Q5ZAtpxQ40I/view?usp=sharing" target="_blank" rel="noopener noreferrer"> here.</a>
         </p>
         <div class="icon-bar">
-            <a href="https://www.linkedin.com/in/benjamin-crow1991" target='_blank' rel="noopener noreferrer" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://github.com/CrowBe" target='_blank' rel="noopener noreferrer" class="github"><i class="fab fa-github"></i></a>
-            <a href="mailto:bennycrow91@gmail.com" target="_blank" rel="noopener noreferrer" class="gmail"><i class="far fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/benjamin-crow1991" target="_blank" rel="noopener noreferrer" class="linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/CrowBe" target="_blank" rel="noopener noreferrer" class="github" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="mailto:bennycrow91@gmail.com" target="_blank" rel="noopener noreferrer" class="gmail" aria-label="Email"><i class="far fa-envelope"></i></a>
         </div>
     </section>
     <footer>
-        <p>© 2026 Benjamin Crow.</p>
+        <p>&copy; 2026 Benjamin Crow.</p>
     </footer>
-    <script src="resources/scripts/websitescripts.js" ></script>
+    <button class="fab-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-angle-double-up"></i>
+    </button>
+    <script src="resources/scripts/websitescripts.js"></script>
 </body>
 </html>
