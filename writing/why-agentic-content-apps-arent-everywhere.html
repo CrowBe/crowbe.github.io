@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The access, trust, and technical barriers that stand between the agentic content app pattern and mainstream adoption — and what the ecosystem is doing about them.">
+    <link rel="stylesheet" type="text/css" href="/resources/styles/index.css">
+    <link rel="stylesheet" type="text/css" href="/resources/styles/writing.css">
+    <link rel="icon" href="/resources/icons/favicon.png">
+    <script src="https://kit.fontawesome.com/aefacc78af.js" crossorigin="anonymous"></script>
+    <title>Why Agentic Content Apps Aren't Everywhere Yet | Ben Crow</title>
+</head>
+<body>
+    <nav aria-label="Main navigation">
+        <div class="nav-inner">
+            <a href="/" class="nav-brand">BC</a>
+            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+            <div id="nav-links" class="nav-links">
+                <a href="/#about">About</a>
+                <a href="/#projects">Projects</a>
+                <a href="/writing/">Writing</a>
+                <a href="/#contact">Contact</a>
+                <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="contrast-bar"></div>
+    </nav>
+
+    <main class="article-page">
+        <a href="/writing/" class="article-back">
+            <i class="fas fa-arrow-left"></i> Writing
+        </a>
+
+        <header class="article-header">
+            <div class="article-meta">
+                <span>April 2026</span>
+                <span class="article-series">Agentic Content Apps — Part 2 of 3</span>
+            </div>
+            <h1>Why Agentic Content Apps Aren't Everywhere Yet</h1>
+            <p class="article-lede">
+                The access, trust, and technical barriers standing between this pattern
+                and mainstream adoption — and what the ecosystem is beginning to do about them.
+            </p>
+        </header>
+
+        <article class="article-body">
+
+            <h2>The Idea Is Ahead of the Ecosystem</h2>
+
+            <p>
+                <a href="/writing/agentic-content-apps.html">The first article in this series</a>
+                sketched out a pattern worth taking seriously: personal AI agents handling the
+                integration work, apps focusing on presentation, data staying on the user's device.
+                If you found that convincing — or at least interesting — the natural next question
+                is why it doesn't already describe how most content apps are built.
+            </p>
+
+            <p>
+                The honest answer is that the idea is ahead of the ecosystem. Something like
+                this future is visible from here; <a href="https://cloud.google.com/resources/content/ai-agent-trends-2026" target="_blank" rel="noopener noreferrer">the major infrastructure players are already
+                orienting toward it</a>. But between where we are and where that points, there
+                are real obstacles — not the hand-waving kind that dissolve under enthusiasm,
+                but the kind that require actual solutions before anything built on this pattern
+                can reach people who aren't developers. Understanding them is the necessary
+                step before the architecture question, which is where Article 3 goes.
+            </p>
+
+            <p>
+                Moving responsibility from centralised apps to personal agents doesn't make
+                the complexity disappear. It relocates it — and the new location carries its
+                own weight.
+            </p>
+
+            <figure class="article-figure">
+                <img src="/resources/images/article-2-diagram.svg" alt="A road from Today (traditional app model) passing through three barrier blocks — Access, Trust, Technical — toward an Agentic Future, with an Ecosystem Catching Up strip below sending arrows upward into each barrier." />
+                <figcaption>Three categories of barrier, each of which is a design problem rather than a permanent wall.</figcaption>
+            </figure>
+
+            <h2>The Access Problem</h2>
+
+            <p>
+                The first barrier is one that tends to surface only after you've started building.
+                Most platforms, when examined carefully, don't want you to do this.
+            </p>
+
+            <p>
+                Terms of service across the major content platforms routinely prohibit scraping,
+                automated access through unofficial clients, and request patterns that suggest
+                anything other than a human sitting at a browser. The legal question underneath
+                all of this — whether an AI agent acting on behalf of a user to access that user's
+                own content should be treated any differently from the user doing it manually —
+                remains genuinely unsettled. <a href="https://itlawco.com/web-scraping-legal-risk-2025/" target="_blank" rel="noopener noreferrer">Courts and regulators in 2025 still haven't
+                produced consistent answers</a>, and the practical reality is that
+                <a href="https://www.browserless.io/blog/is-web-scraping-legal" target="_blank" rel="noopener noreferrer">the legal exposure varies enormously by jurisdiction and use case</a>.
+                Developers building products on this pattern are building on ground that platforms
+                can shift at any time, and that uncertainty has a chilling effect on what gets built.
+            </p>
+
+            <p>
+                But there's something worth naming underneath the legal framing: the friction
+                isn't primarily legal in origin. Modern platforms are optimised around a particular
+                economic arrangement — keeping users inside their own surfaces, maximising time
+                spent, controlling the recommendation layer, and owning the inventory that
+                advertisers buy against. Unified feeds, personal aggregators, and tools that
+                route content around the platform's native interface directly threaten that
+                arrangement. The closed APIs, the progressively more hostile anti-bot systems,
+                the terms of service written to foreclose exactly this kind of automation —
+                these are the architecture of a business incentive, dressed in the language
+                of policy. Agentic content apps restore a measure of user choice over their
+                own data. That is simply not aligned with what most platforms are built to want.
+            </p>
+
+            <p>
+                I don't want to minimise this. But it's worth holding in mind that where
+                regulation has required platforms to support data portability — GDPR's
+                rights of access, open banking mandates in Europe and Australia — developers
+                have found more stable ground. The direction of travel in data regulation
+                is, on balance, toward user control. What reads today as an immovable wall
+                has, in adjacent domains, turned out to be a question of political will rather
+                than technical possibility.
+            </p>
+
+            <h2>The Two Trust Problems</h2>
+
+            <p>
+                Suppose the access problem were solved — the platforms cooperative, or the
+                regulations favourable, or the agent clever enough to work around the friction.
+                There is still a pair of trust problems that would need answering, and they are
+                distinct enough to deserve separate treatment.
+            </p>
+
+            <p>
+                The first is the question of trusting the agent itself. A complete implementation
+                of this pattern might give an agent access to social feeds, financial accounts,
+                email, subscriptions, browsing history, and private documents. That is, taken
+                together, an extraordinary level of access — more than most people have ever
+                granted to a single system outside of their own device's operating system.
+                A thoughtful user confronted with this proposition will ask reasonable questions:
+                where is the model actually running? What is retained, and for how long? Who can
+                read the logs? Is interaction data being used to train anything? What happens if
+                the service shuts down or is acquired? These aren't edge-case concerns raised by
+                the paranoid — they're the questions anyone should ask before handing over that
+                kind of access. And answering them with architecture rather than privacy policy
+                prose is a genuinely hard problem.
+            </p>
+
+            <p>
+                The second trust problem is different in character and, I think, underappreciated.
+                Once an agent has gathered and structured information from multiple sources, it
+                flows into an app interface — and that interface becomes something quite sensitive.
+                Financial patterns, social habits, reading behaviour, message content, and
+                preference signals, all concentrated in one place, represent a target considerably
+                more valuable than any individual source. A user who has thought carefully about
+                this will want to know: is this view stored in the cloud? Can the developer see
+                it? Is it encrypted, and does that mean something, or is it just a word in the
+                documentation? Can I delete it completely? These questions are not about paranoia —
+                they are about the legitimate recognition that aggregated personal data is
+                qualitatively different from its parts, and that the architecture of the
+                presentation layer matters as much as the architecture of the agent. This is
+                precisely why the design of the relay and storage layer, which Article 3
+                addresses, is not a detail. It is the mechanism by which the trust claim
+                either holds or doesn't.
+            </p>
+
+            <h2>The Technical Reality</h2>
+
+            <p>
+                Alongside access and trust, there are harder technical constraints — the kind
+                that don't yield to clever framing, only to engineering progress.
+            </p>
+
+            <p>
+                Traditional APIs hand you structured data in a documented format. Agentic
+                systems, by contrast, often have to work with websites that weren't designed
+                to be read programmatically, raw document exports, natural language content
+                that needs interpretation, and browser automation that breaks whenever a
+                platform changes its front-end. The noise this introduces — duplicates, misclassified
+                items, stale content served as fresh, summaries that hallucinate their source material —
+                is not merely inconvenient. The reliability bar for something that sits in a person's
+                daily reading flow is high, and trust in that flow, once broken, is not easily rebuilt.
+                Getting consistently structured, accurate data out of unstructured sources at consumer scale
+                is a problem that the field has been working on for years and has not fully solved.
+            </p>
+
+            <p>
+                The setup problem is more tractable but no less real for a mainstream audience.
+                Running a personal agent today requires — at minimum — an API key, a configured
+                workflow, some tolerance for debugging, and an understanding of what the thing
+                is actually doing. For technical users, this is a weekend project. For everyone
+                else, it is a wall. <a href="https://www.ibm.com/think/insights/ai-agents-2025-expectations-vs-reality" target="_blank" rel="noopener noreferrer">IBM's analysis of AI agents in 2025 put it plainly:
+                the gap between expectation and reality remains wide</a>, and the expectation
+                gap is nowhere wider than in setup complexity. Compare this to the early
+                days of self-hosting — technically possible, clearly powerful, the exclusive
+                domain of people who found the configuration intrinsically rewarding. Consumer
+                software this is not, yet.
+            </p>
+
+            <p>
+                And then there is the question of compute. Meaningful agent workflows require
+                summarisation, extraction, ranking, classification, and multi-step reasoning.
+                Running this locally means GPUs, thermal management, and the battery tradeoffs
+                that make mobile a particular challenge. Running it in the cloud reintroduces
+                the subscription cost and the privacy considerations that the architecture was
+                partly designed to sidestep. There is no free lunch here; the question is
+                which tradeoff the user is willing to make. What's clear is that the "just
+                works on your phone for free" version of this pattern does not yet exist.
+            </p>
+
+            <p>
+                Users who navigate all of this will encounter one more mismatch: expectation.
+                The web has trained people — over twenty-five years of ever-faster interfaces —
+                to expect instantaneous results, always-on synchronisation, and a freshness
+                that borders on the uncanny. Agentic systems tend to work more like a
+                scheduled newspaper delivery than a live feed: deliberate, periodic, reliable
+                over time but not in the moment. That is a perfectly reasonable model, but
+                it will read as broken to someone who arrives expecting Twitter-speed
+                responsiveness. Closing that gap is partly a compute problem and partly
+                a design problem — how do you build an interface that makes the periodic
+                model feel considered rather than deficient?
+            </p>
+
+            <h2>The Ecosystem Is Catching Up</h2>
+
+            <p>
+                None of what I've described above is permanent. The shape of these barriers
+                has changed noticeably even in the last twelve months, and the direction is clear.
+            </p>
+
+            <p>
+                The model quality picture is dramatically better than it was two years ago.
+                Open models are capable enough for meaningful content workflows and small enough
+                to run on consumer hardware without a dedicated GPU — a threshold that felt
+                distant in 2023 and is now a matter of routine benchmarking. Inference costs for
+                hosted models have fallen to the point where the economics of personal agent
+                workflows are genuinely viable for individual users rather than just companies.
+                Protocols like <a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener noreferrer">MCP</a>
+                are beginning to standardise how agents interact with tools and data sources,
+                which reduces the bespoke configuration overhead that currently makes setup feel
+                like archaeology. The tooling ecosystem — local model runners, agent orchestration
+                frameworks, device-side storage libraries — is maturing in a way that begins to
+                suggest developer experience rather than research project.
+            </p>
+
+            <p>
+                More consequentially, curated agent environments are starting to emerge — not
+                raw toolkits but assembled systems with preconfigured workflows, one-click installs
+                for common use cases, and hosted personal agent services that preserve the privacy
+                guarantees while removing the technical barrier to entry. Projects like
+                <a href="https://github.com/mediar-ai/screenpipe" target="_blank" rel="noopener noreferrer">Screenpipe</a>
+                are representative of where this is heading: personal AI infrastructure that runs
+                locally, answers to the user rather than a service provider, and is aimed — ambitiously,
+                if not yet fully — at people who wouldn't know what a context window is.
+                This is a category of software that didn't exist two years ago. The gap between
+                "developer experiment" and "consumer product" is closing, unevenly but visibly.
+            </p>
+
+            <h2>Data Sovereignty as the Deeper Theme</h2>
+
+            <p>
+                The barriers described in this article are real and varied in character, but
+                they are all — in some sense — resistance to the same underlying possibility.
+                The question of who should own a user's data is not a new one; researchers
+                studying <a href="https://link.springer.com/article/10.1007/s12525-024-00693-4" target="_blank" rel="noopener noreferrer">data sovereignty in information systems</a>
+                have been mapping this territory for years. For most of the platform era,
+                the answer to ownership has been platforms and app backends — not because
+                users explicitly chose that arrangement, but because it was the path of
+                least architectural resistance. Agentic systems reopen a different possibility:
+                the agent gathers on the user's behalf, the device holds the result, and
+                no intermediary is custodian of the content as a condition of receiving it.
+                The access problem, the trust problems, the technical complexity — each
+                of these is, at bottom, resistance to that redistribution from systems and
+                ecosystems built around the opposite model. As the tooling catches up,
+                each becomes a design problem rather than a hard limit.
+            </p>
+
+            <div class="article-closing">
+                The barriers are real. So is the direction.
+            </div>
+
+            <h2>What Comes Next</h2>
+
+            <p>
+                If this pattern is going to earn the trust it asks for, the architecture
+                has to reflect its principles structurally — not in documentation, but in
+                how the system is actually built. Saying "your data stays on your device"
+                is only meaningful if the relay genuinely cannot read the payload, if the
+                app genuinely holds nothing, if the agent genuinely operates independently.
+                Those are architectural choices, not configuration options.
+            </p>
+
+            <p>
+                The third article in this series is about exactly that: the concrete architecture
+                I'm working through in <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">ScrolLess</a> —
+                a device-first model where the trust claims aren't asserted but enforced,
+                and where the agent, the relay, and the app are kept genuinely separate
+                from one another.
+            </p>
+
+        </article>
+
+        <footer class="article-footer">
+            <p>Part 2 of a three-part series on agentic content apps.</p>
+            <p>
+                <a href="/writing/agentic-content-apps.html">&larr; Part 1: A New Pattern</a>
+                &nbsp;&nbsp;&nbsp;
+                <a href="/writing/architecting-agentic-content-apps.html">Part 3: The Architecture &rarr;</a>
+            </p>
+            <p><a href="/writing/">Back to Writing</a></p>
+        </footer>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Benjamin Crow.</p>
+    </footer>
+
+    <button class="fab-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-angle-double-up"></i>
+    </button>
+
+    <script src="/resources/scripts/writingscripts.js"></script>
+</body>
+</html>

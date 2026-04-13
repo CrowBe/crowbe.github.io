@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" role="img" aria-label="Comparison of traditional app model versus agentic content app model">
+  <rect width="800" height="440" rx="12" fill="#17141d"/>
+
+  <!-- Panel headers -->
+  <text x="200" y="34" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="11" font-weight="700" fill="#6b7fa3" letter-spacing="2">TRADITIONAL MODEL</text>
+  <text x="600" y="34" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="11" font-weight="700" fill="#6b7fa3" letter-spacing="2">AGENTIC CONTENT APP</text>
+
+  <!-- Centre divider -->
+  <line x1="400" y1="46" x2="400" y2="416" stroke="#2e2e42" stroke-width="1" stroke-dasharray="5,4"/>
+
+  <!-- ===== LEFT COLUMN: Traditional ===== -->
+
+  <!-- Node: Platform APIs -->
+  <rect x="60" y="56" width="280" height="40" rx="6" fill="#201c29" stroke="#2e2e42" stroke-width="1"/>
+  <text x="200" y="81" text-anchor="middle" font-family="'Courier New',monospace" font-size="13" fill="#9a9ab0">Platform APIs</text>
+
+  <!-- Arrow down -->
+  <line x1="200" y1="96" x2="200" y2="114" stroke="#3a3a58" stroke-width="1.5"/>
+  <polygon points="194,111 200,124 206,111" fill="#3a3a58"/>
+
+  <!-- Node: App Backend + DB (grouped, app-owned) -->
+  <rect x="60" y="124" width="280" height="88" rx="6" fill="#1a1625" stroke="#3e3860" stroke-width="1.5"/>
+  <text x="200" y="152" text-anchor="middle" font-family="'Courier New',monospace" font-size="13" fill="#8a9bbd">App Backend</text>
+  <line x1="80" y1="164" x2="320" y2="164" stroke="#3e3860" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="200" y="192" text-anchor="middle" font-family="'Courier New',monospace" font-size="13" fill="#8a9bbd">App Database</text>
+
+  <!-- "app-owned" badge -->
+  <rect x="234" y="120" width="88" height="18" rx="9" fill="#2a1f3a" stroke="#fe5f55" stroke-width="0.5"/>
+  <text x="278" y="132" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#fe5f55">app-owned</text>
+
+  <!-- Arrow down -->
+  <line x1="200" y1="212" x2="200" y2="230" stroke="#3a3a58" stroke-width="1.5"/>
+  <polygon points="194,227 200,240 206,227" fill="#3a3a58"/>
+
+  <!-- Node: App UI -->
+  <rect x="60" y="240" width="280" height="40" rx="6" fill="#201c29" stroke="#2e2e42" stroke-width="1"/>
+  <text x="200" y="265" text-anchor="middle" font-family="'Courier New',monospace" font-size="13" fill="#9a9ab0">App UI</text>
+
+  <!-- Arrow down -->
+  <line x1="200" y1="280" x2="200" y2="298" stroke="#3a3a58" stroke-width="1.5"/>
+  <polygon points="194,295 200,308 206,295" fill="#3a3a58"/>
+
+  <!-- Node: User (at bottom, far from data) -->
+  <rect x="60" y="308" width="280" height="40" rx="6" fill="#201c29" stroke="#2e2e42" stroke-width="1"/>
+  <text x="200" y="333" text-anchor="middle" font-family="'Courier New',monospace" font-size="13" fill="#9a9ab0">User</text>
+
+  <!-- Bottom label -->
+  <text x="200" y="380" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="#fe5f55">Your data, held by the app</text>
+  <text x="200" y="398" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#5a5a7a">Switch apps → start from scratch</text>
+
+  <!-- ===== RIGHT COLUMN: Agentic ===== -->
+
+  <!-- Node: User (at top, in control) -->
+  <rect x="460" y="56" width="280" height="40" rx="6" fill="#1b2e1b" stroke="#3d6e3d" stroke-width="1.5"/>
+  <text x="600" y="81" text-anchor="middle" font-family="'Courier New',monospace" font-size="13" fill="#7abd7a">User</text>
+
+  <!-- Arrow with label -->
+  <line x1="600" y1="96" x2="600" y2="114" stroke="#6b7fa3" stroke-width="1.5"/>
+  <polygon points="594,111 600,124 606,111" fill="#6b7fa3"/>
+  <text x="625" y="109" font-family="'Courier New',monospace" font-size="10" fill="#6b7fa3">schedules</text>
+
+  <!-- Node: AI Agent -->
+  <rect x="460" y="124" width="280" height="40" rx="6" fill="#1d1a2e" stroke="#4a3f7a" stroke-width="1.5"/>
+  <text x="600" y="149" text-anchor="middle" font-family="'Courier New',monospace" font-size="13" fill="#a89bcd">AI Agent</text>
+
+  <!-- Arrow with label -->
+  <line x1="600" y1="164" x2="600" y2="182" stroke="#6b7fa3" stroke-width="1.5"/>
+  <polygon points="594,179 600,192 606,179" fill="#6b7fa3"/>
+  <text x="625" y="177" font-family="'Courier New',monospace" font-size="10" fill="#6b7fa3">gathers + encrypts</text>
+
+  <!-- Node: Content Sources -->
+  <rect x="460" y="192" width="280" height="40" rx="6" fill="#201c29" stroke="#2e2e42" stroke-width="1"/>
+  <text x="600" y="217" text-anchor="middle" font-family="'Courier New',monospace" font-size="13" fill="#9a9ab0">Content Sources</text>
+
+  <!-- Arrow with label -->
+  <line x1="600" y1="232" x2="600" y2="250" stroke="#6b7fa3" stroke-width="1.5"/>
+  <polygon points="594,247 600,260 606,247" fill="#6b7fa3"/>
+  <text x="625" y="245" font-family="'Courier New',monospace" font-size="10" fill="#fe5f55">encrypted</text>
+
+  <!-- Node: Device Storage (user-owned) -->
+  <rect x="460" y="260" width="280" height="40" rx="6" fill="#1b2e1b" stroke="#3d6e3d" stroke-width="1.5"/>
+  <text x="600" y="285" text-anchor="middle" font-family="'Courier New',monospace" font-size="13" fill="#7abd7a">Device Storage</text>
+
+  <!-- "user-owned" badge -->
+  <rect x="232" y="256" width="88" height="18" rx="9" fill="#1b3e1b" stroke="#3d6e3d" stroke-width="0.5"/>
+  <text x="276" y="268" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#7abd7a">user-owned</text>
+
+  <!-- Arrow -->
+  <line x1="600" y1="300" x2="600" y2="318" stroke="#6b7fa3" stroke-width="1.5"/>
+  <polygon points="594,315 600,328 606,315" fill="#6b7fa3"/>
+
+  <!-- Node: App UI -->
+  <rect x="460" y="328" width="280" height="40" rx="6" fill="#201c29" stroke="#2e2e42" stroke-width="1"/>
+  <text x="600" y="353" text-anchor="middle" font-family="'Courier New',monospace" font-size="13" fill="#9a9ab0">App UI</text>
+
+  <!-- Bottom labels -->
+  <text x="600" y="380" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="#7abd7a">Your data, on your device</text>
+  <text x="600" y="398" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#5a7a5a">Switch apps → your history follows</text>
+</svg>
