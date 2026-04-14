@@ -582,6 +582,24 @@ nav .theme-toggle:hover, nav .theme-toggle:focus-visible {
 .writing-section .writing-card-series {
   color: var(--accent);
 }
+.writing-section .writing-view-all {
+  text-align: center;
+  padding: 0 3rem 3rem;
+}
+.writing-section .writing-view-all a {
+  font-family: "Fira Mono", monospace;
+  font-size: 0.85rem;
+  color: var(--accent-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+.writing-section .writing-view-all a:hover {
+  color: var(--contrast);
+}
+.writing-section .writing-view-all a:visited {
+  color: var(--accent-light);
+}
 .writing-section .writing-card-excerpt {
   font-family: "Fira Mono", monospace;
   font-size: 13px;

@@ -159,6 +159,51 @@
   padding-left: 1rem;
 }
 
+/* ── Series disclaimer ── */
+.series-disclaimer {
+  margin: 0 0 2.5rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--tech-card-bg);
+  border: 1px solid var(--tech-card-border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  font-family: "Fira Mono", monospace;
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+
+.series-disclaimer p {
+  font-family: "Fira Mono", monospace;
+  font-size: 0.78rem;
+  line-height: 1.75;
+  margin: 0;
+  max-width: 100%;
+}
+
+.series-disclaimer a {
+  font-size: inherit;
+  font-weight: inherit;
+  color: var(--accent-light);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent-light) 40%, transparent);
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+
+.series-disclaimer a:visited {
+  color: var(--accent-light);
+}
+
+.series-disclaimer a:hover {
+  color: var(--contrast);
+}
+
+.series-disclaimer strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
 /* ── Article body typography ── */
 .article-body {
   font-family: "Fira Mono", monospace;
