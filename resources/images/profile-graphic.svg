@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="Ben Crow — stylised portrait">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="68%">
+      <stop offset="0%" stop-color="#1a2e6e"/>
+      <stop offset="100%" stop-color="#0d0221"/>
+    </radialGradient>
+    <!-- Soft shadow under face -->
+    <radialGradient id="face-shadow" cx="50%" cy="80%" r="50%">
+      <stop offset="0%" stop-color="#00000033"/>
+      <stop offset="100%" stop-color="#00000000"/>
+    </radialGradient>
+  </defs>
+
+  <!-- ── Background ── -->
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <!-- Subtle grid accent (thin lines) -->
+  <line x1="0" y1="200" x2="400" y2="200" stroke="#ffffff" stroke-width="0.4" opacity="0.06"/>
+  <line x1="200" y1="0" x2="200" y2="400" stroke="#ffffff" stroke-width="0.4" opacity="0.06"/>
+
+  <!-- ── Shirt / body ── coral, V-neck -->
+  <path d="M 20 400 L 50 345 C 72 322 108 308 142 302 L 172 338 L 200 322 L 228 338 L 258 302 C 292 308 328 322 350 345 L 380 400 Z" fill="#fe5f55"/>
+  <!-- V-neck collar shadow -->
+  <path d="M 172 338 L 200 355 L 228 338 L 200 322 Z" fill="#c84a41"/>
+  <!-- Collar highlight edge -->
+  <path d="M 172 338 L 200 355 L 228 338" stroke="#ff8a82" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+  <!-- ── Neck ── -->
+  <path d="M 174 308 C 174 292 182 282 200 282 C 218 282 226 292 226 308 L 230 342 L 170 342 Z" fill="#c8845a"/>
+  <!-- Neck centre shadow -->
+  <path d="M 196 282 C 186 285 178 294 176 308 L 174 335 L 188 342 L 188 308 C 188 296 192 286 196 282 Z" fill="#b87348" opacity="0.35"/>
+
+  <!-- ── Ears ── -->
+  <ellipse cx="114" cy="228" rx="16" ry="21" fill="#c8845a"/>
+  <ellipse cx="114" cy="228" rx="9" ry="13" fill="#b87348" opacity="0.55"/>
+  <ellipse cx="286" cy="228" rx="16" ry="21" fill="#c8845a"/>
+  <ellipse cx="286" cy="228" rx="9" ry="13" fill="#b87348" opacity="0.55"/>
+
+  <!-- ── Face ── -->
+  <ellipse cx="200" cy="218" rx="87" ry="104" fill="#c8845a"/>
+  <!-- Subtle right-side face shadow -->
+  <ellipse cx="266" cy="235" rx="32" ry="65" fill="#b87348" opacity="0.18"/>
+  <!-- Face bottom ambient shadow (depth under chin area) -->
+  <ellipse cx="200" cy="322" rx="60" ry="20" fill="#00000022"/>
+
+  <!-- ── Hair ── short, dark brown, tight to skull ── -->
+  <!-- Hairline sits around y=165; hair cap extends to y≈95 -->
+  <!-- Main hair mass -->
+  <path d="
+    M 114 208
+    C 113 180 117 152 130 132
+    C 148 107 172 96 200 95
+    C 228 96 252 107 270 132
+    C 283 152 287 180 286 208
+    C 282 194 277 181 268 170
+    C 254 153 232 145 200 144
+    C 168 145 146 153 132 170
+    C 123 181 118 194 114 208
+    Z
+  " fill="#3d2b1a"/>
+  <!-- Hair highlight strip on top -->
+  <path d="
+    M 170 102 C 183 97 200 95 217 97
+    C 232 100 246 108 257 118
+    C 244 110 224 105 200 105
+    C 176 105 156 110 143 118
+    C 154 108 163 103 170 102 Z
+  " fill="#5a4228"/>
+
+  <!-- ── Eyebrows ── dark, slightly arched ── -->
+  <path d="M 150 188 C 157 182 168 180 180 183" stroke="#2e1f0e" stroke-width="6.5" stroke-linecap="round" fill="none"/>
+  <path d="M 220 183 C 232 180 243 182 250 188" stroke="#2e1f0e" stroke-width="6.5" stroke-linecap="round" fill="none"/>
+
+  <!-- ── Eyes ── -->
+  <!-- Left eye -->
+  <ellipse cx="172" cy="207" rx="19" ry="13" fill="#f0ede6"/>
+  <circle cx="172" cy="207" r="9.5" fill="#6b7fa3"/>
+  <circle cx="172" cy="207" r="5.5" fill="#1a1a2e"/>
+  <circle cx="176" cy="203" r="3" fill="#ffffff" opacity="0.85"/>
+  <!-- Upper eyelid -->
+  <path d="M 153 207 Q 172 197 191 207" stroke="#2e1f0e" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- Lower lashline -->
+  <path d="M 155 209 Q 172 215 189 209" stroke="#b87348" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.45"/>
+
+  <!-- Right eye -->
+  <ellipse cx="228" cy="207" rx="19" ry="13" fill="#f0ede6"/>
+  <circle cx="228" cy="207" r="9.5" fill="#6b7fa3"/>
+  <circle cx="228" cy="207" r="5.5" fill="#1a1a2e"/>
+  <circle cx="232" cy="203" r="3" fill="#ffffff" opacity="0.85"/>
+  <!-- Upper eyelid -->
+  <path d="M 209 207 Q 228 197 247 207" stroke="#2e1f0e" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- Lower lashline -->
+  <path d="M 211 209 Q 228 215 245 209" stroke="#b87348" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.45"/>
+
+  <!-- ── Nose ── subtle flat-illustration style ── -->
+  <!-- Bridge lines -->
+  <path d="M 197 222 L 191 247" stroke="#b87348" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.55"/>
+  <path d="M 203 222 L 209 247" stroke="#b87348" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.55"/>
+  <!-- Nose tip / nostrils hint -->
+  <ellipse cx="200" cy="249" rx="13" ry="7" fill="#be7c52" opacity="0.35"/>
+  <ellipse cx="192" cy="251" rx="7" ry="4.5" fill="#b06840" opacity="0.5"/>
+  <ellipse cx="208" cy="251" rx="7" ry="4.5" fill="#b06840" opacity="0.5"/>
+
+  <!-- ── Beard ── covers lower jaw / chin ── -->
+  <path d="
+    M 118 252
+    C 116 266 113 285 117 304
+    C 128 330 162 348 200 349
+    C 238 348 272 330 283 304
+    C 287 285 284 266 282 252
+    C 272 260 252 267 200 267
+    C 148 267 128 260 118 252
+    Z
+  " fill="#3d2b1a"/>
+  <!-- Beard centre sheen (slightly lighter) -->
+  <path d="
+    M 152 292
+    C 162 314 180 330 200 332
+    C 220 330 238 314 248 292
+    C 238 287 224 284 200 284
+    C 176 284 162 287 152 292 Z
+  " fill="#52381e" opacity="0.7"/>
+  <!-- Beard edge fade at top (where it meets skin) -->
+  <path d="
+    M 118 252 C 120 248 128 246 140 248
+    C 158 252 178 256 200 256
+    C 222 256 242 252 260 248
+    C 272 246 280 248 282 252
+    C 272 260 252 267 200 267
+    C 148 267 128 260 118 252 Z
+  " fill="#4a3020" opacity="0.5"/>
+
+  <!-- ── Moustache ── -->
+  <path d="
+    M 177 258
+    C 181 251 190 248 200 250
+    C 210 248 219 251 223 258
+    C 216 265 207 267 200 267
+    C 193 267 184 265 177 258 Z
+  " fill="#3d2b1a"/>
+
+  <!-- ── Smile ── slight, friendly ── visible between moustache & beard -->
+  <path d="M 188 270 C 194 278 206 278 212 270" stroke="#2a1808" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- ── Cheek warmth ── -->
+  <ellipse cx="148" cy="242" rx="24" ry="15" fill="#d4956a" opacity="0.18"/>
+  <ellipse cx="252" cy="242" rx="24" ry="15" fill="#d4956a" opacity="0.18"/>
+
+  <!-- ── Accent dot — site motif (coral) ── -->
+  <circle cx="340" cy="58" r="5" fill="#fe5f55" opacity="0.7"/>
+  <circle cx="356" cy="58" r="3" fill="#fe5f55" opacity="0.4"/>
+  <circle cx="60" cy="342" r="4" fill="#6b7fa3" opacity="0.5"/>
+</svg>
