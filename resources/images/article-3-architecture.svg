@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 560" role="img" aria-label="Full architecture diagram: User to Agent to MCP to Sources to encrypted relay to Device to App UI">
+  <rect width="700" height="560" rx="12" fill="#17141d"/>
+
+  <!-- Title -->
+  <text x="350" y="30" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="10" font-weight="700" fill="#6b7fa3" letter-spacing="2">AGENTIC CONTENT APP — FULL FLOW</text>
+
+  <!-- ── NODE: User ── -->
+  <rect x="250" y="46" width="200" height="44" rx="8" fill="#1b2e1b" stroke="#3d6e3d" stroke-width="1.5"/>
+  <text x="350" y="63" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="11" font-weight="700" fill="#7abd7a">User</text>
+  <text x="350" y="79" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#4a6e4a">schedules agent task</text>
+
+  <!-- Arrow down -->
+  <line x1="350" y1="90" x2="350" y2="108" stroke="#6b7fa3" stroke-width="1.5"/>
+  <polygon points="344,105 350,118 356,105" fill="#6b7fa3"/>
+
+  <!-- ── NODE: AI Agent ── -->
+  <rect x="220" y="118" width="260" height="44" rx="8" fill="#1d1a2e" stroke="#4a3f7a" stroke-width="1.5"/>
+  <text x="350" y="135" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="11" font-weight="700" fill="#a89bcd">Personal AI Agent</text>
+  <text x="350" y="151" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#6a5a9a">gathers · structures · encrypts</text>
+
+  <!-- Branch left to MCP -->
+  <line x1="220" y1="140" x2="152" y2="140" stroke="#6b7fa3" stroke-width="1.5"/>
+  <polygon points="156,134 144,140 156,146" fill="#6b7fa3"/>
+  <text x="178" y="132" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#6b7fa3">loads</text>
+  <text x="178" y="143" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#6b7fa3">workflow</text>
+
+  <!-- ── NODE: MCP Server (left branch) ── -->
+  <rect x="28" y="114" width="116" height="52" rx="6" fill="#1a1e2e" stroke="#2e3a5e" stroke-width="1.5"/>
+  <text x="86" y="133" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="10" font-weight="700" fill="#8a9bbd">MCP Server</text>
+  <text x="86" y="147" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#4a5a7a">instruction</text>
+  <text x="86" y="158" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#4a5a7a">+ ingestion</text>
+
+  <!-- Branch right to Sources -->
+  <line x1="480" y1="140" x2="546" y2="140" stroke="#6b7fa3" stroke-width="1.5"/>
+  <polygon points="542,134 554,140 542,146" fill="#6b7fa3"/>
+  <text x="512" y="132" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#6b7fa3">fetches</text>
+  <text x="512" y="143" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#6b7fa3">content</text>
+
+  <!-- ── NODE: Sources (right branch) ── -->
+  <rect x="554" y="114" width="118" height="52" rx="6" fill="#201c29" stroke="#2e2e42" stroke-width="1.5"/>
+  <text x="613" y="133" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="10" font-weight="700" fill="#9a9ab0">Sources</text>
+  <text x="613" y="147" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#5a5a7a">RSS · YouTube</text>
+  <text x="613" y="158" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#5a5a7a">X · web scraping</text>
+
+  <!-- Arrow down from Agent -->
+  <line x1="350" y1="162" x2="350" y2="180" stroke="#6b7fa3" stroke-width="1.5"/>
+  <polygon points="344,177 350,190 356,177" fill="#6b7fa3"/>
+
+  <!-- ── NODE: Encrypt ── -->
+  <rect x="220" y="190" width="260" height="44" rx="8" fill="#2a1a1a" stroke="#6a3030" stroke-width="1.5"/>
+  <text x="350" y="207" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="11" font-weight="700" fill="#c06060">Encrypt Payload</text>
+  <text x="350" y="223" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#7a4040">ECIES P-256 + AES-256-GCM · device public key</text>
+
+  <!-- Arrow down -->
+  <line x1="350" y1="234" x2="350" y2="252" stroke="#6b7fa3" stroke-width="1.5"/>
+  <polygon points="344,249 350,262 356,249" fill="#6b7fa3"/>
+
+  <!-- ── NODE: Relay Server (blind) ── -->
+  <rect x="220" y="262" width="260" height="52" rx="8" fill="#201c29" stroke="#3a3050" stroke-width="1.5"/>
+  <text x="350" y="280" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="11" font-weight="700" fill="#8a9bbd">Relay Server</text>
+  <text x="350" y="296" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#4a5a7a">sees only ciphertext</text>
+  <text x="350" y="308" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#4a5a7a">routes · never reads · never stores content</text>
+
+  <!-- Blind badge -->
+  <rect x="446" y="258" width="48" height="18" rx="9" fill="#2a1f3a" stroke="#5a3a6a" stroke-width="0.5"/>
+  <text x="470" y="270" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#9a6aaa">blind</text>
+
+  <!-- Arrow down -->
+  <line x1="350" y1="314" x2="350" y2="332" stroke="#6b7fa3" stroke-width="1.5"/>
+  <polygon points="344,329 350,342 356,329" fill="#6b7fa3"/>
+
+  <!-- ── NODE: Device Storage ── -->
+  <rect x="220" y="342" width="260" height="52" rx="8" fill="#1b2e1b" stroke="#3d6e3d" stroke-width="1.5"/>
+  <text x="350" y="361" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="11" font-weight="700" fill="#7abd7a">Device Storage</text>
+  <text x="350" y="377" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#4a6e4a">decrypts on arrival · IndexedDB</text>
+  <text x="350" y="389" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#4a6e4a">deduplicates · retains per user preference</text>
+
+  <!-- User-owned badge -->
+  <rect x="206" y="338" width="88" height="18" rx="9" fill="#1b3e1b" stroke="#3d6e3d" stroke-width="0.5"/>
+  <text x="250" y="350" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#7abd7a">user-owned</text>
+
+  <!-- Arrow down -->
+  <line x1="350" y1="394" x2="350" y2="412" stroke="#6b7fa3" stroke-width="1.5"/>
+  <polygon points="344,409 350,422 356,409" fill="#6b7fa3"/>
+
+  <!-- ── NODE: App UI ── -->
+  <rect x="220" y="422" width="260" height="44" rx="8" fill="#1d1a2e" stroke="#4a3f7a" stroke-width="1.5"/>
+  <text x="350" y="439" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="11" font-weight="700" fill="#a89bcd">App UI</text>
+  <text x="350" y="455" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#6a5a9a">reads local storage · renders · no cloud round-trip</text>
+
+  <!-- Caption -->
+  <text x="350" y="498" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#5a5a7a">Content is encrypted before it touches any server.</text>
+  <text x="350" y="512" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#5a5a7a">The relay cannot read it. The app holds nothing.</text>
+  <text x="350" y="526" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#fe5f55">The architectural guarantee isn't "we won't look." It's "we can't."</text>
+</svg>

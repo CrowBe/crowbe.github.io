@@ -1,0 +1,464 @@
+/* ── Writing section — article and index styles ──
+   Depends on index.css being loaded first (fonts, CSS vars, nav, footer, fab) */
+
+/* ── Writing index page ── */
+.writing-hero {
+  background: linear-gradient(to left, var(--landing-gradient-start), var(--landing-gradient-end));
+  color: var(--text-secondary);
+  padding: 10vh 2rem 6vh;
+  text-align: center;
+}
+
+.writing-hero h1 {
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin: 0 0 1rem;
+}
+
+.writing-hero h1 em {
+  font-style: normal;
+  color: var(--contrast);
+}
+
+.writing-hero p {
+  font-family: "Fira Mono", monospace;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  opacity: 0.75;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.writing-list {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 8rem;
+}
+
+.writing-list h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--tech-card-border);
+}
+
+.article-card {
+  display: block;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--tech-card-border);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.article-card:hover .article-title,
+.article-card:focus-visible .article-title {
+  color: var(--contrast);
+}
+
+.article-card:focus-visible {
+  outline: 2px solid var(--contrast);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.article-meta {
+  font-family: "Fira Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.article-series {
+  color: var(--accent);
+}
+
+.article-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+  color: var(--text-primary);
+  margin: 0 0 0.6rem;
+  line-height: 1.35;
+  transition: color 0.2s;
+}
+
+.article-excerpt {
+  font-family: "Fira Mono", monospace;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 100%;
+}
+
+/* ── Article page ── */
+.article-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 8rem;
+  color: var(--text-primary);
+}
+
+.article-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: "Fira Mono", monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-bottom: 3rem;
+  transition: color 0.2s;
+}
+
+.article-back:visited {
+  color: var(--text-muted);
+}
+
+.article-back:hover,
+.article-back:focus-visible {
+  color: var(--contrast);
+}
+
+.article-back:focus-visible {
+  outline: 2px solid var(--contrast);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.article-header {
+  margin-bottom: 3rem;
+}
+
+.article-header .article-meta {
+  margin-bottom: 1rem;
+}
+
+.article-header h1 {
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  margin: 0 0 1.25rem;
+  color: var(--text-primary);
+}
+
+.article-header .article-lede {
+  font-family: "Fira Mono", monospace;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin: 0;
+  border-left: 3px solid var(--contrast);
+  padding-left: 1rem;
+}
+
+/* ── Series disclaimer ── */
+.series-disclaimer {
+  margin: 0 0 2.5rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--tech-card-bg);
+  border: 1px solid var(--tech-card-border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  font-family: "Fira Mono", monospace;
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+
+.series-disclaimer p {
+  font-family: "Fira Mono", monospace;
+  font-size: 0.78rem;
+  line-height: 1.75;
+  margin: 0;
+  max-width: 100%;
+}
+
+.series-disclaimer a {
+  font-size: inherit;
+  font-weight: inherit;
+  color: var(--accent-light);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent-light) 40%, transparent);
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+
+.series-disclaimer a:visited {
+  color: var(--accent-light);
+}
+
+.series-disclaimer a:hover {
+  color: var(--contrast);
+}
+
+.series-disclaimer strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* ── Article body typography ── */
+.article-body {
+  font-family: "Fira Mono", monospace;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--text-primary);
+}
+
+.article-body p {
+  font-family: "Fira Mono", monospace;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  margin: 0 0 1.5rem;
+  max-width: 100%;
+  text-align: left;
+}
+
+.article-body h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.4rem;
+  margin: 3rem 0 1rem;
+  color: var(--text-primary);
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.article-body h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2.5rem;
+  height: 2px;
+  background: linear-gradient(to right, var(--accent), var(--contrast));
+}
+
+.article-body h3 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.05rem;
+  margin: 2rem 0 0.75rem;
+  color: var(--accent-light);
+}
+
+.article-body strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.article-body em {
+  font-style: italic;
+}
+
+/* ── Article inline links ── */
+.article-body a,
+.article-header a,
+.article-lede a {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  font-family: inherit;
+  color: var(--accent-light);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent-light) 45%, transparent);
+  text-underline-offset: 3px;
+  transition: color 0.2s, text-decoration-color 0.2s;
+}
+
+.article-body a:visited,
+.article-header a:visited,
+.article-lede a:visited {
+  color: var(--accent-light);
+}
+
+.article-body a:hover,
+.article-body a:focus-visible,
+.article-header a:hover,
+.article-lede a:hover {
+  color: var(--contrast);
+  text-decoration-color: color-mix(in srgb, var(--contrast) 70%, transparent);
+}
+
+.article-body a:focus-visible {
+  outline: 2px solid var(--contrast);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Code blocks ── */
+.article-body pre {
+  background: var(--bg-card);
+  border: 1px solid var(--tech-card-border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0 2rem;
+  font-family: "Fira Mono", monospace;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.article-body code {
+  font-family: "Fira Mono", monospace;
+  font-size: 0.85em;
+  background: var(--tech-card-bg);
+  border: 1px solid var(--tech-card-border);
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+  color: var(--accent-light);
+}
+
+.article-body pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* ── Comparison table ── */
+.article-body .comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0 2rem;
+  font-family: "Fira Mono", monospace;
+  font-size: 0.82rem;
+  overflow-x: auto;
+  display: block;
+}
+
+.article-body .comparison-table thead th {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--accent);
+}
+
+.article-body .comparison-table thead th:first-child {
+  border-radius: 8px 0 0 0;
+}
+
+.article-body .comparison-table thead th:last-child {
+  border-radius: 0 8px 0 0;
+}
+
+.article-body .comparison-table tbody tr {
+  border-bottom: 1px solid var(--tech-card-border);
+}
+
+.article-body .comparison-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.article-body .comparison-table tbody tr:nth-child(even) {
+  background: var(--tech-card-bg);
+}
+
+.article-body .comparison-table td {
+  padding: 0.7rem 1rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  vertical-align: top;
+}
+
+.article-body .comparison-table td:first-child {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.article-body .comparison-table td.highlight {
+  color: var(--accent-light);
+}
+
+/* ── Article footer / series note ── */
+.article-footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--tech-card-border);
+  font-family: "Fira Mono", monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.article-footer a {
+  color: var(--accent);
+  font-size: 0.8rem;
+  text-decoration: underline;
+}
+
+.article-footer a:hover {
+  color: var(--contrast);
+}
+
+/* ── Closing callout ── */
+.article-closing {
+  margin: 3rem 0 2rem;
+  padding: 1.5rem 1.75rem;
+  border-left: 4px solid var(--contrast);
+  background: var(--tech-card-bg);
+  border-radius: 0 8px 8px 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* ── Diagrams ── */
+.article-figure {
+  margin: 2.5rem 0 2rem;
+  text-align: center;
+}
+
+.article-figure img {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--tech-card-border);
+}
+
+.article-figure figcaption {
+  font-family: "Fira Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.6rem;
+  font-style: italic;
+}
+
+/* ── Responsive ── */
+@media (min-width: 768px) {
+  .article-page {
+    padding: 5rem 2rem 10rem;
+  }
+
+  .article-body p {
+    font-size: 1rem;
+  }
+
+  .writing-list {
+    padding: 5rem 2rem 10rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .writing-list {
+    padding: 6rem 0 10rem;
+  }
+}

@@ -99,16 +99,17 @@ fabTop.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// ── Keyboard navigation for project carousel ──
-const projectList = document.querySelector(".project-list");
+// ── Keyboard navigation for horizontal carousels ──
+const cardWidth = 290; // approximate card visible width with overlap
 
-projectList.addEventListener("keydown", (e) => {
-  const cardWidth = 290; // approximate card visible width with overlap
-  if (e.key === "ArrowRight") {
-    e.preventDefault();
-    projectList.scrollBy({ left: cardWidth, behavior: "smooth" });
-  } else if (e.key === "ArrowLeft") {
-    e.preventDefault();
-    projectList.scrollBy({ left: -cardWidth, behavior: "smooth" });
-  }
+document.querySelectorAll(".project-list, .writing-card-list").forEach((list) => {
+  list.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      list.scrollBy({ left: cardWidth, behavior: "smooth" });
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      list.scrollBy({ left: -cardWidth, behavior: "smooth" });
+    }
+  });
 });

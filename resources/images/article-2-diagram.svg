@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" role="img" aria-label="Barriers on the path from today to agentic content apps becoming mainstream">
+  <rect width="800" height="320" rx="12" fill="#17141d"/>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="10" font-weight="700" fill="#6b7fa3" letter-spacing="2">THE ROAD TO AGENTIC CONTENT APPS</text>
+
+  <!-- ── Road path (background strip) ── -->
+  <rect x="30" y="100" width="740" height="52" rx="0" fill="#1a1625"/>
+  <!-- Road centre dashes -->
+  <line x1="160" y1="126" x2="210" y2="126" stroke="#2e2e42" stroke-width="2" stroke-dasharray="10,8"/>
+  <line x1="390" y1="126" x2="440" y2="126" stroke="#2e2e42" stroke-width="2" stroke-dasharray="10,8"/>
+  <line x1="620" y1="126" x2="670" y2="126" stroke="#2e2e42" stroke-width="2" stroke-dasharray="10,8"/>
+
+  <!-- ── START NODE ── -->
+  <rect x="30" y="100" width="110" height="52" rx="8" fill="#201c29" stroke="#3a3a58" stroke-width="1.5"/>
+  <text x="85" y="121" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="10" font-weight="700" fill="#9a9ab0" letter-spacing="1">TODAY</text>
+  <text x="85" y="140" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#5a5a7a">Traditional</text>
+  <text x="85" y="152" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#5a5a7a">app model</text>
+
+  <!-- Arrow right -->
+  <line x1="140" y1="126" x2="158" y2="126" stroke="#3a3a58" stroke-width="1.5"/>
+  <polygon points="154,120 164,126 154,132" fill="#3a3a58"/>
+
+  <!-- ── BARRIER 1: ACCESS ── -->
+  <rect x="164" y="80" width="160" height="92" rx="6" fill="#2a1a1a" stroke="#7a3030" stroke-width="1.5"/>
+  <text x="244" y="100" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="11" font-weight="700" fill="#c06060" letter-spacing="1">ACCESS</text>
+  <line x1="180" y1="108" x2="308" y2="108" stroke="#7a3030" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="244" y="122" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#9a6060">Legal grey area</text>
+  <text x="244" y="136" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#9a6060">Platform hostility</text>
+  <text x="244" y="150" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#9a6060">ToS restrictions</text>
+  <text x="244" y="163" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#9a6060">Closed APIs</text>
+
+  <!-- Arrow right -->
+  <line x1="324" y1="126" x2="342" y2="126" stroke="#3a3a58" stroke-width="1.5"/>
+  <polygon points="338,120 348,126 338,132" fill="#3a3a58"/>
+
+  <!-- ── BARRIER 2: TRUST ── -->
+  <rect x="348" y="80" width="160" height="92" rx="6" fill="#2a1a1a" stroke="#7a3030" stroke-width="1.5"/>
+  <text x="428" y="100" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="11" font-weight="700" fill="#c06060" letter-spacing="1">TRUST</text>
+  <line x1="364" y1="108" x2="492" y2="108" stroke="#7a3030" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="428" y="122" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#9a6060">Trusting the agent</text>
+  <text x="428" y="136" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#9a6060">Aggregated data risk</text>
+  <text x="428" y="150" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#9a6060">Verifiable guarantees</text>
+  <text x="428" y="163" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#9a6060">Architecture as proof</text>
+
+  <!-- Arrow right -->
+  <line x1="508" y1="126" x2="526" y2="126" stroke="#3a3a58" stroke-width="1.5"/>
+  <polygon points="522,120 532,126 522,132" fill="#3a3a58"/>
+
+  <!-- ── BARRIER 3: TECHNICAL ── -->
+  <rect x="532" y="80" width="160" height="92" rx="6" fill="#2a1a1a" stroke="#7a3030" stroke-width="1.5"/>
+  <text x="612" y="100" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="11" font-weight="700" fill="#c06060" letter-spacing="1">TECHNICAL</text>
+  <line x1="548" y1="108" x2="676" y2="108" stroke="#7a3030" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text x="612" y="122" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#9a6060">Setup complexity</text>
+  <text x="612" y="136" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#9a6060">Compute constraints</text>
+  <text x="612" y="150" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#9a6060">Data reliability</text>
+  <text x="612" y="163" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#9a6060">UX expectations gap</text>
+
+  <!-- Arrow right -->
+  <line x1="692" y1="126" x2="698" y2="126" stroke="#3a3a58" stroke-width="1.5"/>
+  <polygon points="694,120 704,126 694,132" fill="#3a3a58"/>
+
+  <!-- ── END NODE: Agentic Future ── -->
+  <rect x="704" y="100" width="86" height="52" rx="8" fill="#1b2e1b" stroke="#3d6e3d" stroke-width="1.5"/>
+  <text x="747" y="121" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="9" font-weight="700" fill="#7abd7a" letter-spacing="1">AGENTIC</text>
+  <text x="747" y="134" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="9" font-weight="700" fill="#7abd7a" letter-spacing="1">FUTURE</text>
+  <text x="747" y="148" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#4a6e4a">design</text>
+  <text x="747" y="159" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#4a6e4a">problems</text>
+
+  <!-- ── ECOSYSTEM CATCHING UP strip ── -->
+  <rect x="164" y="200" width="528" height="40" rx="6" fill="#1a1e2e" stroke="#2e3a5e" stroke-width="1"/>
+  <text x="428" y="216" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="9" font-weight="700" fill="#6b7fa3" letter-spacing="2">ECOSYSTEM CATCHING UP</text>
+  <text x="428" y="231" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#4a5a7a">Better models · Cheaper inference · MCP standardisation · Curated agent tooling</text>
+
+  <!-- Upward arrows from ecosystem strip to barriers -->
+  <line x1="244" y1="200" x2="244" y2="180" stroke="#4a6e4a" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <polygon points="239,182 244,172 249,182" fill="#4a6e4a"/>
+  <line x1="428" y1="200" x2="428" y2="180" stroke="#4a6e4a" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <polygon points="423,182 428,172 433,182" fill="#4a6e4a"/>
+  <line x1="612" y1="200" x2="612" y2="180" stroke="#4a6e4a" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <polygon points="607,182 612,172 617,182" fill="#4a6e4a"/>
+
+  <!-- Caption -->
+  <text x="400" y="270" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#5a5a7a">Each barrier is a design problem, not a hard limit.</text>
+  <text x="400" y="286" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#5a5a7a">The ecosystem is starting to address them.</text>
+</svg>

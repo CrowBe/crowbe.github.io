@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340" role="img" aria-label="MCP's dual role: instruction layer teaching the agent, and ingestion interface receiving validated content">
+  <rect width="700" height="340" rx="12" fill="#17141d"/>
+
+  <!-- Title -->
+  <text x="350" y="28" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="10" font-weight="700" fill="#6b7fa3" letter-spacing="2">MCP'S DUAL ROLE</text>
+
+  <!-- ── Centre: MCP Server ── -->
+  <rect x="250" y="128" width="200" height="84" rx="8" fill="#1a1e2e" stroke="#4a5aae" stroke-width="2"/>
+  <text x="350" y="153" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="13" font-weight="700" fill="#8a9bbd">MCP Server</text>
+  <line x1="268" y1="163" x2="432" y2="163" stroke="#2e3a5e" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="350" y="178" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#4a5a8a">Named workflows · Typed tools</text>
+  <text x="350" y="191" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#4a5a8a">Schemas · Skill resources</text>
+  <text x="350" y="204" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#4a5a8a">User preferences</text>
+
+  <!-- ── LEFT SIDE: Role 1 — Instruction Layer ── -->
+  <!-- Agent node -->
+  <rect x="28" y="80" width="160" height="44" rx="6" fill="#1d1a2e" stroke="#4a3f7a" stroke-width="1.5"/>
+  <text x="108" y="97" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="10" font-weight="700" fill="#a89bcd">AI Agent</text>
+  <text x="108" y="113" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#6a5a9a">asks: how do I populate this app?</text>
+
+  <!-- Arrow: Agent → MCP (request workflow) -->
+  <line x1="188" y1="102" x2="246" y2="154" stroke="#6b7fa3" stroke-width="1.5"/>
+  <polygon points="241,150 250,162 255,151" fill="#6b7fa3"/>
+  <text x="196" y="130" font-family="'Courier New',monospace" font-size="8" fill="#6b7fa3">loads</text>
+  <text x="188" y="141" font-family="'Courier New',monospace" font-size="8" fill="#6b7fa3">sync_feed</text>
+
+  <!-- Arrow: MCP → Agent (returns instructions) -->
+  <line x1="250" y1="148" x2="193" y2="100" stroke="#4a5aae" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polygon points="196,104 184,94 191,105" fill="#4a5aae"/>
+  <text x="148" y="148" font-family="'Courier New',monospace" font-size="8" fill="#4a5aae">returns</text>
+  <text x="148" y="159" font-family="'Courier New',monospace" font-size="8" fill="#4a5aae">instructions</text>
+
+  <!-- Role 1 label -->
+  <rect x="28" y="148" width="160" height="36" rx="6" fill="#13132a" stroke="#2e2e52" stroke-width="1"/>
+  <text x="108" y="163" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="9" font-weight="700" fill="#6b7fa3" letter-spacing="1">ROLE 1</text>
+  <text x="108" y="176" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#4a5a7a">Instruction Layer</text>
+
+  <!-- ── RIGHT SIDE: Role 2 — Ingestion Interface ── -->
+  <!-- Agent output node -->
+  <rect x="512" y="80" width="160" height="44" rx="6" fill="#1d1a2e" stroke="#4a3f7a" stroke-width="1.5"/>
+  <text x="592" y="97" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="10" font-weight="700" fill="#a89bcd">Agent Output</text>
+  <text x="592" y="113" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#6a5a9a">encrypted, structured payload</text>
+
+  <!-- Arrow: Agent → MCP (submits tool call) -->
+  <line x1="512" y1="102" x2="454" y2="154" stroke="#6b7fa3" stroke-width="1.5"/>
+  <polygon points="452,150 450,163 460,154" fill="#6b7fa3"/>
+  <text x="478" y="130" font-family="'Courier New',monospace" font-size="8" fill="#6b7fa3">calls</text>
+  <text x="464" y="141" font-family="'Courier New',monospace" font-size="8" fill="#6b7fa3">write_feed_items</text>
+
+  <!-- App / Relay node -->
+  <rect x="512" y="148" width="160" height="44" rx="6" fill="#1b2e1b" stroke="#3d6e3d" stroke-width="1.5"/>
+  <text x="592" y="165" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="10" font-weight="700" fill="#7abd7a">Relay → Device</text>
+  <text x="592" y="181" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#4a6e4a">schema-validated · forwarded</text>
+
+  <!-- Arrow: MCP → Relay (forwards validated payload) -->
+  <line x1="450" y1="160" x2="510" y2="160" stroke="#4a5aae" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <polygon points="506,154 518,160 506,166" fill="#4a5aae"/>
+
+  <!-- Role 2 label -->
+  <rect x="512" y="208" width="160" height="36" rx="6" fill="#13132a" stroke="#2e2e52" stroke-width="1"/>
+  <text x="592" y="223" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="9" font-weight="700" fill="#6b7fa3" letter-spacing="1">ROLE 2</text>
+  <text x="592" y="236" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#4a5a7a">Ingestion Interface</text>
+
+  <!-- ── Bottom caption ── -->
+  <text x="350" y="276" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#5a5a7a">The MCP server teaches the agent how to work with the app —</text>
+  <text x="350" y="290" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#5a5a7a">and validates what comes back in.</text>
+  <text x="350" y="308" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#8a9bbd">One protocol. Two roles. One boundary between agent and app.</text>
+</svg>

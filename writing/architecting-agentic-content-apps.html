@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A walkthrough of the device-first architecture behind ScrolLess — where the agent, relay, and app are kept genuinely separate, and the trust claims are enforced by the structure rather than asserted in documentation.">
+    <link rel="stylesheet" type="text/css" href="/resources/styles/index.css">
+    <link rel="stylesheet" type="text/css" href="/resources/styles/writing.css">
+    <link rel="icon" href="/resources/icons/favicon.png">
+    <script src="https://kit.fontawesome.com/aefacc78af.js" crossorigin="anonymous"></script>
+    <title>Architecting Agentic Content Apps | Ben Crow</title>
+</head>
+<body>
+    <nav aria-label="Main navigation">
+        <div class="nav-inner">
+            <a href="/" class="nav-brand">BC</a>
+            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+            <div id="nav-links" class="nav-links">
+                <a href="/#about">About</a>
+                <a href="/#projects">Projects</a>
+                <a href="/#writing">Writing</a>
+                <a href="/#contact">Contact</a>
+                <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="contrast-bar"></div>
+    </nav>
+
+    <main class="article-page">
+        <a href="/#writing" class="article-back">
+            <i class="fas fa-arrow-left"></i> Writing
+        </a>
+
+        <header class="article-header">
+            <div class="article-meta">
+                <span>April 2026</span>
+                <span class="article-series">Agentic Content Apps — Part 3 of 3</span>
+            </div>
+            <h1>Architecting Agentic Content Apps</h1>
+            <p class="article-lede">
+                A walkthrough of the device-first architecture behind ScrolLess — where the agent,
+                relay, and app are kept genuinely separate, and the trust claims are enforced
+                by the structure rather than asserted in documentation.
+            </p>
+        </header>
+
+        <aside class="series-disclaimer">
+            <p>This is a three-part series on agentic content apps. Reading order:
+                <a href="/writing/agentic-content-apps.html">Part 1: Agentic Content Apps — A New Pattern</a>
+                &rarr; <a href="/writing/why-agentic-content-apps-arent-everywhere.html">Part 2: Why They Aren't Everywhere Yet</a>
+                &rarr; <strong>Part 3: Architecting Agentic Content Apps</strong> (you are here)
+            </p>
+        </aside>
+
+        <article class="article-body">
+
+            <h2>The Architecture Has to Earn the Trust</h2>
+
+            <p>
+                <a href="/writing/agentic-content-apps.html">Article 1</a> described a pattern
+                worth exploring: personal agents handling integrations, apps focusing on
+                presentation, data living on the user's device. <a href="/writing/why-agentic-content-apps-arent-everywhere.html">Article 2</a>
+                looked honestly at the barriers — the access friction, the two distinct trust
+                problems, the technical constraints that don't dissolve under enthusiasm.
+                Both of those articles were, in a sense, preliminary. This one is about
+                what you actually build when you take the pattern seriously.
+            </p>
+
+            <p>
+                The central point of Article 2 was that trust claims in this space need to be
+                structural rather than rhetorical. Saying "your data stays on your device" only
+                means something if the system is built in a way that makes the alternative
+                impossible — not merely unlikely, not policy-prohibited, but architecturally
+                foreclosed. An app whose relay server happens not to log content is different
+                from an app whose relay server receives only ciphertext and therefore cannot
+                log content in any meaningful sense, regardless of what someone later decides.
+                That difference is what this article is about.
+            </p>
+
+            <p>
+                What follows is a walkthrough of the architecture I'm working through in
+                <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">ScrolLess</a>.
+                It is a live exploration rather than a finished blueprint — the design is
+                in place and the core pipeline is running, but the project is still being built
+                out. I'm documenting it here because the architectural reasoning matters
+                independently of how complete the implementation is.
+            </p>
+
+            <h2>Five Principles Before the Diagram</h2>
+
+            <p>
+                Architecture decisions that aren't grounded in explicit principles tend to
+                drift — each individual choice seems reasonable and the cumulative effect
+                is an incoherent system. Before the flow diagram, it's worth naming
+                the five principles that shape every decision in this design.
+            </p>
+
+            <p>
+                <strong>User-owned data by default.</strong> Feed items, read state, preferences,
+                saved content — primary data lives on the user's device. The app reads from local
+                storage. Nothing is held centrally as a condition of using the service. This is
+                not a privacy feature bolted on top; it is the load-bearing assumption everything
+                else is designed around.
+            </p>
+
+            <p>
+                <strong>Agents handle integrations.</strong> The app has no OAuth flows, no
+                API clients, no rate-limit logic, no knowledge of what Twitter or YouTube look
+                like from the outside. That complexity belongs entirely to the agent layer,
+                which runs independently and is controlled by the user. The app's relationship
+                to the outside world is: receive structured data, render it. Full stop.
+            </p>
+
+            <p>
+                <strong>Apps compete on experience.</strong> When data ownership is no longer
+                a source of lock-in, the only thing left to differentiate on is how well the
+                app works. This is, I think, a healthier competitive arrangement —
+                <a href="https://builtin.com/articles/agentic-ai-interface-design" target="_blank" rel="noopener noreferrer">interface design becomes the meaningful differentiator</a>
+                rather than the size of your integration catalogue or the switching cost you've
+                engineered into your data model.
+            </p>
+
+            <p>
+                <strong>Cloud is an optional enhancement.</strong> Multi-device sync, reliable
+                background scheduling, and compute-heavy features can be cloud-backed.
+                But the app is fully functional without them. Cloud extends capability;
+                it does not gatekeep it. A user who runs everything locally should get
+                the same core experience as a paying subscriber.
+            </p>
+
+            <p>
+                <strong>Clear trust boundaries.</strong> A user should be able to understand,
+                at a meaningful level of detail, what runs on their device, what leaves it,
+                and what any server in the chain can and cannot access. This is not a UX
+                nicety — it is an architectural constraint. If the relay can read your content,
+                the trust model is broken regardless of what the privacy page promises.
+            </p>
+
+            <h2>The Full Flow</h2>
+
+            <p>
+                With those principles in place, the architecture resolves into a clear sequence.
+                The user schedules a sync task. A personal AI agent picks it up, loads its
+                workflow from an MCP server, fetches from the configured sources, structures
+                and deduplicates the results, encrypts the entire payload using the device's
+                public key, and submits it. A relay server receives the ciphertext — seeing
+                nothing it could read even if it tried — and pushes it to the device.
+                The device decrypts, writes to IndexedDB, and the app renders from local storage
+                without a network round-trip.
+            </p>
+
+            <figure class="article-figure">
+                <img src="/resources/images/article-3-architecture.svg" alt="Full architecture flow from User scheduling a task, through Personal AI Agent which loads from MCP Server and fetches from Sources, then encrypts the payload, through a blind Relay Server, to Device Storage which decrypts on arrival, and finally to App UI reading from local storage." />
+                <figcaption>The full delivery flow. Encryption happens at the agent; the relay sees only ciphertext; the app reads from local storage with no cloud round-trip required.</figcaption>
+            </figure>
+
+            <p>
+                Two things in this flow are worth pausing on, because they represent deliberate
+                departures from how most apps are built. The encryption step happens at the agent,
+                before the payload touches any server. This means the relay is blind not by policy
+                but by construction — it routes ciphertext, and the key to decrypt it never passes
+                through it. The device is the terminal point: content arrives, gets decrypted
+                locally, and the app reads it from there. There is no cloud database query
+                standing between the user and their feed.
+            </p>
+
+            <h2>Deterministic Workflows and MCP's Two Roles</h2>
+
+            <p>
+                One of the more discussed challenges with AI agents in production is reliability.
+                An agent given a loose instruction — "fetch my YouTube subscriptions and add them
+                to my feed" — will behave inconsistently. It will sometimes work, sometimes
+                hallucinate a field name, occasionally invent an endpoint that doesn't exist.
+                For a background task handling real user data on a schedule, this is not acceptable.
+                The answer isn't a smarter model; it's a more structured workflow.
+            </p>
+
+            <p>
+                Deterministic agent workflows impose structure on what the agent can do and in
+                what order. The application exposes named prompts, typed tools, ordered steps,
+                and explicit schemas. The agent executes a guided process rather than improvising
+                one. Reliability comes from the design of the workflow, not from trusting the
+                model to reason its way to the right answer every time.
+            </p>
+
+            <p>
+                <a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener noreferrer">MCP (Model Context Protocol)</a> —
+                <a href="https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation" target="_blank" rel="noopener noreferrer">now stewarded by the Agentic AI Foundation</a>
+                and increasingly adopted as a standard for agent-tool interaction —
+                plays two distinct roles in this architecture. They're easy to conflate,
+                so it's worth separating them clearly.
+            </p>
+
+            <figure class="article-figure">
+                <img src="/resources/images/article-3-mcp-roles.svg" alt="MCP Server at centre. On the left, AI Agent asks for workflow instructions and MCP returns named steps, typed tools, and skill resources — labelled Role 1: Instruction Layer. On the right, Agent Output submits an encrypted validated tool call, MCP forwards it to the Relay and Device — labelled Role 2: Ingestion Interface." />
+                <figcaption>MCP as instruction layer (teaching the agent how to work with the app) and as ingestion interface (the validated boundary where agent output enters the system).</figcaption>
+            </figure>
+
+            <p>
+                The first role is as an <strong>instruction layer</strong>. The MCP server is
+                where the agent learns how to populate the app correctly. It exposes named
+                workflows — <code>sync_feed</code>, for example — alongside typed tool definitions,
+                schema specifications, source-specific skill documents, and the user's current
+                preferences. The agent doesn't need to understand how the app works internally.
+                The MCP server tells it exactly what to do and in what shape to deliver the result.
+                As <a href="https://www.data-unplugged.de/en/blog/model-context-protocol-mcp-foundation-for-agentic-web" target="_blank" rel="noopener noreferrer">others exploring MCP's broader implications have noted</a>,
+                this separation between agent capability and application-specific knowledge
+                is one of the protocol's most useful structural properties.
+            </p>
+
+            <p>
+                The second role is as an <strong>ingestion interface</strong>. Once the agent
+                has gathered and structured content, it doesn't push raw results directly to
+                any storage layer. Instead, it submits a validated tool call to the MCP server,
+                which acts as the structured boundary between agent output and the application's
+                data layer. This enforces schema compliance and gives the system a single,
+                auditable point where external data enters — a checkpoint rather than an open pipe.
+            </p>
+
+            <p>
+                One protocol, two roles: how the agent learns what to do, and how the result
+                safely enters the system. That combination is what makes the pattern more
+                than AI with guardrails applied afterward.
+            </p>
+
+            <h2>Walking Through <code>sync_feed</code></h2>
+
+            <p>
+                The most direct way to see this architecture working is to follow a single
+                execution of <code>sync_feed</code> — the core scheduled workflow in ScrolLess,
+                the one that runs on a timer and populates the user's feed. Here is what
+                actually happens.
+            </p>
+
+            <p>
+                The agent begins by calling <code>get_feed_state</code>. What comes back is
+                everything the agent needs before touching any external source: the timestamp
+                of the last successful sync, the list of enabled sources with their priorities,
+                the device's public key for the encryption step, and any skip rules the user
+                has configured. One call, complete context.
+            </p>
+
+            <p>
+                With that state in hand, the agent loads the relevant skill resources from
+                the MCP server — <code>skills/youtube.md</code>, <code>skills/x.md</code>,
+                and so on for each enabled source. Each skill file is a deterministic set of
+                instructions written for that specific platform: where to navigate, which
+                elements to extract, which to skip, how to handle edge cases like deleted posts
+                or private accounts. The agent doesn't improvise these steps. It follows a document
+                that was written, tested, and tuned for that source — the same way a journalist
+                follows an editorial brief rather than reinventing the article format for each story.
+            </p>
+
+            <p>
+                It then works through each source, applying those instructions. New content
+                since the last sync timestamp is collected, deduplicated against known
+                <code>url_hash</code> values, and ranked according to the user's priority
+                rules. The result is a flat list of items conforming to the app's schema —
+                same fields, same types, regardless of origin platform. At this point, the
+                content exists only in the agent's context.
+            </p>
+
+            <p>
+                Before anything leaves, the entire payload is encrypted using the device's
+                public key (ECIES P-256 + AES-256-GCM). The key was returned in the first
+                call. After this step, the agent holds ciphertext — a thing it can transmit
+                but cannot usefully read, and that no server in the chain will be able to
+                read either. The agent then calls <code>write_feed_items</code> with the
+                encrypted payload, the ephemeral key needed for decryption on the device,
+                and source metadata. The MCP server validates the structure of the tool
+                call, then forwards it to the relay. The relay pushes it to the device.
+                The device decrypts, deduplicates against existing IndexedDB records, and
+                the app reflects the new items on next render.
+            </p>
+
+            <p>
+                If the device is offline when the agent runs, the relay queues the encrypted
+                payload and delivers it on reconnection. The agent receives an HTTP 503
+                and does not advance its <code>last_sync</code> window — it will retry the
+                same time window on the next scheduled run, so nothing is silently dropped.
+            </p>
+
+            <h2>Where the Data Lives</h2>
+
+            <h3>The device</h3>
+
+            <p>
+                Feed items, read state, user preferences, saved content, and sync logs all
+                live in IndexedDB. The app reads from there directly — no network request
+                required for normal browsing, which gives it genuinely fast local queries and
+                complete offline support. Deletion is straightforward: clearing the app's local
+                data clears everything, because everything is there. URL deduplication runs
+                client-side, checking <code>url_hash</code> values in IndexedDB before storing
+                a newly delivered item. Data retention is also client-side, a periodic cleanup
+                against the item's <code>fetched_at</code> timestamp and the user's configured
+                retention window.
+            </p>
+
+            <h3>The relay</h3>
+
+            <p>
+                The relay exists for one reason: to bridge the gap between an agent that may
+                run remotely or on a schedule and a device that may be offline at the time.
+                It receives encrypted payloads and forwards them. It stores nothing beyond
+                what is operationally necessary to complete the delivery. It has no knowledge
+                of what platforms the user follows, what the content looks like, or who
+                the user is in any meaningful sense — the payload arrives already encrypted
+                with the device's key and leaves the same way. The architectural guarantee
+                is not "we don't look at your data." It is "we can't."
+            </p>
+
+            <h3>The coordination backend</h3>
+
+            <p>
+                A minimal server handles what the relay can't: push notification subscriptions,
+                device registration, source configuration metadata, MCP server discovery, and —
+                for the optional paid tier — subscription entitlements and multi-device sync
+                metadata. This backend never stores feed content. Its job is coordination,
+                not custody. The distinction between free and paid tiers is handled in
+                the auth middleware; route handlers don't need to know which they're serving.
+            </p>
+
+            <h2>The Optional Cloud Layer</h2>
+
+            <p>
+                For users who want more than a single device, an optional subscription tier
+                extends the architecture without altering its character. Multi-device sync,
+                reliable queuing for extended offline periods, background agent scheduling,
+                and compute-heavy features like cross-source summarisation can all be
+                cloud-backed. The constraint that keeps this honest is that these capabilities
+                are strictly additive. A user who never opts in should get a fully functional
+                app — agent running locally or on a machine they control, data on their
+                device, relay handling delivery on a best-effort basis. The paid tier
+                adds convenience and reliability. It does not change what the system
+                can and cannot see.
+            </p>
+
+            <h2>ScrolLess as a Working Experiment</h2>
+
+            <p>
+                ScrolLess is the application of all of this — a unified social and news
+                feed aggregator built around this architecture from the ground up.
+                The agent scrapes the platforms the user follows (currently YouTube
+                subscriptions and the X/Twitter following timeline), structures the
+                results into a common content schema, encrypts the payload, and delivers
+                it via the relay. The Preact PWA reads from IndexedDB and renders a
+                chronological feed. There are no direct connections between the app
+                and any content platform. The feed belongs to the user; the app
+                simply makes it useful to look at.
+            </p>
+
+            <p>
+                The project is in active development. The core pipeline is running —
+                agent scraping, MCP-guided workflows, encrypted relay, device-side
+                decryption and storage. The architecture described in this series
+                is structural from the first commit, not something to be retrofitted
+                when the system matures. What's still being built out is the full range
+                of source skills, the preferences and source-management UI, and the
+                optional sync tier. The shell is deployed; the pattern is in place.
+            </p>
+
+            <p>
+                The specific decisions that constrain ScrolLess — the blind relay,
+                the device-first storage, the agent's independence from the app —
+                are not incidental. They are the choices that make the trust claims
+                mean something rather than read pleasantly. A system where the
+                relay operator genuinely cannot access user content is categorically
+                different from a system where they merely promise restraint. That
+                difference is harder to achieve and easier to verify. It seemed
+                worth building for.
+            </p>
+
+            <div class="article-closing">
+                Agents gather. Users own. Apps compete on experience.<br>
+                That's a better arrangement for everyone — except the intermediaries.
+            </div>
+
+        </article>
+
+        <footer class="article-footer">
+            <p>Part 3 of 3 — Agentic Content Apps.</p>
+            <p>
+                <a href="/writing/why-agentic-content-apps-arent-everywhere.html">&larr; Part 2: Why They Aren't Everywhere Yet</a>
+                &nbsp;&nbsp;&nbsp;
+                <a href="/writing/">View all writing &rarr;</a>
+            </p>
+        </footer>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Benjamin Crow.</p>
+    </footer>
+
+    <button class="fab-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-angle-double-up"></i>
+    </button>
+
+    <script src="/resources/scripts/writingscripts.js"></script>
+</body>
+</html>
