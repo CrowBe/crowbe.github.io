@@ -70,10 +70,10 @@
   <path d="M 150 188 C 157 182 168 180 180 183" stroke="#2e1f0e" stroke-width="6.5" stroke-linecap="round" fill="none"/>
   <path d="M 220 183 C 232 180 243 182 250 188" stroke="#2e1f0e" stroke-width="6.5" stroke-linecap="round" fill="none"/>
 
-  <!-- ── Eyes ── -->
+  <!-- ── Eyes ── blue ── -->
   <!-- Left eye -->
   <ellipse cx="172" cy="207" rx="19" ry="13" fill="#f0ede6"/>
-  <circle cx="172" cy="207" r="9.5" fill="#6b7fa3"/>
+  <circle cx="172" cy="207" r="9.5" fill="#4a8fd4"/>
   <circle cx="172" cy="207" r="5.5" fill="#1a1a2e"/>
   <circle cx="176" cy="203" r="3" fill="#ffffff" opacity="0.85"/>
   <!-- Upper eyelid -->
@@ -83,7 +83,7 @@
 
   <!-- Right eye -->
   <ellipse cx="228" cy="207" rx="19" ry="13" fill="#f0ede6"/>
-  <circle cx="228" cy="207" r="9.5" fill="#6b7fa3"/>
+  <circle cx="228" cy="207" r="9.5" fill="#4a8fd4"/>
   <circle cx="228" cy="207" r="5.5" fill="#1a1a2e"/>
   <circle cx="232" cy="203" r="3" fill="#ffffff" opacity="0.85"/>
   <!-- Upper eyelid -->
@@ -100,53 +100,31 @@
   <ellipse cx="192" cy="251" rx="7" ry="4.5" fill="#b06840" opacity="0.5"/>
   <ellipse cx="208" cy="251" rx="7" ry="4.5" fill="#b06840" opacity="0.5"/>
 
-  <!-- ── Beard ── covers lower jaw / chin ── -->
-  <path d="
-    M 118 252
-    C 116 266 113 285 117 304
-    C 128 330 162 348 200 349
-    C 238 348 272 330 283 304
-    C 287 285 284 266 282 252
-    C 272 260 252 267 200 267
-    C 148 267 128 260 118 252
-    Z
-  " fill="#3d2b1a"/>
-  <!-- Beard centre sheen (slightly lighter) -->
-  <path d="
-    M 152 292
-    C 162 314 180 330 200 332
-    C 220 330 238 314 248 292
-    C 238 287 224 284 200 284
-    C 176 284 162 287 152 292 Z
-  " fill="#52381e" opacity="0.7"/>
-  <!-- Beard edge fade at top (where it meets skin) -->
-  <path d="
-    M 118 252 C 120 248 128 246 140 248
-    C 158 252 178 256 200 256
-    C 222 256 242 252 260 248
-    C 272 246 280 248 282 252
-    C 272 260 252 267 200 267
-    C 148 267 128 260 118 252 Z
-  " fill="#4a3020" opacity="0.5"/>
+  <!-- ── Philtrum shadow ── -->
+  <path d="M 196 257 L 200 266 L 204 257" stroke="#b87348" stroke-width="1" fill="none" opacity="0.3"/>
 
-  <!-- ── Moustache ── -->
-  <path d="
-    M 177 258
-    C 181 251 190 248 200 250
-    C 210 248 219 251 223 258
-    C 216 265 207 267 200 267
-    C 193 267 184 265 177 258 Z
-  " fill="#3d2b1a"/>
+  <!-- ── Mouth / smile ── clean-shaven, friendly ── -->
+  <!-- Upper lip (Cupid's bow) -->
+  <path d="M 180 272 C 186 267 193 265 200 266 C 207 265 214 267 220 272 C 213 275 207 276 200 276 C 193 276 187 275 180 272 Z" fill="#b87348"/>
+  <!-- Lower lip -->
+  <path d="M 180 272 C 184 281 192 285 200 285 C 208 285 216 281 220 272 C 213 276 207 277 200 277 C 193 277 187 276 180 272 Z" fill="#d4956a"/>
+  <!-- Mouth line (smile) -->
+  <path d="M 180 272 Q 200 286 220 272" stroke="#a06040" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  <!-- Smile corner upturns -->
+  <path d="M 180 272 C 178 270 177 267 179 265" stroke="#a06040" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  <path d="M 220 272 C 222 270 223 267 221 265" stroke="#a06040" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+  <!-- Lower lip highlight -->
+  <ellipse cx="200" cy="280" rx="10" ry="3" fill="#e0a880" opacity="0.4"/>
 
-  <!-- ── Smile ── slight, friendly ── visible between moustache & beard -->
-  <path d="M 188 270 C 194 278 206 278 212 270" stroke="#2a1808" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <!-- ── Chin subtle shadow ── -->
+  <ellipse cx="200" cy="308" rx="36" ry="12" fill="#b87348" opacity="0.14"/>
 
   <!-- ── Cheek warmth ── -->
   <ellipse cx="148" cy="242" rx="24" ry="15" fill="#d4956a" opacity="0.18"/>
   <ellipse cx="252" cy="242" rx="24" ry="15" fill="#d4956a" opacity="0.18"/>
 
-  <!-- ── Accent dot — site motif (coral) ── -->
+  <!-- ── Accent dots — site motif ── -->
   <circle cx="340" cy="58" r="5" fill="#fe5f55" opacity="0.7"/>
   <circle cx="356" cy="58" r="3" fill="#fe5f55" opacity="0.4"/>
-  <circle cx="60" cy="342" r="4" fill="#6b7fa3" opacity="0.5"/>
+  <circle cx="60" cy="342" r="4" fill="#4a8fd4" opacity="0.5"/>
 </svg>
