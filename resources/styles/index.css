@@ -343,6 +343,86 @@ nav .theme-toggle:hover, nav .theme-toggle:focus-visible {
   border-color: var(--contrast);
 }
 
+/* ── Shared carousel styles ── */
+
+.section-tagline {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+  font-weight: 400;
+}
+
+.project-list,
+.writing-card-list {
+  display: flex;
+  padding: 3rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+.project-list:focus-visible,
+.writing-card-list:focus-visible {
+  outline: 2px solid var(--contrast);
+  outline-offset: -2px;
+  border-radius: 8px;
+}
+.project-list::-webkit-scrollbar,
+.writing-card-list::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.project-list::-webkit-scrollbar-thumb,
+.writing-card-list::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+  box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, 0.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+}
+.project-list::-webkit-scrollbar-track,
+.writing-card-list::-webkit-scrollbar-track {
+  background: var(--bg-card-track);
+}
+
+.project-card,
+.writing-card {
+  min-width: 250px;
+  border-radius: 16px;
+  background: var(--bg-card);
+  box-shadow: -1rem 0 3rem rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+  scroll-snap-align: start;
+  position: relative;
+}
+.project-card:not(:first-child),
+.writing-card:not(:first-child) {
+  margin-left: -130px;
+}
+.project-card:hover,
+.project-card:focus-within,
+.writing-card:hover,
+.writing-card:focus-within {
+  transform: translateY(-1rem);
+}
+
+.card-header h3 {
+  color: rgb(255, 255, 255);
+  display: inline-block;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+}
+.card-header h3:hover,
+.writing-card-link:hover .card-header h3 {
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* ── Project section ── */
+
 .project-section {
   text-align: left;
   color: white;
@@ -353,75 +433,18 @@ nav .theme-toggle:hover, nav .theme-toggle:focus-visible {
   background: none;
   color: var(--text-secondary);
 }
-.project-section .project-tagline {
-  text-align: center;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin: 0 0 1rem;
-  font-weight: 400;
-}
-.project-section .project-list {
-  display: flex;
-  padding: 3rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
-.project-section .project-list:focus-visible {
-  outline: 2px solid var(--contrast);
-  outline-offset: -2px;
-  border-radius: 8px;
-}
-.project-section .project-list::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-.project-section .project-list::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 10px;
-  box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, 0.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
-}
-.project-section .project-list::-webkit-scrollbar-track {
-  background: var(--bg-card-track);
-}
 .project-section .project-card {
   min-height: 500px;
   flex: 0 0 400px;
-  min-width: 250px;
   padding: 1.5rem;
-  border-radius: 16px;
-  background: var(--bg-card);
-  box-shadow: -1rem 0 3rem rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s;
-  scroll-snap-align: start;
-  position: relative;
 }
 .project-section .project-card:focus-within ~ .project-card,
 .project-section .project-card:hover ~ .project-card {
   transform: translateX(130px);
 }
-.project-section .project-card:hover,
-.project-section .project-card:focus-within {
-  transform: translateY(-1rem);
-}
-.project-section .project-card:not(:first-child) {
-  margin-left: -130px;
-}
-.project-section .project-header h3 {
+.project-section .card-header h3 {
   font-size: 20px;
   margin: 1vh 0 2vh;
-  color: rgb(255, 255, 255);
-  display: inline-block;
-  cursor: pointer;
-}
-.project-section .project-header h3:hover {
-  background: linear-gradient(90deg, #ff8a00, #e52e71);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
 }
 .project-section .project-info-container {
   max-width: 100%;
@@ -483,6 +506,8 @@ nav .theme-toggle:hover, nav .theme-toggle:focus-visible {
   border-color: var(--contrast);
 }
 
+/* ── Writing section ── */
+
 .writing-section {
   text-align: left;
   color: white;
@@ -493,52 +518,17 @@ nav .theme-toggle:hover, nav .theme-toggle:focus-visible {
   background: none;
   color: var(--text-secondary);
 }
-.writing-section .writing-card-list {
-  display: flex;
-  padding: 3rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
-.writing-section .writing-card-list:focus-visible {
-  outline: 2px solid var(--contrast);
-  outline-offset: -2px;
-  border-radius: 8px;
-}
-.writing-section .writing-card-list::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-.writing-section .writing-card-list::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 10px;
-  box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, 0.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
-}
-.writing-section .writing-card-list::-webkit-scrollbar-track {
-  background: var(--bg-card-track);
-}
 .writing-section .writing-card {
   min-height: 240px;
   flex: 0 0 380px;
-  min-width: 250px;
-  border-radius: 16px;
-  background: var(--bg-card);
-  box-shadow: -1rem 0 3rem rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s;
-  scroll-snap-align: start;
-  position: relative;
 }
-.writing-section .writing-card:not(:first-child) {
-  margin-left: -130px;
-}
-.writing-section .writing-card:hover, .writing-section .writing-card:focus-within {
-  transform: translateY(-1rem);
-}
-.writing-section .writing-card:focus-within ~ .writing-card, .writing-section .writing-card:hover ~ .writing-card {
+.writing-section .writing-card:focus-within ~ .writing-card,
+.writing-section .writing-card:hover ~ .writing-card {
   transform: translateX(130px);
+}
+.writing-section .card-header h3 {
+  font-size: 18px;
+  margin: 1vh 0 1.5vh;
 }
 .writing-section .writing-card-link {
   display: flex;
@@ -555,20 +545,6 @@ nav .theme-toggle:hover, nav .theme-toggle:focus-visible {
   outline: 2px solid var(--contrast);
   outline-offset: -4px;
   border-radius: 16px;
-}
-.writing-section .project-header h3 {
-  font-size: 18px;
-  margin: 1vh 0 1.5vh;
-  color: rgb(255, 255, 255);
-  display: inline-block;
-  cursor: pointer;
-  font-family: "Montserrat", sans-serif;
-}
-.writing-section .project-header h3:hover, .writing-card-link:hover .writing-section .project-header h3 {
-  background: linear-gradient(90deg, #ff8a00, #e52e71);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
 }
 .writing-section .writing-card-meta {
   display: flex;
@@ -609,17 +585,6 @@ nav .theme-toggle:hover, nav .theme-toggle:focus-visible {
   flex-grow: 1;
 }
 
-@media (min-width: 1024px) {
-  .writing-section .writing-card {
-    flex: 0 0 400px;
-  }
-}
-@media (min-width: 1440px) {
-  .writing-section .writing-card-list {
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-}
 .contact-section {
   padding-bottom: 10vh;
   background-color: var(--bg-secondary);
@@ -786,6 +751,9 @@ footer {
   .project-section .project-card {
     flex: 0 0 420px;
   }
+  .writing-section .writing-card {
+    flex: 0 0 400px;
+  }
 }
 @media (min-width: 1440px) {
   .intro-container {
@@ -797,6 +765,10 @@ footer {
     max-width: 1100px;
   }
   .project-section .project-list {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .writing-section .writing-card-list {
     max-width: 1400px;
     margin: 0 auto;
   }
