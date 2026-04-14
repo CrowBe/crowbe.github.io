@@ -567,6 +567,150 @@ nav {
   }
 }
 
+// ── Writing section ──
+.writing-section {
+  text-align: left;
+  color: white;
+  width: 100%;
+  background: linear-gradient(180deg, var(--bg-card-track) 0%, var(--bg-secondary) 100%);
+
+  .header-container {
+    background: none;
+    color: var(--text-secondary);
+  }
+
+  .writing-card-list {
+    display: flex;
+    padding: 3rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+
+    &:focus-visible {
+      outline: 2px solid var(--contrast);
+      outline-offset: -2px;
+      border-radius: 8px;
+    }
+  }
+
+  .writing-card-list::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .writing-card-list::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, 0.25),
+      inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+  }
+
+  .writing-card-list::-webkit-scrollbar-track {
+    background: var(--bg-card-track);
+  }
+
+  .writing-card {
+    min-height: 240px;
+    flex: 0 0 380px;
+    min-width: 250px;
+    border-radius: 16px;
+    background: var(--bg-card);
+    box-shadow: -1rem 0 3rem rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+    scroll-snap-align: start;
+    position: relative;
+
+    &:not(:first-child) {
+      margin-left: -130px;
+    }
+
+    &:hover,
+    &:focus-within {
+      transform: translateY(-1rem);
+    }
+
+    &:focus-within ~ .writing-card,
+    &:hover ~ .writing-card {
+      transform: translateX(130px);
+    }
+  }
+
+  .writing-card-link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+
+    &:visited {
+      color: inherit;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--contrast);
+      outline-offset: -4px;
+      border-radius: 16px;
+    }
+  }
+
+  .project-header h3 {
+    font-size: 18px;
+    margin: 1vh 0 1.5vh;
+    color: rgb(255, 255, 255);
+    display: inline-block;
+    cursor: pointer;
+    font-family: $primary-font;
+
+    &:hover,
+    .writing-card-link:hover & {
+      background: linear-gradient(90deg, #ff8a00, #e52e71);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+  }
+
+  .writing-card-meta {
+    display: flex;
+    gap: 0.75rem;
+    font-family: $secondary-font;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .writing-card-series {
+    color: var(--accent);
+  }
+
+  .writing-card-excerpt {
+    font-family: $secondary-font;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    margin: 0;
+    flex-grow: 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .writing-section .writing-card {
+    flex: 0 0 400px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .writing-section .writing-card-list {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
 // ── Contact section ──
 .contact-section {
   padding-bottom: 10vh;

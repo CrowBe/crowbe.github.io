@@ -211,6 +211,41 @@
   font-style: italic;
 }
 
+/* ── Article inline links ── */
+.article-body a,
+.article-header a,
+.article-lede a {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  font-family: inherit;
+  color: var(--accent-light);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent-light) 45%, transparent);
+  text-underline-offset: 3px;
+  transition: color 0.2s, text-decoration-color 0.2s;
+}
+
+.article-body a:visited,
+.article-header a:visited,
+.article-lede a:visited {
+  color: var(--accent-light);
+}
+
+.article-body a:hover,
+.article-body a:focus-visible,
+.article-header a:hover,
+.article-lede a:hover {
+  color: var(--contrast);
+  text-decoration-color: color-mix(in srgb, var(--contrast) 70%, transparent);
+}
+
+.article-body a:focus-visible {
+  outline: 2px solid var(--contrast);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 /* ── Code blocks ── */
 .article-body pre {
   background: var(--bg-card);
