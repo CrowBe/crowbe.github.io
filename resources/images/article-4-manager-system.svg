@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" role="img" aria-labelledby="title desc">
+  <title id="title">Manager as steward of an agentic work system</title>
+  <desc id="desc">A manager tends clarity, trust, growth, and feedback loops around people, agents, and work outcomes.</desc>
+  <defs>
+    <style>
+      .bg { fill: #101820; }
+      .panel { fill: #17232d; stroke: #6ee7b7; stroke-width: 2; rx: 22; }
+      .node { fill: #22313d; stroke: #9ca3af; stroke-width: 1.5; }
+      .accent { fill: #6ee7b7; }
+      .muted { fill: #9ca3af; }
+      .text { fill: #f8fafc; font-family: Inter, Arial, sans-serif; font-size: 24px; font-weight: 700; }
+      .small { fill: #d1d5db; font-family: Inter, Arial, sans-serif; font-size: 17px; font-weight: 500; }
+      .label { fill: #101820; font-family: Inter, Arial, sans-serif; font-size: 15px; font-weight: 800; letter-spacing: 0.04em; }
+      .line { stroke: #6ee7b7; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-dasharray: 7 9; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="960" height="520" rx="28" />
+  <rect class="panel" x="52" y="54" width="856" height="412" rx="24" />
+
+  <text class="text" x="480" y="112" text-anchor="middle">The Manager Tends the System Around the Work</text>
+  <text class="small" x="480" y="146" text-anchor="middle">Agents change execution. Managers protect clarity, trust, growth, and feedback.</text>
+
+  <circle class="node" cx="480" cy="278" r="78" />
+  <text class="text" x="480" y="270" text-anchor="middle">Manager</text>
+  <text class="small" x="480" y="299" text-anchor="middle">system steward</text>
+
+  <circle class="node" cx="208" cy="278" r="58" />
+  <text class="text" x="208" y="270" text-anchor="middle">People</text>
+  <text class="small" x="208" y="298" text-anchor="middle">judgement + craft</text>
+
+  <circle class="node" cx="752" cy="278" r="58" />
+  <text class="text" x="752" y="270" text-anchor="middle">Agents</text>
+  <text class="small" x="752" y="298" text-anchor="middle">execution + reach</text>
+
+  <rect class="accent" x="146" y="388" width="124" height="34" rx="17" />
+  <text class="label" x="208" y="410" text-anchor="middle">AUTONOMY</text>
+
+  <rect class="accent" x="330" y="388" width="124" height="34" rx="17" />
+  <text class="label" x="392" y="410" text-anchor="middle">CLARITY</text>
+
+  <rect class="accent" x="506" y="388" width="124" height="34" rx="17" />
+  <text class="label" x="568" y="410" text-anchor="middle">TRUST</text>
+
+  <rect class="accent" x="690" y="388" width="124" height="34" rx="17" />
+  <text class="label" x="752" y="410" text-anchor="middle">GROWTH</text>
+
+  <path class="line" d="M269 278 H398" />
+  <path class="line" d="M562 278 H691" />
+  <path class="line" d="M480 356 C480 388 440 416 392 422" />
+  <path class="line" d="M480 356 C480 388 520 416 568 422" />
+  <path class="line" d="M208 336 C252 380 300 402 330 405" />
+  <path class="line" d="M752 336 C708 380 660 402 630 405" />
+</svg>
