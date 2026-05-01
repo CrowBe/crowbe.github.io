@@ -68,30 +68,26 @@
             <p>
                 A year ago, the phrase "personal AI agent" described something fairly specific:
                 a chat window, a model waiting for instructions, an assistant that could answer
-                questions and draft emails reasonably well. That picture is changing, and changing
-                quickly. The agents emerging now can browse the web on your behalf, authenticate
-                with services, run scheduled tasks, call tools, and chain those actions together
-                into workflows that run without you watching. They are becoming, in a more literal
-                sense than the name previously implied, agents — things that act.
+                questions and draft emails reasonably well. That picture is changing quickly. The
+                agents emerging now can browse the web on your behalf, authenticate with services,
+                run scheduled tasks, call tools, and chain those actions together into workflows
+                that run without you watching, becoming agents in a more literal sense than the
+                name previously implied — things that act.
             </p>
 
             <p>
                 <a href="https://sequoiacap.com/article/ai-50-2025/" target="_blank" rel="noopener noreferrer">Sequoia's 2025 AI 50 report</a>
-                noted that AI agents were moving meaningfully beyond chat interfaces — from
-                answering questions to completing tasks autonomously. Others have started asking
-                <a href="https://sdtimes.com/ai/the-future-of-ai-isnt-chat-why-user-experience-will-make-or-break-the-next-wave-of-applications/" target="_blank" rel="noopener noreferrer">what the future of AI looks like when it isn't a conversation at all</a>.
-                I think this trajectory raises a question that doesn't yet have a settled answer:
-                if a personal agent can handle the work of fetching, filtering, and structuring
-                content from across the web, what does that mean for the apps that currently
-                do that work?
-            </p>
-
-            <p>
+                noted that AI agents were moving meaningfully beyond chat interfaces, from
+                answering questions to completing tasks autonomously, and others have started
+                asking <a href="https://sdtimes.com/ai/the-future-of-ai-isnt-chat-why-user-experience-will-make-or-break-the-next-wave-of-applications/" target="_blank" rel="noopener noreferrer">what the future of AI looks like when it isn't a conversation at all</a>.
+                That trajectory raises a question that doesn't yet have a settled answer: if a
+                personal agent can handle the work of fetching, filtering, and structuring content
+                from across the web, what does that mean for the apps that currently do that work?
                 This article is my attempt to think through one possible answer — a pattern I've
-                been calling agentic content apps, and that I've been building toward
-                with <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">ScrolLess</a>.
-                I'm not announcing a new paradigm. I'm describing something I can see the edge of,
-                and thinking out loud about what it might become.
+                been calling agentic content apps, and that I've been building toward with
+                <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">ScrolLess</a>.
+                It is less a new paradigm than something I can see the edge of and want to think
+                out loud about.
             </p>
 
             <h2>The Problem Apps Carry</h2>
@@ -132,21 +128,21 @@
             <h2>The Inversion I'm Exploring</h2>
 
             <p>
-                The pattern that's been occupying my thinking goes roughly like this: what if a
-                personal AI agent took over the integration work entirely — authenticating with
-                platforms, fetching content, normalising it into a common format — and the app
-                simply received the result? The agent handles the plumbing. The app handles the
-                experience. And the data, rather than being held in a backend somewhere, lives
+                The pattern that's been occupying my thinking goes roughly like this: a personal
+                AI agent takes over the integration work entirely — authenticating with platforms,
+                fetching content, normalising it into a common format — and the app simply
+                receives the result. The agent handles the plumbing while the app handles the
+                experience, and the data, rather than being held in a backend somewhere, lives
                 on the user's own device.
             </p>
 
             <p>
-                In this model, the agent runs on a schedule. It knows which sources you follow,
-                what you care about, and where to put the output. It structures everything into
-                a consistent schema and delivers it to your device. The app — any app that
-                speaks the right format — reads from that local store and renders. Nothing more.
-                The relationship between integration complexity and application complexity, which
-                currently maps almost one-to-one, comes apart.
+                In this model, the agent runs on a schedule, knows which sources you follow and
+                what you care about, structures everything into a consistent schema, and delivers
+                it to your device. Any app that speaks the right format reads from that local
+                store and renders, and nothing more is required. The relationship between
+                integration complexity and application complexity, which currently maps almost
+                one-to-one, comes apart.
             </p>
 
             <figure class="article-figure">
@@ -156,12 +152,13 @@
 
             <p>
                 The inversion matters for two reasons, and they apply to different people.
-                For developers, integration complexity moves out of the application entirely —
-                the app's job becomes rendering well-structured data, which is a much smaller
+                For developers, integration complexity moves out of the application entirely,
+                so the app's job becomes rendering well-structured data, which is a much smaller
                 and more focused problem. For users, the arrangement with their data changes:
                 the agent gathers on their behalf, the device holds the result, and no
                 intermediary is custodian of their content as a condition of using the service.
-                Switch apps, and your history follows. Delete the app, and your data is still there.
+                Switching apps means your history follows you, and deleting the app does not
+                delete your data.
             </p>
 
             <h2>What Changes</h2>
@@ -216,12 +213,13 @@
             <h2>A Sketch of How It Works</h2>
 
             <p>
-                The technical shape of this, in its simplest form: the agent runs on a schedule,
-                reads a configuration of which sources to check, authenticates and fetches from
-                each, structures the results into a common payload, encrypts that payload using
-                the device's public key, and delivers it to the device via a lightweight relay.
-                The relay passes it through without reading it — the payload is ciphertext by the
-                time it arrives. The device decrypts, stores locally, and the app reads from there.
+                In its simplest form, the agent runs on a schedule, reads a configuration of
+                which sources to check, authenticates and fetches from each, structures the
+                results into a common payload, encrypts that payload using the device's public
+                key, and delivers it to the device via a lightweight relay. The relay passes
+                the payload through without reading it, since by the time it arrives the content
+                is already ciphertext, and the device then decrypts, stores locally, and the
+                app reads from there.
             </p>
 
             <p>
@@ -229,9 +227,10 @@
                 deterministic workflows rather than free-form reasoning. MCP
                 (<a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener noreferrer">Model Context Protocol</a>)
                 tools wrap each source's logic with typed inputs and outputs — named, repeatable
-                operations that run the same way every time. The intelligence is in deciding what
-                to gather and how to prioritise it. The mechanics of fetching are structured,
-                not improvised. The architecture of Article 3 in this series covers this in detail.
+                operations that run the same way every time. The intelligence sits in deciding
+                what to gather and how to prioritise it, while the mechanics of fetching are
+                structured rather than improvised. Article 3 in this series covers the
+                architecture in detail.
             </p>
 
             <h2>Beyond Content Feeds</h2>
@@ -259,9 +258,9 @@
             <p>
                 The common thread is that the app gets narrower in scope and deeper in quality.
                 Rather than doing thirty things adequately — integrations, sync, auth, storage,
-                rendering — it does one thing well: making the data useful. That's a different
-                kind of software from what most content apps are today, and I think a more
-                interesting one to build.
+                rendering — it does one thing well: making the data useful. That is a different
+                kind of software from what most content apps are today, and a more interesting
+                one to build.
             </p>
 
             <h2>An Early Exploration: ScrolLess</h2>
@@ -272,18 +271,18 @@
                 aggregator built around this architecture. An external AI agent handles scraping
                 the platforms I follow, encrypts the payload using the device's public key, and
                 delivers it through a relay server that is deliberately blind to the content.
-                The app — a Preact PWA — reads from IndexedDB and renders. The server holds
-                nothing; it routes encrypted ciphertext and that's all it can do.
+                The app, a Preact PWA, reads from IndexedDB and renders, and the server itself
+                holds nothing beyond the encrypted ciphertext it routes.
             </p>
 
             <p>
-                The project is still in active development, and I want to be honest about that.
-                The core delivery pipeline is working — agent scraping, encrypted relay,
-                device-side storage — and the architectural principle (no direct platform
-                integrations in the app itself) is structural from the start, not something
-                to be added later. The full range of sources, the preferences UI, and the
-                multi-device sync tier are still being built. ScrolLess is less a finished
-                product than a probe into what this pattern feels like in practice.
+                The project is still in active development. The core delivery pipeline is working
+                — agent scraping, encrypted relay, device-side storage — and the architectural
+                principle of having no direct platform integrations in the app itself is
+                structural from the start rather than something to be added later. The full
+                range of sources, the preferences UI, and the multi-device sync tier are still
+                being built, so ScrolLess is less a finished product than a probe into what
+                this pattern feels like in practice.
             </p>
 
             <div class="article-closing">
