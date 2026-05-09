@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" role="img" aria-labelledby="title desc">
+  <title id="title">Two borrowed pattern libraries shaping agentic AI</title>
+  <desc id="desc">A diagram showing human work practices and human cognitive mechanisms flowing into agentic AI systems.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="left" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="right" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#ef4444"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000" flood-opacity="0.28"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#e5e7eb"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="520" rx="32" fill="url(#bg)"/>
+  <text x="480" y="62" text-anchor="middle" fill="#f8fafc" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="700">Borrowed Patterns</text>
+  <text x="480" y="94" text-anchor="middle" fill="#cbd5e1" font-family="Inter, system-ui, sans-serif" font-size="16">Agentic systems are borrowing from how humans work and how humans learn.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="150" width="280" height="220" rx="24" fill="#0b1220" stroke="#38bdf8" stroke-opacity="0.7"/>
+    <circle cx="112" cy="194" r="24" fill="url(#left)"/>
+    <text x="150" y="187" fill="#f8fafc" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="700">Work Practices</text>
+    <text x="150" y="214" fill="#bfdbfe" font-family="Inter, system-ui, sans-serif" font-size="14">discipline and quality control</text>
+    <text x="104" y="262" fill="#e5e7eb" font-family="Inter, system-ui, sans-serif" font-size="17">• review</text>
+    <text x="104" y="294" fill="#e5e7eb" font-family="Inter, system-ui, sans-serif" font-size="17">• tests and rubrics</text>
+    <text x="104" y="326" fill="#e5e7eb" font-family="Inter, system-ui, sans-serif" font-size="17">• approval gates</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="610" y="150" width="280" height="220" rx="24" fill="#0b1220" stroke="#f97316" stroke-opacity="0.75"/>
+    <circle cx="652" cy="194" r="24" fill="url(#right)"/>
+    <text x="690" y="187" fill="#f8fafc" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="700">Cognition</text>
+    <text x="690" y="214" fill="#fed7aa" font-family="Inter, system-ui, sans-serif" font-size="14">feedback and learning</text>
+    <text x="644" y="262" fill="#e5e7eb" font-family="Inter, system-ui, sans-serif" font-size="17">• dialogue</text>
+    <text x="644" y="294" fill="#e5e7eb" font-family="Inter, system-ui, sans-serif" font-size="17">• consolidation</text>
+    <text x="644" y="326" fill="#e5e7eb" font-family="Inter, system-ui, sans-serif" font-size="17">• deliberate practice</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="380" y="230" width="200" height="128" rx="24" fill="#111827" stroke="#e5e7eb" stroke-opacity="0.55"/>
+    <text x="480" y="276" text-anchor="middle" fill="#f8fafc" font-family="Inter, system-ui, sans-serif" font-size="23" font-weight="700">Agentic AI</text>
+    <text x="480" y="307" text-anchor="middle" fill="#cbd5e1" font-family="Inter, system-ui, sans-serif" font-size="15">generate → evaluate</text>
+    <text x="480" y="333" text-anchor="middle" fill="#cbd5e1" font-family="Inter, system-ui, sans-serif" font-size="15">revise → approve</text>
+  </g>
+
+  <path d="M350 260 C375 260 372 278 380 286" stroke="#e5e7eb" stroke-width="3" fill="none" marker-end="url(#arrow)" opacity="0.85"/>
+  <path d="M610 260 C585 260 588 278 580 286" stroke="#e5e7eb" stroke-width="3" fill="none" marker-end="url(#arrow)" opacity="0.85"/>
+
+  <text x="480" y="438" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="16">The useful lens is not that agents are human.</text>
+  <text x="480" y="466" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="16">It is that our best human patterns are becoming system architecture.</text>
+</svg>
