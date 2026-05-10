@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agentic AI is being shaped by borrowed patterns from human work practices and human cognition: review, testing, dialogue, feedback, and learning loops.">
+    <link rel="stylesheet" type="text/css" href="/resources/styles/index.css">
+    <link rel="stylesheet" type="text/css" href="/resources/styles/writing.css">
+    <link rel="icon" type="image/svg+xml" href="/resources/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/icons/apple-touch-icon.png">
+    <link rel="manifest" href="/resources/icons/site.webmanifest">
+    <script src="https://kit.fontawesome.com/aefacc78af.js" crossorigin="anonymous"></script>
+    <title>Borrowed Patterns | Ben Crow</title>
+</head>
+<body>
+    <nav aria-label="Main navigation">
+        <div class="nav-inner">
+            <a href="/" class="nav-brand">BC</a>
+            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+                <span class="nav-toggle-bar"></span>
+            </button>
+            <div id="nav-links" class="nav-links">
+                <a href="/#about">About</a>
+                <a href="/#projects">Projects</a>
+                <a href="/#writing">Writing</a>
+                <a href="/#contact">Contact</a>
+                <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="contrast-bar"></div>
+    </nav>
+
+    <main class="article-page">
+        <a href="/#writing" class="article-back">
+            <i class="fas fa-arrow-left"></i> Writing
+        </a>
+
+        <header class="article-header">
+            <div class="article-meta">
+                <span>May 2026</span>
+                <span class="article-series">Agentic AI — Evaluation — Knowledge Work</span>
+            </div>
+            <h1>Borrowed Patterns</h1>
+            <p class="article-lede">
+                Agentic AI is being shaped by two borrowed pattern libraries: the practices humans use to produce reliable work,
+                and the cognitive mechanisms humans use to learn.
+            </p>
+        </header>
+
+        <article class="article-body">
+            <h2>The Borrowing Has Moved Up the Stack</h2>
+
+            <p>
+                The idea that AI borrows from human life is not new. Neural networks are the obvious historical example: a computing
+                architecture inspired, however loosely, by the way biological neurons connect and fire. That borrowing happened near
+                the substrate of the system. It shaped how computation happened.
+            </p>
+
+            <p>
+                What feels different about the current wave of agentic AI is where the borrowing is happening. We are no longer only
+                borrowing metaphors from biology to describe model internals. We are borrowing from the way humans organise work, pass
+                judgement, learn from mistakes, ask clarifying questions, and improve through feedback. The inspiration has moved up
+                the stack, from computation toward cognition and practice.
+            </p>
+
+            <p>
+                That matters because it gives us a useful lens. The patterns emerging around agents are not a grab-bag of clever tricks.
+                They are part of a broader translation project: taking durable human patterns and turning them into system architecture.
+            </p>
+
+            <figure class="article-figure">
+                <img src="/resources/images/article-5-borrowed-patterns.svg" alt="A diagram showing human work practices and human cognitive mechanisms flowing into agentic AI systems." />
+                <figcaption>Agentic systems are increasingly built from patterns borrowed from how humans work and how humans learn.</figcaption>
+            </figure>
+
+            <h2>The First Library: Human Work Practices</h2>
+
+            <p>
+                Software engineering is a useful place to start because it has spent decades learning how to make unreliable human work
+                more reliable without pretending humans are perfect. We use tests to make expectations executable. We use code review to
+                add another layer of judgement. We use CI to catch regressions before they reach production. We use approval gates because
+                some changes deserve friction.
+            </p>
+
+            <p>
+                Agentic systems are beginning to inherit those habits. Anthropic's public writing on
+                <a href="https://www.anthropic.com/engineering/built-multi-agent-research-system" target="_blank" rel="noopener noreferrer">multi-agent research systems</a>
+                describes a lead agent coordinating specialist subagents. Its documentation on
+                <a href="https://docs.anthropic.com/en/docs/test-and-evaluate/eval-tool" target="_blank" rel="noopener noreferrer">evaluation workflows</a>
+                treats quality as something to test against examples and rubrics, not something to vibe-check after the fact. That is not
+                alien to software engineering. It is recognisably the same family of ideas as review, testing, and acceptance criteria.
+            </p>
+
+            <p>
+                That orchestrator pattern is itself a borrowed shape. A lead agent that holds the goal, decomposes the work, delegates to
+                specialists, and integrates their findings is doing the job of a mentor or coach: holding the bigger picture so the people
+                — or agents — closer to the task can focus on their slice. Multi-agent architectures are not just engineering convenience.
+                They are encoding a coordination habit humans have been refining for a long time.
+            </p>
+
+            <p>
+                The important move is the separation between doing and judging. A model can produce an answer, but another process can
+                evaluate whether that answer satisfied the task. The reviewer may be a human, an automated eval, another agent, or some
+                combination of all three. Either way, the system becomes stronger when judgement is made explicit instead of hidden inside
+                a single generation step.
+            </p>
+
+            <p>
+                This is where a lot of AI discourse is still too prompt-centric. Better prompts help, but mature software teams do not
+                rely on one perfect instruction to protect production. They build systems around the work: checks, reviewers, tests,
+                observability, rollback paths, and norms about what good looks like. Agentic AI is heading in the same direction.
+            </p>
+
+            <h2>The Second Library: Human Cognition</h2>
+
+            <p>
+                The second pattern library is less about professional practice and more about cognition itself. Some emerging agent
+                patterns look less like software process and more like attempts to reconstruct how people learn.
+            </p>
+
+            <p>
+                Take the idea of agents reviewing their own traces after the fact, sometimes described with language like dreaming or
+                consolidation. The interesting part is not the branding. It is the mechanism: experience is not only used in the moment;
+                it is replayed, compressed, and turned into better future behaviour. That is closer to a cognitive metaphor than a CI
+                metaphor.
+            </p>
+
+            <p>
+                Dialogue is another example. Matt Pocock's
+                <a href="https://github.com/total-typescript/claude-code-setup/blob/main/skills/grill-me/SKILL.md" target="_blank" rel="noopener noreferrer">Grill Me skill</a>
+                for Claude Code is a small but sharp pattern: before the agent acts, it pushes back with clarifying questions until the
+                user's intent is clearer. That is not just prompt decoration. It is a way of importing a human collaboration habit into
+                the agent loop. People build shared understanding by explaining, questioning, restating, and correcting each other.
+                Agents need versions of that too.
+            </p>
+
+            <h2>Two Threads, Side by Side</h2>
+
+            <p>
+                It is worth naming what these two libraries actually are, because they are not the same kind of borrowing.
+            </p>
+
+            <p>
+                The first thread is <em>transferring practices</em>. Software engineering disciplines — review, testing, CI, approval
+                gates — work because they are sound principles for quality and safety, not because they are specific to code. They scale
+                naturally to agentic systems for the same reason they scale across teams and stacks. Matt Pocock has been making a
+                version of this argument under the heading
+                <a href="https://www.youtube.com/watch?v=v4F1gFy-hqg" target="_blank" rel="noopener noreferrer">"Software Fundamentals Matter More Than Ever"</a>:
+                the skills, ways of working, and patterns that survived in software engineering still apply when the thing being engineered
+                is an AI system. That through-line is underdrawn in current AI discourse, which often implies entirely new patterns are
+                needed.
+            </p>
+
+            <p>
+                The second thread is <em>porting mechanisms</em>. Some of these patterns are not borrowed from software at all. Agent
+                dreaming is not an inheritance from CI; it is reverse-engineered from neurobiology and the way memory consolidates during
+                sleep. Clarifying dialogue is borrowed from how humans build shared understanding. These are cognitive mechanisms being
+                lifted out of biology and psychology and translated directly into system architecture.
+            </p>
+
+            <p>
+                Holding both threads at once matters. One is about <em>discipline</em>; the other is about <em>design</em>. Review, tests,
+                and approval gates protect quality. Dialogue, consolidation, and feedback create adaptation. A system that can act but
+                cannot be reviewed is risky. A system that can be reviewed but cannot learn from the review is brittle. Treating either
+                thread alone hides half the surface area we are actually drawing from.
+            </p>
+
+            <h2>Evaluation Is Becoming the Centre of Gravity</h2>
+
+            <p>
+                Once output becomes cheap, evaluation becomes the bottleneck. This is the deeper reason these borrowed patterns matter.
+                AI makes it easy to generate ten drafts, five plans, or a dozen plausible next actions. It does not automatically tell us
+                which one is true, useful, safe, aligned, well-structured, or worth committing to.
+            </p>
+
+            <p>
+                That shifts the valuable work upward. The scarce skill is no longer only producing artefacts. It is defining what good
+                means, making that definition inspectable, and building feedback loops that improve the next attempt. In software terms,
+                this is why evals feel closer to tests than to demos. In product terms, it is why review surfaces may matter as much as
+                generation features. In organisational terms, it is why judgement becomes more visible, not less.
+            </p>
+
+            <p>
+                The useful pattern is simple:
+            </p>
+
+            <p>
+                <strong>generate → evaluate → revise → approve → learn</strong>
+            </p>
+
+            <p>
+                That loop is already familiar in human work. Writers draft and edit. Engineers implement and review. Teams run incidents
+                and post-mortems. Coaches observe and give targeted feedback. Agentic AI is forcing us to encode those loops more deliberately.
+            </p>
+
+            <h2>What Comes Next</h2>
+
+            <p>
+                If this lens is right, we should expect more agent design patterns to come from human learning and collaboration. Some
+                will come from software engineering, but not all of them. The broader question becomes: which human patterns are durable
+                enough to translate?
+            </p>
+
+            <p>
+                One candidate is learning through teaching. Humans often understand something more deeply when they have to explain it
+                to someone else. It is not hard to imagine agents consolidating task knowledge by teaching another agent, producing a
+                short explanation for a user, or converting an execution trace into a reusable lesson.
+            </p>
+
+            <p>
+                Another is social learning. People learn by watching other people work, not only by being corrected directly. Agentic
+                systems may eventually learn more from observing other agents' successes and failures, especially inside bounded domains
+                where the work can be replayed and evaluated.
+            </p>
+
+            <p>
+                A third is the post-mortem. Failure should not be a dead end in an agent loop. If an agent takes the wrong path, the
+                system should be able to inspect why: ambiguous instructions, missing context, weak tool choice, overconfidence, bad
+                retrieval, or a poor evaluation rubric. That diagnosis should feed the next attempt.
+            </p>
+
+            <p>
+                The fourth is a shared working surface before commit. Coding agents already show the value of diff-first workflows: the
+                agent proposes a change, the human reviews it, and persistence is gated by approval. I do not think that pattern has been
+                generalised widely enough across normal SaaS yet. The next step is applying it to business objects: development plans,
+                invoices, CRM updates, reports, support replies, policy drafts, or performance notes. The agent drafts into the same
+                surface the human uses, but the database commit still waits for review.
+            </p>
+
+            <p>
+                That pattern is powerful because it keeps the agent close to the work without making it invisible. The user is not merely
+                chatting beside the product. They are reviewing proposed changes inside the product, in the context where the consequences
+                matter.
+            </p>
+
+            <p>
+                A fifth is deliberate practice with targeted feedback. Anders Ericsson's
+                <a href="https://psycnet.apa.org/record/1993-40718-001" target="_blank" rel="noopener noreferrer">research on expert performance</a>
+                showed that experts do not just accumulate hours; they train on specific weaknesses with immediate, individualised feedback,
+                usually shaped by a coach. Most agent training today looks more like bulk evaluation than coaching: large eval sets,
+                aggregate scores, occasional regressions surfaced. The next step is training loops shaped around an agent's actual weak
+                spots — a stretch task, a graded attempt, a critique, a retry — repeated until the gap closes. That is closer to how a
+                coach develops a junior than how a test suite grades a build.
+            </p>
+
+            <p>
+                These five candidates are not exhaustive. The lens itself is the asset: once you start looking for durable human patterns
+                waiting to be translated, you will find your own.
+            </p>
+
+            <h2>The Lens Is the Point</h2>
+
+            <p>
+                None of this means agentic AI should imitate humans for its own sake. Some human patterns are inefficient, biased, political,
+                or simply irrelevant to machines. The point is not anthropomorphism. The point is selectivity.
+            </p>
+
+            <p>
+                The best teams will ask which human practices survived because they solve real coordination, quality, and learning problems.
+                They will ask which cognitive mechanisms are worth approximating because they improve adaptation. Then they will turn those
+                patterns into explicit architecture: evals, rubrics, review surfaces, memory, teaching loops, post-mortems, and approval gates.
+            </p>
+
+            <p>
+                That is the useful shift. We are not just making agents that can do more work. We are gradually surrounding them with the
+                same kinds of feedback, judgement, and learning loops that make human work reliable.
+            </p>
+
+            <div class="article-closing">
+                The next wave of agentic AI will not only be built from better models. It will be built from better borrowed patterns.
+            </div>
+
+        </article>
+
+        <footer class="article-footer">
+            <p>A continuation of my writing on agentic work, evaluation, and software patterns moving beyond code.</p>
+            <p>
+                <a href="/writing/when-agents-join-the-team-managers-matter-differently.html">&larr; When Agents Join the Team, Managers Need to Tend the System</a>
+            </p>
+            <p><a href="/#writing">Back to Writing</a></p>
+        </footer>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Benjamin Crow.</p>
+    </footer>
+
+    <button class="fab-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-angle-double-up"></i>
+    </button>
+
+    <script src="/resources/scripts/writingscripts.js"></script>
+</body>
+</html>
