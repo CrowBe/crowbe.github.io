@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" role="img" aria-labelledby="title desc">
-  <title id="title">Two borrowed pattern libraries shaping agentic AI</title>
+  <title id="title">Two borrowed pattern sources shaping agentic AI</title>
   <desc id="desc">A diagram showing human work practices and human cognitive mechanisms flowing into agentic AI systems.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -56,6 +56,6 @@
   <path d="M350 260 C375 260 372 278 380 286" stroke="#e5e7eb" stroke-width="3" fill="none" marker-end="url(#arrow)" opacity="0.85"/>
   <path d="M610 260 C585 260 588 278 580 286" stroke="#e5e7eb" stroke-width="3" fill="none" marker-end="url(#arrow)" opacity="0.85"/>
 
-  <text x="480" y="438" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="16">The useful lens is not that agents are human.</text>
+  <text x="480" y="438" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="16">The point is not that agents are human.</text>
   <text x="480" y="466" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="16">It is that our best human patterns are becoming system architecture.</text>
 </svg>
