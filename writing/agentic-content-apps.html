@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="If personal AI agents are becoming capable of handling the work of fetching and structuring data, what does that mean for the apps built around them? A speculation on a pattern worth exploring.">
+    <meta name="description" content="Personal agents can move the integration layer out of content apps, leaving apps to compete on experience instead.">
     <link rel="stylesheet" type="text/css" href="/resources/styles/index.css">
     <link rel="stylesheet" type="text/css" href="/resources/styles/writing.css">
     <link rel="icon" type="image/svg+xml" href="/resources/icons/favicon.svg">
@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/resources/icons/apple-touch-icon.png">
     <link rel="manifest" href="/resources/icons/site.webmanifest">
     <script src="https://kit.fontawesome.com/aefacc78af.js" crossorigin="anonymous"></script>
-    <title>Agentic Content Apps — A New Pattern | Ben Crow</title>
+    <title>Personal Agents Let Content Apps Stop Owning Integrations | Ben Crow</title>
 </head>
 <body>
     <nav aria-label="Main navigation">
@@ -46,33 +46,31 @@
                 <span>April 2026</span>
                 <span class="article-series">Agentic Content Apps — Part 1 of 3</span>
             </div>
-            <h1>Agentic Content Apps — A New Pattern</h1>
+            <h1>Personal Agents Let Content Apps Stop Owning Integrations</h1>
             <p class="article-lede">
-                Personal AI agents are moving well beyond chat. If they can handle the work
-                of fetching and structuring data, what does that mean for the apps built around them?
+                If personal agents can fetch and structure content for us, content apps can stop owning the integrations
+                and compete on the experience instead.
             </p>
         </header>
 
         <aside class="series-disclaimer">
             <p>This is a three-part series on agentic content apps. Reading order:
-                <strong>Part 1: Agentic Content Apps — A New Pattern</strong> (you are here)
-                &rarr; <a href="/writing/why-agentic-content-apps-arent-everywhere.html">Part 2: Why They Aren't Everywhere Yet</a>
-                &rarr; <a href="/writing/architecting-agentic-content-apps.html">Part 3: Architecting Agentic Content Apps</a>
+                <strong>Part 1: Personal Agents Let Content Apps Stop Owning Integrations</strong> (you are here)
+                &rarr; <a href="/writing/why-agentic-content-apps-arent-everywhere.html">Part 2: Agentic Content Apps Are Blocked by Access, Trust, and Product Readiness</a>
+                &rarr; <a href="/writing/architecting-agentic-content-apps.html">Part 3: Trustworthy Agentic Apps Need Device-First Architecture</a>
             </p>
         </aside>
 
         <article class="article-body">
 
-            <h2>Something Is Shifting</h2>
+            <h2>The Integration Layer Is Moving</h2>
 
             <p>
-                A year ago, the phrase "personal AI agent" described something fairly specific:
-                a chat window, a model waiting for instructions, an assistant that could answer
-                questions and draft emails reasonably well. That picture is changing quickly. The
-                agents emerging now can browse the web on your behalf, authenticate with services,
-                run scheduled tasks, call tools, and chain those actions together into workflows
-                that run without you watching, becoming agents in a more literal sense than the
-                name previously implied — things that act.
+                Content apps have traditionally had to own the hard part before they could deliver the useful part:
+                authenticate with platforms, fetch data, normalise it, store it, and keep that plumbing alive as APIs
+                change. Personal agents create a credible alternative. If an agent can fetch and structure content on
+                the user's behalf, the app no longer needs to own the integration layer. It can compete on the product
+                experience instead.
             </p>
 
             <p>
@@ -80,14 +78,10 @@
                 noted that AI agents were moving meaningfully beyond chat interfaces, from
                 answering questions to completing tasks autonomously, and others have started
                 asking <a href="https://sdtimes.com/ai/the-future-of-ai-isnt-chat-why-user-experience-will-make-or-break-the-next-wave-of-applications/" target="_blank" rel="noopener noreferrer">what the future of AI looks like when it isn't a conversation at all</a>.
-                That trajectory raises a question that doesn't yet have a settled answer: if a
-                personal agent can handle the work of fetching, filtering, and structuring content
-                from across the web, what does that mean for the apps that currently do that work?
-                This article is my attempt to think through one possible answer — a pattern I've
+                That trajectory raises a product question: if a personal agent can fetch, filter, and structure content
+                from across the web, what should the app still own? My answer is the pattern I've
                 been calling agentic content apps, and that I've been building toward with
-                <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">ScrolLess</a>.
-                It is less a new paradigm than something I can see the edge of and want to think
-                out loud about.
+                <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">ScrolLess</a>: the agent owns the integration work, the app owns the experience.
             </p>
 
             <h2>The Problem Apps Carry</h2>
@@ -98,7 +92,7 @@
                 of it has nothing to do with the actual experience the app is trying to deliver.
                 OAuth flows, API rate limit handling, token refresh logic, schema mappings that
                 need updating every time a platform changes its response format: a great deal of
-                engineering effort goes into simply getting the data, before a single line of
+                engineering effort goes into getting the data before a single line of
                 thought can be spent on what to do with it.
             </p>
 
@@ -130,7 +124,7 @@
             <p>
                 The pattern that's been occupying my thinking goes roughly like this: a personal
                 AI agent takes over the integration work entirely — authenticating with platforms,
-                fetching content, normalising it into a common format — and the app simply
+                fetching content, normalising it into a common format — and the app
                 receives the result. The agent handles the plumbing while the app handles the
                 experience, and the data, rather than being held in a backend somewhere, lives
                 on the user's own device.
@@ -244,6 +238,12 @@
             </p>
 
             <p>
+                The pattern is strongest where the external integrations are necessary but not the product's main
+                differentiation. If every competitor has to solve the same access problem before they can build the
+                actual experience, that access problem is a good candidate to move into the agent layer.
+            </p>
+
+            <p>
                 Budgeting apps are one example. The open banking integrations they require — the
                 bank-specific API clients, the maintenance overhead as institutions change formats —
                 represent exactly the kind of plumbing that an agent could absorb. The app would
@@ -294,7 +294,7 @@
         <footer class="article-footer">
             <p>Part 1 of a three-part series on agentic content apps.</p>
             <p>
-                <a href="/writing/why-agentic-content-apps-arent-everywhere.html">Part 2: Why They Aren't Everywhere Yet &rarr;</a>
+                <a href="/writing/why-agentic-content-apps-arent-everywhere.html">Part 2: Agentic Content Apps Are Blocked by Access, Trust, and Product Readiness &rarr;</a>
             </p>
             <p><a href="/#writing">Back to Writing</a></p>
         </footer>
