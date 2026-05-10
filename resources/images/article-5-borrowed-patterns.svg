@@ -23,7 +23,7 @@
   </defs>
 
   <rect width="960" height="520" rx="32" fill="url(#bg)"/>
-  <text x="480" y="62" text-anchor="middle" fill="#f8fafc" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="700">Borrowed Patterns</text>
+  <text x="480" y="62" text-anchor="middle" fill="#f8fafc" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="700">Borrowed Patterns for Agentic AI</text>
   <text x="480" y="94" text-anchor="middle" fill="#cbd5e1" font-family="Inter, system-ui, sans-serif" font-size="16">Agentic systems are borrowing from how humans work and how humans learn.</text>
 
   <g filter="url(#shadow)">
@@ -56,6 +56,6 @@
   <path d="M350 260 C375 260 372 278 380 286" stroke="#e5e7eb" stroke-width="3" fill="none" marker-end="url(#arrow)" opacity="0.85"/>
   <path d="M610 260 C585 260 588 278 580 286" stroke="#e5e7eb" stroke-width="3" fill="none" marker-end="url(#arrow)" opacity="0.85"/>
 
-  <text x="480" y="438" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="16">The point is not that agents are human.</text>
+  <text x="480" y="438" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="16">The point is not to make agents human.</text>
   <text x="480" y="466" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="16">It is that our best human patterns are becoming system architecture.</text>
 </svg>
