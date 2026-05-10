@@ -138,83 +138,42 @@
                 Agents need versions of that too.
             </p>
 
-            <h2>Two Sources, One Set of Patterns</h2>
+            <h2>Two Sources, One Loop</h2>
 
             <p>
-                It is worth separating these sources because they solve different problems.
+                These two sources work best together. Work practices make agentic systems safer: review, testing, CI, and approval gates
+                protect quality because they make judgement explicit. Cognitive mechanisms help the system improve: dialogue, reflection,
+                and consolidation turn feedback into better future behaviour.
             </p>
 
             <p>
-                Work practices make the system safer. Review, testing, CI, and approval gates are useful because they protect quality,
-                not because they are specific to code. Matt Pocock has been making a version of this argument under the heading
-                <a href="https://www.youtube.com/watch?v=v4F1gFy-hqg" target="_blank" rel="noopener noreferrer">"Software Fundamentals Matter More Than Ever"</a>:
-                the skills, ways of working, and patterns that survived in software engineering still apply when the thing being engineered
-                is an AI system.
+                That combination matters because AI makes output cheap. It can generate ten drafts, five plans, or a dozen plausible next
+                actions without telling us which one is true, useful, safe, or worth committing to. The scarce skill becomes defining what
+                good means, making that definition inspectable, and building loops that improve the next attempt.
             </p>
 
             <p>
-                Cognitive mechanisms help the system improve. Dreaming is not inherited from CI; it is reverse-engineered from the way
-                memory consolidates during sleep. Clarifying dialogue is borrowed from how humans build shared understanding. These are
-                mechanisms from biology and psychology being built into agent loops.
-            </p>
-
-            <p>
-                Agentic systems need both. A system that can act but cannot be reviewed is risky. A system that can be reviewed but cannot
-                learn from the review is brittle. The strongest designs combine safety with learning.
-            </p>
-
-            <h2>Evaluation Is Becoming the Centre of Gravity</h2>
-
-            <p>
-                Once output becomes cheap, evaluation becomes the bottleneck. This is why these borrowed patterns matter.
-                AI makes it easy to generate ten drafts, five plans, or a dozen plausible next actions. It does not automatically tell us
-                which one is true, useful, safe, aligned, well-structured, or worth committing to.
-            </p>
-
-            <p>
-                That shifts the valuable work upward. The scarce skill is no longer only producing artefacts. It is defining what good
-                means, making that definition inspectable, and building feedback loops that improve the next attempt. In software terms,
-                this is why evals feel closer to tests than to demos. In product terms, it is why the review surface may matter as much
-                as the generation feature. In organisational terms, it is why judgement becomes more visible, not less.
-            </p>
-
-            <p>
-                The core loop is simple:
-            </p>
-
-            <p>
-                <strong>generate → evaluate → revise → approve → learn</strong>
-            </p>
-
-            <p>
-                That loop is already familiar in human work. Writers draft and edit. Engineers implement and review. Teams run incidents
-                and post-mortems. Coaches observe and give targeted feedback. Agentic AI is forcing us to encode those loops more deliberately.
+                The core loop is simple: <strong>generate → evaluate → revise → approve → learn</strong>. Software engineering gives us
+                mature patterns for the evaluate and approve parts. Human cognition gives us patterns for the revise and learn parts.
             </p>
 
             <h2>What Comes Next</h2>
 
             <p>
-                If this is the right frame, I think we should expect more agent designs to borrow from human learning and collaboration.
-                Some will come from software engineering, but not all of them. The practical question is: which human patterns have
-                survived enough real work to be worth translating?
+                If this is the right frame, I think we should expect more agent designs to borrow from human collaboration. Two quick
+                candidates stand out.
             </p>
 
             <p>
-                One candidate is social learning. People learn by watching other people work, not only by being corrected directly. Agentic
-                systems may eventually learn more from observing other agents' successes and failures, especially inside bounded domains
-                where the work can be replayed and evaluated.
+                The first is social learning: agents improving by observing other agents' successes and failures, especially inside bounded
+                domains where the work can be replayed and evaluated. The second is the post-mortem: failed agent runs should leave behind
+                a useful diagnosis, not just an error state.
             </p>
 
             <p>
-                Another is the post-mortem. Failure should not be a dead end in an agent loop. If an agent takes the wrong path, the
-                system should be able to inspect why: ambiguous instructions, missing context, weak tool choice, overconfidence, bad
-                retrieval, or a poor evaluation rubric. That diagnosis should feed the next attempt.
-            </p>
-
-            <p>
-                A third is a shared working surface before commit. Coding agents already show the value of diff-first workflows: the
-                agent proposes a change, the human reviews it, and persistence is gated by approval. That pattern is partly about quality,
-                but it is also about responsibility. The human can see what changed before it becomes real.
+                The stronger near-term example, though, is the shared working surface before commit. Coding agents already show the value
+                of diff-first workflows: the agent proposes a change, the human reviews it, and persistence is gated by approval. That
+                pattern is partly about quality, but it is also about responsibility. The human can see what changed before it becomes real.
             </p>
 
             <p>
@@ -243,18 +202,8 @@
             </p>
 
             <p>
-                A fourth is deliberate practice with targeted feedback. Anders Ericsson's
-                <a href="https://psycnet.apa.org/record/1993-40718-001" target="_blank" rel="noopener noreferrer">research on expert performance</a>
-                showed that experts do not just accumulate hours; they train on specific weaknesses with immediate, individualised feedback,
-                usually shaped by a coach. Most agent training today looks more like bulk evaluation than coaching: large eval sets,
-                aggregate scores, occasional regressions surfaced. The next step is training loops shaped around an agent's actual weak
-                spots — a stretch task, a graded attempt, a critique, a retry — repeated until the gap closes. That is closer to how a
-                coach develops a junior than how a test suite grades a build.
-            </p>
-
-            <p>
-                These four candidates are not exhaustive. The useful move is learning to recognise which human patterns have earned their
-                place, then asking what they become when built directly into a product or agent loop.
+                These examples are not exhaustive. The useful move is learning to recognise which human patterns have earned their place,
+                then asking what they become when built directly into a product or agent loop.
             </p>
 
             <h2>The Patterns Are the Point</h2>
