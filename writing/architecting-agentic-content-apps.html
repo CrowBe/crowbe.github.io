@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/resources/icons/apple-touch-icon.png">
     <link rel="manifest" href="/resources/icons/site.webmanifest">
     <script src="https://kit.fontawesome.com/aefacc78af.js" crossorigin="anonymous"></script>
-    <title>Architecting Agentic Content Apps | Ben Crow</title>
+    <title>How Device-First Architecture Makes Agentic Apps Trustworthy | Ben Crow</title>
 </head>
 <body>
     <nav aria-label="Main navigation">
@@ -46,19 +46,18 @@
                 <span>April 2026</span>
                 <span class="article-series">Agentic Content Apps — Part 3 of 3</span>
             </div>
-            <h1>Architecting Agentic Content Apps</h1>
+            <h1>How Device-First Architecture Makes Agentic Apps Trustworthy</h1>
             <p class="article-lede">
-                A walkthrough of the device-first architecture behind ScrolLess — where the agent,
-                relay, and app are kept genuinely separate, and the trust claims are enforced
-                by the structure rather than asserted in documentation.
+                A walkthrough of the ScrolLess architecture: the agent fetches, the relay stays blind,
+                the device owns the data, and the trust claim is enforced by the structure.
             </p>
         </header>
 
         <aside class="series-disclaimer">
             <p>This is a three-part series on agentic content apps. Reading order:
-                <a href="/writing/agentic-content-apps.html">Part 1: Agentic Content Apps — A New Pattern</a>
+                <a href="/writing/agentic-content-apps.html">Part 1: How Personal Agents Change What Content Apps Need to Own</a>
                 &rarr; <a href="/writing/why-agentic-content-apps-arent-everywhere.html">Part 2: Why They Aren't Everywhere Yet</a>
-                &rarr; <strong>Part 3: Architecting Agentic Content Apps</strong> (you are here)
+                &rarr; <strong>Part 3: How Device-First Architecture Makes Agentic Apps Trustworthy</strong> (you are here)
             </p>
         </aside>
 
@@ -67,14 +66,12 @@
             <h2>The Architecture Has to Earn the Trust</h2>
 
             <p>
-                <a href="/writing/agentic-content-apps.html">Article 1</a> described a pattern
-                worth exploring: personal agents handling integrations, apps focusing on
-                presentation, data living on the user's device.
+                <a href="/writing/agentic-content-apps.html">Article 1</a> described the core inversion:
+                personal agents handle integrations, apps focus on presentation, and data lives on the user's device.
                 <a href="/writing/why-agentic-content-apps-arent-everywhere.html">Article 2</a>
                 looked honestly at the barriers — the access friction, the two distinct trust
                 problems, and the technical constraints that don't dissolve under enthusiasm.
-                Both of those articles were, in a sense, preliminary, and this one is about
-                what you actually build when you take the pattern seriously.
+                This article is about what you actually build when you take that pattern seriously.
             </p>
 
             <p>
@@ -101,9 +98,8 @@
 
             <p>
                 Architecture decisions that aren't grounded in explicit principles tend to
-                drift — each individual choice seems reasonable and the cumulative effect
-                is an incoherent system. Before the flow diagram, it's worth naming
-                the five principles that shape every decision in this design.
+                drift: each individual choice seems reasonable, but the cumulative effect
+                is an incoherent system. These five principles shape every decision in this design.
             </p>
 
             <p>
@@ -167,8 +163,8 @@
             </figure>
 
             <p>
-                Two things in this flow are worth pausing on, because they represent deliberate
-                departures from how most apps are built. The encryption step happens at the agent,
+                Two parts of this flow matter because they depart from how most apps are built.
+                The encryption step happens at the agent,
                 before the payload touches any server. This means the relay is blind not by policy
                 but by construction — it routes ciphertext, and the key to decrypt it never passes
                 through it. The device is the terminal point: content arrives, gets decrypted
@@ -200,7 +196,7 @@
                 <a href="https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation" target="_blank" rel="noopener noreferrer">now stewarded by the Agentic AI Foundation</a>
                 and increasingly adopted as a standard for agent-tool interaction —
                 plays two distinct roles in this architecture. They're easy to conflate,
-                so it's worth separating them clearly.
+                so the distinction matters.
             </p>
 
             <figure class="article-figure">
@@ -353,8 +349,8 @@
                 following timeline), structures the results into a common content schema,
                 encrypts the payload, and delivers it via the relay. The Preact PWA reads from
                 IndexedDB and renders a chronological feed, and there are no direct connections
-                between the app and any content platform. The feed belongs to the user, and the
-                app simply makes it useful to look at.
+                between the app and any content platform. The feed belongs to the user; the
+                app makes it useful to look at.
             </p>
 
             <p>

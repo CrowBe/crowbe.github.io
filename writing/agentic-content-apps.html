@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/resources/icons/apple-touch-icon.png">
     <link rel="manifest" href="/resources/icons/site.webmanifest">
     <script src="https://kit.fontawesome.com/aefacc78af.js" crossorigin="anonymous"></script>
-    <title>Agentic Content Apps — A New Pattern | Ben Crow</title>
+    <title>How Personal Agents Change What Content Apps Need to Own | Ben Crow</title>
 </head>
 <body>
     <nav aria-label="Main navigation">
@@ -46,18 +46,18 @@
                 <span>April 2026</span>
                 <span class="article-series">Agentic Content Apps — Part 1 of 3</span>
             </div>
-            <h1>Agentic Content Apps — A New Pattern</h1>
+            <h1>How Personal Agents Change What Content Apps Need to Own</h1>
             <p class="article-lede">
-                Personal AI agents are moving well beyond chat. If they can handle the work
-                of fetching and structuring data, what does that mean for the apps built around them?
+                If personal agents can fetch and structure content for us, content apps can stop owning the integrations
+                and compete on the experience instead.
             </p>
         </header>
 
         <aside class="series-disclaimer">
             <p>This is a three-part series on agentic content apps. Reading order:
-                <strong>Part 1: Agentic Content Apps — A New Pattern</strong> (you are here)
+                <strong>Part 1: How Personal Agents Change What Content Apps Need to Own</strong> (you are here)
                 &rarr; <a href="/writing/why-agentic-content-apps-arent-everywhere.html">Part 2: Why They Aren't Everywhere Yet</a>
-                &rarr; <a href="/writing/architecting-agentic-content-apps.html">Part 3: Architecting Agentic Content Apps</a>
+                &rarr; <a href="/writing/architecting-agentic-content-apps.html">Part 3: How Device-First Architecture Makes Agentic Apps Trustworthy</a>
             </p>
         </aside>
 
@@ -80,14 +80,10 @@
                 noted that AI agents were moving meaningfully beyond chat interfaces, from
                 answering questions to completing tasks autonomously, and others have started
                 asking <a href="https://sdtimes.com/ai/the-future-of-ai-isnt-chat-why-user-experience-will-make-or-break-the-next-wave-of-applications/" target="_blank" rel="noopener noreferrer">what the future of AI looks like when it isn't a conversation at all</a>.
-                That trajectory raises a question that doesn't yet have a settled answer: if a
-                personal agent can handle the work of fetching, filtering, and structuring content
-                from across the web, what does that mean for the apps that currently do that work?
-                This article is my attempt to think through one possible answer — a pattern I've
+                That trajectory raises a product question: if a personal agent can fetch, filter, and structure content
+                from across the web, what should the app still own? My answer is the pattern I've
                 been calling agentic content apps, and that I've been building toward with
-                <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">ScrolLess</a>.
-                It is less a new paradigm than something I can see the edge of and want to think
-                out loud about.
+                <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">ScrolLess</a>: the agent owns the integration work, the app owns the experience.
             </p>
 
             <h2>The Problem Apps Carry</h2>
@@ -98,7 +94,7 @@
                 of it has nothing to do with the actual experience the app is trying to deliver.
                 OAuth flows, API rate limit handling, token refresh logic, schema mappings that
                 need updating every time a platform changes its response format: a great deal of
-                engineering effort goes into simply getting the data, before a single line of
+                engineering effort goes into getting the data before a single line of
                 thought can be spent on what to do with it.
             </p>
 
@@ -130,7 +126,7 @@
             <p>
                 The pattern that's been occupying my thinking goes roughly like this: a personal
                 AI agent takes over the integration work entirely — authenticating with platforms,
-                fetching content, normalising it into a common format — and the app simply
+                fetching content, normalising it into a common format — and the app
                 receives the result. The agent handles the plumbing while the app handles the
                 experience, and the data, rather than being held in a backend somewhere, lives
                 on the user's own device.
