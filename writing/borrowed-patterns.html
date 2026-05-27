@@ -132,12 +132,12 @@
                 moment; it is replayed, compressed, and turned into better future behaviour. That is close to how sleep is often described
                 in memory research, including Diekelmann and Born's review of
                 <a href="https://www.nature.com/articles/nrn2762" target="_blank" rel="noopener noreferrer">sleep and memory consolidation</a>.
-                The pattern comes from cognitive science more than from software process, and the same metaphor is showing up at lower
-                layers of the stack too. Lee et al.'s
+                The pattern comes from cognitive science more than from software process, and the same metaphor is showing up inside
+                the models themselves. Lee et al.'s
                 <a href="https://arxiv.org/abs/2605.26099" target="_blank" rel="noopener noreferrer">Language Models Need Sleep</a>
-                borrows the framing inside the model itself: when the context window fills, the model spends offline recurrent passes
-                turning evicted tokens into persistent weights before resuming. It is a looser borrowing than agent-level trace review,
-                but recognisably the same trade — pay a cost in wake-time responsiveness for stronger later behaviour.
+                gives a model a quiet phase when its short-term memory fills up: instead of taking in new input, it spends that time
+                compressing what it has just seen into its longer-term memory before resuming. It is a looser borrowing than agent-level
+                trace review, but recognisably the same trade — pause to digest now, work better later.
             </p>
 
             <p>
