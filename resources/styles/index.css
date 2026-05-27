@@ -353,6 +353,18 @@ nav .theme-toggle:hover, nav .theme-toggle:focus-visible {
   font-weight: 400;
 }
 
+.process-note {
+  font-family: "Fira Mono", monospace;
+  font-style: italic;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  max-width: 640px;
+  margin: 0 auto 1.5rem;
+  padding: 0 1rem;
+  text-align: center;
+  line-height: 1.6;
+}
+
 .project-list,
 .writing-card-list {
   display: flex;
