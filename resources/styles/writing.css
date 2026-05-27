@@ -38,13 +38,24 @@
 
 .writing-list h2 {
   font-family: "Montserrat", sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-muted);
-  margin: 0 0 2rem;
+  color: var(--accent-light);
+  margin: 3rem 0;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--tech-card-border);
+  position: relative;
+}
+
+.writing-list h2::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 3rem;
+  height: 2px;
+  background: linear-gradient(to right, var(--accent), var(--contrast));
 }
 
 .article-card {
