@@ -1,56 +1,54 @@
-// ── Dark mode toggle ──
+// ── Ben Crow — writing pages scripts ──
+// Theme toggle, popover-nav fallback, FAB fallback.
+
+// ── Theme toggle (initial theme is set by an inline head script) ──
 const themeToggle = document.querySelector(".theme-toggle");
-const themeIcon = themeToggle.querySelector("i");
+themeToggle.addEventListener("click", () => {
+  const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try {
+    localStorage.setItem("theme", next);
+  } catch (e) {}
+});
 
-const applyTheme = (theme) => {
-  document.documentElement.setAttribute("data-theme", theme);
-  themeIcon.className = theme === "dark" ? "fas fa-sun" : "fas fa-moon";
-  localStorage.setItem("theme", theme);
-};
+// ── Mobile nav: native Popover API where supported ──
+const navToggle = document.querySelector(".nav-toggle");
+const navLinks = document.getElementById("nav-links");
 
-// Initialize from saved preference or system preference
-const savedTheme = localStorage.getItem("theme");
-if (savedTheme) {
-  applyTheme(savedTheme);
-} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-  applyTheme("dark");
+if (HTMLElement.prototype.hasOwnProperty("popover")) {
+  navLinks.addEventListener("toggle", (e) => {
+    navToggle.setAttribute("aria-expanded", e.newState === "open");
+  });
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      if (navLinks.matches(":popover-open")) navLinks.hidePopover();
+    });
+  });
+} else {
+  navLinks.removeAttribute("popover");
+  const setOpen = (open) => {
+    navLinks.classList.toggle("open", open);
+    navToggle.setAttribute("aria-expanded", String(open));
+  };
+  navToggle.addEventListener("click", () => setOpen(!navLinks.classList.contains("open")));
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setOpen(false));
+  });
 }
 
-themeToggle.addEventListener("click", () => {
-  const current = document.documentElement.getAttribute("data-theme");
-  applyTheme(current === "dark" ? "light" : "dark");
-});
-
-// ── Mobile nav toggle ──
-const navToggle = document.querySelector(".nav-toggle");
-const navLinks = document.querySelector(".nav-links");
-
-navToggle.addEventListener("click", () => {
-  const expanded = navToggle.getAttribute("aria-expanded") === "true";
-  navToggle.setAttribute("aria-expanded", !expanded);
-  navLinks.classList.toggle("open");
-});
-
-navLinks.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => {
-    navToggle.setAttribute("aria-expanded", "false");
-    navLinks.classList.remove("open");
-  });
-});
-
-// ── FAB back-to-top ──
+// ── Back-to-top FAB (scroll-driven animation where supported) ──
 const fabTop = document.querySelector(".fab-top");
+fabTop.addEventListener("click", () => window.scrollTo({ top: 0 }));
 
-const handleFabVisibility = () => {
-  if (window.scrollY > window.innerHeight * 0.5) {
-    fabTop.classList.add("visible");
-  } else {
-    fabTop.classList.remove("visible");
-  }
-};
-
-window.addEventListener("scroll", handleFabVisibility, { passive: true });
-
-fabTop.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
+const fabScrollDriven =
+  window.CSS &&
+  CSS.supports("animation-timeline: scroll()") &&
+  !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (!fabScrollDriven) {
+  document.documentElement.classList.add("no-scroll-timeline");
+  const handleFabVisibility = () => {
+    fabTop.classList.toggle("visible", window.scrollY > window.innerHeight * 0.5);
+  };
+  window.addEventListener("scroll", handleFabVisibility, { passive: true });
+  handleFabVisibility();
+}

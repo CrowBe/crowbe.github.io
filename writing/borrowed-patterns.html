@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Better agents need proven human patterns for work, judgement, and learning turned into explicit product loops.">
+    <meta name="view-transition" content="same-origin">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400..800&family=Fira+Code:wght@400..600&display=swap">
     <link rel="stylesheet" type="text/css" href="/resources/styles/index.css">
     <link rel="stylesheet" type="text/css" href="/resources/styles/writing.css">
     <link rel="icon" type="image/svg+xml" href="/resources/icons/favicon.svg">
@@ -11,34 +23,56 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/resources/icons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/resources/icons/apple-touch-icon.png">
     <link rel="manifest" href="/resources/icons/site.webmanifest">
-    <script src="https://kit.fontawesome.com/aefacc78af.js" crossorigin="anonymous"></script>
     <title>Better Agents Need Better Borrowed Patterns | Ben Crow</title>
+    <script type="speculationrules">
+    {
+          "prefetch": [
+                {
+                      "urls": [
+                            "/",
+                            "/writing/",
+                            "/writing/when-agents-join-the-team-managers-matter-differently.html",
+                            "/writing/hr-next-sociotechnical-moment.html",
+                            "/writing/agentic-content-apps.html",
+                            "/writing/why-agentic-content-apps-arent-everywhere.html",
+                            "/writing/architecting-agentic-content-apps.html"
+                      ],
+                      "eagerness": "moderate"
+                }
+          ]
+    }
+    </script>
 </head>
 <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
     <nav aria-label="Main navigation">
-        <div class="nav-inner">
-            <a href="/" class="nav-brand">BC</a>
-            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
-                <span class="nav-toggle-bar"></span>
-                <span class="nav-toggle-bar"></span>
-                <span class="nav-toggle-bar"></span>
-            </button>
-            <div id="nav-links" class="nav-links">
-                <a href="/#about">About</a>
-                <a href="/#projects">Projects</a>
-                <a href="/#writing">Writing</a>
-                <a href="/#contact">Contact</a>
-                <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
-                    <i class="fas fa-moon"></i>
+        <div class="nav-surface">
+            <div class="nav-inner">
+                <a href="/" class="nav-brand">BC</a>
+                <button class="nav-toggle" popovertarget="nav-links" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
+                    <span class="nav-toggle-bar"></span>
+                    <span class="nav-toggle-bar"></span>
+                    <span class="nav-toggle-bar"></span>
                 </button>
+                <div id="nav-links" class="nav-links" popover>
+                    <a href="/#about">About</a>
+                    <a href="/#projects">Projects</a>
+                    <a href="/#writing">Writing</a>
+                    <a href="/#contact">Contact</a>
+                    <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+                        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    </button>
+                    <span class="nav-indicator" aria-hidden="true"></span>
+                </div>
             </div>
+            <div class="contrast-bar"></div>
         </div>
-        <div class="contrast-bar"></div>
     </nav>
 
     <main class="article-page">
         <a href="/#writing" class="article-back">
-            <i class="fas fa-arrow-left"></i> Writing
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Writing
         </a>
 
         <header class="article-header">
@@ -46,7 +80,7 @@
                 <span>May 2026</span>
                 <span class="article-series">Agentic AI — Evaluation — Knowledge Work</span>
             </div>
-            <h1>Better Agents Need Better Borrowed Patterns</h1>
+            <h1 style="view-transition-name: vt-title-borrowed">Better Agents Need Better Borrowed Patterns</h1>
             <p class="article-lede">
                 The useful shift in agentic AI is not just better models. It is turning proven human patterns for work,
                 judgement, and learning into explicit product loops.
@@ -262,7 +296,7 @@
     </footer>
 
     <button class="fab-top" aria-label="Back to top" title="Back to top">
-        <i class="fas fa-angle-double-up"></i>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
     </button>
 
     <script src="/resources/scripts/writingscripts.js"></script>
