@@ -51,7 +51,7 @@
   margin: 0 0 2.5rem;
 }
 
-.writing-list h2 {
+.writing-list .list-heading {
   font-family: var(--font-mono);
   font-weight: 500;
   font-size: 0.78rem;
@@ -64,12 +64,12 @@
   position: relative;
 }
 
-.writing-list h2::before {
+.writing-list .list-heading::before {
   content: "// ";
   color: var(--coral);
 }
 
-.writing-list h2::after {
+.writing-list .list-heading::after {
   content: "";
   position: absolute;
   bottom: -1px;
@@ -135,7 +135,7 @@
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
     .article-card,
-    .writing-list h2 {
+    .writing-list .list-heading {
       animation: rise-in linear both;
       animation-timeline: view(block);
       animation-range: entry 5% entry 40%;
