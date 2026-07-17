@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Agentic content apps are blocked by access, trust, reliability, setup, and cost, not by one missing model or framework.">
+    <meta name="view-transition" content="same-origin">
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400..800&family=Fira+Code:wght@400..600&display=swap">
     <link rel="stylesheet" type="text/css" href="/resources/styles/index.css">
     <link rel="stylesheet" type="text/css" href="/resources/styles/writing.css">
     <link rel="icon" type="image/svg+xml" href="/resources/icons/favicon.svg">
@@ -11,34 +23,56 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/resources/icons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/resources/icons/apple-touch-icon.png">
     <link rel="manifest" href="/resources/icons/site.webmanifest">
-    <script src="https://kit.fontawesome.com/aefacc78af.js" crossorigin="anonymous"></script>
     <title>Agentic Content Apps Are Blocked by Access, Trust, and Product Readiness | Ben Crow</title>
+    <script type="speculationrules">
+    {
+          "prefetch": [
+                {
+                      "urls": [
+                            "/",
+                            "/writing/",
+                            "/writing/borrowed-patterns.html",
+                            "/writing/when-agents-join-the-team-managers-matter-differently.html",
+                            "/writing/hr-next-sociotechnical-moment.html",
+                            "/writing/agentic-content-apps.html",
+                            "/writing/architecting-agentic-content-apps.html"
+                      ],
+                      "eagerness": "moderate"
+                }
+          ]
+    }
+    </script>
 </head>
 <body>
+    <div class="scroll-progress" aria-hidden="true"></div>
     <nav aria-label="Main navigation">
-        <div class="nav-inner">
-            <a href="/" class="nav-brand">BC</a>
-            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
-                <span class="nav-toggle-bar"></span>
-                <span class="nav-toggle-bar"></span>
-                <span class="nav-toggle-bar"></span>
-            </button>
-            <div id="nav-links" class="nav-links">
-                <a href="/#about">About</a>
-                <a href="/#projects">Projects</a>
-                <a href="/#writing">Writing</a>
-                <a href="/#contact">Contact</a>
-                <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
-                    <i class="fas fa-moon"></i>
+        <div class="nav-surface">
+            <div class="nav-inner">
+                <a href="/" class="nav-brand">BC</a>
+                <button class="nav-toggle" popovertarget="nav-links" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
+                    <span class="nav-toggle-bar"></span>
+                    <span class="nav-toggle-bar"></span>
+                    <span class="nav-toggle-bar"></span>
                 </button>
+                <div id="nav-links" class="nav-links" popover>
+                    <a href="/#about">About</a>
+                    <a href="/#projects">Projects</a>
+                    <a href="/#writing">Writing</a>
+                    <a href="/#contact">Contact</a>
+                    <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">
+                        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    </button>
+                    <span class="nav-indicator" aria-hidden="true"></span>
+                </div>
             </div>
+            <div class="contrast-bar"></div>
         </div>
-        <div class="contrast-bar"></div>
     </nav>
 
     <main class="article-page">
         <a href="/#writing" class="article-back">
-            <i class="fas fa-arrow-left"></i> Writing
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Writing
         </a>
 
         <header class="article-header">
@@ -46,7 +80,7 @@
                 <span>April 2026</span>
                 <span class="article-series">Agentic Content Apps — Part 2 of 3</span>
             </div>
-            <h1>Agentic Content Apps Are Blocked by Access, Trust, and Product Readiness</h1>
+            <h1 style="view-transition-name: vt-title-aca2">Agentic Content Apps Are Blocked by Access, Trust, and Product Readiness</h1>
             <p class="article-lede">
                 The pattern is technically visible, but not yet product-ready: access is contested,
                 trust has to be enforced architecturally, and the tooling still asks too much of ordinary users.
@@ -165,7 +199,7 @@
                 aggregated personal data is qualitatively different from its parts, and that
                 the architecture of the presentation layer matters as much as the architecture
                 of the agent. That is precisely why the design of the relay and storage layer,
-                which Article 3 addresses, is not a detail — it is the mechanism by which the
+                which Part 3 addresses, is not a detail — it is the mechanism by which the
                 trust claim either holds or doesn't.
             </p>
 
@@ -205,10 +239,10 @@
             <p>
                 Compute is the other piece. Meaningful agent workflows require summarisation,
                 extraction, ranking, classification, and multi-step reasoning. Running this
-                locally means GPUs, thermal management, and the battery tradeoffs that make
+                locally means GPUs, thermal management, and the battery trade-offs that make
                 mobile a particular challenge, while running it in the cloud reintroduces the
                 subscription cost and the privacy considerations that the architecture was partly
-                designed to sidestep. There is no free lunch, only a question of which tradeoff
+                designed to sidestep. There is no free lunch, only a question of which trade-off
                 the user is willing to make, and a "just works on your phone for free" version
                 of this pattern does not yet exist.
             </p>
@@ -289,7 +323,7 @@
                 data stays on your device" is only meaningful if the relay genuinely cannot read
                 the payload, the app genuinely holds nothing, and the agent genuinely operates
                 independently — and those are architectural choices, not configuration options.
-                The third article in this series is about exactly that: the concrete architecture
+                Part 3 of this series is about exactly that: the concrete architecture
                 I'm working through in <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">ScrolLess</a>,
                 a device-first model where the trust claims aren't asserted but enforced, and
                 where the agent, the relay, and the app are kept genuinely separate from one
@@ -302,9 +336,9 @@
             <p class="process-note">Note on process: every piece here is AI-produced. Claude and ChatGPT do the drafting — Claude through the Claude mobile app, ChatGPT through OpenClaw over Telegram. I act as editor: setting direction, providing initial sources, and reviewing for style and cohesion. It's an experiment in extending the process that works for code production into other forms of writing.</p>
             <p>Part 2 of a three-part series on agentic content apps.</p>
             <p>
-                <a href="/writing/agentic-content-apps.html">&larr; Part 1: A New Pattern</a>
+                <a href="/writing/agentic-content-apps.html">&larr; Part 1: Personal Agents Let Content Apps Stop Owning Integrations</a>
                 &nbsp;&nbsp;&nbsp;
-                <a href="/writing/architecting-agentic-content-apps.html">Part 3: The Architecture &rarr;</a>
+                <a href="/writing/architecting-agentic-content-apps.html">Part 3: Trustworthy Agentic Apps Need Device-First Architecture &rarr;</a>
             </p>
             <p><a href="/#writing">Back to Writing</a></p>
         </footer>
@@ -315,7 +349,7 @@
     </footer>
 
     <button class="fab-top" aria-label="Back to top" title="Back to top">
-        <i class="fas fa-angle-double-up"></i>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
     </button>
 
     <script src="/resources/scripts/writingscripts.js"></script>

@@ -1,86 +1,107 @@
 /* ── Writing section — article and index styles ──
-   Depends on index.css being loaded first (fonts, CSS vars, nav, footer, fab) */
+   Depends on index.css being loaded first (tokens, nav, footer, fab,
+   view transitions, scroll progress bar). */
 
-/* ── Writing index page ── */
+/* ── Writing index hero ── */
 .writing-hero {
-  background: linear-gradient(to left, var(--landing-gradient-start), var(--landing-gradient-end));
-  color: var(--text-secondary);
-  padding: 10vh 2rem 6vh;
+  position: relative;
+  color: var(--d-text);
+  padding: clamp(5rem, 12vh, 8rem) 2rem clamp(3.5rem, 8vh, 5.5rem);
   text-align: center;
+  overflow: clip;
+  background:
+    radial-gradient(70% 90% at 74% 20%, rgba(61, 99, 192, 0.35), transparent 64%),
+    radial-gradient(50% 65% at 16% 85%, rgba(254, 95, 85, 0.08), transparent 60%),
+    linear-gradient(150deg, var(--ink), var(--indigo));
 }
 
 .writing-hero h1 {
-  font-family: "Montserrat", sans-serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-family: var(--font-sans);
+  font-size: var(--step-4);
+  font-weight: 750;
+  letter-spacing: -0.025em;
   margin: 0 0 1rem;
 }
 
 .writing-hero h1 em {
   font-style: normal;
-  color: var(--contrast);
+  color: var(--coral);
 }
 
 .writing-hero p {
-  font-family: "Fira Mono", monospace;
-  font-size: 1rem;
-  color: var(--text-secondary);
-  opacity: 0.75;
-  max-width: 560px;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--d-muted);
+  max-width: 56ch;
   margin: 0 auto;
   line-height: 1.7;
 }
 
+/* ── Writing index list ── */
 .writing-list {
   max-width: 760px;
   margin: 0 auto;
   padding: 4rem 1.5rem 8rem;
+  text-align: left;
 }
 
-.writing-list h2 {
-  font-family: "Montserrat", sans-serif;
-  font-size: 0.85rem;
-  letter-spacing: 0.14em;
+.writing-list .process-note {
+  text-align: left;
+  padding: 0;
+  margin: 0 0 2.5rem;
+}
+
+.writing-list .list-heading {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--accent-light);
-  margin: 3rem 0;
+  color: var(--accent);
+  margin: 3.5rem 0 1.5rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--tech-card-border);
+  border-bottom: 1px solid var(--border);
   position: relative;
 }
 
-.writing-list h2::after {
+.writing-list .list-heading::before {
+  content: "// ";
+  color: var(--coral);
+}
+
+.writing-list .list-heading::after {
   content: "";
   position: absolute;
   bottom: -1px;
   left: 0;
   width: 3rem;
   height: 2px;
-  background: linear-gradient(to right, var(--accent), var(--contrast));
+  background: linear-gradient(90deg, var(--coral), var(--indigo-bright));
 }
 
 .article-card {
   display: block;
   padding: 1.75rem 0;
-  border-bottom: 1px solid var(--tech-card-border);
+  border-bottom: 1px solid var(--border);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .article-card:hover .article-title,
 .article-card:focus-visible .article-title {
-  color: var(--contrast);
+  color: var(--coral);
 }
 
 .article-card:focus-visible {
-  outline: 2px solid var(--contrast);
+  outline: 2px solid var(--coral);
   outline-offset: 4px;
   border-radius: 4px;
 }
 
 .article-meta {
-  font-family: "Fira Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: var(--muted);
   margin-bottom: 0.5rem;
   display: flex;
   gap: 1rem;
@@ -92,54 +113,74 @@
 }
 
 .article-title {
-  font-family: "Montserrat", sans-serif;
-  font-size: clamp(1.15rem, 2.5vw, 1.4rem);
-  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  color: var(--text);
   margin: 0 0 0.6rem;
-  line-height: 1.35;
+  line-height: 1.3;
   transition: color 0.2s;
 }
 
 .article-excerpt {
-  font-family: "Fira Mono", monospace;
-  font-size: 0.875rem;
-  color: var(--text-muted);
+  font-size: 0.92rem;
+  color: var(--muted);
   line-height: 1.7;
   margin: 0;
-  max-width: 100%;
+  max-width: 62ch;
+}
+
+/* Index reveals — scroll-driven where supported */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .article-card,
+    .writing-list .list-heading {
+      animation: rise-in linear both;
+      animation-timeline: view(block);
+      animation-range: entry 5% entry 40%;
+    }
+  }
 }
 
 /* ── Article page ── */
 .article-page {
-  max-width: 720px;
+  max-width: 46rem;
   margin: 0 auto;
   padding: 4rem 1.5rem 8rem;
-  color: var(--text-primary);
+  color: var(--text);
+  text-align: left;
 }
 
 .article-back {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  font-family: "Fira Mono", monospace;
-  font-size: 0.8rem;
-  color: var(--text-muted);
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
   text-decoration: none;
   margin-bottom: 3rem;
   transition: color 0.2s;
 }
 
+.article-back svg {
+  width: 14px;
+  height: 14px;
+}
+
 .article-back:visited {
-  color: var(--text-muted);
+  color: var(--muted);
 }
 
 .article-back:hover,
 .article-back:focus-visible {
-  color: var(--contrast);
+  color: var(--coral);
 }
 
 .article-back:focus-visible {
-  outline: 2px solid var(--contrast);
+  outline: 2px solid var(--coral);
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -149,43 +190,45 @@
 }
 
 .article-header .article-meta {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .article-header h1 {
-  font-family: "Montserrat", sans-serif;
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  line-height: 1.2;
-  margin: 0 0 1.25rem;
-  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--step-3);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0 0 1.5rem;
+  color: var(--text);
 }
 
 .article-header .article-lede {
-  font-family: "Fira Mono", monospace;
-  font-size: 1.05rem;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
   line-height: 1.75;
-  color: var(--text-muted);
+  color: var(--muted);
   margin: 0;
-  border-left: 3px solid var(--contrast);
-  padding-left: 1rem;
+  border-left: 3px solid var(--coral);
+  padding-left: 1.15rem;
 }
 
 /* ── Series disclaimer ── */
 .series-disclaimer {
   margin: 0 0 2.5rem;
   padding: 0.9rem 1.1rem;
-  background: var(--tech-card-bg);
-  border: 1px solid var(--tech-card-border);
+  background: var(--tint);
+  border: 1px solid var(--border);
   border-left: 3px solid var(--accent);
-  border-radius: 0 6px 6px 0;
-  font-family: "Fira Mono", monospace;
+  border-radius: 0 8px 8px 0;
+  font-family: var(--font-mono);
   font-size: 0.78rem;
   line-height: 1.75;
-  color: var(--text-muted);
+  color: var(--muted);
 }
 
 .series-disclaimer p {
-  font-family: "Fira Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.78rem;
   line-height: 1.75;
   margin: 0;
@@ -195,50 +238,52 @@
 .series-disclaimer a {
   font-size: inherit;
   font-weight: inherit;
-  color: var(--accent-light);
+  color: var(--accent);
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--accent-light) 40%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
   text-underline-offset: 2px;
   transition: color 0.2s;
 }
 
 .series-disclaimer a:visited {
-  color: var(--accent-light);
+  color: var(--accent);
 }
 
 .series-disclaimer a:hover {
-  color: var(--contrast);
+  color: var(--coral);
 }
 
 .series-disclaimer strong {
-  color: var(--text-primary);
+  color: var(--text);
   font-weight: 700;
 }
 
-/* ── Article body typography ── */
+/* ── Article body typography — sans measure ~68ch, mono accents ── */
 .article-body {
-  font-family: "Fira Mono", monospace;
-  font-size: 0.95rem;
-  line-height: 1.85;
-  color: var(--text-primary);
+  font-size: var(--step-0);
+  line-height: 1.8;
+  color: var(--text);
 }
 
 .article-body p {
-  font-family: "Fira Mono", monospace;
-  font-size: 0.95rem;
-  line-height: 1.85;
+  font-size: inherit;
+  line-height: inherit;
   margin: 0 0 1.5rem;
-  max-width: 100%;
+  max-width: 68ch;
   text-align: left;
+  text-wrap: pretty;
 }
 
 .article-body h2 {
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.4rem;
-  margin: 3rem 0 1rem;
-  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--step-2);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  margin: 3.25rem 0 1rem;
+  color: var(--text);
   position: relative;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.6rem;
 }
 
 .article-body h2::after {
@@ -248,23 +293,53 @@
   left: 0;
   width: 2.5rem;
   height: 2px;
-  background: linear-gradient(to right, var(--accent), var(--contrast));
+  background: linear-gradient(90deg, var(--coral), var(--indigo-bright));
 }
 
 .article-body h3 {
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.05rem;
-  margin: 2rem 0 0.75rem;
-  color: var(--accent-light);
+  font-family: var(--font-sans);
+  font-size: var(--step-1);
+  font-weight: 650;
+  margin: 2.25rem 0 0.75rem;
+  color: var(--accent);
 }
 
 .article-body strong {
-  color: var(--text-primary);
+  color: var(--text);
   font-weight: 700;
 }
 
 .article-body em {
   font-style: italic;
+}
+
+.article-body ul,
+.article-body ol {
+  max-width: 66ch;
+  padding-left: 1.5rem;
+  margin: 0 0 1.5rem;
+}
+
+.article-body li {
+  margin-bottom: 0.5rem;
+}
+
+.article-body li::marker {
+  color: var(--coral);
+}
+
+.article-body blockquote {
+  margin: 2rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 3px solid var(--coral);
+  background: var(--tint);
+  border-radius: 0 8px 8px 0;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.article-body blockquote p {
+  margin: 0;
 }
 
 /* ── Article inline links ── */
@@ -275,9 +350,9 @@
   font-weight: inherit;
   line-height: inherit;
   font-family: inherit;
-  color: var(--accent-light);
+  color: var(--accent);
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--accent-light) 45%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
   text-underline-offset: 3px;
   transition: color 0.2s, text-decoration-color 0.2s;
 }
@@ -285,45 +360,45 @@
 .article-body a:visited,
 .article-header a:visited,
 .article-lede a:visited {
-  color: var(--accent-light);
+  color: var(--accent);
 }
 
 .article-body a:hover,
 .article-body a:focus-visible,
 .article-header a:hover,
 .article-lede a:hover {
-  color: var(--contrast);
-  text-decoration-color: color-mix(in srgb, var(--contrast) 70%, transparent);
+  color: var(--coral);
+  text-decoration-color: color-mix(in srgb, var(--coral) 70%, transparent);
 }
 
 .article-body a:focus-visible {
-  outline: 2px solid var(--contrast);
+  outline: 2px solid var(--coral);
   outline-offset: 2px;
   border-radius: 2px;
 }
 
 /* ── Code blocks ── */
 .article-body pre {
-  background: var(--bg-card);
-  border: 1px solid var(--tech-card-border);
-  border-radius: 8px;
+  background: var(--d-surface);
+  border: 1px solid var(--d-border);
+  border-radius: 10px;
   padding: 1.25rem 1.5rem;
   overflow-x: auto;
   margin: 1.5rem 0 2rem;
-  font-family: "Fira Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.82rem;
   line-height: 1.65;
-  color: var(--text-muted);
+  color: var(--d-muted);
 }
 
 .article-body code {
-  font-family: "Fira Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.85em;
-  background: var(--tech-card-bg);
-  border: 1px solid var(--tech-card-border);
-  border-radius: 3px;
+  background: var(--tint);
+  border: 1px solid var(--border);
+  border-radius: 4px;
   padding: 0.1em 0.35em;
-  color: var(--accent-light);
+  color: var(--accent);
 }
 
 .article-body pre code {
@@ -339,23 +414,23 @@
   width: 100%;
   border-collapse: collapse;
   margin: 1.5rem 0 2rem;
-  font-family: "Fira Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 0.82rem;
   overflow-x: auto;
   display: block;
 }
 
 .article-body .comparison-table thead th {
-  background: var(--bg-secondary);
-  color: var(--text-secondary);
-  font-family: "Montserrat", sans-serif;
-  font-size: 0.75rem;
+  background: var(--indigo-deep);
+  color: var(--d-text);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   padding: 0.75rem 1rem;
   text-align: left;
-  border-bottom: 2px solid var(--accent);
+  border-bottom: 2px solid var(--coral);
 }
 
 .article-body .comparison-table thead th:first-child {
@@ -367,7 +442,7 @@
 }
 
 .article-body .comparison-table tbody tr {
-  border-bottom: 1px solid var(--tech-card-border);
+  border-bottom: 1px solid var(--border);
 }
 
 .article-body .comparison-table tbody tr:last-child {
@@ -375,36 +450,36 @@
 }
 
 .article-body .comparison-table tbody tr:nth-child(even) {
-  background: var(--tech-card-bg);
+  background: var(--tint);
 }
 
 .article-body .comparison-table td {
   padding: 0.7rem 1rem;
-  color: var(--text-muted);
+  color: var(--muted);
   line-height: 1.5;
   vertical-align: top;
 }
 
 .article-body .comparison-table td:first-child {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--text);
   white-space: nowrap;
 }
 
 .article-body .comparison-table td.highlight {
-  color: var(--accent-light);
+  color: var(--accent);
 }
 
 /* ── Article footer / series note ── */
 .article-footer {
   margin-top: 4rem;
   padding-top: 2rem;
-  border-top: 1px solid var(--tech-card-border);
-  font-family: "Fira Mono", monospace;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: var(--muted);
   text-align: center;
 }
 
@@ -412,55 +487,75 @@
   color: var(--accent);
   font-size: 0.8rem;
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .article-footer a:hover {
-  color: var(--contrast);
+  color: var(--coral);
 }
 
 /* ── Closing callout ── */
 .article-closing {
   margin: 3rem 0 2rem;
   padding: 1.5rem 1.75rem;
-  border-left: 4px solid var(--contrast);
-  background: var(--tech-card-bg);
-  border-radius: 0 8px 8px 0;
-  font-family: "Montserrat", sans-serif;
+  border-left: 4px solid var(--coral);
+  background: var(--tint);
+  border-radius: 0 10px 10px 0;
+  font-family: var(--font-sans);
   font-size: 1.05rem;
   font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1.5;
+  color: var(--text);
+  line-height: 1.55;
+  text-wrap: balance;
 }
 
-/* ── Diagrams ── */
+/* ── Diagrams / figures ── */
 .article-figure {
   margin: 2.5rem 0 2rem;
   text-align: center;
+  background: var(--tint);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1rem 0.85rem;
 }
 
 .article-figure img {
   width: 100%;
   max-width: 100%;
-  border-radius: 8px;
-  border: 1px solid var(--tech-card-border);
+  border-radius: 6px;
+  display: block;
 }
 
 .article-figure figcaption {
-  font-family: "Fira Mono", monospace;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-top: 0.6rem;
-  font-style: italic;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+  line-height: 1.6;
+}
+
+.article-figure figcaption::before {
+  content: "fig. ";
+  color: var(--coral);
+}
+
+/* Article body reveals */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .article-body h2,
+    .article-figure,
+    .article-closing {
+      animation: rise-in linear both;
+      animation-timeline: view(block);
+      animation-range: entry 5% entry 35%;
+    }
+  }
 }
 
 /* ── Responsive ── */
 @media (min-width: 768px) {
   .article-page {
     padding: 5rem 2rem 10rem;
-  }
-
-  .article-body p {
-    font-size: 1rem;
   }
 
   .writing-list {
