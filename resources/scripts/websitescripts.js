@@ -95,6 +95,7 @@ document.querySelectorAll(".project-list, .writing-card-list").forEach((list) =>
   uniform vec2 u_res;
   uniform float u_time;
   uniform vec2 u_mouse;
+  uniform float u_light;
   out vec4 outColor;
 
   vec3 permute(vec3 x) { return mod(((x * 34.0) + 1.0) * x, 289.0); }
@@ -144,21 +145,22 @@ document.querySelectorAll(".project-list, .writing-card-list").forEach((list) =>
     vec2 r = vec2(fbm(p * 1.15 + q * 0.9 + m + t * 0.5), fbm(p * 1.15 + q * 0.8 - m * 0.7 + 5.2));
     float f = fbm(p * 1.25 + r * 1.1);
 
-    // brand palette (linear-ish; gamma applied on output)
-    vec3 ink = vec3(0.016, 0.003, 0.05);      // near-black #0d0221
-    vec3 indigo = vec3(0.026, 0.1, 0.32);     // deep indigo #0a2463
-    vec3 glow = vec3(0.09, 0.2, 0.55);        // lifted indigo
+    // brand palette (linear-ish; gamma applied on output);
+    // each stop blends to its light-theme counterpart via u_light
+    vec3 ink = mix(vec3(0.016, 0.003, 0.05), vec3(0.90, 0.885, 0.85), u_light);   // near-black #0d0221 → warm paper
+    vec3 indigo = mix(vec3(0.026, 0.1, 0.32), vec3(0.50, 0.60, 0.85), u_light);   // deep indigo #0a2463 → indigo wash
+    vec3 glow = mix(vec3(0.09, 0.2, 0.55), vec3(0.70, 0.78, 0.96), u_light);      // lifted indigo → pale glow
     vec3 coral = vec3(0.996, 0.373, 0.333);   // coral #fe5f55
 
-    vec3 col = mix(ink, indigo, smoothstep(-0.7, 0.9, f) * 0.85);
-    col = mix(col, glow, smoothstep(0.3, 1.0, q.y) * 0.18);
+    vec3 col = mix(ink, indigo, smoothstep(-0.7, 0.9, f) * mix(0.85, 0.55, u_light));
+    col = mix(col, glow, smoothstep(0.3, 1.0, q.y) * mix(0.18, 0.3, u_light));
 
     // sparse coral glints along flow ridges
     float glint = smoothstep(0.62, 0.95, r.x) * smoothstep(0.5, 0.9, f);
-    col = mix(col, coral, glint * 0.16);
+    col = mix(col, coral, glint * mix(0.16, 0.1, u_light));
 
-    // vignette for text legibility
-    col *= 1.0 - 0.34 * dot(uv, uv);
+    // vignette for text legibility (gentler on light paper)
+    col *= 1.0 - mix(0.34, 0.1, u_light) * dot(uv, uv);
 
     // gamma
     col = pow(max(col, 0.0), vec3(0.4545));
@@ -193,6 +195,12 @@ document.querySelectorAll(".project-list, .writing-card-list").forEach((list) =>
   const uRes = gl.getUniformLocation(prog, "u_res");
   const uTime = gl.getUniformLocation(prog, "u_time");
   const uMouse = gl.getUniformLocation(prog, "u_mouse");
+  const uLight = gl.getUniformLocation(prog, "u_light");
+
+  // Theme drives the shader palette; eased so toggling cross-fades.
+  const themeLight = () => (document.documentElement.getAttribute("data-theme") === "dark" ? 0 : 1);
+  let lightTarget = themeLight();
+  let lightNow = lightTarget;
 
   hero.classList.add("webgl");
 
@@ -214,10 +222,20 @@ document.querySelectorAll(".project-list, .writing-card-list").forEach((list) =>
   const draw = (timeSec) => {
     mouseX += (targetX - mouseX) * 0.045;
     mouseY += (targetY - mouseY) * 0.045;
+    lightNow += (lightTarget - lightNow) * 0.08;
+    if (Math.abs(lightTarget - lightNow) < 0.002) lightNow = lightTarget;
     gl.uniform2f(uRes, canvas.width, canvas.height);
     gl.uniform1f(uTime, timeSec);
     gl.uniform2f(uMouse, mouseX, mouseY);
+    gl.uniform1f(uLight, lightNow);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
+  };
+
+  const watchTheme = (onChange) => {
+    new MutationObserver(() => {
+      lightTarget = themeLight();
+      if (onChange) onChange();
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   };
 
   if (reduceMotion) {
@@ -227,8 +245,13 @@ document.querySelectorAll(".project-list, .writing-card-list").forEach((list) =>
       resize();
       draw(37.0);
     });
+    watchTheme(() => {
+      lightNow = lightTarget;
+      draw(37.0);
+    });
     return;
   }
+  watchTheme();
 
   window.addEventListener("resize", resize);
   hero.addEventListener("pointermove", (e) => {
