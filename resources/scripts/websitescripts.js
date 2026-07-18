@@ -2,15 +2,33 @@
 // Theme toggle, popover-nav fallback, FAB fallback, carousel keys,
 // and the WebGL2 shader hero. Everything degrades gracefully.
 
-// ── Theme toggle (initial theme is set by an inline head script) ──
+// ── Theme cycle: light → dark → system default ──
+// Initial state is set by an inline head script; "system" follows
+// prefers-color-scheme live and stores nothing.
 const themeToggle = document.querySelector(".theme-toggle");
+const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+const applyThemeMode = (mode) => {
+  const theme = mode === "system" ? (systemDark.matches ? "dark" : "light") : mode;
+  document.documentElement.setAttribute("data-theme", theme);
+  document.documentElement.setAttribute("data-theme-mode", mode);
+  const label = mode === "system" ? "system default" : mode;
+  themeToggle.setAttribute("aria-label", "Theme: " + label + " — activate to change");
+  themeToggle.title = "Theme: " + label;
+};
 themeToggle.addEventListener("click", () => {
-  const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-  document.documentElement.setAttribute("data-theme", next);
+  const order = ["light", "dark", "system"];
+  const current = document.documentElement.getAttribute("data-theme-mode") || "system";
+  const next = order[(order.indexOf(current) + 1) % order.length];
+  applyThemeMode(next);
   try {
-    localStorage.setItem("theme", next);
+    if (next === "system") localStorage.removeItem("theme");
+    else localStorage.setItem("theme", next);
   } catch (e) {}
 });
+systemDark.addEventListener("change", () => {
+  if (document.documentElement.getAttribute("data-theme-mode") === "system") applyThemeMode("system");
+});
+applyThemeMode(document.documentElement.getAttribute("data-theme-mode") || "system");
 
 // ── Mobile nav: native Popover API where supported ──
 const navToggle = document.querySelector(".nav-toggle");
