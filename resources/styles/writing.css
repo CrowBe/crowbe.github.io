@@ -5,14 +5,15 @@
 /* ── Writing index hero ── */
 .writing-hero {
   position: relative;
-  color: var(--d-text);
+  color: var(--text);
   padding: clamp(5rem, 12vh, 8rem) 2rem clamp(3.5rem, 8vh, 5.5rem);
   text-align: center;
   overflow: clip;
   background:
     radial-gradient(70% 90% at 74% 20%, rgba(61, 99, 192, 0.35), transparent 64%),
     radial-gradient(50% 65% at 16% 85%, rgba(254, 95, 85, 0.08), transparent 60%),
-    linear-gradient(150deg, var(--ink), var(--indigo));
+    linear-gradient(150deg, var(--hero-a), var(--hero-b));
+  transition: color 0.3s;
 }
 
 .writing-hero h1 {
@@ -25,13 +26,13 @@
 
 .writing-hero h1 em {
   font-style: normal;
-  color: var(--coral);
+  color: var(--coral-text);
 }
 
 .writing-hero p {
   font-family: var(--font-mono);
   font-size: var(--step--1);
-  color: var(--d-muted);
+  color: var(--muted);
   max-width: 56ch;
   margin: 0 auto;
   line-height: 1.7;

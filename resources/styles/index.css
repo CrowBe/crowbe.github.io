@@ -59,6 +59,22 @@
   --accent: #35508f;
   --accent-2: #6b7fa3;
 
+  /* theme tokens for the formerly dark-anchored regions
+     (hero / nav / rails / contact / footer) — light values here,
+     dark overrides restore the original fixed dark palette */
+  --coral-text: #c9433a;
+  --hero-a: #f6f4ee;
+  --hero-b: #ccd9f2;
+  --scrim-base: #fbfaf7;
+  --nav-bg: #f7f5f0;
+  --card-bg: #ffffff;
+  --chip-bg: #ffffff;
+  --section-bg: #eef1f8;
+  --section-deep: #dfe6f5;
+  --footer-bg: #d5def0;
+  --card-shadow-c: rgba(43, 42, 69, 0.2);
+  --card-shadow-hover-c: rgba(43, 42, 69, 0.28);
+
   /* legacy aliases (referenced by inline styles in the HTML) */
   --contrast: var(--coral);
   --text-muted: var(--muted);
@@ -99,6 +115,19 @@
   --border: rgba(237, 235, 246, 0.12);
   --accent: #97a9dd;
   --accent-2: #7186ad;
+
+  --coral-text: var(--coral);
+  --hero-a: var(--ink);
+  --hero-b: var(--indigo);
+  --scrim-base: var(--ink);
+  --nav-bg: var(--ink);
+  --card-bg: var(--d-surface);
+  --chip-bg: var(--d-surface-2);
+  --section-bg: var(--d-bg);
+  --section-deep: var(--indigo-deep);
+  --footer-bg: var(--ink);
+  --card-shadow-c: rgba(6, 2, 16, 0.55);
+  --card-shadow-hover-c: rgba(6, 2, 16, 0.7);
 }
 
 /* OKLCH + light-dark() upgrade — one source of truth per token */
@@ -130,23 +159,25 @@
     );
     --accent: light-dark(oklch(46% 0.1 265), oklch(76% 0.08 268));
     --accent-2: light-dark(oklch(57% 0.06 265), oklch(64% 0.05 268));
+
+    --coral-text: light-dark(oklch(55% 0.175 25), var(--coral));
+    --hero-a: light-dark(oklch(96.5% 0.006 95), var(--ink));
+    --hero-b: light-dark(oklch(87% 0.045 268), var(--indigo));
+    --scrim-base: light-dark(oklch(98.4% 0.004 95), var(--ink));
+    --nav-bg: light-dark(oklch(97.3% 0.005 95), var(--ink));
+    --card-bg: light-dark(oklch(100% 0 0), var(--d-surface));
+    --chip-bg: light-dark(oklch(100% 0 0), var(--d-surface-2));
+    --section-bg: light-dark(oklch(94.8% 0.014 268), var(--d-bg));
+    --section-deep: light-dark(oklch(91.5% 0.028 268), var(--indigo-deep));
+    --footer-bg: light-dark(oklch(88.5% 0.035 268), var(--ink));
+    --card-shadow-c: light-dark(oklch(28% 0.04 285 / 0.2), oklch(10% 0.03 295 / 0.55));
+    --card-shadow-hover-c: light-dark(oklch(28% 0.04 285 / 0.28), oklch(10% 0.03 295 / 0.7));
   }
 }
 
-/* Dark-anchored regions re-scope the semantic tokens */
-.hero,
-nav,
-.project-section,
-.writing-section,
-.contact-section,
-footer,
-.writing-hero {
-  --text: var(--d-text);
-  --muted: var(--d-muted);
-  --border: var(--d-border);
-  --surface: var(--d-surface);
-  --text-muted: var(--d-muted);
-}
+/* Formerly dark-anchored regions (hero / nav / rails / contact /
+   footer) now follow the theme via the tokens above; in dark mode
+   those tokens resolve to the original fixed dark palette. */
 
 /* ── Cross-document view transitions ── */
 @view-transition {
@@ -252,11 +283,12 @@ a {
   display: grid;
   place-items: center;
   overflow: clip;
-  color: var(--d-text);
+  color: var(--text);
   background:
     radial-gradient(80% 100% at var(--hero-x) var(--hero-y), rgba(61, 99, 192, 0.38), transparent 64%),
     radial-gradient(55% 70% at 18% 82%, rgba(254, 95, 85, 0.09), transparent 62%),
-    linear-gradient(var(--hero-angle), var(--ink), var(--indigo));
+    linear-gradient(var(--hero-angle), var(--hero-a), var(--hero-b));
+  transition: color 0.3s;
 }
 @media (prefers-reduced-motion: no-preference) {
   .hero {
@@ -292,6 +324,15 @@ a {
   background:
     radial-gradient(78% 62% at 50% 52%, rgba(13, 2, 33, 0.4), transparent 72%),
     linear-gradient(to bottom, rgba(13, 2, 33, 0.32), transparent 30%, transparent 66%, rgba(13, 2, 33, 0.55));
+  background:
+    radial-gradient(78% 62% at 50% 52%, color-mix(in srgb, var(--scrim-base) 40%, transparent), transparent 72%),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--scrim-base) 32%, transparent),
+      transparent 30%,
+      transparent 66%,
+      color-mix(in srgb, var(--scrim-base) 55%, transparent)
+    );
 }
 
 .hero-content {
@@ -306,26 +347,28 @@ a {
   letter-spacing: -0.028em;
   line-height: 1.02;
   text-shadow: 0 2px 24px rgba(13, 2, 33, 0.45);
+  text-shadow: 0 2px 24px color-mix(in srgb, var(--scrim-base) 45%, transparent);
 }
 .hero h1 em {
   font-style: normal;
-  color: var(--coral);
+  color: var(--coral-text);
 }
 .hero h2 {
   margin: 1rem 0 0;
   font-size: var(--step-2);
   font-weight: 500;
   letter-spacing: 0.01em;
-  color: var(--d-text);
+  color: var(--text);
   opacity: 0.92;
   text-shadow: 0 1px 16px rgba(13, 2, 33, 0.45);
+  text-shadow: 0 1px 16px color-mix(in srgb, var(--scrim-base) 45%, transparent);
 }
 .hero-prompt {
   margin: 2.4rem auto 0;
   font-family: var(--font-mono);
   font-size: var(--step--1);
   letter-spacing: 0.03em;
-  color: var(--d-muted);
+  color: var(--muted);
 }
 .hero-prompt .prompt-glyph {
   color: var(--coral);
@@ -363,10 +406,10 @@ nav {
 
 .nav-surface {
   background: rgba(13, 2, 33, 0.85);
-  background: color-mix(in srgb, var(--ink) 85%, transparent);
+  background: color-mix(in srgb, var(--nav-bg) 85%, transparent);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--d-border);
+  border-bottom: 1px solid var(--border);
   transition: background-color 0.3s, border-color 0.3s;
 }
 
@@ -376,7 +419,7 @@ nav {
     container-name: navbar;
   }
   .nav-surface {
-    background: var(--ink);
+    background: var(--nav-bg);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
     border-bottom-color: transparent;
@@ -384,10 +427,10 @@ nav {
   @container navbar scroll-state(stuck: top) {
     .nav-surface {
       background: rgba(13, 2, 33, 0.72);
-      background: color-mix(in srgb, var(--ink) 72%, transparent);
+      background: color-mix(in srgb, var(--nav-bg) 72%, transparent);
       -webkit-backdrop-filter: blur(14px) saturate(1.4);
       backdrop-filter: blur(14px) saturate(1.4);
-      border-bottom-color: var(--d-border);
+      border-bottom-color: var(--border);
     }
   }
 }
@@ -408,16 +451,16 @@ nav {
   font-weight: 600;
   font-size: 0.95rem;
   letter-spacing: 0.08em;
-  color: var(--coral);
+  color: var(--coral-text);
   text-decoration: none;
   border: 1px solid rgba(254, 95, 85, 0.35);
-  border: 1px solid color-mix(in srgb, var(--coral) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--coral-text) 40%, transparent);
   border-radius: 8px;
   padding: 0.3rem 0.55rem;
   transition: border-color 0.2s, background-color 0.2s;
 }
 .nav-brand:visited {
-  color: var(--coral);
+  color: var(--coral-text);
 }
 .nav-brand:hover,
 .nav-brand:focus-visible {
@@ -440,7 +483,7 @@ nav {
   display: block;
   width: 24px;
   height: 2px;
-  background-color: var(--d-text);
+  background-color: var(--text);
   border-radius: 2px;
   transition: transform 0.3s, opacity 0.3s;
 }
@@ -463,10 +506,10 @@ nav {
   top: 100%;
   left: 0;
   right: 0;
-  background-color: var(--ink);
+  background-color: var(--nav-bg);
   padding: 0.75rem 0 1.25rem;
   text-align: center;
-  border-bottom: 1px solid var(--d-border);
+  border-bottom: 1px solid var(--border);
 }
 .nav-links.open {
   display: flex;
@@ -486,7 +529,7 @@ nav {
   #nav-links:popover-open {
     display: flex;
     background: rgba(13, 2, 33, 0.92);
-    background: color-mix(in srgb, var(--ink) 92%, transparent);
+    background: color-mix(in srgb, var(--nav-bg) 92%, transparent);
     -webkit-backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
   }
@@ -501,24 +544,24 @@ nav {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   text-decoration: none;
-  color: var(--d-text);
+  color: var(--text);
   padding: 0.8rem 1rem;
   transition: color 0.2s;
 }
 .nav-links a:visited {
-  color: var(--d-text);
+  color: var(--text);
 }
 .nav-links a:hover,
 .nav-links a:focus-visible {
-  color: var(--coral);
+  color: var(--coral-text);
   text-decoration: underline;
-  text-decoration-color: var(--coral);
+  text-decoration-color: var(--coral-text);
   text-underline-offset: 6px;
 }
 
 .theme-toggle {
   background: none;
-  border: 1px solid var(--d-border);
+  border: 1px solid var(--border);
   border-radius: 50%;
   width: 38px;
   height: 38px;
@@ -526,7 +569,7 @@ nav {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--d-text);
+  color: var(--text);
   margin: 0.5rem auto 0;
   transition: border-color 0.2s, color 0.2s;
 }
@@ -774,13 +817,14 @@ nav {
   position: relative;
   scroll-snap-align: start;
   border-radius: var(--radius);
-  background: var(--d-surface);
-  border: 1px solid var(--d-border);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
   box-shadow: 0 18px 40px -18px rgba(6, 2, 16, 0.55);
+  box-shadow: 0 18px 40px -18px var(--card-shadow-c);
   display: flex;
   flex-direction: column;
   text-align: left;
-  transition: translate 0.25s, border-color 0.25s, box-shadow 0.25s;
+  transition: translate 0.25s, border-color 0.25s, box-shadow 0.25s, background-color 0.3s;
 }
 .project-card:hover,
 .project-card:focus-within,
@@ -788,6 +832,7 @@ nav {
 .writing-card:focus-within {
   translate: 0 -6px;
   box-shadow: 0 28px 56px -22px rgba(6, 2, 16, 0.7);
+  box-shadow: 0 28px 56px -22px var(--card-shadow-hover-c);
 }
 
 /* @property-driven conic border glow (coral → indigo) on hover */
@@ -836,7 +881,7 @@ nav {
 }
 
 .card-header h3 {
-  color: var(--d-text);
+  color: var(--text);
   font-family: var(--font-sans);
   font-weight: 650;
   letter-spacing: -0.01em;
@@ -845,7 +890,7 @@ nav {
 .project-card:hover .card-header h3,
 .writing-card-link:hover .card-header h3,
 .writing-card-link:focus-visible .card-header h3 {
-  color: var(--coral);
+  color: var(--coral-text);
 }
 
 /* CSS carousel enhancements */
@@ -869,14 +914,14 @@ nav {
     width: 8px;
     height: 8px;
     border-radius: 999px;
-    background: rgba(240, 238, 248, 0.22);
-    background: color-mix(in srgb, var(--d-text) 22%, transparent);
+    background: rgba(128, 131, 150, 0.35);
+    background: color-mix(in srgb, var(--text) 25%, transparent);
     transition: background-color 0.2s, width 0.2s;
     cursor: pointer;
   }
   .project-card::scroll-marker:hover,
   .writing-card::scroll-marker:hover {
-    background: var(--d-muted);
+    background: var(--muted);
   }
   .project-card::scroll-marker:focus-visible,
   .writing-card::scroll-marker:focus-visible {
@@ -905,12 +950,12 @@ nav {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    border: 1px solid var(--d-border);
+    border: 1px solid var(--border);
     background: rgba(13, 2, 33, 0.65);
-    background: color-mix(in srgb, var(--ink) 70%, transparent);
+    background: color-mix(in srgb, var(--nav-bg) 70%, transparent);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
-    color: var(--d-text);
+    color: var(--text);
     font-size: 1.3rem;
     line-height: 1;
     display: grid;
@@ -976,13 +1021,10 @@ nav {
 /* ── Projects ── */
 .project-section {
   text-align: left;
-  color: var(--d-text);
+  color: var(--text);
   width: 100%;
-  background: linear-gradient(180deg, var(--bg) 0%, var(--d-bg) 11%, var(--d-bg) 100%);
-}
-.project-section .header-container,
-.writing-section .header-container {
-  color: var(--d-text);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--section-bg) 11%, var(--section-bg) 100%);
+  transition: color 0.3s;
 }
 .project-section .project-card {
   min-height: 500px;
@@ -1010,34 +1052,34 @@ nav {
   width: 100%;
   height: auto;
   border-radius: 8px;
-  border: 1px solid var(--d-border);
+  border: 1px solid var(--border);
 }
 .project-section .project-description {
   font-size: 0.88rem;
   line-height: 1.7;
   margin: 1.25rem 0;
   flex-grow: 1;
-  color: var(--d-muted);
+  color: var(--muted);
 }
 .project-section .project-links {
   font-family: var(--font-mono);
 }
 .project-section .project-links a {
   font-family: var(--font-mono);
-  color: var(--coral);
+  color: var(--coral-text);
   font-size: 0.8rem;
   text-decoration: underline;
   text-decoration-color: rgba(254, 95, 85, 0.45);
-  text-decoration-color: color-mix(in srgb, var(--coral) 45%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--coral-text) 45%, transparent);
   text-underline-offset: 4px;
   margin-right: 1.5rem;
   transition: text-decoration-color 0.2s;
 }
 .project-section .project-links a:visited {
-  color: var(--coral);
+  color: var(--coral-text);
 }
 .project-section .project-links a:hover {
-  text-decoration-color: var(--coral);
+  text-decoration-color: var(--coral-text);
 }
 .project-section .project-links a:focus-visible {
   outline: 2px solid var(--coral);
@@ -1056,29 +1098,30 @@ nav {
   font-family: var(--font-mono);
   font-weight: 400;
   font-size: 0.66rem;
-  color: var(--d-muted);
+  color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  border: 1px solid var(--d-border);
+  border: 1px solid var(--border);
   border-radius: 999px;
   padding: 0.28rem 0.7rem;
   background: rgba(34, 28, 61, 0.55);
-  background: color-mix(in srgb, var(--d-surface-2) 60%, transparent);
+  background: color-mix(in srgb, var(--chip-bg) 60%, transparent);
   margin-right: 0.3rem;
   transition: color 0.2s, border-color 0.2s;
 }
 .project-section .project-tags span:hover {
-  color: var(--coral);
+  color: var(--coral-text);
   border-color: rgba(254, 95, 85, 0.55);
-  border-color: color-mix(in srgb, var(--coral) 55%, transparent);
+  border-color: color-mix(in srgb, var(--coral-text) 55%, transparent);
 }
 
 /* ── Writing rail ── */
 .writing-section {
   text-align: left;
-  color: var(--d-text);
+  color: var(--text);
   width: 100%;
-  background: linear-gradient(180deg, var(--d-bg) 0%, var(--indigo-deep) 100%);
+  background: linear-gradient(180deg, var(--section-bg) 0%, var(--section-deep) 100%);
+  transition: color 0.3s;
 }
 .writing-section .writing-card {
   min-height: 240px;
@@ -1111,18 +1154,17 @@ nav {
   gap: 0.75rem;
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--d-muted);
+  color: var(--muted);
   margin-bottom: 0.85rem;
   flex-wrap: wrap;
 }
 .writing-section .writing-card-series {
-  color: #97a9dd;
-  color: oklch(76% 0.08 268);
+  color: var(--accent);
 }
 .writing-section .writing-card-excerpt {
   font-size: 0.85rem;
   line-height: 1.7;
-  color: var(--d-muted);
+  color: var(--muted);
   margin: 0;
   flex-grow: 1;
 }
@@ -1133,25 +1175,27 @@ nav {
 .writing-section .writing-view-all a {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  color: var(--d-text);
+  color: var(--text);
   text-decoration: underline;
   text-decoration-color: rgba(254, 95, 85, 0.5);
+  text-decoration-color: color-mix(in srgb, var(--coral-text) 50%, transparent);
   text-underline-offset: 5px;
   transition: color 0.2s;
 }
 .writing-section .writing-view-all a:visited {
-  color: var(--d-text);
+  color: var(--text);
 }
 .writing-section .writing-view-all a:hover,
 .writing-section .writing-view-all a:focus-visible {
-  color: var(--coral);
+  color: var(--coral-text);
 }
 
 /* ── Contact ── */
 .contact-section {
   padding-bottom: 10vh;
-  background-color: var(--indigo-deep);
-  color: var(--d-text);
+  background-color: var(--section-deep);
+  color: var(--text);
+  transition: background-color 0.3s, color 0.3s;
 }
 .contact-section p {
   margin: 0 auto 1.25rem;
@@ -1159,17 +1203,17 @@ nav {
   padding: 0 1.25rem;
 }
 .contact-section p a {
-  color: var(--coral);
+  color: var(--coral-text);
   text-decoration: underline;
   text-decoration-color: rgba(254, 95, 85, 0.45);
-  text-decoration-color: color-mix(in srgb, var(--coral) 45%, transparent);
+  text-decoration-color: color-mix(in srgb, var(--coral-text) 45%, transparent);
   text-underline-offset: 4px;
 }
 .contact-section p a:visited {
-  color: var(--coral);
+  color: var(--coral-text);
 }
 .contact-section p a:hover {
-  text-decoration-color: var(--coral);
+  text-decoration-color: var(--coral-text);
 }
 .contact-section .angle-container {
   height: 8vh;
@@ -1200,10 +1244,10 @@ nav {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 1px solid var(--d-border);
-  color: var(--d-text);
+  border: 1px solid var(--border);
+  color: var(--text);
   background: rgba(240, 238, 248, 0.04);
-  background: color-mix(in srgb, var(--d-text) 5%, transparent);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
   transition: translate 0.2s, border-color 0.2s, color 0.2s;
 }
 .icon-bar a svg {
@@ -1212,8 +1256,8 @@ nav {
 }
 .icon-bar a:hover {
   translate: 0 -3px;
-  border-color: var(--coral);
-  color: var(--coral);
+  border-color: var(--coral-text);
+  color: var(--coral-text);
 }
 .icon-bar a:focus-visible {
   outline: 2px solid var(--coral);
@@ -1224,9 +1268,10 @@ nav {
 footer {
   display: flex;
   justify-content: center;
-  background-color: var(--ink);
-  color: var(--d-muted);
-  border-top: 1px solid var(--d-border);
+  background-color: var(--footer-bg);
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  transition: background-color 0.3s, color 0.3s;
 }
 footer p {
   font-family: var(--font-mono);
@@ -1262,7 +1307,7 @@ footer p {
   background: color-mix(in srgb, var(--coral) 88%, #000);
 }
 .fab-top:focus-visible {
-  outline: 2px solid var(--d-text);
+  outline: 2px solid var(--text);
   outline-offset: 2px;
 }
 
