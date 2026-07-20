@@ -638,6 +638,11 @@ nav {
   font-weight: 400;
   color: var(--coral);
   letter-spacing: 0.4em;
+  /* Center the number over the heading text and offset the trailing
+     gap that letter-spacing adds after the last digit, so it stays
+     centred regardless of heading width. */
+  text-align: center;
+  text-indent: 0.4em;
   margin-bottom: 0.7rem;
 }
 .header-container h2::after {
