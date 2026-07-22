@@ -182,13 +182,98 @@
    footer) now follow the theme via the tokens above; in dark mode
    those tokens resolve to the original fixed dark palette. */
 
-/* ── Cross-document view transitions ── */
+/* ── Cross-document view transitions ──────────────────────────────
+   Opt in with the standardized @view-transition at-rule. This is the
+   modern replacement for the earlier, non-standard
+   <meta name="view-transition"> opt-in: every same-origin page just
+   needs this rule (all pages load this stylesheet) for the navigation
+   between them to be captured and animated. */
 @view-transition {
   navigation: auto;
 }
+
+/* Respect reduced-motion: skip the animation entirely (instant nav). */
 @media (prefers-reduced-motion: reduce) {
   @view-transition {
     navigation: none;
+  }
+}
+
+/* Root cross-fade — a touch quicker than the UA default, eased. This is
+   the fallback for any navigation the directional types below don't
+   cover (e.g. same-depth links). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.32s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Persistent chrome: the sticky nav (view-transition-name: site-nav, set
+   on the <nav> further down) is lifted into its own group, so it stays
+   anchored and cross-fades its contents instead of sliding with the page. */
+::view-transition-group(site-nav) {
+  animation-duration: 0.32s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Shared "hero title" morph. Each writing title carries a unique
+   view-transition-name (so a card title on one page pairs with the
+   matching <h1> on the next) *and* this shared view-transition-class,
+   which lets us tune every one of those morphs from a single rule
+   instead of repeating the selector for each name. */
+.writing-card h3,
+.article-title,
+.article-header h1 {
+  view-transition-class: vt-title;
+}
+
+::view-transition-group(.vt-title) {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Directional page slides, driven by the forwards/backwards transition
+   types that view-transitions.js assigns per navigation and read here via
+   the :active-view-transition-type() pseudo-class. Deliberately subtle —
+   a short translate plus fade, not a full-width swipe — and gated behind
+   no-preference so reduced-motion users never see them. */
+@media (prefers-reduced-motion: no-preference) {
+  :root:active-view-transition-type(forwards)::view-transition-old(root) {
+    animation: vt-exit-left 0.32s both cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  :root:active-view-transition-type(forwards)::view-transition-new(root) {
+    animation: vt-enter-right 0.36s both cubic-bezier(0.2, 0, 0.2, 1);
+  }
+  :root:active-view-transition-type(backwards)::view-transition-old(root) {
+    animation: vt-exit-right 0.32s both cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  :root:active-view-transition-type(backwards)::view-transition-new(root) {
+    animation: vt-enter-left 0.36s both cubic-bezier(0.2, 0, 0.2, 1);
+  }
+}
+
+@keyframes vt-exit-left {
+  to {
+    opacity: 0;
+    transform: translateX(-2.5rem);
+  }
+}
+@keyframes vt-enter-right {
+  from {
+    opacity: 0;
+    transform: translateX(2.5rem);
+  }
+}
+@keyframes vt-exit-right {
+  to {
+    opacity: 0;
+    transform: translateX(2.5rem);
+  }
+}
+@keyframes vt-enter-left {
+  from {
+    opacity: 0;
+    transform: translateX(-2.5rem);
   }
 }
 
