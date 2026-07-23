@@ -89,8 +89,9 @@ document.querySelectorAll(".project-list, .writing-card-list").forEach((list) =>
 // ── WebGL2 shader hero ────────────────────────────────────────
 // Layered simplex/FBM flow field in the brand palette, with eased
 // pointer parallax. Pauses offscreen and on tab blur; renders one
-// static frame under prefers-reduced-motion; CSS gradient fallback
-// stays in place when WebGL2 is unavailable.
+// static frame under prefers-reduced-motion. The animated CSS gradient
+// fallback stays in place until the first frame paints, and returns if
+// WebGL2 is unavailable, the shader fails, or the GPU context is lost.
 (() => {
   const hero = document.getElementById("top");
   const canvas = hero && hero.querySelector(".hero-canvas");
@@ -220,7 +221,34 @@ document.querySelectorAll(".project-list, .writing-card-list").forEach((list) =>
   let lightTarget = themeLight();
   let lightNow = lightTarget;
 
-  hero.classList.add("webgl");
+  // Reveal the shader canvas only once it has painted its first real frame,
+  // so the animated CSS gradient fallback stays visible until then — no black
+  // flash while the shader spins up ("hasn't loaded yet").
+  let revealed = false;
+  const reveal = () => {
+    if (revealed || contextLost) return;
+    revealed = true;
+    hero.classList.add("webgl");
+  };
+
+  // If the GPU context is lost (backgrounding, driver reset, too many
+  // contexts), fall back to the CSS gradient rather than leaving a frozen or
+  // blank canvas. Decorative background — no need to rebuild the context.
+  let rafId = 0;
+  let contextLost = false;
+  canvas.addEventListener(
+    "webglcontextlost",
+    (e) => {
+      e.preventDefault();
+      contextLost = true;
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = 0;
+      }
+      hero.classList.remove("webgl");
+    },
+    false
+  );
 
   const dpr = () => Math.min(window.devicePixelRatio || 1, 2);
   const resize = () => {
@@ -259,6 +287,7 @@ document.querySelectorAll(".project-list, .writing-card-list").forEach((list) =>
   if (reduceMotion) {
     // Single static, atmospheric frame — no loop, no pointer tracking.
     draw(37.0);
+    reveal();
     window.addEventListener("resize", () => {
       resize();
       draw(37.0);
@@ -278,14 +307,15 @@ document.querySelectorAll(".project-list, .writing-card-list").forEach((list) =>
     targetY = 1 - ((e.clientY - rect.top) / rect.height) * 2;
   });
 
-  let rafId = 0;
   let visible = true;
   const loop = (now) => {
+    if (contextLost) return;
     draw(now / 1000);
+    reveal();
     rafId = requestAnimationFrame(loop);
   };
   const setRunning = (run) => {
-    if (run && !rafId) {
+    if (run && !rafId && !contextLost) {
       rafId = requestAnimationFrame(loop);
     } else if (!run && rafId) {
       cancelAnimationFrame(rafId);
