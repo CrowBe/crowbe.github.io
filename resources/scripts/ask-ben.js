@@ -5,6 +5,8 @@
   let availability;
   let session = null;
   let isBusy = false;
+  let modelReady = false;
+  let downloadAbortController = null;
 
   // Facts come from resources/scripts/site-tools.js, the same module that
   // exposes them as WebMCP tools via document.modelContext for external agents.
@@ -29,7 +31,7 @@
       position: fixed;
       right: 2rem;
       bottom: 2rem;
-      z-index: 30;
+      z-index: 60;
       font-family: "Fira Mono", monospace;
     }
 
@@ -84,7 +86,7 @@
       position: fixed;
       right: 2rem;
       bottom: 6.5rem;
-      z-index: 29;
+      z-index: 59;
       width: min(390px, calc(100vw - 2rem));
       height: min(560px, calc(100dvh - 9rem));
       display: grid;
@@ -148,6 +150,20 @@
 
     .ask-ben-progress { width: calc(100% - 2rem); height: 5px; margin: 0.3rem 1rem 0.65rem; accent-color: var(--contrast); }
     .ask-ben-progress[hidden] { display: none; }
+
+    .ask-ben-model-actions { display: flex; gap: 0.5rem; padding: 0 1rem 0.7rem; }
+    .ask-ben-download, .ask-ben-cancel, .ask-ben-remove {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.4rem 0.7rem;
+      background: var(--bg);
+      color: var(--text);
+      font: 700 0.7rem/1 "Fira Mono", monospace;
+      cursor: pointer;
+    }
+    .ask-ben-download { border-color: var(--contrast); color: var(--contrast); }
+    .ask-ben-download:hover, .ask-ben-cancel:hover, .ask-ben-remove:hover { background: var(--tint); }
+    .ask-ben-download[hidden], .ask-ben-cancel[hidden], .ask-ben-remove[hidden] { display: none; }
 
     .ask-ben-form { display: flex; gap: 0.5rem; padding: 0.8rem; border-top: 1px solid var(--border); }
     .ask-ben-input {
@@ -217,6 +233,11 @@
       <div>
         <p class="ask-ben-status" role="status"></p>
         <progress class="ask-ben-progress" max="100" value="0" aria-label="AI model download progress" hidden></progress>
+        <div class="ask-ben-model-actions">
+          <button class="ask-ben-download" type="button" hidden>Download model</button>
+          <button class="ask-ben-cancel" type="button" hidden>Cancel download</button>
+          <button class="ask-ben-remove" type="button" hidden>Remove model</button>
+        </div>
       </div>
       <form class="ask-ben-form">
         <textarea class="ask-ben-input" rows="2" maxlength="500" placeholder="Ask about Ben…" aria-label="Question about Ben" required></textarea>
@@ -237,6 +258,9 @@
       messages: panel.querySelector(".ask-ben-messages"),
       status: panel.querySelector(".ask-ben-status"),
       progress: panel.querySelector(".ask-ben-progress"),
+      download: panel.querySelector(".ask-ben-download"),
+      cancel: panel.querySelector(".ask-ben-cancel"),
+      remove: panel.querySelector(".ask-ben-remove"),
       form: panel.querySelector(".ask-ben-form"),
       input: panel.querySelector(".ask-ben-input"),
       submit: panel.querySelector(".ask-ben-submit"),
@@ -252,20 +276,41 @@
 
   const setBusy = (ui, busy) => {
     isBusy = busy;
-    ui.input.disabled = busy;
-    ui.submit.disabled = busy;
+    ui.input.disabled = busy || !modelReady;
+    ui.submit.disabled = busy || !modelReady;
   };
 
-  const setUnavailable = (ui) => {
-    ui.status.textContent = "AI unavailable";
-    ui.progress.hidden = true;
+  // "ready" enables chat; "needs-download"/"downloading" keep it disabled and
+  // swap which model-lifecycle button is showing.
+  const setModelState = (ui, state) => {
+    modelReady = state === "ready";
+    ui.download.hidden = state !== "needs-download";
+    ui.cancel.hidden = state !== "downloading";
+    ui.remove.hidden = state !== "ready";
+    ui.progress.hidden = state !== "downloading";
+    if (state === "needs-download") {
+      ui.status.textContent = "Download the on-device AI model to ask about Ben.";
+    } else if (state === "ready") {
+      ui.status.textContent = "";
+    }
     setBusy(ui, false);
   };
 
-  const createSession = async (ui) => {
+  const setUnavailable = (ui) => {
+    modelReady = false;
+    ui.status.textContent = "AI unavailable";
+    ui.progress.hidden = true;
+    ui.download.hidden = true;
+    ui.cancel.hidden = true;
+    ui.remove.hidden = true;
+    setBusy(ui, false);
+  };
+
+  const createSession = async (ui, { signal } = {}) => {
     const options = {
       initialPrompts: [{ role: "system", content: systemPrompt }],
     };
+    if (signal) options.signal = signal;
 
     if (availability === "downloadable" || availability === "downloading") {
       ui.status.textContent = "Downloading on-device AI…";
@@ -286,6 +331,35 @@
     ui.progress.hidden = true;
     ui.status.textContent = "";
     return session;
+  };
+
+  const downloadModel = async (ui) => {
+    downloadAbortController = new AbortController();
+    setModelState(ui, "downloading");
+    try {
+      await createSession(ui, { signal: downloadAbortController.signal });
+      setModelState(ui, "ready");
+    } catch (error) {
+      if (error?.name === "AbortError") {
+        setModelState(ui, "needs-download");
+      } else {
+        console.warn("Ask about Ben model download failed:", error);
+        setUnavailable(ui);
+      }
+    } finally {
+      downloadAbortController = null;
+    }
+  };
+
+  const cancelDownload = () => downloadAbortController?.abort();
+
+  // There's no page-level API to actually delete the cached weights — this
+  // just drops our session and puts the UI back into a pre-download state.
+  const removeModel = (ui) => {
+    session?.destroy();
+    session = null;
+    availability = "downloadable";
+    setModelState(ui, "needs-download");
   };
 
   const isQuotaExceeded = (error) => error && error.name === "QuotaExceededError";
@@ -331,6 +405,10 @@
       if (event.key === "Escape" && !ui.panel.hidden) closePanel();
     });
 
+    ui.download.addEventListener("click", () => downloadModel(ui));
+    ui.cancel.addEventListener("click", cancelDownload);
+    ui.remove.addEventListener("click", () => removeModel(ui));
+
     ui.input.addEventListener("keydown", (event) => {
       if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault();
@@ -341,7 +419,7 @@
     ui.form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const prompt = ui.input.value.trim();
-      if (!prompt || isBusy) return;
+      if (!prompt || isBusy || !modelReady) return;
 
       appendMessage(ui, "user", prompt);
       ui.input.value = "";
@@ -372,6 +450,7 @@
       const ui = mount();
       appendMessage(ui, "assistant", "Hi — ask me about Ben’s skills, experience, or projects.");
       wireEvents(ui);
+      setModelState(ui, availability === "available" ? "ready" : "needs-download");
     } catch (error) {
       console.warn("Ask about Ben feature detection failed:", error);
     }
