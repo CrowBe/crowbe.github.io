@@ -885,7 +885,7 @@ nav {
 .writing-card-list {
   display: flex;
   gap: clamp(1rem, 2.5vw, 1.75rem);
-  padding: 2.75rem var(--rail-pad) 1.5rem;
+  padding: 1.9rem var(--rail-pad) 1.5rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: var(--rail-pad);
@@ -1129,13 +1129,12 @@ nav {
   transition: color 0.3s;
 }
 .project-section .project-card {
-  min-height: 500px;
-  flex: 0 0 min(400px, 84vw);
-  padding: 1.5rem;
+  flex: 0 0 min(360px, 84vw);
+  padding: 1.35rem;
 }
 .project-section .card-header h3 {
   font-size: var(--step-1);
-  margin: 0.25rem 0 1.25rem;
+  margin: 0.15rem 0 0.9rem;
 }
 .project-section .project-info-container {
   max-width: 100%;
@@ -1144,22 +1143,33 @@ nav {
   display: flex;
   flex-direction: column;
 }
+/* Screenshots vary in shape, so every card gets an identically sized
+   frame and the image is fitted inside it rather than cropped. */
 .project-section .project-image-container {
   display: flex;
   margin-bottom: auto;
+  align-items: center;
   justify-content: center;
   width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0.55rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(34, 28, 61, 0.4);
+  background: color-mix(in srgb, var(--chip-bg) 45%, transparent);
+  overflow: hidden;
 }
 .project-section .project-image-container img {
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
   height: auto;
-  border-radius: 8px;
-  border: 1px solid var(--border);
+  border-radius: 6px;
 }
 .project-section .project-description {
-  font-size: 0.88rem;
-  line-height: 1.7;
-  margin: 1.25rem 0;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  margin: 0.9rem 0 0;
   flex-grow: 1;
   color: var(--muted);
 }
@@ -1193,8 +1203,10 @@ nav {
 }
 .project-section .project-tags {
   margin: 0;
-  padding: 0.5rem 0 1.25rem;
-  line-height: 2.4;
+  padding: 0.75rem 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
 }
 .project-section .project-tags span {
   font-family: var(--font-mono);
@@ -1208,7 +1220,7 @@ nav {
   padding: 0.28rem 0.7rem;
   background: rgba(34, 28, 61, 0.55);
   background: color-mix(in srgb, var(--chip-bg) 60%, transparent);
-  margin-right: 0.3rem;
+  white-space: nowrap;
   transition: color 0.2s, border-color 0.2s;
 }
 .project-section .project-tags span:hover {
@@ -1619,7 +1631,7 @@ html.no-scroll-timeline .fab-top.visible {
     flex: 1;
   }
   .project-section .project-card {
-    flex: 0 0 420px;
+    flex: 0 0 380px;
   }
   .writing-section .writing-card {
     flex: 0 0 400px;
