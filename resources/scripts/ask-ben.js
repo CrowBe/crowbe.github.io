@@ -12,6 +12,27 @@
   // exposes them as WebMCP tools via document.modelContext for external agents.
   const ABOUT_BEN = window.BenSiteTools.ABOUT_BEN;
 
+  // ── Page follows the conversation ───────────────────────────
+  // The reply is scanned for things that exist on the page — a project
+  // card, an article, a technology — and each one is scrolled to and
+  // highlighted the first time it comes up, so the answer and the page
+  // stay in step. Matching is done here rather than asked of the model:
+  // the on-device model is small, and a highlight that fires on the wrong
+  // word is worse than one that never fires.
+  const MAX_HIGHLIGHTS_PER_REPLY = 3;
+  let highlighted = new Set();
+
+  const focusMentions = (text, reason) => {
+    const focus = window.BenSiteFocus;
+    if (!focus || !text) return;
+    for (const target of focus.mentions(text)) {
+      if (highlighted.size >= MAX_HIGHLIGHTS_PER_REPLY) return;
+      if (highlighted.has(target.id)) continue;
+      highlighted.add(target.id);
+      focus.focus(target, { reason });
+    }
+  };
+
   const systemPrompt = [
     "You are the friendly \"Ask about Ben\" assistant on Ben Crow's portfolio website.",
     "Answer questions about Ben using only the resume facts below. Do not infer or invent details.",
@@ -373,6 +394,9 @@
       for await (const chunk of stream) {
         reply.textContent += chunk;
         ui.messages.scrollTop = ui.messages.scrollHeight;
+        // Scan the answer so far, not just the chunk — a name can be
+        // split across chunk boundaries.
+        focusMentions(reply.textContent, "chat-reply");
       }
     } catch (error) {
       reply.remove();
@@ -425,6 +449,13 @@
       ui.input.value = "";
       ui.status.textContent = "Thinking…";
       setBusy(ui, true);
+
+      // Each question gets its own highlight budget, and the question
+      // itself moves the page before the model has said anything — asking
+      // about ScrolLess should put ScrolLess on screen right away.
+      highlighted = new Set();
+      window.BenSiteFocus?.cancel();
+      focusMentions(prompt, "chat-question");
 
       try {
         await streamReply(ui, prompt);
