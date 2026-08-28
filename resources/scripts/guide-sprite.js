@@ -15,6 +15,10 @@
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const MAX_SPARKS = 96;          // hard cap; sizes the GPU buffer
+  // A soft glow carries no fine detail, so it never needs full device
+  // resolution — capping the backing store keeps the per-frame raster and
+  // upload cheap on exactly the high-DPR phones where it would cost most.
+  const MAX_SCALE = 1.5;
   const TRAIL = 26;               // trailing spark count
   const TRAVEL_MS = 1050;         // launch → arrival
   const ORBIT_MS = 1500;          // circling the target
@@ -151,9 +155,12 @@ fn fs(in: VSOut) -> @location(0) vec4f {
       get lost() {
         return lost;
       },
-      draw(sparks, width, height, additive = true) {
+      destroy() {
+        if (!lost) device.destroy();
+      },
+      draw(sparks, sparkCount, width, height, additive = true) {
         if (lost) return;
-        const count = Math.min(sparks.length, MAX_SPARKS);
+        const count = Math.min(sparkCount, MAX_SPARKS);
         for (let i = 0; i < count; i++) {
           const spark = sparks[i];
           const at = i * FLOATS_PER_SPARK;
@@ -200,10 +207,15 @@ fn fs(in: VSOut) -> @location(0) vec4f {
     return {
       kind: "canvas2d",
       lost: false,
-      draw(sparks, width, height, additive = true) {
+      destroy() {},
+      draw(sparks, sparkCount, width, height, additive = true) {
+        // Clearing only the painted region was measured and made no
+        // difference: the trail spans most of the flight arc, so the union
+        // of the sparks is close to the full surface anyway.
         ctx.clearRect(0, 0, width, height);
         ctx.globalCompositeOperation = additive ? "lighter" : "source-over";
-        for (const spark of sparks) {
+        for (let i = 0; i < sparkCount; i++) {
+          const spark = sparks[i];
           const gradient = ctx.createRadialGradient(spark.x, spark.y, 0, spark.x, spark.y, spark.size);
           gradient.addColorStop(0, rgb(spark.tint, spark.alpha));
           gradient.addColorStop(0.35, rgb(spark.tint, spark.alpha * 0.45));
@@ -231,12 +243,15 @@ fn fs(in: VSOut) -> @location(0) vec4f {
 
   let renderer = null;
   let rendererPromise = null;
+  let parked = false;
+  let parkTimer = 0;
   let width = 0;
   let height = 0;
   let scale = 1;
 
   const resize = () => {
-    scale = Math.min(window.devicePixelRatio || 1, 2);
+    if (parked) return;
+    scale = Math.min(window.devicePixelRatio || 1, MAX_SCALE);
     const w = Math.round(window.innerWidth * scale);
     const h = Math.round(window.innerHeight * scale);
     if (canvas.width === w && canvas.height === h) return;
@@ -244,6 +259,31 @@ fn fs(in: VSOut) -> @location(0) vec4f {
     canvas.height = h;
     width = w;
     height = h;
+  };
+
+  // Between flights the canvas is a full-viewport layer the compositor keeps
+  // paying for — ~20MB of backing store at high DPR — for an animation that
+  // runs a few seconds at a time. Parking drops the pixels and takes the
+  // element out of the layer tree until the next launch. Delayed so the
+  // opacity transition finishes first.
+  const park = () => {
+    parkTimer = 0;
+    if (flight) return;
+    parked = true;
+    canvas.classList.add("is-parked");
+    canvas.width = 1;
+    canvas.height = 1;
+    width = 1;
+    height = 1;
+  };
+
+  const unpark = () => {
+    if (parkTimer) {
+      clearTimeout(parkTimer);
+      parkTimer = 0;
+    }
+    parked = false;
+    canvas.classList.remove("is-parked");
   };
 
   // Where the firefly comes from: out of the chat launcher if it's on the
@@ -259,9 +299,10 @@ fn fs(in: VSOut) -> @location(0) vec4f {
   };
 
   // Aim at the element's heading where it has one — the eye wants the
-  // title, not the centre of a tall card.
-  const targetPoint = (element) => {
-    const anchor = element.querySelector(".card-header h3, h4, h2") || element;
+  // title, not the centre of a tall card. Resolved once per launch.
+  const anchorFor = (element) => element.querySelector(".card-header h3, h4, h2") || element;
+
+  const targetPoint = (anchor) => {
     const rect = anchor.getBoundingClientRect();
     if (!rect.width && !rect.height) return null;
     const x = Math.min(Math.max(rect.left + rect.width * 0.5, 40), window.innerWidth - 40);
@@ -271,18 +312,54 @@ fn fs(in: VSOut) -> @location(0) vec4f {
 
   let flight = null;
   let rafId = 0;
-  const trail = [];
+
+  // Everything below is preallocated and reused. At 60fps a fresh object per
+  // spark per frame would be a few thousand short-lived allocations a second,
+  // and GC pauses are exactly what a 3-second animation cannot absorb.
+  const trail = Array.from({ length: TRAIL }, () => ({ x: 0, y: 0 }));
+  let trailHead = 0;
+  let trailLength = 0;
   const burst = [];
-  const sparks = [];
+  const sparks = Array.from({ length: MAX_SPARKS }, () => ({ x: 0, y: 0, size: 0, alpha: 0, tint: null }));
+  let sparkCount = 0;
+
+  const emit = (x, y, size, alpha, tint) => {
+    if (sparkCount >= MAX_SPARKS) return;
+    const spark = sparks[sparkCount++];
+    spark.x = x;
+    spark.y = y;
+    spark.size = size;
+    spark.alpha = alpha;
+    spark.tint = tint;
+  };
+
+  const pushTrail = (x, y) => {
+    trailHead = (trailHead + TRAIL - 1) % TRAIL;
+    trail[trailHead].x = x;
+    trail[trailHead].y = y;
+    if (trailLength < TRAIL) trailLength++;
+  };
+
+  // i = 0 is the newest point.
+  const trailAt = (i) => trail[(trailHead + i) % TRAIL];
+
+  // Re-reading the target's rect forces a layout flush — measured at
+  // 0.5-0.7ms a frame while the page is mid-scroll. The rect only moves when
+  // something scrolls, so read it then rather than every frame. Capture phase
+  // catches the horizontal card rail's own scrolling, not just the page's.
+  let aimDirty = true;
+  document.addEventListener("scroll", () => { aimDirty = true; }, { capture: true, passive: true });
 
   const stop = () => {
     if (rafId) cancelAnimationFrame(rafId);
     rafId = 0;
     flight = null;
-    trail.length = 0;
+    trailLength = 0;
     burst.length = 0;
+    sparkCount = 0;
     canvas.classList.remove("is-flying");
-    if (renderer) renderer.draw([], width, height);
+    if (renderer && !parked) renderer.draw(sparks, 0, width, height);
+    if (!parkTimer) parkTimer = setTimeout(park, 500);
   };
 
   const step = (now) => {
@@ -296,10 +373,14 @@ fn fs(in: VSOut) -> @location(0) vec4f {
       return;
     }
 
-    // The page is usually still smooth-scrolling while the firefly flies,
-    // so re-read the target every frame and let the sprite chase it.
-    const aim = targetPoint(flight.element);
-    if (aim) flight.to = aim;
+    // The page is usually still smooth-scrolling while the firefly flies, so
+    // the sprite chases the target — but only on frames where something has
+    // actually scrolled (see aimDirty), not on every one.
+    if (aimDirty) {
+      const aim = targetPoint(flight.anchor);
+      if (aim) flight.to = aim;
+      aimDirty = false;
+    }
 
     let x;
     let y;
@@ -351,8 +432,7 @@ fn fs(in: VSOut) -> @location(0) vec4f {
       y = flight.to.y - t * 26 * scale;
     }
 
-    trail.unshift({ x, y });
-    if (trail.length > TRAIL) trail.length = TRAIL;
+    pushTrail(x, y);
 
     // Resolved per frame so toggling the theme mid-flight is picked up.
     const light = isLight();
@@ -362,19 +442,20 @@ fn fs(in: VSOut) -> @location(0) vec4f {
     const boost = light ? 1.45 : 1;
 
     // Rebuild the spark list each frame: head, trail, burst.
-    sparks.length = 0;
+    sparkCount = 0;
     const pulse = 0.82 + Math.sin(elapsed * 0.012) * 0.18;
-    sparks.push({ x, y, size: 18 * scale * pulse, alpha: Math.min(0.95 * boost, 1) * lead, tint: palette.core });
-    sparks.push({ x, y, size: 42 * scale * pulse, alpha: 0.36 * boost * lead, tint: palette.glow });
-    for (let i = 1; i < trail.length; i++) {
-      const decay = 1 - i / trail.length;
-      sparks.push({
-        x: trail[i].x,
-        y: trail[i].y,
-        size: (4 + 10 * decay) * scale,
-        alpha: 0.45 * boost * decay * decay * lead,
-        tint: i % 5 === 0 ? palette.accent : palette.glow,
-      });
+    emit(x, y, 18 * scale * pulse, Math.min(0.95 * boost, 1) * lead, palette.core);
+    emit(x, y, 42 * scale * pulse, 0.36 * boost * lead, palette.glow);
+    for (let i = 1; i < trailLength; i++) {
+      const decay = 1 - i / trailLength;
+      const point = trailAt(i);
+      emit(
+        point.x,
+        point.y,
+        (4 + 10 * decay) * scale,
+        0.45 * boost * decay * decay * lead,
+        i % 5 === 0 ? palette.accent : palette.glow
+      );
     }
     for (let i = burst.length - 1; i >= 0; i--) {
       const spark = burst[i];
@@ -383,29 +464,38 @@ fn fs(in: VSOut) -> @location(0) vec4f {
         burst.splice(i, 1);
         continue;
       }
-      sparks.push({
-        x: spark.x + spark.vx * (now - spark.born) * 0.06,
-        y: spark.y + spark.vy * (now - spark.born) * 0.06 + age * age * 40 * scale,
-        size: (3 + 5 * (1 - age)) * scale,
-        alpha: (1 - age) * 0.7 * boost,
-        tint: palette[spark.hue],
-      });
+      const life = now - spark.born;
+      emit(
+        spark.x + spark.vx * life * 0.06,
+        spark.y + spark.vy * life * 0.06 + age * age * 40 * scale,
+        (3 + 5 * (1 - age)) * scale,
+        (1 - age) * 0.7 * boost,
+        palette[spark.hue]
+      );
     }
-    if (sparks.length > MAX_SPARKS) sparks.length = MAX_SPARKS;
 
-    renderer.draw(sparks, width, height, !light);
+    renderer.draw(sparks, sparkCount, width, height, !light);
     rafId = requestAnimationFrame(step);
   };
 
   const launch = (element) => {
+    unpark();
     resize();
-    const to = targetPoint(element);
+    const anchor = anchorFor(element);
+    const to = targetPoint(anchor);
     if (!to) return;
-    const from = flight && trail.length ? trail[0] : launchPoint();
-    trail.length = 0;
+    // Hand off from wherever the last flight left the firefly, so a
+    // multi-hop answer reads as one continuous path. Copied, because the
+    // trail buffer is about to be reused.
+    const previous = flight && trailLength ? trailAt(0) : null;
+    const from = previous ? { x: previous.x, y: previous.y } : launchPoint();
+    trailLength = 0;
     burst.length = 0;
+    sparkCount = 0;
+    aimDirty = true;
     flight = {
       element,
+      anchor,
       from,
       to,
       // Alternate which way the arc bows so consecutive hops in one
@@ -479,4 +569,12 @@ fn fs(in: VSOut) -> @location(0) vec4f {
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) stop();
   });
+  window.addEventListener(
+    "pagehide",
+    () => {
+      stop();
+      renderer?.destroy();
+    },
+    { once: true }
+  );
 })();

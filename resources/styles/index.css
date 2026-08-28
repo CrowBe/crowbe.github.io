@@ -1752,6 +1752,11 @@ html.no-scroll-timeline .fab-top.visible {
 .guide-sprite-canvas.is-flying {
   opacity: 1;
 }
+/* Between flights the canvas leaves the layer tree entirely — guide-sprite.js
+   drops its backing store at the same time. */
+.guide-sprite-canvas.is-parked {
+  display: none;
+}
 @media (prefers-reduced-motion: reduce) {
   .guide-sprite-canvas {
     display: none;

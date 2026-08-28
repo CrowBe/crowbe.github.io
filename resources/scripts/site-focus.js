@@ -69,6 +69,9 @@
     target.phrases = Array.from(
       new Set((target.phrases || [target.label]).map(normalise).filter((p) => p.length >= 3))
     );
+    // mentions() runs on every streamed chunk of a chat reply, so the
+    // squashed forms are derived once here rather than per call.
+    target.squashedPhrases = target.phrases.filter((p) => p.length >= 6).map(squash);
     targets.push(target);
     byId.set(target.id, target);
     return target;
@@ -217,7 +220,7 @@
       }
       // "agent.branch" written as "agentbranch" survives normalisation
       // as one token, so check the squashed form too.
-      if (at === -1 && target.phrases.some((p) => p.length >= 6 && squashedHaystack.includes(squash(p)))) at = haystack.length;
+      if (at === -1 && target.squashedPhrases.some((p) => squashedHaystack.includes(p))) at = haystack.length;
       if (at !== -1) hits.push({ target, at });
     }
     hits.sort((a, b) => a.at - b.at || KIND_RANK[a.target.kind] - KIND_RANK[b.target.kind]);
