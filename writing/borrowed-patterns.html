@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Better agents need proven human patterns for work, judgement, and learning turned into explicit product loops.">
+    <meta name="description" content="As agents become more capable, some of the most important improvements come from turning proven human patterns for thinking and working into software.">
     <script>
       (function () {
         try {
@@ -25,7 +25,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/resources/icons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/resources/icons/apple-touch-icon.png">
     <link rel="manifest" href="/resources/icons/site.webmanifest">
-    <title>Better Agents Need Better Borrowed Patterns | Ben Crow</title>
+    <title>Agents Get Better by Becoming More Human | Ben Crow</title>
     <script type="speculationrules">
     {
           "prefetch": [
@@ -83,203 +83,142 @@
                 <span>May 2026</span>
                 <span class="article-series">Agentic AI — Evaluation — Knowledge Work</span>
             </div>
-            <h1 style="view-transition-name: vt-title-borrowed">Better Agents Need Better Borrowed Patterns</h1>
+            <h1 style="view-transition-name: vt-title-borrowed">Agents Get Better by Becoming More Human</h1>
             <p class="article-lede">
-                The useful shift in agentic AI is not just better models. It is turning proven human patterns for work,
-                judgement, and learning into explicit product loops.
+                As agents become more capable, some of the most important improvements aren't happening inside the model.
+                We're rediscovering structures humans developed to make unreliable individual intelligence useful: review,
+                delegation, clarification, evaluation, reflection, approval, institutional memory. Agent architecture is
+                increasingly the process of turning those patterns into software.
             </p>
         </header>
 
         <article class="article-body">
-            <h2>The Borrowing Has Moved Up the Stack</h2>
-
             <p>
-                The idea that AI borrows from human life is not new. Neural networks are the obvious historical example: a computing
-                architecture inspired, however loosely, by the way biological neurons connect and fire.
+                The more capable agents become, the more we're making them work like people.
             </p>
 
             <p>
-                What feels different about the current wave of agentic AI is where the borrowing is happening. We are no longer only
-                borrowing from biology at the level of model architecture. We are borrowing from the way humans organise work, pass
-                judgement, learn from mistakes, ask clarifying questions, and improve through feedback.
+                I don't mean making them sound human. I mean giving them some of the structures humans use to make our own
+                intelligence more reliable.
             </p>
 
             <p>
-                That matters because the strongest agent patterns are not random tricks. They are human habits that survived real work,
-                made explicit enough to become product and system design.
-            </p>
-
-            <figure class="article-figure">
-                <img src="/resources/images/article-5-borrowed-patterns.svg" alt="A diagram showing human work practices and human cognitive mechanisms flowing into agentic AI systems." />
-                <figcaption>Agentic systems are increasingly built from patterns borrowed from how humans work and how humans learn.</figcaption>
-            </figure>
-
-            <h2>The First Source: Human Work Practices</h2>
-
-            <p>
-                Software engineering is a useful place to start because it has spent decades learning how to make imperfect human work
-                safer without pretending humans are perfect. We use tests to make expectations executable. We use code review to add
-                another layer of judgement. We use CI to catch regressions before they reach production. We use approval gates because
-                some changes deserve friction.
+                None of this borrowing is new. Neural networks themselves were inspired by biological neurons, even if the
+                resemblance between the two is now fairly loose.
             </p>
 
             <p>
-                Agentic systems are beginning to inherit those habits. Anthropic's public writing on
-                <a href="https://www.anthropic.com/engineering/built-multi-agent-research-system" target="_blank" rel="noopener noreferrer">multi-agent research systems</a>
-                describes a lead agent coordinating specialist subagents. Its documentation on
-                <a href="https://docs.anthropic.com/en/docs/test-and-evaluate/eval-tool" target="_blank" rel="noopener noreferrer">evaluation workflows</a>
-                treats quality as something to test against examples and rubrics, not something to vibe-check after the fact. Their
-                <a href="https://www.anthropic.com/engineering/evals" target="_blank" rel="noopener noreferrer">engineering guide to evals</a>
-                makes the same practical point: evaluation needs to be designed, measured, and iterated like the rest of the system. That is not
-                alien to software engineering. It is recognisably the same family of ideas as review, testing, and acceptance criteria.
+                But we're increasingly borrowing from how humans think and work, not just from ideas about how the brain works.
             </p>
 
             <p>
-                Orchestration is another borrowed pattern. A lead agent that holds the goal, decomposes the work, delegates to
-                specialists, and integrates their findings is doing something recognisably human: holding the bigger picture so the people
-                — or agents — closer to the task can focus on their slice. Multi-agent architectures encode a coordination habit
-                humans have been refining for a long time.
+                Memory is a good example. Human memory isn't a complete transcript of everything we've experienced. We retain
+                some things, consolidate them over time, retrieve them when they're useful and forget others. Agent memory is
+                increasingly becoming a software process with many of the same concerns: what belongs in immediate context,
+                what should persist, and what should be retrieved later. Research into
+                <a href="https://www.nature.com/articles/nrn2762" target="_blank" rel="noopener noreferrer">sleep and memory consolidation</a>
+                has long described consolidation as part of biological memory, while experiments such as
+                <a href="https://arxiv.org/abs/2605.26099" target="_blank" rel="noopener noreferrer">Do Language Models Need Sleep?</a>
+                explore analogous processes in models.
             </p>
 
             <p>
-                The important move is the separation between doing and judging. A model can produce an answer, but another process can
-                decide whether that answer actually satisfied the task. The reviewer may be a human, an automated eval, another agent,
-                or some combination of all three. Either way, the system gets stronger when judgement is explicit instead of hidden inside
-                a single generation step.
+                The same thing is happening with patterns that aren't obviously cognitive. Review, delegation, clarification
+                and approval come from how humans organise work around each other's limitations.
             </p>
 
             <p>
-                This is where a lot of AI discourse is still too prompt-centric. Better prompts help, but mature software teams do not
-                rely on one perfect instruction to protect production. They build systems around the work: checks, reviewers, tests,
-                observability, rollback paths, and norms about what good looks like. Matt Pocock makes a similar point in
+                We're not just borrowing ideas about how intelligence might work. We're borrowing what humans have learned
+                about making intelligence useful.
+            </p>
+
+            <h2>Engineering as a Frontier</h2>
+
+            <p>
+                Software engineering is an interesting place to watch this happen. It's a form of knowledge work with unusually
+                mature ways of dealing with the fallibility of individual judgement. We don't rely on one engineer getting
+                everything right. We use code review, tests, CI, staging environments and approval gates.
+            </p>
+
+            <p>
+                As coding agents have become more capable, we've started giving them the same structures. They run tests and
+                linters before presenting their work. Subagents independently investigate parts of a problem and report back
+                to a coordinating agent. Human approval sits in front of consequential actions. Anthropic's
+                <a href="https://www.anthropic.com/engineering/built-multi-agent-research-system" target="_blank" rel="noopener noreferrer">multi-agent research system</a>
+                and its work on
+                <a href="https://www.anthropic.com/engineering/evals" target="_blank" rel="noopener noreferrer">evals</a>
+                are concrete examples.
+            </p>
+
+            <p>
+                Matt Pocock's
+                <a href="https://github.com/total-typescript/claude-code-setup/blob/main/skills/grill-me/SKILL.md" target="_blank" rel="noopener noreferrer"><code>Grill Me</code> skill</a>
+                is an especially simple one. Rather than handing an underspecified idea to an agent and hoping it fills in the
+                gaps correctly, the agent asks questions until it understands what you actually want.
+            </p>
+
+            <p>
+                The pattern isn't new. It's requirements gathering.
+            </p>
+
+            <p>
+                That fits Pocock's broader argument in
                 <a href="https://www.youtube.com/watch?v=v4F1gFy-hqg" target="_blank" rel="noopener noreferrer">Software Fundamentals Matter More Than Ever</a>:
-                those fundamentals still apply, even more so when agents are driving the work.
-            </p>
-
-            <h2>The Second Source: Human Cognition</h2>
-
-            <p>
-                The second source is less about professional practice and more about cognition itself. Some emerging agent patterns look
-                less like software process and more like attempts to copy how people learn.
+                agentic engineering still depends on the judgement and critical thinking that engineering always has.
             </p>
 
             <p>
-                Take the idea of agents reviewing their own traces after the fact, sometimes described with language like dreaming or
-                consolidation. For me, the interesting part is not the branding. It is the mechanism: experience is not only used in the
-                moment; it is replayed, compressed, and turned into better future behaviour. That is close to how sleep is often described
-                in memory research, including Diekelmann and Born's review of
-                <a href="https://www.nature.com/articles/nrn2762" target="_blank" rel="noopener noreferrer">sleep and memory consolidation</a>.
-                The pattern comes from cognitive science more than from software process, and the same metaphor is showing up inside
-                the models themselves. Lee et al.'s
-                <a href="https://arxiv.org/abs/2605.26099" target="_blank" rel="noopener noreferrer">Do Language Models Need Sleep? Offline Recurrence for Improved Online Inference</a>
-                gives a model a quiet phase when its short-term memory fills up: instead of taking in new input, it spends that time
-                compressing what it has just seen into its longer-term memory before resuming. It is a looser borrowing than agent-level
-                trace review, but recognisably the same trade — pause to digest now, work better later.
+                That's what I find interesting about a lot of the progress in coding agents. We're not only making the
+                underlying intelligence more capable. We're rediscovering the practices humans already use to make intelligent
+                work reliable.
+            </p>
+
+            <h2>Beyond Engineering</h2>
+
+            <p>
+                Coding is a particularly visible frontier for these ideas, but I don't think that's where they stop.
+                Increasingly, software is the medium through which agentic work gets done, not necessarily the output.
             </p>
 
             <p>
-                Dialogue is another example. Matt Pocock's
-                <a href="https://github.com/total-typescript/claude-code-setup/blob/main/skills/grill-me/SKILL.md" target="_blank" rel="noopener noreferrer">Grill Me skill</a>
-                for Claude Code is a small but sharp pattern: before the agent acts, it pushes back with clarifying questions until the
-                user's intent is clearer. That is not just prompt decoration. It is a way of importing a human collaboration habit into
-                the agent loop. People build shared understanding by explaining, questioning, restating, and correcting each other.
-                Agents need versions of that too.
+                I became interested in this while prototyping an AI-assisted tool for writing career goals and development plans.
             </p>
 
             <p>
-                The common thread is that cognition is being treated less like magic and more like a set of repeatable behaviours:
-                ask before acting, review what happened, compress experience, and carry the useful parts forward.
-            </p>
-
-            <h2>Two Sources, One Loop</h2>
-
-            <p>
-                These two sources work best together. Work practices make agentic systems safer: review, testing, CI, and approval gates
-                protect quality because they make judgement explicit. Cognitive mechanisms help the system improve: dialogue, reflection,
-                and consolidation turn feedback into better future behaviour.
+                Coding gives us unusually strong ways to evaluate agent output. We have tests, type systems, linters and code
+                review. Career development doesn't have those things. A career goal doesn't compile.
             </p>
 
             <p>
-                That combination matters because AI makes output cheap. It can generate ten drafts, five plans, or a dozen plausible next
-                actions without telling us which one is true, useful, safe, or worth committing to. The scarce skill becomes defining what
-                good means, making that definition inspectable, and building loops that improve the next attempt.
+                But the collaborative pattern still worked.
             </p>
 
             <p>
-                The core loop is simple: <strong>generate → evaluate → revise → approve → learn</strong>. Software engineering gives us
-                mature patterns for the evaluate and approve parts. Human cognition gives us patterns for the revise and learn parts.
-            </p>
-
-            <h2>What Comes Next</h2>
-
-            <p>
-                If this is the right frame, I think we should expect more agent designs to borrow from human collaboration. Two quick
-                candidates stand out.
+                The AI chat and workflow inputs sat side by side. As the conversation unfolded, the agent populated the form
+                fields for the user to review, challenge and revise in context. The user wasn't chatting beside the product and
+                then copying the result back into the workflow. The conversation and the career goal shared the same surface.
             </p>
 
             <p>
-                The first is social learning: agents improving by observing other agents' successes and failures, especially inside bounded
-                domains where the work can be replayed and evaluated. The second is the post-mortem: failed agent runs should leave behind
-                a useful diagnosis, not just an error state.
+                The pattern survived the change in domain.
             </p>
 
             <p>
-                The strongest near-term product pattern is the shared working surface before commit. Coding agents already show the
-                value of diff-first workflows: the agent proposes a change, the human reviews it, and persistence is gated by approval. That
-                pattern is partly about quality, but it is also about responsibility. The human can see what changed before it becomes real.
+                That makes me wonder how many of the patterns we're currently discovering through coding agents aren't really
+                coding patterns at all.
             </p>
 
             <p>
-                I do not think that pattern has been generalised widely enough across normal SaaS yet, but it should be. It points at one
-                of the hardest product questions in an agentic world: when an AI helps produce an output, how do we keep responsibility
-                shared, legible, and reviewable?
+                Humans didn't stop needing review, delegation, clarification or institutional memory as we became better at
+                our jobs. Those structures are part of how we make intelligence useful.
             </p>
 
             <p>
-                This is not just theoretical for me. In a recent prototype I demoed, the AI chat and workflow inputs sat side by side.
-                As the conversation unfolded, the agent naturally populated the form fields for the user to review, correct, and approve
-                in context. The user was not chatting beside the product, then copying the result back into the workflow. The conversation
-                and the business object shared the same surface.
-            </p>
-
-            <p>
-                That is a direct example of a coding-tool lesson moving into broader knowledge work. The agent can propose, draft, and
-                structure the output, but the user stays close enough to steer, inspect, correct, and approve it. The product is not only
-                generating content; it is designing the collaboration contract around that content.
-            </p>
-
-            <p>
-                That is the next step I expect to see more often: applying diff-and-approve thinking to business objects like development
-                plans, invoices, CRM updates, reports, support replies, policy drafts, or performance notes. The agent drafts into the
-                same surface the human uses, but the real commit still waits for review.
-            </p>
-
-            <p>
-                These examples are not exhaustive. The useful move is learning to recognise which human patterns have earned their place,
-                then asking what they become when built directly into a product or agent loop.
-            </p>
-
-            <h2>The Patterns Are the Point</h2>
-
-            <p>
-                None of this means agentic AI should imitate humans for its own sake. Some human patterns are inefficient, biased, political,
-                or irrelevant to machines. The useful move is selectivity, not anthropomorphism.
-            </p>
-
-            <p>
-                The best teams will ask which human practices survived because they solve real coordination, quality, and learning problems.
-                They will ask which cognitive mechanisms are worth approximating because they help the system get better over time. Then
-                they will turn the answers into explicit architecture: evals, rubrics, review surfaces, memory, post-mortems, and
-                approval gates.
-            </p>
-
-            <p>
-                That is the useful shift. Better agents will not only do more work. They will be surrounded by the same kinds
-                of feedback, judgement, and learning loops that make human work reliable.
+                As agents become more capable, perhaps the interesting question isn't only how we make them smarter.
             </p>
 
             <div class="article-closing">
-                The next wave of agentic AI will not only be built from better models. It will be built from better borrowed patterns.
+                What have humans already learned about making imperfect intelligence work?
             </div>
 
         </article>
