@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Headless agents make HR a work-architecture problem because they change how work is delegated, measured, governed, and trusted.">
+    <meta name="description" content="AI can increase individual capacity faster than organisations learn how to turn that capacity into useful work.">
     <script>
       (function () {
         try {
@@ -25,7 +25,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/resources/icons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/resources/icons/apple-touch-icon.png">
     <link rel="manifest" href="/resources/icons/site.webmanifest">
-    <title>Headless Agents Make HR a Work-Architecture Problem | Ben Crow</title>
+    <title>AI Is Getting Better Faster Than Organisations Are | Ben Crow</title>
     <script type="speculationrules">
     {
           "prefetch": [
@@ -81,12 +81,12 @@
         <header class="article-header">
             <div class="article-meta">
                 <span>May 2026</span>
-                <span class="article-series">Agentic work — HR Tech — People Science</span>
+                <span class="article-series">Agentic work — Organisations — Productivity</span>
             </div>
-            <h1 style="view-transition-name: vt-title-hr">Headless Agents Make HR a Work-Architecture Problem</h1>
+            <h1 style="view-transition-name: vt-title-hr">AI Is Getting Better Faster Than Organisations Are</h1>
             <p class="article-lede">
-                Headless agents will do more than automate workplace tasks. They will change how work is delegated,
-                measured, and governed, which makes them a people problem as much as a technology one.
+                AI can increase individual capacity faster than organisations learn how to turn that capacity into useful work.
+                The efficiency gain is real. So is the work required to capture it.
             </p>
         </header>
 
@@ -97,183 +97,68 @@
         </aside>
 
         <article class="article-body">
-            <h2>The Next User Might Not Be Human</h2>
+            <p>The productivity argument for AI is fairly intuitive. If an engineer with agents can do substantially more work than an engineer without them, the company has gained capacity.</p>
+            <p>What happens next is less obvious.</p>
+            <p>The company could decide it needs fewer engineers to produce the same amount of work. Or it could keep spending the same amount on engineering and become more ambitious.</p>
+            <p>The second option sounds like pure upside. If the people you already employ can suddenly accomplish substantially more, why wouldn't you just do more?</p>
+            <p>Because doing more is actually hard.</p>
 
-            <p>
-                A quiet assumption sits underneath most workplace software: a human logs in, navigates a user interface,
-                interprets the information on screen, and decides what to do next. That assumption is starting to weaken.
-                The emerging pattern is software becoming addressable by agents through APIs, tools, commands, and protocols,
-                not only chatbots embedded inside existing products.
-            </p>
+            <h2>Individual Productivity Isn't Organisational Productivity</h2>
+            <p>AI can increase the amount of work an individual can attempt without increasing an organisation's ability to absorb that work at the same rate.</p>
+            <p>There is already some evidence of this distinction. A <a href="https://www.nber.org/papers/w33795" target="_blank" rel="noopener noreferrer">six-month randomised experiment involving 7,137 knowledge workers</a> found that access to generative AI changed behaviours people could alter independently. Frequent users spent substantially less time on email and completed documents somewhat faster. But the researchers didn't find a significant change in time spent in meetings — behaviour that requires other people to change with you.</p>
+            <p>That's a useful distinction. An engineer might be able to produce substantially more code. That doesn't mean a product organisation can identify substantially more valuable things to build, or that a team can review changes at the same increased rate, or that customers can absorb substantially more change.</p>
+            <p>The limiting factor moves.</p>
+            <p>A <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6513481" target="_blank" rel="noopener noreferrer">2026 field experiment across 515 startups</a> gets even closer to this problem. The researchers call it the <em>mapping problem</em>: discovering where and how AI actually creates value within a firm's production process. Companies given information about how other firms had reorganised production around AI discovered 44% more AI use cases and subsequently completed more tasks, acquired more paying customers and generated more revenue.</p>
+            <p>The interesting part isn't just that AI produced gains. It's that finding and reorganising work around those gains was itself a problem to solve.</p>
 
-            <p>
-                Salesforce described this shift directly with <a href="https://www.salesforce.com/au/news/stories/salesforce-headless-360-announcement/" target="_blank" rel="noopener noreferrer">Headless 360</a>,
-                exposing capabilities that previously lived behind a browser so that agents can call them directly.
-                <a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener noreferrer">Anthropic's Model Context Protocol</a>
-                points the same way, offering a more standard means for AI systems to connect to the places where work
-                data already lives. The surface changes, but the underlying work system remains.
-            </p>
+            <h2>Delegation Gets Complicated Quickly</h2>
+            <p>Consider something fairly mundane: I ask a company-provided coding agent to make a change.</p>
+            <p>It has access to the repository because my company gave it access. It may have instructions supplied by the organisation. It can use tools the organisation has made available to it. I give it a task, review the result and merge the change.</p>
+            <p>Then it causes an incident.</p>
+            <p>Who is responsible?</p>
+            <p>The simplest answer is me. I delegated the work and ultimately accepted it.</p>
+            <p>But change the scenario slightly. What if the agent can merge its own changes? What if another agent reviewed them? What if the mistake came from centrally supplied instructions rather than my prompt? What if another engineer later builds on the agent's output without knowing how it was produced?</p>
+            <p>None of these questions make agents unusable. They demonstrate that using them creates work around the work.</p>
+            <p>Someone has to decide what can be delegated, what requires review, which permissions an agent should have, when it should escalate, how its actions are recorded and who ultimately owns the outcome.</p>
+            <p>This isn't entirely hypothetical infrastructure. Workday's <a href="https://newsroom.workday.com/2025-02-11-The-Next-Generation-of-Workforce-Management-is-Here-Workday-Unveils-New-Agent-System-of-Record" target="_blank" rel="noopener noreferrer">Agent System of Record</a>, for example, is explicitly designed around registering agents, defining their roles and responsibilities, governing their access and tracking their impact.</p>
+            <p>As agents become more capable, some of the work shifts from performing tasks to designing the system in which those tasks can safely be delegated.</p>
 
-            <p>
-                The interesting part of "headless agents" is not that they can run without a visible UI, but that they can
-                become participants in workflows that used to require people to click, copy, summarise, route, remind, and
-                reconcile. They act across systems, run on a schedule, inherit permissions, and leave audit trails, which
-                gradually weaves them into the operating fabric of a company.
-            </p>
+            <h2>We've Seen This Kind of Problem Before</h2>
+            <p>This isn't the first time organisations have discovered that improving the technical part of a work system doesn't automatically improve the whole thing.</p>
+            <p>Research into British coal mining in the 1950s helped establish what became known as <a href="https://doi.org/10.1177/001872675100400101" target="_blank" rel="noopener noreferrer">sociotechnical systems theory</a>. Researchers studying the introduction of new mining technology found that outcomes depended on the relationship between the technical system and the social organisation around it. Changing one while ignoring the other could make the overall system worse.</p>
+            <p>The analogy to AI shouldn't be stretched too far. A coding agent is not mining equipment and a software company is not a coal mine.</p>
+            <p>But the underlying observation still seems useful.</p>
+            <p>AI is changing one part of the work system extraordinarily quickly. It changes how much work a person can attempt, what can be delegated, where judgement is applied and increasingly who or what can act.</p>
+            <p>The rest of the system has to adapt around that.</p>
 
-            <p>
-                HR Tech should pay attention because HR has always been concerned with the design of work: how people are
-                managed, how performance is understood, how trust is built or broken, and how organisations adapt when the
-                nature of work changes. That does not mean every HR workflow should be automated. It means agents belong
-                in the same conversation as accountability, measurement, trust, and organisational design.
-            </p>
+            <h2>The Work Hidden Inside the Efficiency Gain</h2>
+            <p>Once you look at AI adoption this way, a lot of apparently separate questions start to look related.</p>
+            <p>How much should an employee be expected to review before accepting an agent's work? What happens when someone doesn't trust an agent their organisation expects them to use? How should an organisation monitor an agent's behaviour without turning that monitoring into surveillance of the person using it? When should an agent be allowed to act autonomously? Who decides whether it is behaving in a way the organisation actually wants?</p>
+            <p>There are questions about people too. Some employees will eagerly change how they work. Others won't. Some resistance will come from unfamiliarity, but some will come from reasonable disagreements about quality, judgement, privacy, craft or what parts of their work they are willing to delegate.</p>
+            <p>I'm not trying to answer all of those questions here.</p>
+            <p>Their existence is the point.</p>
+            <p>The difficult part of adopting AI isn't limited to making the technology work. Organisations have to change how work is delegated, reviewed, coordinated and understood around it.</p>
+            <p>That is significant work.</p>
 
-            <h2>An Old Lesson Worth Repeating</h2>
-
-            <p>
-                It is tempting to reach for the Industrial Revolution analogy, but it is easy to stretch that comparison
-                until it stops meaning much. A more precise lesson comes from a 1950s
-                <a href="https://doi.org/10.1177/001872675100400101" target="_blank" rel="noopener noreferrer">study of British coal miners</a>
-                adopting new mining technology. The researchers found that productivity and worker experience depended on
-                the joint design of the technical system and the social system around it. Optimising the machinery while
-                damaging the human work structure could make the whole operation worse.
-            </p>
-
-            <p>
-                Headless agents sit in similar territory. They are changes to the work system itself: who does what,
-                where judgement is applied, how handoffs happen, what gets measured, and who is accountable when something
-                goes wrong. Companies that treat agents as a purely technical deployment will miss the harder question of
-                what social system those agents are entering, and how that system will need to change around them.
-            </p>
-
-            <h2>From Automation to Informating</h2>
-
-            <p>
-                Another useful lens comes from Shoshana Zuboff's
-                <a href="https://books.google.com/books/about/In_the_age_of_the_smart_machine.html?id=dx1HAAAAMAAJ" target="_blank" rel="noopener noreferrer"><em>In the Age of the Smart Machine</em></a>,
-                where she coined the term <em>informating</em> to capture a distinction that still matters: digital systems do not only
-                automate work, they also make work newly visible by creating data about how it happens. Agents intensify that
-                pattern. A headless agent does not only complete a task; it may also record what was delegated, which systems
-                were touched, which instructions were ambiguous, which decisions required escalation, and where the organisation
-                relied on undocumented knowledge. Agents become a new source of operational telemetry about the real shape of
-                work.
-            </p>
-
-            <p>
-                That visibility can be valuable, revealing bottlenecks, unclear ownership, policy friction, and duplicated effort.
-                It can also tip into surveillance, pressure, and a quiet collapse of autonomy. The same data that helps a company
-                improve the work can be used in ways that erode trust, which is why HR cannot sit downstream from the technology
-                decision. If agentic systems produce new data about work, organisations need a clear point of view on what should
-                be measured, what should not, who can see it, how it should be interpreted, and when it should trigger human
-                intervention.
-            </p>
-
-            <h2>The Risk Is Taylorism with APIs</h2>
-
-            <p>
-                The cautionary version of this future is not hard to imagine. Work gets decomposed into smaller tasks routed to
-                humans or agents, every interaction becomes measurable, managers acquire dashboards, employees receive nudges,
-                and productivity becomes legible in ways that feel objective even when the underlying model of work is incomplete.
-                This is not a new story. Scientific management tried to turn work into measurable units more than a century ago,
-                and more recently, platform companies showed how software can become management itself, allocating work, scoring
-                performance, and constraining human discretion. Agentic white-collar work could bring a softer version of
-                algorithmic management into ordinary organisations.
-            </p>
-
-            <p>
-                The danger is not that agents will be useless. It is that they will be useful enough to spread before companies
-                have developed the organisational discipline to use them well. A badly designed agentic workplace could improve
-                throughput while degrading trust, reduce admin while increasing ambiguity about accountability, and help managers
-                write better messages while making employees wonder whether anyone is actually listening — making work faster
-                and thinner at the same time.
-            </p>
-
-            <h2>People Science Belongs in the Architecture</h2>
-
-            <p>
-                This is why People Science belongs closer to product architecture than generic AI productivity discourse. If agents
-                become part of the work system, the relevant question is not only whether they can complete tasks, but whether they
-                improve the conditions around human performance: clarity, confidence, fairness, trust, learning, and the quality of
-                management decisions. Culture Amp's framing of
-                <a href="https://www.cultureamp.com/science/people-science" target="_blank" rel="noopener noreferrer">People Science</a>
-                is useful here because it combines organisational psychology, research, data, and product practice rather than treating
-                AI as a feature layer detached from how work actually happens.
-            </p>
-
-            <p>
-                Culture Amp's writing on the <a href="https://www.cultureamp.com/blog/science-behind-pcq" target="_blank" rel="noopener noreferrer">Performance Culture Quadrant</a>
-                makes a related point: sustainable high performance is not simply an individual trait, it is a collective property
-                shaped by the conditions around people. That idea travels directly into agentic work. An agent that helps one
-                employee move faster while creating confusion for the team may not leave the system healthier, and one that automates
-                manager follow-up while making people unsure what is automated and what is human may quietly weaken trust. An agent
-                that reduces toil while improving clarity, feedback, and follow-through can genuinely increase organisational capacity.
-            </p>
-
-            <h2>What HR Tech May Need to Become</h2>
-
-            <p>
-                The obvious HR Tech response to AI is to add AI features to existing workflows: summarise comments, draft reviews,
-                recommend actions, coach managers, answer policy questions. Those features matter, but they are probably not the
-                endpoint. Workday's framing of an
-                <a href="https://blog.workday.com/en-us/managing-ai-powered-future-of-work.html" target="_blank" rel="noopener noreferrer">Agent System of Record</a>
-                signals that the category is already moving beyond AI assistance toward the governance of agents themselves. The
-                larger shift is that HR systems may need to become legible to agents while remaining accountable to people, which
-                means more than exposing APIs. It means making the organisation's people context available in ways that are
-                permissioned, interpretable, and bounded by good judgement.
-            </p>
-
-            <p>
-                Consider a manager-support agent acting after an engagement survey. A shallow version summarises comments and drafts
-                a message. A better version understands team context, highlights risks, proposes follow-up rituals, suggests 1:1
-                prompts, and escalates when sensitive issues require human care. The best version also knows what not to do: it
-                does not automate empathy, infer more than the data supports, or turn private employee sentiment into a productivity
-                weapon. That is a different product philosophy, where HR Tech becomes less like a dashboard people occasionally
-                visit and more like a people-context layer inside the operating system of work — not a source of automated decisions,
-                but a source of grounded signals, guardrails, and interventions that help humans and agents act better together.
-            </p>
-
-            <p>
-                In product terms, this means agentic HR systems need explicit boundaries: scoped permissions, visible provenance,
-                escalation paths, human-readable audit trails, consent-aware data use, and clear ownership when an agent acts on behalf
-                of a person or team. Without those primitives, agents become another integration surface. With them, HR Tech can become
-                infrastructure for safer delegation.
-            </p>
-
-            <h2>What This Means for HR</h2>
-
-            <p>
-                Microsoft's 2025 <a href="https://www.microsoft.com/en-us/worklab/work-trend-index/agents-human-agency-and-the-opportunity-for-every-organization" target="_blank" rel="noopener noreferrer">Work Trend Index</a>
-                found that organisational factors account for more than twice the reported AI impact of individual factors alone — yet
-                only 19 percent of AI users currently work in what the report calls Frontier conditions, where individual capability and
-                organisational readiness reinforce each other. The researchers' summary is blunt: <em>in many cases, people are ready —
-                the systems around them are not.</em> That structural gap is the problem HR is best positioned to close.
-            </p>
-
-            <p>
-                The companies that win with agents will not be the ones that automate the most tasks. They will be the
-                ones that redesign work as a socio-technical system, using agents to increase capacity while preserving trust,
-                autonomy, learning, fairness, and accountability. For HR, that means the discipline cannot be confined to policy,
-                engagement surveys, performance cycles, and change communications after the fact. HR will need to be involved
-                in the architecture of agentic work itself: what agents are allowed to do, how work is delegated, how human
-                judgement is preserved, how employee experience is measured, and how the organisation learns from the data these
-                systems create.
-            </p>
-
-            <p>
-                Headless agents may enter the company through engineering, sales, support, finance, or operations, but if they
-                reshape how work actually happens, they eventually become HR's problem — and HR's opportunity
-                to make work not only faster, but better designed.
-            </p>
-
-            <div class="article-closing">
-                Agents make work faster. HR makes it better designed.
-            </div>
-
+            <h2>Capability Is Moving Faster Than the System Around It</h2>
+            <p>Microsoft's <a href="https://www.microsoft.com/en-us/worklab/work-trend-index/agents-human-agency-and-the-opportunity-for-every-organization" target="_blank" rel="noopener noreferrer">2026 Work Trend Index</a> provides a useful measure of the gap. In its survey of 20,000 AI users across ten countries, organisational factors such as culture, manager support and talent practices were more than twice as strongly associated with reported AI impact as individual factors such as mindset and behaviour.</p>
+            <p>Only 19% of AI users in the study had both high individual capability and high organisational readiness. Another 10% had developed strong individual capability but lacked the organisational conditions to apply it.</p>
+            <p>Microsoft describes this as a gap between what employees can do and what their organisations are built to support.</p>
+            <p>That seems close to what I'm experiencing from the inside.</p>
+            <p>If an engineer can do twice as much, the organisation doesn't automatically get twice as much value. It gets the <em>capacity</em> to attempt more.</p>
+            <p>Turning that capacity into something useful still requires deciding what to do with it and building a work system capable of supporting it.</p>
+            <p>This is where management becomes important. In <a href="/writing/when-agents-join-the-team-managers-matter-differently.html">the next essay</a>, I look at the same transition from the manager relationship: agents may automate some management work while the difficulty of changing how people work makes good management more valuable.</p>
+            <p>There is simply more change to manage.</p>
+            <p>And there is another question behind both essays. If agents themselves are becoming participants in these work systems, what can we borrow from the structures humans already use to make imperfect intelligence reliable? That's the thread I pick up in <a href="/writing/borrowed-patterns.html">Agents Get Better by Becoming More Human</a>.</p>
+            <p>Some of these problems will eventually become mundane. We will develop conventions, tooling and organisational patterns that make them easier. Things that currently require explicit thought will become assumptions built into how companies operate.</p>
+            <p>We're not there yet.</p>
+            <div class="article-closing">The technical capability is arriving faster than organisations are learning how to use it. The efficiency gain is real. So is the work required to capture it.</div>
         </article>
 
         <footer class="article-footer">
             <p class="process-note">Note on process: every piece here is AI-produced. Claude and ChatGPT do the drafting — Claude through the Claude mobile app, ChatGPT through OpenClaw over Telegram. I act as editor: setting direction, providing initial sources, and reviewing for style and cohesion. It's an experiment in extending the process that works for code production into other forms of writing.</p>
-            <p>A standalone essay on agentic work, HR Tech, and People Science.</p>
+            <p>The first in a connected thread on organisational adaptation, management, and the human patterns emerging around agentic work.</p>
+            <p><a href="/writing/when-agents-join-the-team-managers-matter-differently.html">Next: AI Agents Make Management More Important, Not Less &rarr;</a></p>
             <p><a href="/#writing">Back to Writing</a></p>
         </footer>
     </main>
