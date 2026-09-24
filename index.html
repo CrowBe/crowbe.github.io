@@ -144,163 +144,177 @@
         <div class="header-container">
             <h2>Projects</h2>
         </div>
-        <h3 class="section-tagline">Next.js - TypeScript - React Native - Ruby on Rails - AI/LLM &amp; Agents</h3>
-        <div class="project-list" role="list" tabindex="0" aria-label="Project cards — scroll horizontally to browse">
+        <h3 class="section-tagline">Experiments in agent runtimes, semantic capabilities, personal agents, and agent-native interfaces.</h3>
+
+        <h3 class="section-tagline">Current work</h3>
+        <div class="project-list" role="list" tabindex="0" aria-label="Current project cards — scroll horizontally to browse">
             <article class="project-card" role="listitem">
                 <header class="card-header">
-                    <h3 id="project-head-agentbranch">agent.branch</h3>
+                    <h3 id="project-head-weave">Weave</h3>
                 </header>
                 <div class="project-info-container">
                     <div class="project-image-container">
-                        <img src="resources/images/agentbranch-live.png" alt="agent.branch workspace showing plain-language Insights from a triggering evaluation" loading="lazy" />
+                        <img src="resources/images/weave-concept.svg" alt="Weave concept: Jev weighs options, policy bounds action, and inference returns evidence" loading="lazy" />
                     </div>
                     <div class="project-description">
-                        A proving ground for people building AI agents. Drop in part of an agent's setup and it gets checked, trialled safely, and confirmed to fire only when it should. In development.
+                        An experimental goal-directed runtime for software that can build the capabilities it needs and improve how it works. Weave combines bounded model judgment with explicit authority, replayable evidence, capability crystallisation through TDD, and measured optimisation.
                     </div>
                 </div>
                 <div class="project-tags">
-                    <span>Next.js / TypeScript</span>
-                    <span>Prisma</span>
-                    <span>LLM APIs</span>
-                    <span>Harness Evaluation</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/CrowBe/agentbranch" target="_blank" rel="noopener noreferrer">GitHub</a>
-                </div>
-            </article>
-            <article class="project-card" role="listitem">
-                <header class="card-header">
-                    <h3 id="project-head-clawface">ClawFace</h3>
-                </header>
-                <div class="project-info-container">
-                    <div class="project-image-container">
-                        <img src="resources/images/clawface-placeholder.svg" alt="ClawFace mobile agent operations app — preview graphic" loading="lazy" />
-                    </div>
-                    <div class="project-description">
-                        A phone app for watching AI agents while they work. Pair it with your computer by scanning a code, then approve or block each step from anywhere. In development.
-                    </div>
-                </div>
-                <div class="project-tags">
-                    <span>React Native / Expo</span>
                     <span>TypeScript</span>
-                    <span>WebSockets</span>
-                    <span>AI Agents</span>
+                    <span>Agent Runtime</span>
+                    <span>Jev</span>
+                    <span>Evaluation</span>
+                    <span>Capability Crystallisation</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://github.com/CrowBe/ClawFace" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://github.com/CrowBe/weave" target="_blank" rel="noopener noreferrer">GitHub</a>
                 </div>
             </article>
+
+            <article class="project-card" role="listitem">
+                <header class="card-header">
+                    <h3 id="project-head-agentfabric">AgentFabric</h3>
+                </header>
+                <div class="project-info-container">
+                    <div class="project-image-container">
+                        <img src="resources/images/agentfabric-demo.png" alt="AgentFabric local demo showing capability status, authority checks, and crystallisation" loading="lazy" />
+                    </div>
+                    <div class="project-description">
+                        A small runtime for giving agents stable semantic capabilities instead of making them rediscover implementation every time. Capability contracts stay durable while resolvers can evolve, with explicit resource references, authority, audit, composition, and a path for crystallising new capabilities.
+                    </div>
+                </div>
+                <div class="project-tags">
+                    <span>Python</span>
+                    <span>AgentSOP</span>
+                    <span>MCP</span>
+                    <span>Semantic Capabilities</span>
+                    <span>Agent Safety</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/CrowBe/AgentFabric" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+            </article>
+
             <article class="project-card" role="listitem">
                 <header class="card-header">
                     <h3 id="project-head-scrolless">ScrolLess</h3>
                 </header>
                 <div class="project-info-container">
                     <div class="project-image-container">
-                        <img src="resources/images/scrolless-screenshot.jpg" alt="ScrolLess app showing an empty feed state" loading="lazy" />
+                        <img src="resources/images/scrolless-feed-current.png" alt="ScrolLess app showing a populated feed from several sources" loading="lazy" />
                     </div>
                     <div class="project-description">
-                        One calm feed for everything you follow. Your own AI agent collects the posts and sends them to your phone, locked up so nothing in between can read them. In development.
+                        A device-first feed aggregator where a personal agent uses your logged-in browser sessions to collect content, while the server stays out of the platform-integration layer and relays encrypted payloads to the PWA.
                     </div>
                 </div>
                 <div class="project-tags">
                     <span>Preact / TypeScript</span>
-                    <span>Node/Fastify</span>
-                    <span>AI Agent</span>
+                    <span>Fastify</span>
+                    <span>Personal Agents</span>
                     <span>MCP</span>
+                    <span>Web Push</span>
                 </div>
                 <div class="project-links">
                     <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">GitHub</a>
                     <a href="/writing/agentic-content-apps.html">Article</a>
                 </div>
             </article>
+
             <article class="project-card" role="listitem">
                 <header class="card-header">
-                    <h3 id="project-head-rails-ai">Rails AI 20 Questions</h3>
+                    <h3 id="project-head-portfolio-agent">This Site's Agent</h3>
                 </header>
                 <div class="project-info-container">
                     <div class="project-image-container">
-                        <img src="resources/images/rails_20_q_login.png" alt="Pixel art sky and grass with login form centred" loading="lazy" />
+                        <img src="resources/images/portfolio-agent-demo.png" alt="Ask about Ben chat panel with a sample conversation using a mocked on-device model" loading="lazy" />
                     </div>
                     <div class="project-description">
-                        A web game built with my wife Niki. The AI thinks of something and answers your yes/no questions until you guess it — or run out of turns.
+                        The portfolio doubles as an agent-interface experiment: an on-device browser model can answer questions about my work through explicit site functions, with those same capabilities exposed as WebMCP tools and connected to page-level interactions.
                     </div>
                 </div>
                 <div class="project-tags">
-                    <span>Ruby on Rails</span>
-                    <span>OpenAI</span>
-                    <span>Docker</span>
+                    <span>On-device LLM</span>
+                    <span>WebMCP</span>
+                    <span>Tool Use</span>
+                    <span>Web APIs</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://github.com/CrowBe/rails_twenty_questions_ai_bot" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a href="https://mysite-i0j9.onrender.com/" target="_blank" rel="noopener noreferrer">Deployment</a>
+                    <a href="https://github.com/CrowBe/crowbe.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
                 </div>
             </article>
+        </div>
+
+        <h3 class="section-tagline">Earlier experiments</h3>
+        <div class="project-list" role="list" tabindex="0" aria-label="Earlier project cards — scroll horizontally to browse">
             <article class="project-card" role="listitem">
-                <header class="card-header">
-                    <h3 id="project-head-hooks">React Hooks Library</h3>
-                </header>
+                <header class="card-header"><h3 id="project-head-agentbranch">agent.branch</h3></header>
                 <div class="project-info-container">
                     <div class="project-image-container">
-                        <img src="resources/images/hooks-library-1.svg" alt="bc-react-hooks-library package listing all 11 hooks" loading="lazy" />
+                        <img src="resources/images/agentbranch-live.png" alt="agent.branch workspace showing plain-language Insights from a triggering evaluation" loading="lazy" />
                     </div>
                     <div class="project-description">
-                        A free kit of 11 reusable building blocks for React apps. It handles the fiddly jobs most apps need — saving settings, resizing, copying to the clipboard — so nobody rewrites them.
+                        A workbench for authoring portable agent skills, visualising their logic, testing them against mocked tools, and evaluating whether they trigger when they should before export.
                     </div>
                 </div>
                 <div class="project-tags">
-                    <span>TypeScript</span>
-                    <span>React</span>
-                    <span>NPM</span>
+                    <span>Next.js / TypeScript</span><span>LLM APIs</span><span>Agent Skills</span><span>Evaluation</span>
                 </div>
-                <div class="project-links">
-                    <a href="https://github.com/CrowBe/react-hooks-library" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a href="https://www.npmjs.com/package/bc-react-hooks-library" target="_blank" rel="noopener noreferrer">NPM</a>
-                </div>
+                <div class="project-links"><a href="https://github.com/CrowBe/agentbranch" target="_blank" rel="noopener noreferrer">GitHub</a></div>
             </article>
+
             <article class="project-card" role="listitem">
-                <header class="card-header">
-                    <h3 id="project-head-movie">Movie Finder Widget</h3>
-                </header>
+                <header class="card-header"><h3 id="project-head-clawface">ClawFace</h3></header>
                 <div class="project-info-container">
                     <div class="project-image-container">
-                        <img src="resources/images/movie-widget-1.png" alt="Web app with search bar and movie info cards" loading="lazy" />
+                        <img src="resources/images/clawface-demo.png" alt="ClawFace mobile agents screen with sample agents and pending approvals" loading="lazy" />
                     </div>
                     <div class="project-description">
-                        A quick way to search films, shows and cast, with the details laid out at a glance. Rebuilt on newer foundations after the tooling it started on aged out.
+                        A mobile command surface for supervising and messaging trusted AI agents, including pairing, threads, approvals, notifications, and direct OpenClaw Gateway integration.
                     </div>
                 </div>
-                <div class="project-tags">
-                    <span>React</span>
-                    <span>TypeScript</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/CrowBe/movie-finder-widget" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a href="https://movie-finder-widget.vercel.app/" target="_blank" rel="noopener noreferrer">Deployment</a>
-                </div>
+                <div class="project-tags"><span>React Native / Expo</span><span>TypeScript</span><span>OpenClaw</span><span>AI Agents</span></div>
+                <div class="project-links"><a href="https://github.com/CrowBe/ClawFace" target="_blank" rel="noopener noreferrer">GitHub</a></div>
             </article>
+
             <article class="project-card" role="listitem">
-                <header class="card-header">
-                    <h3 id="project-head-crypto">Crypto Price Tracker</h3>
-                </header>
+                <header class="card-header"><h3 id="project-head-rails-ai">Rails AI 20 Questions</h3></header>
                 <div class="project-info-container">
-                    <div class="project-image-container">
-                        <img src="resources/images/cryptotracker-1.png" alt="Crypto price tracker showing coin prices across multiple currencies" loading="lazy" />
-                    </div>
-                    <div class="project-description">
-                        Live prices for seven cryptocurrencies, updating the moment they move. Adds history charts, alerts that ping your browser, and it keeps working with no signal.
-                    </div>
+                    <div class="project-image-container"><img src="resources/images/rails_20_q_login.png" alt="Pixel art sky and grass with login form centred" loading="lazy" /></div>
+                    <div class="project-description">A web game built with my wife Niki. The AI thinks of something and answers your yes/no questions until you guess it — or run out of turns.</div>
                 </div>
-                <div class="project-tags">
-                    <span>TypeScript</span>
-                    <span>React PWA</span>
-                    <span>Node/Express</span>
-                    <span>Tailwind</span>
+                <div class="project-tags"><span>Ruby on Rails</span><span>OpenAI</span><span>Docker</span></div>
+                <div class="project-links"><a href="https://github.com/CrowBe/rails_twenty_questions_ai_bot" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://mysite-i0j9.onrender.com/" target="_blank" rel="noopener noreferrer">Deployment</a></div>
+            </article>
+
+            <article class="project-card" role="listitem">
+                <header class="card-header"><h3 id="project-head-hooks">React Hooks Library</h3></header>
+                <div class="project-info-container">
+                    <div class="project-image-container"><img src="resources/images/hooks-library-1.svg" alt="bc-react-hooks-library package listing all 11 hooks" loading="lazy" /></div>
+                    <div class="project-description">A free kit of 11 reusable building blocks for React apps, covering common jobs such as persisted settings, resizing and clipboard interaction.</div>
                 </div>
-                <div class="project-links">
-                    <a href="https://github.com/CrowBe/crypto-price-pwa" target="_blank" rel="noopener noreferrer">Frontend</a>
-                    <a href="https://github.com/CrowBe/crypto-price-server" target="_blank" rel="noopener noreferrer">Backend</a>
-                    <a href="https://build-six-delta.now.sh/" target="_blank" rel="noopener noreferrer">Deployed</a>
+                <div class="project-tags"><span>TypeScript</span><span>React</span><span>NPM</span></div>
+                <div class="project-links"><a href="https://github.com/CrowBe/react-hooks-library" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.npmjs.com/package/bc-react-hooks-library" target="_blank" rel="noopener noreferrer">NPM</a></div>
+            </article>
+
+            <article class="project-card" role="listitem">
+                <header class="card-header"><h3 id="project-head-movie">Movie Finder Widget</h3></header>
+                <div class="project-info-container">
+                    <div class="project-image-container"><img src="resources/images/movie-widget-1.png" alt="Web app with search bar and movie info cards" loading="lazy" /></div>
+                    <div class="project-description">A quick way to search films, shows and cast, with the details laid out at a glance. Rebuilt on newer foundations after the tooling it started on aged out.</div>
                 </div>
+                <div class="project-tags"><span>React</span><span>TypeScript</span></div>
+                <div class="project-links"><a href="https://github.com/CrowBe/movie-finder-widget" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://movie-finder-widget.vercel.app/" target="_blank" rel="noopener noreferrer">Deployment</a></div>
+            </article>
+
+            <article class="project-card" role="listitem">
+                <header class="card-header"><h3 id="project-head-crypto">Crypto Price Tracker</h3></header>
+                <div class="project-info-container">
+                    <div class="project-image-container"><img src="resources/images/cryptotracker-1.png" alt="Crypto price tracker showing coin prices across multiple currencies" loading="lazy" /></div>
+                    <div class="project-description">Live prices for seven cryptocurrencies with history charts, browser alerts and offline support.</div>
+                </div>
+                <div class="project-tags"><span>TypeScript</span><span>React PWA</span><span>Node/Express</span><span>Tailwind</span></div>
+                <div class="project-links"><a href="https://github.com/CrowBe/crypto-price-pwa" target="_blank" rel="noopener noreferrer">Frontend</a><a href="https://github.com/CrowBe/crypto-price-server" target="_blank" rel="noopener noreferrer">Backend</a></div>
             </article>
         </div>
     </section>
