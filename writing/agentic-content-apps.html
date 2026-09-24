@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Personal agents can move the integration layer out of content apps, leaving apps to compete on experience instead.">
+    <meta name="description" content="Personal agents can shift content acquisition out of the app, letting content products focus on curation and product experience.">
     <script>
       (function () {
         try {
@@ -25,7 +25,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/resources/icons/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/resources/icons/apple-touch-icon.png">
     <link rel="manifest" href="/resources/icons/site.webmanifest">
-    <title>Personal Agents Let Content Apps Stop Owning Integrations | Ben Crow</title>
+    <title>Personal Agents Make Experience More Important Than Content Acquisition | Ben Crow</title>
     <script type="speculationrules">
     {
           "prefetch": [
@@ -83,16 +83,16 @@
                 <span>April 2026</span>
                 <span class="article-series">Agentic Content Apps — Part 1 of 3</span>
             </div>
-            <h1 style="view-transition-name: vt-title-aca1">Personal Agents Let Content Apps Stop Owning Integrations</h1>
+            <h1 style="view-transition-name: vt-title-aca1">Personal Agents Make Experience More Important Than Content Acquisition</h1>
             <p class="article-lede">
-                If personal agents can fetch and structure content for us, content apps can stop owning the integrations
-                and compete on the experience instead.
+                Content apps usually have to solve content acquisition before they can focus on curation and product experience.
+                Personal agents create another option.
             </p>
         </header>
 
         <aside class="series-disclaimer">
             <p>This is a three-part series on agentic content apps. Reading order:
-                <strong>Part 1: Personal Agents Let Content Apps Stop Owning Integrations</strong> (you are here)
+                <strong>Part 1: Personal Agents Make Experience More Important Than Content Acquisition</strong> (you are here)
                 &rarr; <a href="/writing/why-agentic-content-apps-arent-everywhere.html">Part 2: Agentic Content Apps Are Blocked by Access, Trust, and Product Readiness</a>
                 &rarr; <a href="/writing/architecting-agentic-content-apps.html">Part 3: Trustworthy Agentic Apps Need Device-First Architecture</a>
             </p>
@@ -100,80 +100,70 @@
 
         <article class="article-body">
 
-            <h2>The Integration Layer Is Moving</h2>
+            <h2>Content Has to Come From Somewhere</h2>
 
             <p>
-                Content apps have traditionally had to own the hard part before they could deliver the useful part:
-                authenticate with platforms, fetch data, normalise it, store it, and keep that plumbing alive as APIs
-                change. Personal agents create a credible alternative. If an agent can fetch and structure content on
-                the user's behalf, the app no longer needs to own the integration layer. It can compete on the product
-                experience instead.
+                Content apps need content. Traditionally, they get it in one of two ways: attract creators to produce it
+                inside the app, or build integrations to bring it in from somewhere else.
             </p>
 
             <p>
-                <a href="https://sequoiacap.com/article/ai-50-2025/" target="_blank" rel="noopener noreferrer">Sequoia's 2025 AI 50 report</a>
-                noted that AI agents were moving meaningfully beyond chat interfaces, from
-                answering questions to completing tasks autonomously, and others have started
-                asking <a href="https://sdtimes.com/ai/the-future-of-ai-isnt-chat-why-user-experience-will-make-or-break-the-next-wave-of-applications/" target="_blank" rel="noopener noreferrer">what the future of AI looks like when it isn't a conversation at all</a>.
-                That trajectory raises a product question: if a personal agent can fetch, filter, and structure content
-                from across the web, what should the app still own? My answer is the pattern I've
-                been calling agentic content apps, and that I've been building toward with
-                <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">ScrolLess</a>: the agent owns the integration work, the app owns the experience.
+                Both are hard, in different ways. Building a creator ecosystem means convincing people to make content
+                before there's an audience to consume it. Building integrations means authentication, APIs, rate limits,
+                normalisation, and ongoing maintenance as the systems you're integrating with change.
+            </p>
+
+            <p>
+                Either way, a lot has to happen before you get to the part most users actually care about:
+                content curation and the product experience around it.
+            </p>
+
+            <p>
+                Personal agents create another possibility. If an agent can gather and structure existing content on the
+                user's behalf, an app doesn't necessarily need to attract its own creators or own the integrations used
+                to reach it. That's the pattern I've been exploring with
+                <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">ScrolLess</a>:
+                the agent gathers the content, while the app focuses on what to do with it.
             </p>
 
             <h2>The Problem Apps Carry</h2>
 
             <p>
-                Look at the codebase of almost any content app — a news reader, a social
-                aggregator, a personal dashboard — and you'll find that a significant portion
-                of it has nothing to do with the actual experience the app is trying to deliver.
-                OAuth flows, API rate limit handling, token refresh logic, schema mappings that
-                need updating every time a platform changes its response format: a great deal of
-                engineering effort goes into getting the data before a single line of
-                thought can be spent on what to do with it.
+                Look at the codebase of a news reader, social aggregator, or personal dashboard and you'll find a
+                substantial amount that has little to do with the experience the app is trying to deliver. OAuth flows,
+                API rate limits, token refresh logic, schema mappings that need updating when platforms change their
+                response formats. The plumbing required to reach the data becomes a substantial part of building the product.
             </p>
 
             <p>
-                This wasn't always the shape of things. In the early web, apps owned their data
-                because they were the source of it — you were putting information into them, not
-                pulling it out of somewhere else. Then came the platform era, and suddenly every
-                interesting piece of user data lived behind someone else's API and terms of service.
-                Apps adapted by becoming integration layers: brokers of authentication, orchestrators
-                of API calls, engines of synchronisation. The experience became almost incidental
-                to the plumbing required to reach it.
+                This wasn't always the shape of things. In the early web, apps often owned their data because they were
+                the source of it — you were putting information into them, not pulling it out of somewhere else. As more
+                of our data moved behind platforms and their APIs, applications increasingly became integration layers too:
+                authenticating, synchronising, and translating between external systems before they could do anything useful
+                with the result.
             </p>
 
             <p>
-                There's a less-visible cost that falls on users. When an app owns your integrations,
-                it also owns, in a practical sense, your data. Switching to a competing app means
-                starting from scratch. Deleting your account means losing your history. Your
-                preferences, your reading patterns, your saved items — all of it lives in someone
-                else's database, subject to their retention decisions and business continuity.
-                This arrangement is so normalised that it barely registers as a choice.
-                But it is a choice, embedded in the architecture, and not the only one available.
-                Scholars studying <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10155150/" target="_blank" rel="noopener noreferrer">data sovereignty in the age of big tech</a>
-                have been pointing to this structural problem for years — the question is whether
-                the tooling now exists to address it differently.
+                There's a less-visible cost for users. When an app owns your integrations, it will often hold the resulting
+                data too. Your history, preferences, saved items, and other state become tied to that application. Switching
+                to another app can mean starting again. That arrangement is normal enough that it barely registers as an
+                architectural choice. But it is one. Research into
+                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10155150/" target="_blank" rel="noopener noreferrer">data sovereignty in the age of big tech</a>
+                has been examining the consequences of this kind of platform control for years.
             </p>
 
             <h2>The Inversion I'm Exploring</h2>
 
             <p>
-                The pattern that's been occupying my thinking goes roughly like this: a personal
-                AI agent takes over the integration work entirely — authenticating with platforms,
-                fetching content, normalising it into a common format — and the app
-                receives the result. The agent handles the plumbing while the app handles the
-                experience, and the data, rather than being held in a backend somewhere, lives
-                on the user's own device.
+                What happens if a personal agent takes over the integration work? The agent authenticates with platforms,
+                gathers content, and structures it into a format the application understands. The application receives the
+                result and focuses on what to do with it.
             </p>
 
             <p>
-                In this model, the agent runs on a schedule, knows which sources you follow and
-                what you care about, structures everything into a consistent schema, and delivers
-                it to your device. Any app that speaks the right format reads from that local
-                store and renders, and nothing more is required. The relationship between
-                integration complexity and application complexity, which currently maps almost
-                one-to-one, comes apart.
+                In the model I'm exploring, the resulting data also lives on the user's device rather than in the
+                application's backend. That separates three responsibilities which are usually bundled together:
+                <strong>the agent gathers, the device owns, and the app presents.</strong>
             </p>
 
             <figure class="article-figure">
@@ -182,21 +172,16 @@
             </figure>
 
             <p>
-                The inversion matters for two reasons, and they apply to different people.
-                For developers, integration complexity moves out of the application entirely,
-                so the app's job becomes rendering well-structured data, which is a much smaller
-                and more focused problem. For users, the arrangement with their data changes:
-                the agent gathers on their behalf, the device holds the result, and no
-                intermediary is custodian of their content as a condition of using the service.
-                Switching apps means your history follows you, and deleting the app does not
-                delete your data.
+                For developers, integration complexity moves out of the application. Adding another source doesn't
+                necessarily require adding another API client to the app. For users, the relationship with their data
+                changes. The agent gathers on their behalf, their device holds the result, and using an application doesn't
+                inherently require making that application's backend the custodian of their content.
             </p>
 
             <h2>What Changes</h2>
 
             <p>
-                The practical difference between a traditional content app and the pattern I'm
-                describing comes down to where responsibility lives at each step:
+                The practical difference is mostly about where responsibility lives:
             </p>
 
             <table class="comparison-table" aria-label="Traditional vs Agentic content app comparison">
@@ -211,115 +196,83 @@
                     <tr>
                         <td>Data gathering</td>
                         <td>App connects directly to platforms</td>
-                        <td class="highlight">Agent handles all fetching</td>
+                        <td class="highlight">Agent gathers on the user's behalf</td>
                     </tr>
                     <tr>
                         <td>Integrations</td>
-                        <td>App maintains API clients per platform</td>
-                        <td class="highlight">Managed in the user's agent layer — new platforms added without touching the app</td>
+                        <td>App maintains clients for each platform</td>
+                        <td class="highlight">Integration logic lives with the agent</td>
                     </tr>
                     <tr>
                         <td>Data ownership</td>
-                        <td>Held by the app's backend</td>
+                        <td>Usually held by the app's backend</td>
                         <td class="highlight">Stored on the user's device</td>
                     </tr>
                     <tr>
                         <td>Authentication</td>
-                        <td>App brokers OAuth per service</td>
+                        <td>App brokers access to each service</td>
                         <td class="highlight">Agent authenticates independently</td>
                     </tr>
                     <tr>
                         <td>App's core job</td>
-                        <td>Integration + presentation</td>
-                        <td class="highlight">Presentation only</td>
+                        <td>Integration + storage + presentation</td>
+                        <td class="highlight">Presentation and interaction</td>
                     </tr>
                     <tr>
                         <td>Portability</td>
-                        <td>Data locked to the app</td>
-                        <td class="highlight">Data portable across apps</td>
+                        <td>Data and history tied to the app</td>
+                        <td class="highlight">Data can outlive the app</td>
                     </tr>
                 </tbody>
             </table>
 
-            <h2>A Sketch of How It Works</h2>
+            <h2>Apps Can Compete on the Experience</h2>
 
             <p>
-                In its simplest form, the agent runs on a schedule, reads a configuration of
-                which sources to check, authenticates and fetches from each, structures the
-                results into a common payload, encrypts that payload using the device's public
-                key, and delivers it to the device via a lightweight relay. The relay passes
-                the payload through without reading it, since by the time it arrives the content
-                is already ciphertext, and the device then decrypts, stores locally, and the
-                app reads from there.
+                If the integration work can move outside the application, the relationship between the number of
+                integrations an app supports and the complexity of the app itself starts to come apart.
             </p>
 
             <p>
-                To keep this reliable rather than unpredictable, the agent works with
-                deterministic workflows rather than free-form reasoning. MCP
-                (<a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener noreferrer">Model Context Protocol</a>)
-                tools wrap each source's logic with typed inputs and outputs — named, repeatable
-                operations that run the same way every time. The intelligence sits in deciding
-                what to gather and how to prioritise it, while the mechanics of fetching are
-                structured rather than improvised. Part 3 in this series covers the
-                architecture in detail.
-            </p>
-
-            <h2>Beyond Content Feeds</h2>
-
-            <p>
-                Content feeds are the natural starting point for this kind of thinking — the
-                integration cost is obvious and the user benefit of portability is immediate.
-                But the pattern isn't limited to feeds. Anywhere an app currently has to maintain
-                integrations with external sources to assemble a personalised view, the same logic
-                applies.
+                The pattern is strongest where external integrations are necessary but aren't the product's main
+                differentiation. A feed reader can focus on making a feed good to use. A research tool can focus on helping
+                someone understand what they've gathered. A dashboard can focus on presenting information well rather than
+                knowing how every underlying system works.
             </p>
 
             <p>
-                The pattern is strongest where the external integrations are necessary but not the product's main
-                differentiation. If every competitor has to solve the same access problem before they can build the
-                actual experience, that access problem is a good candidate to move into the agent layer.
-            </p>
-
-            <p>
-                Budgeting apps are one example. The open banking integrations they require — the
-                bank-specific API clients, the maintenance overhead as institutions change formats —
-                represent exactly the kind of plumbing that an agent could absorb. The app would
-                receive normalised transaction data and focus on categorisation, visualisation, and
-                insight. The research dashboard is another: a researcher tracking a topic across
-                academic databases, news sources, and social feeds today has to move between
-                disconnected tools or build custom pipelines. An agent could monitor all those
-                sources, normalise the results, and surface them through a single interface that
-                has no knowledge of how any individual source works.
-            </p>
-
-            <p>
-                The common thread is that the app gets narrower in scope and deeper in quality.
-                Rather than doing thirty things adequately — integrations, sync, auth, storage,
-                rendering — it does one thing well: making the data useful. That is a different
-                kind of software from what most content apps are today, and a more interesting
-                one to build.
+                Instead of every competitor solving the same access problem before it can build the experience it actually
+                cares about, that access problem can move into the agent layer. If the user's data isn't trapped inside the
+                application providing the interface, switching applications becomes easier too. The data remains; the tool
+                operating on it changes.
             </p>
 
             <h2>An Early Exploration: ScrolLess</h2>
 
             <p>
                 <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">ScrolLess</a>
-                is my working experiment in this direction — a unified social and news feed
-                aggregator built around this architecture. An external AI agent handles scraping
-                the platforms I follow, encrypts the payload using the device's public key, and
-                delivers it through a relay server that is deliberately blind to the content.
-                The app, a Preact PWA, reads from IndexedDB and renders, and the server itself
-                holds nothing beyond the encrypted ciphertext it routes.
+                is my experiment in this direction: a unified social and news feed built around the separation between
+                gathering content and presenting it. An external agent handles the platforms I follow and structures the
+                results into a common format. The application stores the resulting feed locally and renders it without
+                having direct integrations with those platforms itself.
             </p>
 
             <p>
-                The project is still in active development. The core delivery pipeline is working
-                — agent scraping, encrypted relay, device-side storage — and the architectural
-                principle of having no direct platform integrations in the app itself is
-                structural from the start rather than something to be added later. The full
-                range of sources, the preferences UI, and the multi-device sync tier are still
-                being built, so ScrolLess is less a finished product than a probe into what
-                this pattern feels like in practice.
+                The project is still in active development. I'm less interested in presenting it as a finished architecture
+                than in using it to test the underlying idea: <strong>how much of a content application is still necessary
+                when gathering the content becomes somebody else's problem?</strong>
+            </p>
+
+            <p>
+                There are significant obstacles between that idea and ordinary consumer software. Platforms may not want
+                agents accessing them this way. Giving an agent broad access introduces its own trust problem. Local data
+                ownership only means much if the architecture actually enforces it. And today's personal-agent tooling still
+                asks considerably more of users than a normal application does.
+            </p>
+
+            <p>
+                Those problems don't make the pattern uninteresting. They determine whether it can actually work. That's
+                where I'll go next.
             </p>
 
             <div class="article-closing">
