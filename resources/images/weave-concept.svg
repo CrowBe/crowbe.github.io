@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Weave: Jev weighs decisions; inference is a tool</title>
+  <desc id="desc">Goal and state feed Jev's bounded judgment. Runtime policy and authority filter an action frontier. Inference is requested as a tool and returns evidence to state.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#120e20"/><stop offset="1" stop-color="#101b3e"/></linearGradient>
+    <linearGradient id="jev" x2="1" y2="1"><stop stop-color="#fe5f55"/><stop offset="1" stop-color="#d84970"/></linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#8fa8ed"/></marker>
+    <marker id="return" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#fe8d85"/></marker>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <g fill="none" stroke="#8fa8ed" stroke-width="4" marker-end="url(#arrow)">
+    <path d="M300 282H394"/><path d="M625 282H712"/><path d="M898 282H944"/>
+    <path d="M1040 366V462H789"/>
+  </g>
+  <path d="M478 535H193V369" fill="none" stroke="#fe8d85" stroke-width="4" marker-end="url(#return)"/>
+  <text x="60" y="84" fill="#f0eef8" font-family="Montserrat,Arial,sans-serif" font-size="48" font-weight="800">Weave</text>
+  <text x="60" y="127" fill="#a19dbd" font-family="Montserrat,Arial,sans-serif" font-size="25">A runtime that weighs work, then uses the right capability</text>
+  <g font-family="Montserrat,Arial,sans-serif">
+    <rect x="60" y="207" width="240" height="158" rx="22" fill="#221c3d" stroke="#738ad0" stroke-width="3"/>
+    <text x="90" y="266" fill="#f0eef8" font-size="29" font-weight="700">Goal + state</text>
+    <text x="90" y="310" fill="#a19dbd" font-size="20">facts · constraints</text>
+    <text x="90" y="340" fill="#a19dbd" font-size="20">open work</text>
+    <rect x="394" y="190" width="231" height="192" rx="30" fill="url(#jev)"/>
+    <text x="509" y="271" fill="#fff" font-size="54" font-weight="800" text-anchor="middle">Jev</text>
+    <text x="509" y="317" fill="#fff" font-size="24" font-weight="600" text-anchor="middle">weighs options</text>
+    <rect x="712" y="207" width="186" height="158" rx="22" fill="#221c3d" stroke="#fe8d85" stroke-width="3"/>
+    <text x="805" y="266" fill="#f0eef8" font-size="27" font-weight="700" text-anchor="middle">Policy</text>
+    <text x="805" y="305" fill="#f0eef8" font-size="22" text-anchor="middle">+ authority</text>
+    <text x="805" y="340" fill="#a19dbd" font-size="18" text-anchor="middle">hard bounds</text>
+    <rect x="944" y="207" width="202" height="158" rx="22" fill="#221c3d" stroke="#738ad0" stroke-width="3"/>
+    <text x="1045" y="266" fill="#f0eef8" font-size="26" font-weight="700" text-anchor="middle">Action</text>
+    <text x="1045" y="305" fill="#f0eef8" font-size="26" font-weight="700" text-anchor="middle">frontier</text>
+    <text x="1045" y="340" fill="#a19dbd" font-size="18" text-anchor="middle">execute · ask · infer</text>
+    <rect x="478" y="462" width="311" height="146" rx="22" fill="#191430" stroke="#8fa8ed" stroke-width="3"/>
+    <text x="633" y="518" fill="#f0eef8" font-size="29" font-weight="700" text-anchor="middle">Inference tool</text>
+    <text x="633" y="557" fill="#a19dbd" font-size="20" text-anchor="middle">scoped request</text>
+    <text x="633" y="586" fill="#fe8d85" font-size="20" text-anchor="middle">result returns as evidence</text>
+  </g>
+</svg>

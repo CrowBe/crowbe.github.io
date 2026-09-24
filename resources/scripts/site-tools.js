@@ -11,7 +11,7 @@
 // reads. The page work lives in site-focus.js; this file only calls it.
 //
 // Edit ABOUT_BEN to control the only facts either consumer is allowed to use.
-// Sourced from resources/Benjamin_Crow_Resume.pdf — keep the two in sync.
+// Career facts come from the resume; project facts also reflect the linked repos.
 const ABOUT_BEN = {
   summary: [
     "Ben (Benjamin) Crow is a Full Stack AI Engineer based in Sydney, Australia.",
@@ -32,6 +32,8 @@ const ABOUT_BEN = {
     "Technical leadership: code review, cross-team pairing, internal documentation, and developer education.",
   ],
   projects: [
+    "Weave (experimental): goal-directed agent runtime that weighs available actions over explicit state, applies policy and authority boundaries, and requests inference as a tool when needed.",
+    "AgentFabric (MVP): runtime for stable AgentSOP semantic capabilities, with explicit ResourceRefs, grants, audit, and a path to crystallise new resolvers.",
     "agent.branch (in development): author and validate AI agent skills — chat-driven builder, logic diagrams, mocked test-runs, trigger checks, and portable SKILL.md export.",
     "ClawFace (in development): React Native (Expo) mobile app for supervising AI coding agents, with QR pairing, an Ed25519-authenticated WebSocket protocol, approval workflows, and push notifications.",
     "ScrolLess (open source): agent-powered feed aggregator with an end-to-end-encrypted relay — MCP server plus Fastify backend, Preact PWA client, and Web Push.",
