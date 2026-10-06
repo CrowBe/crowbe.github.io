@@ -14,12 +14,12 @@
 // Career facts come from the resume; project facts also reflect the linked repos.
 const ABOUT_BEN = {
   summary: [
-    "Ben (Benjamin) Crow is a Full Stack AI Engineer based in Sydney, Australia.",
+    "Ben (Benjamin) Crow is a Senior AI Engineer based in Sydney, Australia.",
     "He has 6+ years building production systems across TypeScript, React/Next.js, Ruby on Rails, Python, and event-driven architecture (Kafka, Temporal).",
     "He owns delivery end to end — from ambiguous product requirements through technical design, implementation, release, and iteration — with a focus on test coverage, performance, and maintainability.",
   ],
   experience: [
-    "Culture Amp, Sydney (Nov 2024 – present): Software Engineer working with LangChain, Next.js, Ruby on Rails, Python, and Kafka. Ships enterprise AI SaaS features end to end, led performance improvements ahead of a GA release, and helped drive company-wide adoption of AI-assisted development through tutorials and internal tooling.",
+    "Culture Amp, Sydney (Nov 2024 – present): Senior AI Engineer working with LangChain, Next.js, Ruby on Rails, Python, and Kafka. Ships enterprise AI SaaS features end to end, led performance improvements ahead of a GA release, and helped drive company-wide adoption of AI-assisted development through tutorials and internal tooling.",
     "Mars United Commerce ANZ (Dec 2020 – Nov 2024): progressed from Junior Engineer to Software Engineer / Product Lead. Cut issue resolution time by ~40%, removed security vulnerabilities via major Ruby and Rails upgrades, reduced local dev startup time by ~30%, and migrated legacy UIs from Material-UI to Tailwind with zero production issues.",
     "Career transition (2019 – 2020): moved from outdoor recreation into software via a 6-month Coder Academy intensive (MERN stack, Ruby on Rails), freelanced while based in Japan, and owned the testing strategy for a pre-launch startup app, catching critical security and scalability issues.",
     "Outdoor recreation industry (2011 – 2018): progressed from guide to Program Coordinator, managing logistics, participant safety, and teams across multi-day programs.",
@@ -32,11 +32,13 @@ const ABOUT_BEN = {
     "Technical leadership: code review, cross-team pairing, internal documentation, and developer education.",
   ],
   projects: [
-    "Weave (experimental): goal-directed agent runtime that weighs available actions over explicit state, applies policy and authority boundaries, and requests inference as a tool when needed.",
+    "Reno Layouts (deployed): browser-based renovation floor-plan studio (TypeScript, React, three.js) where an agent edits the same live 2D/3D model through WebMCP tools; runs fully client-side.",
+    "Weave (experimental): goal-directed agent runtime combining bounded model judgment with explicit authority, replayable evidence, capability crystallisation through TDD, and measured optimisation.",
     "AgentFabric (MVP): runtime for stable AgentSOP semantic capabilities, with explicit ResourceRefs, grants, audit, and a path to crystallise new resolvers.",
     "agent.branch (in development): author and validate AI agent skills — chat-driven builder, logic diagrams, mocked test-runs, trigger checks, and portable SKILL.md export.",
-    "ClawFace (in development): React Native (Expo) mobile app for supervising AI coding agents, with QR pairing, an Ed25519-authenticated WebSocket protocol, approval workflows, and push notifications.",
+    "ClawFace (in development): React Native (Expo) mobile app for supervising and messaging trusted AI agents via OpenClaw Gateway, with QR pairing, an Ed25519-authenticated WebSocket protocol, approval workflows, and push notifications.",
     "ScrolLess (open source): agent-powered feed aggregator with an end-to-end-encrypted relay — MCP server plus Fastify backend, Preact PWA client, and Web Push.",
+    "This site's agent (live): on-device browser model answers questions about Ben through explicit site functions, also exposed as WebMCP tools that move the page.",
     "crypto-price-pwa (production): live cryptocurrency price progressive web app.",
     "react-hooks-library (released): published NPM package of reusable React hooks.",
   ],
