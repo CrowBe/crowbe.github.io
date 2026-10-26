@@ -32,13 +32,10 @@ const ABOUT_BEN = {
     "Technical leadership: code review, cross-team pairing, internal documentation, and developer education.",
   ],
   projects: [
-    "Weave (experimental): goal-directed agent runtime that weighs available actions over explicit state, applies policy and authority boundaries, and requests inference as a tool when needed.",
-    "AgentFabric (MVP): runtime for stable AgentSOP semantic capabilities, with explicit ResourceRefs, grants, audit, and a path to crystallise new resolvers.",
-    "agent.branch (in development): author and validate AI agent skills — chat-driven builder, logic diagrams, mocked test-runs, trigger checks, and portable SKILL.md export.",
-    "ClawFace (in development): React Native (Expo) mobile app for supervising AI coding agents, with QR pairing, an Ed25519-authenticated WebSocket protocol, approval workflows, and push notifications.",
-    "ScrolLess (open source): agent-powered feed aggregator with an end-to-end-encrypted relay — MCP server plus Fastify backend, Preact PWA client, and Web Push.",
-    "crypto-price-pwa (production): live cryptocurrency price progressive web app.",
-    "react-hooks-library (released): published NPM package of reusable React hooks.",
+    "Reno Layouts (deployed): browser-based renovation floor-plan studio (TypeScript, React, three.js) where an agent edits the live 2D/3D model through WebMCP tools.",
+    "Weave (active development): goal-directed agent runtime that weighs available actions over explicit state, applies policy and authority boundaries, and requests inference as a tool when needed.",
+    "ScrolLess (active development): agent-powered feed aggregator with an end-to-end-encrypted relay — MCP server plus Fastify backend, Preact PWA client, and Web Push.",
+    "This site's agent (deployed): on-device browser model that answers questions about Ben's work through explicit site functions, also exposed as WebMCP tools.",
   ],
   education: [
     "Coder Academy: Diploma of Information Technology (MERN stack, Ruby on Rails), 2019.",
@@ -58,7 +55,7 @@ const ABOUT_BEN = {
 
   // Every answer is followed by a note about what the page just did, so a
   // remote agent knows the visitor's screen moved and can talk about it
-  // ("I've highlighted ClawFace for you") instead of describing a page the
+  // ("I've highlighted ScrolLess for you") instead of describing a page the
   // human isn't looking at.
   const focusNote = (targets) => {
     if (!targets || !targets.length) return "";
@@ -127,7 +124,7 @@ const ABOUT_BEN = {
         properties: {
           highlight: {
             type: "string",
-            description: "Optional project name or page id to scroll to and highlight, e.g. \"agent.branch\" or \"project-clawface\".",
+            description: "Optional project name or page id to scroll to and highlight, e.g. \"Weave\" or \"project-reno-layouts\".",
           },
         },
       },
