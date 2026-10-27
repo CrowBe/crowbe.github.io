@@ -26,7 +26,7 @@
   const reduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // Normalise for matching: lowercase, strip punctuation that people and
-  // models drift on ("agent.branch" / "agent branch" / "agentbranch").
+  // models drift on ("Reno Layouts" / "reno-layouts" / "renolayouts").
   const normalise = (value) =>
     String(value || "")
       .toLowerCase()
@@ -119,7 +119,7 @@
         element: card,
         aliases: [id, label, squash(label), repo ? slugFromHref(repo.getAttribute("href")) : "", ...tags],
         // Project names are distinctive enough to scan prose for; the
-        // squashed form catches "agentbranch" as well as "agent.branch".
+        // squashed form catches "renolayouts" as well as "Reno Layouts".
         phrases: [label, squash(label)],
       });
     });
@@ -191,7 +191,7 @@
         alias = target;
       }
       // Partial match is a last resort, and the longest alias wins so
-      // "hooks library" beats a bare "hooks".
+      // "reno layouts" beats a bare "layouts".
       const partial = target.aliases.find(
         (a) => a.length >= 4 && (a.includes(wanted) || wanted.includes(a))
       );
@@ -218,7 +218,7 @@
         const found = haystack.indexOf(` ${phrase} `);
         if (found !== -1 && (at === -1 || found < at)) at = found;
       }
-      // "agent.branch" written as "agentbranch" survives normalisation
+      // "Reno Layouts" written as "renolayouts" survives normalisation
       // as one token, so check the squashed form too.
       if (at === -1 && target.squashedPhrases.some((p) => squashedHaystack.includes(p))) at = haystack.length;
       if (at !== -1) hits.push({ target, at });
@@ -226,7 +226,7 @@
     hits.sort((a, b) => a.at - b.at || KIND_RANK[a.target.kind] - KIND_RANK[b.target.kind]);
 
     // Drop a technology that's only there because a project already
-    // matched on it (highlighting "React" under a ClawFace answer is noise).
+    // matched on it (highlighting "React" under a Reno Layouts answer is noise).
     const specific = hits.some((hit) => hit.target.kind === "project" || hit.target.kind === "writing");
     return hits
       .filter((hit) => !(specific && hit.target.kind === "tech"))
