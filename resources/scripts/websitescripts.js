@@ -74,6 +74,64 @@ if (!fabScrollDriven) {
   handleFabVisibility();
 }
 
+// ── Two small moments with the guide firefly ──
+// The firefly normally only flies when the chat or an agent points at
+// something. It also makes two one-off visits per browsing session:
+//   1. the first time the projects come into view, it finds the first
+//      project's title (the one you can try live) and pops beside it;
+//   2. when someone reaches the bottom of the page, it spirals into the
+//      mail icon and the envelope seals.
+// guide-sprite.js does the flying and skips both under reduced motion.
+(() => {
+  if (!("IntersectionObserver" in window)) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const firstTime = (key) => {
+    try {
+      if (sessionStorage.getItem(key)) return false;
+      sessionStorage.setItem(key, "1");
+    } catch (e) {}
+    return true;
+  };
+  const visit = (detail) => document.dispatchEvent(new CustomEvent("guide-visit", { detail }));
+  const whenSeen = (target, options, run) => {
+    if (!target) return;
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      run();
+    }, options);
+    observer.observe(target);
+  };
+
+  // 1. Projects: wait until the title sits comfortably in view.
+  const firstProject = document.querySelector(".project-card");
+  const projectTitle = firstProject && firstProject.querySelector(".card-header h3");
+  whenSeen(projectTitle, { threshold: 1, rootMargin: "0px 0px -30% 0px" }, () => {
+    if (firstTime("guide-visit-projects")) setTimeout(() => visit({ element: firstProject }), 350);
+  });
+
+  // 2. The bottom: the footer only shows once you've read everything.
+  const mail = document.querySelector(".icon-bar .mail");
+  whenSeen(document.querySelector("body > footer"), { threshold: 0.6 }, () => {
+    if (!mail || !firstTime("guide-visit-mail")) return;
+    setTimeout(
+      () =>
+        visit({
+          element: mail,
+          anchor: mail,
+          dive: true,
+          onArrive: () => {
+            mail.classList.remove("is-sealed");
+            void mail.offsetWidth; // restart the animation if it ran before
+            mail.classList.add("is-sealed");
+          },
+        }),
+      250
+    );
+  });
+})();
+
 // ── Career route trail ──
 // Draws a wandering, dotted trail through each waypoint in the
 // "How I got here" list, like a walking track on a map. Each leg bulges

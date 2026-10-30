@@ -1307,6 +1307,52 @@ main > section:last-child {
   color: var(--coral-text);
 }
 
+/* The mail icon's flap can open above the envelope, so let it draw
+   outside the icon's box. When the guide firefly dives in (see
+   websitescripts.js) the flap flicks open, snaps shut and the icon
+   glows once. */
+.icon-bar .mail svg {
+  overflow: visible;
+}
+.icon-bar .mail .mail-flap {
+  transform-box: view-box;
+  transform-origin: 12px 6px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .icon-bar .mail.is-sealed {
+    animation: mail-glow 1.8s ease-out;
+  }
+  .icon-bar .mail.is-sealed .mail-flap {
+    animation: mail-seal 0.9s cubic-bezier(0.3, 1.5, 0.5, 1);
+  }
+}
+@keyframes mail-seal {
+  0% {
+    transform: scaleY(1);
+  }
+  30% {
+    transform: scaleY(-1);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+@keyframes mail-glow {
+  0% {
+    color: var(--coral-text);
+    border-color: var(--coral);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--coral) 45%, transparent),
+      0 0 26px 4px color-mix(in srgb, var(--coral) 45%, transparent);
+  }
+  60% {
+    color: var(--coral-text);
+    border-color: var(--coral);
+  }
+  100% {
+    box-shadow: 0 0 0 16px transparent, 0 0 26px 4px transparent;
+  }
+}
+
 /* ── Site footer (scoped so it never hits an article's footer) ── */
 body > footer {
   border-top: 1px solid var(--border);
