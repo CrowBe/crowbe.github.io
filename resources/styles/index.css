@@ -437,7 +437,7 @@ nav {
 }
 
 .nav-surface {
-  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
   -webkit-backdrop-filter: blur(14px) saturate(1.3);
   backdrop-filter: blur(14px) saturate(1.3);
   transition: background-color 0.3s;
@@ -457,7 +457,7 @@ nav {
   }
   @container navbar scroll-state(stuck: top) {
     .nav-surface {
-      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
       -webkit-backdrop-filter: blur(14px) saturate(1.3);
       backdrop-filter: blur(14px) saturate(1.3);
     }
@@ -1105,10 +1105,6 @@ main > section:last-child {
 }
 
 /* ── Writing ── */
-.writing-card-list {
-  display: grid;
-  gap: 2.5rem;
-}
 .writing-card-link {
   display: block;
   height: 100%;
@@ -1130,9 +1126,15 @@ main > section:last-child {
   line-height: 1.2;
   transition: color 0.2s;
 }
-.writing-card-link:hover .card-header h3,
 .writing-card-link:focus-visible .card-header h3 {
   color: var(--coral-text);
+}
+/* hover colour only where hover is real, so a tap on a phone
+   doesn't leave the title stuck in coral */
+@media (hover: hover) {
+  .writing-card-link:hover .card-header h3 {
+    color: var(--coral-text);
+  }
 }
 .writing-card-meta {
   display: flex;
@@ -1149,23 +1151,15 @@ main > section:last-child {
   color: var(--text-2);
 }
 
-@media (min-width: 900px) {
-  .writing-card-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 3rem;
-  }
-  .writing-card-list .writing-card-meta {
-    flex-direction: column;
-    gap: 0.1rem;
-  }
-}
 
-/* The three-part series is a real sequence, so it gets numbers. */
+/* Both writing sets are real three-part series, so they get numbers. */
 .writing-series {
-  margin-top: clamp(3.5rem, 8vh, 5rem);
   padding: clamp(1.5rem, 4vw, 2.75rem);
   border-radius: calc(var(--radius) + 6px);
   background: var(--surface);
+}
+.writing-series + .writing-series {
+  margin-top: clamp(1.5rem, 4vh, 2.5rem);
 }
 .series-heading {
   margin: 0 0 2rem;
