@@ -74,17 +74,65 @@ if (!fabScrollDriven) {
   handleFabVisibility();
 }
 
-// ── Keyboard navigation for horizontal card rails ──
-document.querySelectorAll(".project-list, .writing-card-list").forEach((list) => {
-  list.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-      e.preventDefault();
-      const card = list.firstElementChild;
-      const step = card ? card.offsetWidth + 24 : 320;
-      list.scrollBy({ left: e.key === "ArrowRight" ? step : -step });
+// ── Career route trail ──
+// Draws a wandering, dotted trail through each waypoint in the
+// "How I got here" list, like a walking track on a map. Each leg bulges
+// to alternate sides so the line meanders without ever leaving its
+// gutter. Decorative only: the list reads the same without it, and
+// CSS shows a straight dotted line until .has-trail is added.
+(() => {
+  const list = document.querySelector(".route-list");
+  if (!list || !("ResizeObserver" in window)) return;
+
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("class", "route-line");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  const path = document.createElementNS(NS, "path");
+  svg.appendChild(path);
+  list.prepend(svg);
+
+  // Fixed, hand-picked wobble so the trail looks walked, not generated.
+  const WOBBLE = [1, 0.65, 1.2, 0.8, 1.05, 0.7];
+
+  const draw = () => {
+    const stops = list.querySelectorAll(".route-stop");
+    if (stops.length < 2) return;
+    const box = list.getBoundingClientRect();
+    // Waypoint centres come from each stop's ::before dot, so CSS stays
+    // the single source of truth for where the dots sit.
+    const pts = Array.from(stops, (stop) => {
+      const dot = getComputedStyle(stop, "::before");
+      const r = stop.getBoundingClientRect();
+      return {
+        x: r.left - box.left + parseFloat(dot.left) + parseFloat(dot.width) / 2,
+        y: r.top - box.top + parseFloat(dot.top) + parseFloat(dot.height) / 2,
+      };
+    });
+    if (pts.some((p) => !Number.isFinite(p.x) || !Number.isFinite(p.y))) return;
+
+    // Max sideways swing (px) comes from CSS so it tracks the gutter width.
+    const reach = parseFloat(getComputedStyle(list).getPropertyValue("--trail-reach")) || 16;
+    let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const a = pts[i];
+      const b = pts[i + 1];
+      const dy = b.y - a.y;
+      const side = i % 2 === 0 ? 1 : -1;
+      const s = side * Math.min(reach * WOBBLE[i % WOBBLE.length], dy * 0.14);
+      d +=
+        ` C ${(a.x + s).toFixed(1)} ${(a.y + dy * 0.32).toFixed(1)},` +
+        ` ${(b.x + s).toFixed(1)} ${(b.y - dy * 0.32).toFixed(1)},` +
+        ` ${b.x.toFixed(1)} ${b.y.toFixed(1)}`;
     }
-  });
-});
+    path.setAttribute("d", d);
+    list.classList.add("has-trail");
+  };
+
+  new ResizeObserver(draw).observe(list);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+})();
 
 // ── WebGL2 shader hero ────────────────────────────────────────
 // Layered simplex/FBM flow field in the brand palette, with eased

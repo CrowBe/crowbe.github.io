@@ -1,20 +1,19 @@
 /* ════════════════════════════════════════════════════════════════
-   Ben Crow — portfolio · "precision instrument"
-   Dependency-free, progressively enhanced:
-   · OKLCH tokens + light-dark()      · scroll-driven animations
-   · cross-document view transitions  · anchor positioning nav
-   · scroll-state() sticky nav        · CSS carousel pseudo-elements
-   · @property conic card borders     · popover mobile nav
-   Every enhancement is gated with @supports; the site remains fully
-   usable with none of them.
+   Ben Crow — portfolio · "night route"
+   The page continues the hero shader: a real indigo night, a pale
+   periwinkle glow, and coral used only as the firefly glint (now,
+   focus, the agent). One bold element — the career route — and
+   everything else quiet.
+
+   Type: Familjen Grotesk for names and navigation, Literata for
+   reading, Fira Code only for the hero prompt and code.
+
+   Progressive enhancement is unchanged: view transitions, anchor
+   positioning, scroll-state() and scroll timelines are all gated
+   with @supports; the site is fully usable without them.
    ════════════════════════════════════════════════════════════════ */
 
 /* ── Registered custom properties (no-ops where unsupported) ── */
-@property --angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
 @property --hero-angle {
   syntax: "<angle>";
   inherits: false;
@@ -32,213 +31,137 @@
 }
 
 /* ── Design tokens ─────────────────────────────────────────────
-   Hex fallbacks first; OKLCH + light-dark() upgrade below. */
+   Light ("daylight") on :root, dark ("night") on [data-theme=dark].
+   The inline script in <head> always sets data-theme. Token names
+   are shared with writing.css and ask-ben.js — keep them stable. */
 :root {
-  /* brand primitives */
-  --coral: #fe5f55;
-  --indigo: #0a2463;
+  /* brand primitives (theme-independent) */
+  --coral: #f95f5b; /* the glint */
+  --indigo: #0a2463; /* hero shader indigo */
   --indigo-bright: #3d63c0;
   --indigo-deep: #101b3e;
-  --ink: #0d0221;
+  --ink: #0d0221; /* hero shader ink */
 
-  /* fixed dark-surface tokens (hero / nav / rails / contact / footer) */
-  --d-bg: #120e20;
-  --d-surface: #191430;
-  --d-surface-2: #221c3d;
-  --d-text: #f0eef8;
-  --d-muted: #a19dbd;
-  --d-border: rgba(240, 238, 248, 0.11);
+  /* fixed night tokens (chat panel / tooltips stay dark in both themes) */
+  --d-bg: #151739;
+  --d-surface: #1d2049;
+  --d-surface-2: #262956;
+  --d-text: #eceef9;
+  --d-muted: #a3a9c5;
+  --d-border: rgba(236, 238, 249, 0.13);
 
-  /* theme tokens — light values (dark overrides below) */
-  --bg: #fbfaf7;
-  --surface: #ffffff;
-  --tint: #f2f1ec;
-  --text: #16132a;
-  --muted: #5d5a72;
-  --border: rgba(22, 19, 42, 0.14);
-  --accent: #35508f;
-  --accent-2: #6b7fa3;
+  /* daylight */
+  --bg: #f3f6fd;
+  --surface: #e8ecf9;
+  --surface-2: #dde3f5;
+  --tint: #e8ecf9;
+  --text: #16193e;
+  --text-2: #2d3254;
+  --muted: #535977;
+  --border: #cad0e5;
+  --accent: #3c54a3; /* periwinkle glow, darkened for daylight */
+  --accent-2: #535977;
+  --coral-text: #ba3535;
+  --trail: #7f90cf;
+  --focus-ring: rgba(249, 95, 91, 0.45);
 
-  /* theme tokens for the formerly dark-anchored regions
-     (hero / nav / rails / contact / footer) — light values here,
-     dark overrides restore the original fixed dark palette */
-  --coral-text: #c9433a;
-  /* agent-focus highlight ring — coral at low alpha, theme-independent */
-  --focus-ring: rgba(254, 95, 85, 0.5);
-  --hero-a: #f6f4ee;
-  --hero-b: #ccd9f2;
-  --scrim-base: #fbfaf7;
-  --nav-bg: #c4d2ef;
-  --card-bg: #ffffff;
-  --chip-bg: #ffffff;
-  --tech-card-bg: #dfe6f5;
-  --section-bg: #eef1f8;
-  --section-deep: #dfe6f5;
-  --footer-bg: #d5def0;
-  --card-shadow-c: rgba(43, 42, 69, 0.2);
-  --card-shadow-hover-c: rgba(43, 42, 69, 0.28);
+  /* hero (CSS fallback gradient + scrim) */
+  --hero-a: #f3f6fd;
+  --hero-b: #c9d4f2;
+  --scrim-base: #f3f6fd;
 
-  /* legacy aliases (referenced by inline styles in the HTML) */
+  /* legacy aliases still referenced by writing.css / ask-ben.js */
+  --nav-bg: var(--bg);
+  --card-bg: var(--surface);
+  --chip-bg: var(--surface);
+  --section-bg: var(--bg);
+  --section-deep: var(--surface);
+  --footer-bg: var(--bg);
   --contrast: var(--coral);
   --text-muted: var(--muted);
 
   /* typography */
-  --font-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "Fira Code", "Fira Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  --step--1: clamp(0.76rem, 0.73rem + 0.15vw, 0.85rem);
-  --step-0: clamp(0.95rem, 0.9rem + 0.25vw, 1.08rem);
-  --step-1: clamp(1.14rem, 1.05rem + 0.45vw, 1.38rem);
-  --step-2: clamp(1.4rem, 1.24rem + 0.8vw, 1.85rem);
-  --step-3: clamp(1.75rem, 1.45rem + 1.5vw, 2.55rem);
-  --step-4: clamp(2.2rem, 1.6rem + 3vw, 3.8rem);
+  --font-display: "Familjen Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Literata", "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-display);
+  --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* scale: 14 · 17/18 · 21 · 24 · 36 · 48 · hero */
+  --step--1: clamp(0.82rem, 0.8rem + 0.1vw, 0.875rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --step-1: clamp(1.15rem, 1.07rem + 0.35vw, 1.3125rem);
+  --step-2: clamp(1.3rem, 1.17rem + 0.55vw, 1.5rem);
+  --step-3: clamp(1.75rem, 1.45rem + 1.3vw, 2.25rem);
+  --step-4: clamp(2.25rem, 1.75rem + 2.2vw, 3rem);
   --step-5: clamp(2.9rem, 1.7rem + 6vw, 6rem);
 
-  --nav-h: 62px;
-  --rail-pad: clamp(1.25rem, 5vw, 3.5rem);
-  --radius: 16px;
+  --nav-h: 60px;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  --measure: 40rem;
+  --radius: 14px;
 
-  color-scheme: light dark;
+  color-scheme: light;
   accent-color: var(--coral);
 }
 
-/* Manual theme toggle flips color-scheme so light-dark() responds */
-:root[data-theme="light"] {
-  color-scheme: light;
-}
 :root[data-theme="dark"] {
   color-scheme: dark;
-}
 
-:root[data-theme="dark"] {
-  --bg: #14111f;
-  --surface: #1c1830;
-  --tint: #181428;
-  --text: #edebf6;
-  --muted: #a09cba;
-  --border: rgba(237, 235, 246, 0.12);
-  --accent: #97a9dd;
-  --accent-2: #7186ad;
-
+  --bg: #151739;
+  --surface: #1d2049;
+  --surface-2: #262956;
+  --tint: #1d2049;
+  --text: #eceef9;
+  --text-2: #cdd0e2;
+  --muted: #a3a9c5;
+  --border: #393e67;
+  --accent: #acbaf5;
+  --accent-2: #a3a9c5;
   --coral-text: var(--coral);
+  --trail: #8696dc;
+
   --hero-a: var(--ink);
   --hero-b: var(--indigo);
   --scrim-base: var(--ink);
-  --nav-bg: var(--ink);
-  --card-bg: var(--d-surface);
-  --chip-bg: var(--d-surface-2);
-  --tech-card-bg: var(--tint);
-  --section-bg: var(--d-bg);
-  --section-deep: var(--indigo-deep);
-  --footer-bg: var(--ink);
-  --card-shadow-c: rgba(6, 2, 16, 0.55);
-  --card-shadow-hover-c: rgba(6, 2, 16, 0.7);
 }
-
-/* OKLCH + light-dark() upgrade — one source of truth per token */
-@supports (color: oklch(50% 0.1 200)) and (color: light-dark(#000, #fff)) {
-  :root,
-  :root[data-theme="light"],
-  :root[data-theme="dark"] {
-    --coral: oklch(68.5% 0.19 25);
-    --indigo: oklch(32% 0.13 265);
-    --indigo-bright: oklch(53% 0.15 265);
-    --indigo-deep: oklch(24% 0.08 272);
-    --ink: oklch(15% 0.07 305);
-
-    --d-bg: oklch(18% 0.045 295);
-    --d-surface: oklch(22.5% 0.055 295);
-    --d-surface-2: oklch(26.5% 0.06 295);
-    --d-text: oklch(94.5% 0.012 290);
-    --d-muted: oklch(72% 0.035 290);
-    --d-border: color-mix(in oklch, oklch(94.5% 0.012 290) 12%, transparent);
-
-    --bg: light-dark(oklch(98.4% 0.004 95), oklch(17% 0.03 295));
-    --surface: light-dark(oklch(100% 0 0), oklch(21.5% 0.04 295));
-    --tint: light-dark(oklch(95.9% 0.006 95), oklch(19.5% 0.035 295));
-    --text: light-dark(oklch(21% 0.045 295), oklch(93.5% 0.012 290));
-    --muted: light-dark(oklch(46.5% 0.03 290), oklch(71% 0.03 290));
-    --border: light-dark(
-      color-mix(in oklch, oklch(21% 0.045 295) 15%, transparent),
-      color-mix(in oklch, oklch(93.5% 0.012 290) 13%, transparent)
-    );
-    --accent: light-dark(oklch(46% 0.1 265), oklch(76% 0.08 268));
-    --accent-2: light-dark(oklch(57% 0.06 265), oklch(64% 0.05 268));
-
-    --coral-text: light-dark(oklch(55% 0.175 25), var(--coral));
-    --hero-a: light-dark(oklch(96.5% 0.006 95), var(--ink));
-    --hero-b: light-dark(oklch(87% 0.045 268), var(--indigo));
-    --scrim-base: light-dark(oklch(98.4% 0.004 95), var(--ink));
-    --nav-bg: light-dark(oklch(86.5% 0.062 268), var(--ink));
-    --card-bg: light-dark(oklch(100% 0 0), var(--d-surface));
-    --chip-bg: light-dark(oklch(100% 0 0), var(--d-surface-2));
-    --tech-card-bg: light-dark(oklch(92.5% 0.035 268), oklch(19.5% 0.035 295));
-    --section-bg: light-dark(oklch(94.8% 0.014 268), var(--d-bg));
-    --section-deep: light-dark(oklch(91.5% 0.028 268), var(--indigo-deep));
-    --footer-bg: light-dark(oklch(88.5% 0.035 268), var(--ink));
-    --card-shadow-c: light-dark(oklch(28% 0.04 285 / 0.2), oklch(10% 0.03 295 / 0.55));
-    --card-shadow-hover-c: light-dark(oklch(28% 0.04 285 / 0.28), oklch(10% 0.03 295 / 0.7));
-  }
-}
-
-/* Formerly dark-anchored regions (hero / nav / rails / contact /
-   footer) now follow the theme via the tokens above; in dark mode
-   those tokens resolve to the original fixed dark palette. */
 
 /* ── Cross-document view transitions ──────────────────────────────
-   Opt in with the standardized @view-transition at-rule. This is the
-   modern replacement for the earlier, non-standard
-   <meta name="view-transition"> opt-in: every same-origin page just
-   needs this rule (all pages load this stylesheet) for the navigation
-   between them to be captured and animated. */
+   Opt in with the standardized @view-transition at-rule; every
+   same-origin page loads this stylesheet. */
 @view-transition {
   navigation: auto;
 }
-
-/* Respect reduced-motion: skip the animation entirely (instant nav). */
 @media (prefers-reduced-motion: reduce) {
   @view-transition {
     navigation: none;
   }
 }
 
-/* Root cross-fade — a touch quicker than the UA default, eased. This is
-   the fallback for any navigation the directional types below don't
-   cover (e.g. same-depth links). */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 0.32s;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Persistent chrome: the sticky nav (view-transition-name: site-nav, set
-   on the <nav> further down) is lifted into its own group, so it stays
-   anchored and cross-fades its contents instead of sliding with the page. */
+/* The sticky nav is its own group so it stays put and cross-fades. */
 ::view-transition-group(site-nav) {
   animation-duration: 0.32s;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Shared "hero title" morph. Each writing title carries a unique
-   view-transition-name (so a card title on one page pairs with the
-   matching <h1> on the next) *and* this shared view-transition-class,
-   which lets us tune every one of those morphs from a single rule
-   instead of repeating the selector for each name. */
+/* Writing titles morph between the home page, /writing/ and the
+   article <h1>; one class tunes every one of those morphs. */
 .writing-card h3,
 .article-title,
 .article-header h1 {
   view-transition-class: vt-title;
 }
-
 ::view-transition-group(.vt-title) {
   animation-duration: 0.45s;
   animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
 }
 
-/* Directional page slides, driven by the forwards/backwards transition
-   types that view-transitions.js assigns per navigation and read here via
-   the :active-view-transition-type() pseudo-class. Deliberately subtle —
-   a short translate plus fade, not a full-width swipe — and gated behind
-   no-preference so reduced-motion users never see them. */
+/* Directional slides from view-transitions.js (forwards / backwards). */
 @media (prefers-reduced-motion: no-preference) {
   :root:active-view-transition-type(forwards)::view-transition-old(root) {
     animation: vt-exit-left 0.32s both cubic-bezier(0.4, 0, 0.2, 1);
@@ -253,7 +176,6 @@
     animation: vt-enter-left 0.36s both cubic-bezier(0.2, 0, 0.2, 1);
   }
 }
-
 @keyframes vt-exit-left {
   to {
     opacity: 0;
@@ -297,21 +219,21 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   font-size: var(--step-0);
   line-height: 1.65;
+  font-optical-sizing: auto;
   background-color: var(--bg);
   color: var(--text);
-  text-align: center;
   overflow-x: clip;
   transition: background-color 0.3s, color 0.3s;
-  counter-reset: section;
 }
 
 h1,
 h2,
 h3,
 h4 {
+  font-family: var(--font-display);
   text-wrap: balance;
 }
 p {
@@ -320,6 +242,11 @@ p {
 
 a {
   color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+a:hover {
+  color: var(--coral-text);
 }
 ::selection {
   background: var(--coral);
@@ -327,14 +254,32 @@ a {
 }
 :focus-visible {
   outline: 2px solid var(--coral);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
 [id] {
   scroll-margin-top: calc(var(--nav-h) + 16px);
 }
 
-/* ── Reading / scroll progress bar (scroll-driven) ── */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.wrap {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ── Reading progress (scroll-driven; articles mostly) ── */
 .scroll-progress {
   display: none;
 }
@@ -346,7 +291,7 @@ a {
       inset: 0 0 auto 0;
       height: 2px;
       z-index: 99;
-      background: linear-gradient(90deg, var(--indigo-bright), var(--coral));
+      background: var(--coral);
       transform-origin: 0 50%;
       animation: progress-grow linear both;
       animation-timeline: scroll(root);
@@ -364,8 +309,9 @@ a {
 }
 
 /* ── Hero ─────────────────────────────────────────────────────
-   WebGL2 shader canvas injected by JS (adds .webgl); the CSS
-   fallback is an animated gradient on @property-registered vars. */
+   Unchanged composition. WebGL2 shader canvas (JS adds .webgl);
+   the CSS fallback is an animated gradient. The scrim now fades
+   into the page background so the night continues below. */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -373,12 +319,12 @@ a {
   display: grid;
   place-items: center;
   overflow: clip;
+  text-align: center;
   color: var(--text);
   background:
     radial-gradient(80% 100% at var(--hero-x) var(--hero-y), rgba(61, 99, 192, 0.38), transparent 64%),
     radial-gradient(55% 70% at 18% 82%, rgba(254, 95, 85, 0.09), transparent 62%),
     linear-gradient(var(--hero-angle), var(--hero-a), var(--hero-b));
-  transition: color 0.3s;
 }
 @media (prefers-reduced-motion: no-preference) {
   .hero {
@@ -412,16 +358,14 @@ a {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(78% 62% at 50% 52%, rgba(13, 2, 33, 0.4), transparent 72%),
-    linear-gradient(to bottom, rgba(13, 2, 33, 0.32), transparent 30%, transparent 66%, rgba(13, 2, 33, 0.55));
-  background:
     radial-gradient(78% 62% at 50% 52%, color-mix(in srgb, var(--scrim-base) 40%, transparent), transparent 72%),
     linear-gradient(
       to bottom,
       color-mix(in srgb, var(--scrim-base) 32%, transparent),
       transparent 30%,
-      transparent 66%,
-      color-mix(in srgb, var(--scrim-base) 55%, transparent)
+      transparent 62%,
+      color-mix(in srgb, var(--bg) 70%, transparent) 90%,
+      var(--bg)
     );
 }
 
@@ -433,10 +377,9 @@ a {
 .hero h1 {
   margin: 0;
   font-size: var(--step-5);
-  font-weight: 750;
-  letter-spacing: -0.028em;
-  line-height: 1.02;
-  text-shadow: 0 2px 24px rgba(13, 2, 33, 0.45);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
   text-shadow: 0 2px 24px color-mix(in srgb, var(--scrim-base) 45%, transparent);
 }
 .hero h1 em {
@@ -444,20 +387,19 @@ a {
   color: var(--coral-text);
 }
 .hero h2 {
-  margin: 1rem 0 0;
+  margin: 1.1rem 0 0;
   font-size: var(--step-2);
   font-weight: 500;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.005em;
   color: var(--text);
-  opacity: 0.92;
-  text-shadow: 0 1px 16px rgba(13, 2, 33, 0.45);
+  opacity: 0.94;
   text-shadow: 0 1px 16px color-mix(in srgb, var(--scrim-base) 45%, transparent);
 }
 .hero-prompt {
   margin: 2.4rem auto 0;
   font-family: var(--font-mono);
   font-size: var(--step--1);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   color: var(--muted);
 }
 .hero-prompt .prompt-glyph {
@@ -484,8 +426,8 @@ a {
 }
 
 /* ── Nav ──────────────────────────────────────────────────────
-   Sticky; scroll-state() container adds translucent blur when
-   stuck. Fallback: translucent blur always. */
+   Sticky; picks up a translucent blur once stuck (scroll-state()),
+   with an always-translucent fallback. */
 nav {
   position: sticky;
   top: 0;
@@ -495,32 +437,32 @@ nav {
 }
 
 .nav-surface {
-  background: rgba(13, 2, 33, 0.85);
-  background: color-mix(in srgb, var(--nav-bg) 85%, transparent);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
-  transition: background-color 0.3s, border-color 0.3s;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  backdrop-filter: blur(14px) saturate(1.3);
+  transition: background-color 0.3s;
 }
-
 @supports (container-type: scroll-state) {
   nav {
     container-type: scroll-state;
     container-name: navbar;
   }
   .nav-surface {
-    background: var(--nav-bg);
+    background: var(--bg);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
-    border-bottom-color: transparent;
+  }
+  .contrast-bar {
+    opacity: 0;
   }
   @container navbar scroll-state(stuck: top) {
     .nav-surface {
-      background: rgba(13, 2, 33, 0.72);
-      background: color-mix(in srgb, var(--nav-bg) 72%, transparent);
-      -webkit-backdrop-filter: blur(14px) saturate(1.4);
-      backdrop-filter: blur(14px) saturate(1.4);
-      border-bottom-color: var(--border);
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      -webkit-backdrop-filter: blur(14px) saturate(1.3);
+      backdrop-filter: blur(14px) saturate(1.3);
+    }
+    .contrast-bar {
+      opacity: 1;
     }
   }
 }
@@ -530,33 +472,25 @@ nav {
   align-items: center;
   justify-content: space-between;
   height: var(--nav-h);
-  padding: 0 clamp(1rem, 4vw, 2rem);
-  max-width: 1200px;
+  max-width: 72rem;
   margin: 0 auto;
+  padding: 0 var(--gutter);
   position: relative;
 }
 
 .nav-brand {
-  font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.08em;
-  color: var(--coral-text);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+  color: var(--text);
   text-decoration: none;
-  border: 1px solid rgba(254, 95, 85, 0.35);
-  border: 1px solid color-mix(in srgb, var(--coral-text) 40%, transparent);
-  border-radius: 8px;
-  padding: 0.3rem 0.55rem;
-  transition: border-color 0.2s, background-color 0.2s;
 }
 .nav-brand:visited {
-  color: var(--coral-text);
+  color: var(--text);
 }
-.nav-brand:hover,
-.nav-brand:focus-visible {
-  border-color: var(--coral);
-  background: rgba(254, 95, 85, 0.08);
-  background: color-mix(in srgb, var(--coral) 10%, transparent);
+.nav-brand:hover {
+  color: var(--coral-text);
 }
 
 .nav-toggle {
@@ -566,7 +500,7 @@ nav {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 6px;
+  padding: 10px 6px;
   z-index: 11;
 }
 .nav-toggle .nav-toggle-bar {
@@ -587,24 +521,22 @@ nav {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Mobile menu — native popover where supported, .open class fallback
-   (JS removes [popover] when the Popover API is unavailable). */
+/* Mobile menu — native popover where supported, .open fallback. */
 .nav-links {
   display: none;
   flex-direction: column;
+  align-items: stretch;
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
-  background-color: var(--nav-bg);
-  padding: 0.75rem 0 1.25rem;
-  text-align: center;
+  background-color: var(--bg);
+  padding: 0.5rem var(--gutter) 1.25rem;
   border-bottom: 1px solid var(--border);
 }
 .nav-links.open {
   display: flex;
 }
-
 @supports selector(:popover-open) {
   #nav-links[popover] {
     position: fixed;
@@ -614,29 +546,32 @@ nav {
     width: 100%;
     margin: 0;
     border: 0;
+    border-bottom: 1px solid var(--border);
     color: inherit;
   }
   #nav-links:popover-open {
     display: flex;
-    background: rgba(13, 2, 33, 0.92);
-    background: color-mix(in srgb, var(--nav-bg) 92%, transparent);
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
     -webkit-backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
   }
   #nav-links::backdrop {
-    background: rgba(6, 2, 16, 0.35);
+    background: rgba(6, 4, 20, 0.35);
   }
 }
 
 .nav-links a {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
   text-decoration: none;
   color: var(--text);
-  padding: 0.8rem 1rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--border);
   transition: color 0.2s;
+}
+.nav-links a:first-child {
+  border-top: 0;
 }
 .nav-links a:visited {
   color: var(--text);
@@ -644,9 +579,6 @@ nav {
 .nav-links a:hover,
 .nav-links a:focus-visible {
   color: var(--coral-text);
-  text-decoration: underline;
-  text-decoration-color: var(--coral-text);
-  text-underline-offset: 6px;
 }
 
 .theme-toggle {
@@ -660,20 +592,19 @@ nav {
   justify-content: center;
   cursor: pointer;
   color: var(--text);
-  margin: 0.5rem auto 0;
+  margin: 0.75rem 0 0;
   transition: border-color 0.2s, color 0.2s;
 }
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
   border-color: var(--coral);
-  color: var(--coral);
+  color: var(--coral-text);
 }
 .theme-toggle svg {
   width: 17px;
   height: 17px;
 }
-/* Icon shows the current selection: sun = light, moon = dark,
-   monitor = system default. */
+/* Icon shows the current selection: sun, moon, or monitor (system). */
 .theme-toggle .icon-moon,
 .theme-toggle .icon-system {
   display: none;
@@ -693,855 +624,15 @@ nav {
   display: none;
 }
 
+/* Hairline under the nav (appears once stuck where supported). */
 .contrast-bar {
-  margin: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--indigo-bright), var(--coral));
-  opacity: 0.9;
-  width: 100%;
+  height: 1px;
+  background: var(--border);
+  transition: opacity 0.3s;
 }
 
-/* ── Section headers ── */
-.header-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: clamp(4rem, 9vh, 6.5rem) 1.25rem 0.75rem;
-}
-.header-container h2 {
-  position: relative;
-  margin: 0;
-  font-size: var(--step-3);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-}
-.header-container h2::before {
-  counter-increment: section;
-  content: "0" counter(section);
-  display: block;
-  font-family: var(--font-mono);
-  font-size: var(--step--1);
-  font-weight: 400;
-  color: var(--coral);
-  letter-spacing: 0.4em;
-  /* Center the number over the heading text and offset the trailing
-     gap that letter-spacing adds after the last digit, so it stays
-     centred regardless of heading width. */
-  text-align: center;
-  text-indent: 0.4em;
-  margin-bottom: 0.7rem;
-}
-.header-container h2::after {
-  content: "";
-  display: block;
-  width: 3.25rem;
-  height: 2px;
-  margin: 1rem auto 0;
-  background: linear-gradient(90deg, var(--coral), var(--indigo-bright));
-}
-
-/* ── About ── */
-.about-section {
-  color: var(--text);
-  background-color: var(--bg);
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.intro-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 1.5rem 1.25rem 3rem;
-}
-.intro-container p {
-  margin: 0;
-  width: 100%;
-  max-width: 62ch;
-  line-height: 1.75;
-  color: var(--text);
-}
-
-.avatar-container {
-  height: 25vh;
-  width: 25vh;
-  max-height: 190px;
-  max-width: 190px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  box-shadow: 0 0 0 6px var(--tint), 0 14px 34px -16px rgba(13, 2, 33, 0.4);
-}
-.avatar-container img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.tech-grid-wrapper {
-  padding: 1.5rem 1rem 5rem;
-}
-.tech-grid-wrapper h3 {
-  margin: 0 0 0.5rem;
-  font-family: var(--font-mono);
-  font-weight: 400;
-  font-size: var(--step--1);
-  text-transform: uppercase;
-  letter-spacing: 0.3em;
-  color: var(--muted);
-}
-.tech-grid-wrapper h3::before {
-  content: "// ";
-  color: var(--coral);
-}
-
-.tech-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  max-width: 980px;
-  margin: 1.5rem auto 0;
-  padding: 0 0.25rem;
-}
-
-.tech-category {
-  background: var(--tech-card-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.25rem;
-  text-align: left;
-  transition: background-color 0.3s, border-color 0.3s, translate 0.2s;
-}
-.tech-category:hover {
-  translate: 0 -3px;
-  border-color: var(--accent-2);
-  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
-}
-.tech-category h4 {
-  margin: 0 0 0.85rem;
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: 0.72rem;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-}
-.tech-category ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-.tech-category li {
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  color: var(--muted);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 0.28rem 0.6rem;
-  transition: background-color 0.3s, border-color 0.2s, color 0.2s;
-}
-.tech-category li:hover {
-  color: var(--coral);
-  border-color: var(--coral);
-  border-color: color-mix(in srgb, var(--coral) 60%, transparent);
-}
-
-/* ── Shared rail (carousel) styles ────────────────────────────
-   Scroll-snap rails with edge fade masks; CSS carousel
-   ::scroll-marker dots + ::scroll-button arrows where supported. */
-.section-tagline {
-  text-align: center;
-  font-family: var(--font-mono);
-  font-weight: 400;
-  font-size: var(--step--1);
-  letter-spacing: 0.04em;
-  color: var(--muted);
-  margin: 0.5rem auto 0;
-  padding: 0 1.25rem;
-  max-width: 60ch;
-}
-
-.process-note {
-  font-family: var(--font-mono);
-  font-style: italic;
-  font-size: 0.78rem;
-  color: var(--muted);
-  max-width: 640px;
-  margin: 0 auto 1.5rem;
-  padding: 0 1rem;
-  text-align: center;
-  line-height: 1.7;
-}
-
-.project-list,
-.writing-card-list {
-  display: flex;
-  gap: clamp(1rem, 2.5vw, 1.75rem);
-  padding: 1.9rem var(--rail-pad) 1.5rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--rail-pad);
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: var(--indigo-bright) transparent;
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    #000 var(--rail-pad),
-    #000 calc(100% - var(--rail-pad)),
-    transparent
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    #000 var(--rail-pad),
-    #000 calc(100% - var(--rail-pad)),
-    transparent
-  );
-}
-.project-list:focus-visible,
-.writing-card-list:focus-visible {
-  outline: 2px solid var(--coral);
-  outline-offset: -2px;
-  border-radius: 8px;
-}
-
-.project-card,
-.writing-card {
-  position: relative;
-  scroll-snap-align: start;
-  border-radius: var(--radius);
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  box-shadow: 0 18px 40px -18px rgba(6, 2, 16, 0.55);
-  box-shadow: 0 18px 40px -18px var(--card-shadow-c);
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  transition: translate 0.25s, border-color 0.25s, box-shadow 0.25s, background-color 0.3s;
-}
-.project-card:hover,
-.project-card:focus-within,
-.writing-card:hover,
-.writing-card:focus-within {
-  translate: 0 -6px;
-  box-shadow: 0 28px 56px -22px rgba(6, 2, 16, 0.7);
-  box-shadow: 0 28px 56px -22px var(--card-shadow-hover-c);
-}
-
-/* @property-driven conic border glow (coral → indigo) on hover */
-.project-card::after,
-.writing-card::after {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: conic-gradient(
-    from var(--angle),
-    var(--coral),
-    var(--indigo-bright) 22%,
-    transparent 42%,
-    transparent 58%,
-    var(--indigo-bright) 78%,
-    var(--coral)
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.4s;
-  pointer-events: none;
-}
-.project-card:hover::after,
-.project-card:focus-within::after,
-.writing-card:hover::after,
-.writing-card:focus-within::after {
-  opacity: 1;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .project-card:hover::after,
-  .project-card:focus-within::after,
-  .writing-card:hover::after,
-  .writing-card:focus-within::after {
-    animation: border-spin 5s linear infinite;
-  }
-}
-@keyframes border-spin {
-  to {
-    --angle: 360deg;
-  }
-}
-
-.card-header h3 {
-  color: var(--text);
-  font-family: var(--font-sans);
-  font-weight: 650;
-  letter-spacing: -0.01em;
-  transition: color 0.2s;
-}
-.project-card:hover .card-header h3,
-.writing-card-link:hover .card-header h3,
-.writing-card-link:focus-visible .card-header h3 {
-  color: var(--coral-text);
-}
-
-/* CSS carousel enhancements */
-@supports selector(::scroll-marker) {
-  .project-list,
-  .writing-card-list {
-    scrollbar-width: none;
-    scroll-marker-group: after;
-  }
-  .project-list::scroll-marker-group,
-  .writing-card-list::scroll-marker-group {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.6rem;
-    height: 2.5rem;
-  }
-  .project-card::scroll-marker,
-  .writing-card::scroll-marker {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    background: rgba(128, 131, 150, 0.35);
-    background: color-mix(in srgb, var(--text) 25%, transparent);
-    transition: background-color 0.2s, width 0.2s;
-    cursor: pointer;
-  }
-  .project-card::scroll-marker:hover,
-  .writing-card::scroll-marker:hover {
-    background: var(--muted);
-  }
-  .project-card::scroll-marker:focus-visible,
-  .writing-card::scroll-marker:focus-visible {
-    outline: 2px solid var(--coral);
-    outline-offset: 3px;
-  }
-  .project-card::scroll-marker:target-current,
-  .writing-card::scroll-marker:target-current {
-    background: var(--coral);
-    width: 22px;
-  }
-
-  .project-section,
-  .writing-section {
-    position: relative;
-  }
-  .project-list {
-    anchor-name: --rail-projects;
-  }
-  .writing-card-list {
-    anchor-name: --rail-writing;
-  }
-  .project-list::scroll-button(*),
-  .writing-card-list::scroll-button(*) {
-    position: absolute;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    background: rgba(13, 2, 33, 0.65);
-    background: color-mix(in srgb, var(--nav-bg) 70%, transparent);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    color: var(--text);
-    font-size: 1.3rem;
-    line-height: 1;
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    z-index: 2;
-    transition: border-color 0.2s, color 0.2s, opacity 0.2s;
-  }
-  .project-list::scroll-button(*):hover,
-  .writing-card-list::scroll-button(*):hover {
-    border-color: var(--coral);
-    color: var(--coral);
-  }
-  .project-list::scroll-button(*):focus-visible,
-  .writing-card-list::scroll-button(*):focus-visible {
-    outline: 2px solid var(--coral);
-    outline-offset: 2px;
-  }
-  .project-list::scroll-button(*):disabled,
-  .writing-card-list::scroll-button(*):disabled {
-    opacity: 0.25;
-    cursor: default;
-  }
-  .project-list::scroll-button(left) {
-    content: "‹" / "Scroll left";
-    position-anchor: --rail-projects;
-    left: calc(anchor(left) + 0.4rem);
-    top: anchor(center);
-    translate: 0 -50%;
-  }
-  .project-list::scroll-button(right) {
-    content: "›" / "Scroll right";
-    position-anchor: --rail-projects;
-    right: anchor(right);
-    margin-right: 0.4rem;
-    top: anchor(center);
-    translate: 0 -50%;
-  }
-  .writing-card-list::scroll-button(left) {
-    content: "‹" / "Scroll left";
-    position-anchor: --rail-writing;
-    left: calc(anchor(left) + 0.4rem);
-    top: anchor(center);
-    translate: 0 -50%;
-  }
-  .writing-card-list::scroll-button(right) {
-    content: "›" / "Scroll right";
-    position-anchor: --rail-writing;
-    right: anchor(right);
-    margin-right: 0.4rem;
-    top: anchor(center);
-    translate: 0 -50%;
-  }
-  /* On small screens the dots + touch scrolling are enough */
-  @media (max-width: 767px) {
-    .project-list::scroll-button(*),
-    .writing-card-list::scroll-button(*) {
-      display: none;
-    }
-  }
-}
-
-/* ── Projects ── */
-.project-section {
-  text-align: left;
-  color: var(--text);
-  width: 100%;
-  background: linear-gradient(180deg, var(--bg) 0%, var(--section-bg) 11%, var(--section-bg) 100%);
-  transition: color 0.3s;
-}
-.project-section .project-card {
-  flex: 0 0 min(360px, 84vw);
-  padding: 1.35rem;
-}
-.project-section .card-header h3 {
-  font-size: var(--step-1);
-  margin: 0.15rem 0 0.9rem;
-}
-.project-section .project-info-container {
-  max-width: 100%;
-  overflow: hidden;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-/* Screenshots vary in shape, so every card gets an identically sized
-   frame and the image is fitted inside it rather than cropped. */
-.project-section .project-image-container {
-  display: flex;
-  margin-bottom: auto;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  padding: 0.55rem;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: rgba(34, 28, 61, 0.4);
-  background: color-mix(in srgb, var(--chip-bg) 45%, transparent);
-  overflow: hidden;
-}
-.project-section .project-image-container img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  border-radius: 6px;
-}
-.project-section .project-description {
-  font-size: 0.85rem;
-  line-height: 1.65;
-  margin: 0.9rem 0 0;
-  flex-grow: 1;
-  color: var(--muted);
-}
-.project-section .project-links {
-  font-family: var(--font-mono);
-}
-.project-section .project-links a {
-  font-family: var(--font-mono);
-  color: var(--coral-text);
-  font-size: 0.8rem;
-  text-decoration: underline;
-  text-decoration-color: rgba(254, 95, 85, 0.45);
-  text-decoration-color: color-mix(in srgb, var(--coral-text) 45%, transparent);
-  text-underline-offset: 4px;
-  margin-right: 1.5rem;
-  transition: text-decoration-color 0.2s;
-}
-.project-section .project-links a:visited {
-  color: var(--coral-text);
-}
-.project-section .project-links a:hover {
-  text-decoration-color: var(--coral-text);
-}
-.project-section .project-links a:focus-visible {
-  outline: 2px solid var(--coral);
-  outline-offset: 2px;
-}
-.project-section .project-links span {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-}
-.project-section .project-tags {
-  margin: 0;
-  padding: 0.75rem 0 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-.project-section .project-tags span {
-  font-family: var(--font-mono);
-  font-weight: 400;
-  font-size: 0.66rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 0.28rem 0.7rem;
-  background: rgba(34, 28, 61, 0.55);
-  background: color-mix(in srgb, var(--chip-bg) 60%, transparent);
-  white-space: nowrap;
-  transition: color 0.2s, border-color 0.2s;
-}
-.project-section .project-tags span:hover {
-  color: var(--coral-text);
-  border-color: rgba(254, 95, 85, 0.55);
-  border-color: color-mix(in srgb, var(--coral-text) 55%, transparent);
-}
-
-/* ── Writing rail ── */
-.writing-section {
-  text-align: left;
-  color: var(--text);
-  width: 100%;
-  background: linear-gradient(180deg, var(--section-bg) 0%, var(--section-deep) 100%);
-  transition: color 0.3s;
-}
-.writing-section .writing-card {
-  min-height: 240px;
-  flex: 0 0 min(380px, 84vw);
-}
-.writing-section .card-header h3 {
-  font-size: var(--step-1);
-  margin: 0.25rem 0 1rem;
-  line-height: 1.3;
-}
-.writing-section .writing-card-link {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 1.5rem;
-  text-decoration: none;
-  color: inherit;
-  border-radius: inherit;
-}
-.writing-section .writing-card-link:visited {
-  color: inherit;
-}
-.writing-section .writing-card-link:focus-visible {
-  outline: 2px solid var(--coral);
-  outline-offset: -4px;
-  border-radius: var(--radius);
-}
-.writing-section .writing-card-meta {
-  display: flex;
-  gap: 0.75rem;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--muted);
-  margin-bottom: 0.85rem;
-  flex-wrap: wrap;
-}
-.writing-section .writing-card-series {
-  color: var(--accent);
-}
-.writing-section .writing-card-excerpt {
-  font-size: 0.85rem;
-  line-height: 1.7;
-  color: var(--muted);
-  margin: 0;
-  flex-grow: 1;
-}
-.writing-section .writing-view-all {
-  text-align: center;
-  padding: 0.5rem 3rem 3.5rem;
-}
-.writing-section .writing-view-all a {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--text);
-  text-decoration: underline;
-  text-decoration-color: rgba(254, 95, 85, 0.5);
-  text-decoration-color: color-mix(in srgb, var(--coral-text) 50%, transparent);
-  text-underline-offset: 5px;
-  transition: color 0.2s;
-}
-.writing-section .writing-view-all a:visited {
-  color: var(--text);
-}
-.writing-section .writing-view-all a:hover,
-.writing-section .writing-view-all a:focus-visible {
-  color: var(--coral-text);
-}
-
-/* ── Contact ── */
-.contact-section {
-  padding-bottom: 10vh;
-  background-color: var(--section-deep);
-  color: var(--text);
-  transition: background-color 0.3s, color 0.3s;
-}
-.contact-section p {
-  margin: 0 auto 1.25rem;
-  max-width: 52ch;
-  padding: 0 1.25rem;
-}
-.contact-section p a {
-  color: var(--coral-text);
-  text-decoration: underline;
-  text-decoration-color: rgba(254, 95, 85, 0.45);
-  text-decoration-color: color-mix(in srgb, var(--coral-text) 45%, transparent);
-  text-underline-offset: 4px;
-}
-.contact-section p a:visited {
-  color: var(--coral-text);
-}
-.contact-section p a:hover {
-  text-decoration-color: var(--coral-text);
-}
-.contact-section .angle-container {
-  height: 8vh;
-  margin-bottom: 2vh;
-}
-.contact-section .angle-container div {
-  width: 100%;
-  height: 100%;
-  background-color: var(--indigo-deep);
-  background: linear-gradient(180deg, var(--indigo-deep), transparent);
-  clip-path: polygon(0 0, 50% 100%, 100% 0);
-  opacity: 0;
-}
-.contact-section .header-container {
-  padding-top: clamp(1.5rem, 4vh, 3rem);
-}
-
-.icon-bar {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-.icon-bar a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  color: var(--text);
-  background: rgba(240, 238, 248, 0.04);
-  background: color-mix(in srgb, var(--text) 5%, transparent);
-  transition: translate 0.2s, border-color 0.2s, color 0.2s;
-}
-.icon-bar a svg {
-  width: 19px;
-  height: 19px;
-}
-.icon-bar a:hover {
-  translate: 0 -3px;
-  border-color: var(--coral-text);
-  color: var(--coral-text);
-}
-.icon-bar a:focus-visible {
-  outline: 2px solid var(--coral);
-  outline-offset: 2px;
-}
-
-/* ── Footer ── */
-footer {
-  display: flex;
-  justify-content: center;
-  background-color: var(--footer-bg);
-  color: var(--muted);
-  border-top: 1px solid var(--border);
-  transition: background-color 0.3s, color 0.3s;
-}
-footer p {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-}
-
-/* ── Back-to-top FAB ──────────────────────────────────────────
-   Driven by animation-timeline: scroll(root) where supported;
-   JS fallback toggles .visible (html gets .no-scroll-timeline). */
-.fab-top {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: none;
-  background: var(--coral);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 6px 18px -4px rgba(13, 2, 33, 0.5);
-  z-index: 40;
-}
-.fab-top svg {
-  width: 20px;
-  height: 20px;
-}
-.fab-top:hover {
-  background: #e5453a;
-  background: color-mix(in srgb, var(--coral) 88%, #000);
-}
-.fab-top:focus-visible {
-  outline: 2px solid var(--text);
-  outline-offset: 2px;
-}
-
-html.no-scroll-timeline .fab-top {
-  opacity: 0;
-  visibility: hidden;
-  translate: 0 16px;
-  transition: opacity 0.3s, visibility 0.3s, translate 0.3s;
-}
-html.no-scroll-timeline .fab-top.visible {
-  opacity: 1;
-  visibility: visible;
-  translate: 0 0;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: scroll(root)) {
-    .fab-top {
-      animation: fab-in linear both;
-      animation-timeline: scroll(root);
-      animation-range: 90vh 150vh;
-    }
-  }
-}
-@keyframes fab-in {
-  from {
-    opacity: 0;
-    visibility: hidden;
-    translate: 0 16px;
-  }
-  to {
-    opacity: 1;
-    visibility: visible;
-    translate: 0 0;
-  }
-}
-
-/* ── Scroll-driven reveals ────────────────────────────────────
-   view() timelines; non-supporting browsers simply see content
-   (elements animate FROM hidden only inside this gate). */
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .header-container h2,
-    .section-tagline,
-    .intro-container,
-    .tech-grid-wrapper h3,
-    .process-note,
-    .writing-view-all,
-    .contact-section p,
-    .icon-bar,
-    .tech-category,
-    .project-card,
-    .writing-card {
-      animation: rise-in linear both;
-      animation-timeline: view(block);
-      animation-range: entry 5% entry 45%;
-    }
-    .tech-category:nth-child(2) {
-      animation-range: entry 12% entry 52%;
-    }
-    .tech-category:nth-child(3) {
-      animation-range: entry 19% entry 59%;
-    }
-    .tech-category:nth-child(4) {
-      animation-range: entry 26% entry 66%;
-    }
-    .project-card,
-    .writing-card {
-      --stagger: 0%;
-      animation-name: rise-in-card;
-      animation-range: entry calc(0% + var(--stagger)) entry calc(32% + var(--stagger));
-    }
-    .project-card:nth-child(2),
-    .writing-card:nth-child(2) {
-      --stagger: 7%;
-    }
-    .project-card:nth-child(3),
-    .writing-card:nth-child(3) {
-      --stagger: 14%;
-    }
-    .project-card:nth-child(4),
-    .writing-card:nth-child(4) {
-      --stagger: 21%;
-    }
-    .project-card:nth-child(5),
-    .writing-card:nth-child(5) {
-      --stagger: 28%;
-    }
-    .project-card:nth-child(6),
-    .writing-card:nth-child(6) {
-      --stagger: 35%;
-    }
-    .project-card:nth-child(7) {
-      --stagger: 42%;
-    }
-  }
-}
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    translate: 0 26px;
-  }
-  to {
-    opacity: 1;
-    translate: 0 0;
-  }
-}
-/* Cards keep their hover translate (transition on `translate`
-   composes with opacity-only keyframes once settled). */
-@keyframes rise-in-card {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* ── Desktop nav + anchor-positioned active indicator ── */
-@media (min-width: 1024px) {
+/* Desktop nav + anchor-positioned hover indicator */
+@media (min-width: 900px) {
   .nav-toggle {
     display: none;
   }
@@ -1549,6 +640,7 @@ html.no-scroll-timeline .fab-top.visible {
   #nav-links[popover] {
     display: flex;
     flex-direction: row;
+    align-items: center;
     position: static;
     inset: auto;
     width: auto;
@@ -1557,11 +649,12 @@ html.no-scroll-timeline .fab-top.visible {
     backdrop-filter: none;
     padding: 0;
     border: 0;
-    align-items: center;
     gap: 0.25rem;
   }
   .nav-links a {
-    padding: 0.55rem 0.9rem;
+    font-size: 0.98rem;
+    padding: 0.5rem 0.8rem;
+    border: 0;
   }
   .theme-toggle {
     margin: 0 0 0 0.75rem;
@@ -1583,18 +676,15 @@ html.no-scroll-timeline .fab-top.visible {
     .nav-links > a:nth-of-type(4) {
       anchor-name: --nav-4;
     }
-    .nav-links a:hover,
-    .nav-links a:focus-visible {
-      text-decoration: none;
-    }
     .nav-indicator {
       display: block;
       position: absolute;
       position-anchor: --nav-1;
-      top: calc(anchor(bottom) - 6px);
-      left: anchor(left);
-      width: anchor-size(width);
+      top: calc(anchor(bottom) - 4px);
+      left: calc(anchor(left) + 0.8rem);
+      width: calc(anchor-size(width) - 1.6rem);
       height: 2px;
+      border-radius: 2px;
       background: var(--coral);
       opacity: 0;
       transition: left 0.25s, width 0.25s, opacity 0.2s;
@@ -1618,76 +708,692 @@ html.no-scroll-timeline .fab-top.visible {
   }
 }
 
-/* ── Layout: wider viewports ── */
-@media (min-width: 1024px) {
+/* ── Sections ─────────────────────────────────────────────────── */
+main > section {
+  padding-block: clamp(4.5rem, 11vh, 8rem) 0;
+}
+main > section:last-child {
+  padding-bottom: clamp(5rem, 14vh, 9rem);
+}
+
+.section-title {
+  margin: 0 0 1.75rem;
+  font-size: var(--step-4);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+.section-tagline {
+  margin: -0.75rem 0 2.75rem;
+  max-width: var(--measure);
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--muted);
+}
+.sub-title {
+  margin: 0 0 1.5rem;
+  font-size: var(--step-2);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+/* ── About ── */
+.intro-container {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1.75rem;
+}
+.intro-copy {
+  max-width: 44rem;
+}
+.intro-copy p {
+  margin: 0 0 1.1rem;
+  color: var(--text-2);
+}
+.intro-copy .lead {
+  margin-bottom: 1.6rem;
+  font-size: var(--step-3);
+  font-weight: 400;
+  line-height: 1.28;
+  letter-spacing: -0.012em;
+  color: var(--text);
+}
+.intro-copy .lead a {
+  color: inherit;
+  text-decoration-color: var(--coral);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.16em;
+}
+.intro-copy .lead a:hover {
+  color: var(--coral-text);
+}
+
+.avatar-container {
+  width: 7.5rem;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--surface);
+}
+.avatar-container img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 900px) {
   .intro-container {
     flex-direction: row;
-    gap: 3rem;
-    padding: 2rem 4rem 4rem;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 4rem;
   }
-  .intro-container p {
-    text-align: left;
-    width: auto;
-    flex: 1;
-  }
-  .project-section .project-card {
-    flex: 0 0 380px;
-  }
-  .writing-section .writing-card {
-    flex: 0 0 400px;
-  }
-}
-@media (min-width: 1440px) {
-  .intro-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 2rem 4rem;
-  }
-  .tech-grid {
-    max-width: 1100px;
-  }
-  .project-section .project-list,
-  .writing-section .writing-card-list {
-    max-width: 1400px;
-    margin: 0 auto;
+  .avatar-container {
+    width: 13rem;
+    margin-top: 0.5rem;
   }
 }
 
-/* Tech grid container queries */
-@supports (container-type: inline-size) {
-  .tech-grid-wrapper {
-    container-type: inline-size;
-    container-name: tech-wrapper;
+/* ── The route ─────────────────────────────────────────────────
+   Career waypoints joined by a wandering, dotted trail. JS draws
+   the trail through each waypoint (websitescripts.js) and adds
+   .has-trail; without it a straight dotted line stands in.
+   The trail is revealed once as it scrolls into view — the only
+   scroll-triggered motion on the page. */
+.route {
+  margin-top: clamp(4rem, 9vh, 6rem);
+}
+
+.route-list {
+  /* mobile: trail gutter on the left, everything else stacked */
+  --trail-col: 2.75rem;
+  --trail-x: calc(var(--trail-col) / 2);
+  --trail-reach: 16; /* max control-point swing in px, read by JS */
+  --dot-y: 1.05rem;
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 60rem;
+}
+.route-list::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--trail-x) - 1px);
+  top: var(--dot-y);
+  bottom: 2.5rem;
+  border-left: 2px dotted var(--trail);
+}
+.route-list.has-trail::before {
+  display: none;
+}
+
+.route-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.route-line path {
+  fill: none;
+  stroke: var(--trail);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 0.1 7.5;
+}
+
+.route-stop {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--trail-col) minmax(0, 1fr);
+  grid-template-areas:
+    ". when"
+    ". role"
+    ". org"
+    ". note";
+  padding-bottom: 2.5rem;
+}
+.route-stop:last-child {
+  padding-bottom: 0;
+}
+
+/* waypoint */
+.route-stop::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--trail-x) - 7px);
+  top: calc(var(--dot-y) - 7px);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--trail);
+  z-index: 1;
+}
+.route-stop.is-now::before {
+  background: var(--coral);
+  border-color: var(--coral);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--coral) 22%, transparent),
+    0 0 24px 6px color-mix(in srgb, var(--coral) 38%, transparent);
+}
+
+.route-when {
+  grid-area: when;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.route-year {
+  font-size: var(--step-3);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+}
+.route-range {
+  font-size: var(--step--1);
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--muted);
+}
+.route-stop.is-now .route-year {
+  color: var(--coral-text);
+}
+.route-role {
+  grid-area: role;
+  margin: 0;
+  font-size: var(--step-1);
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+.route-org {
+  grid-area: org;
+  margin: 0.1rem 0 0.5rem;
+  font-style: italic;
+  color: var(--muted);
+}
+.route-note {
+  grid-area: note;
+  margin: 0;
+  max-width: var(--measure);
+  font-size: 0.95em;
+  color: var(--text-2);
+}
+
+/* desktop: big start-years | trail | the stop */
+@media (min-width: 760px) {
+  .route-list {
+    --year-col: 8.75rem;
+    --trail-col: 5.5rem;
+    --trail-x: calc(var(--year-col) + var(--trail-col) / 2);
+    --trail-reach: 30;
+    --dot-y: 1.15rem;
   }
-  @container tech-wrapper (max-width: 500px) {
-    .tech-grid {
-      grid-template-columns: 1fr;
-    }
+  .route-stop {
+    grid-template-columns: var(--year-col) var(--trail-col) minmax(0, 1fr);
+    grid-template-areas:
+      "when . role"
+      "when . org"
+      "when . note";
+    padding-bottom: 3rem;
   }
-  @container tech-wrapper (min-width: 501px) and (max-width: 799px) {
-    .tech-grid {
-      grid-template-columns: 1fr 1fr;
-    }
+  .route-when {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.4rem;
+    margin: 0;
+    text-align: right;
   }
-  @container tech-wrapper (min-width: 800px) {
-    .tech-grid {
-      grid-template-columns: repeat(4, 1fr);
+  .route-year {
+    font-size: var(--step-4);
+  }
+  .route-role {
+    padding-top: 0.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .route-list.has-trail .route-line {
+      animation: trail-reveal linear both;
+      animation-timeline: view(block);
+      animation-range: entry 10% cover 60%;
     }
   }
 }
-@media (min-width: 768px) {
-  .tech-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.25rem;
+@keyframes trail-reveal {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* ── Tools ── */
+.tech-grid-wrapper {
+  margin-top: clamp(4rem, 9vh, 6rem);
+}
+.tech-grid {
+  display: grid;
+  border-top: 1px solid var(--border);
+  max-width: 52rem;
+}
+.tech-category {
+  display: grid;
+  gap: 0.25rem 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.tech-category h4 {
+  margin: 0;
+  font-size: var(--step-0);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.tech-category ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: var(--text-2);
+}
+.tech-category li {
+  position: relative;
+  display: inline-block;
+  margin-right: 0.5em;
+}
+/* separators sit outside each item's box so an agent highlight wraps
+   just the technology, not its comma */
+.tech-category li:not(:last-child)::after {
+  content: ",";
+  position: absolute;
+  left: calc(100% + 1px);
+}
+@media (min-width: 760px) {
+  .tech-category {
+    grid-template-columns: 12rem 1fr;
+    align-items: baseline;
+  }
+}
+
+/* ── Projects ── */
+.project-list {
+  display: grid;
+  gap: clamp(3.5rem, 8vh, 5.5rem);
+}
+.project-card {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+.project-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 10;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+.project-image-container img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  border-radius: 6px;
+}
+.project-card .card-header h3 {
+  margin: 0 0 0.75rem;
+  font-size: var(--step-3);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.project-description {
+  margin: 0 0 1rem;
+  max-width: var(--measure);
+  color: var(--text-2);
+}
+.project-tags {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
+}
+.project-tags span:not(:last-child)::after {
+  content: ", ";
+}
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+.project-links a {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-0);
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 0.25em;
+}
+.project-links a:visited {
+  color: var(--accent);
+}
+.project-links a:hover {
+  color: var(--coral-text);
+  text-decoration-color: currentColor;
+}
+
+@media (min-width: 900px) {
+  .project-card {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: 3.5rem;
+    align-items: center;
+  }
+}
+
+/* ── Writing ── */
+.writing-card-list {
+  display: grid;
+  gap: 2.5rem;
+}
+.writing-card-link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.writing-card-link:visited {
+  color: inherit;
+}
+.writing-card-link:focus-visible {
+  outline-offset: 6px;
+}
+.writing-card .card-header h3 {
+  margin: 0 0 0.6rem;
+  font-size: var(--step-2);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  transition: color 0.2s;
+}
+.writing-card-link:hover .card-header h3,
+.writing-card-link:focus-visible .card-header h3 {
+  color: var(--coral-text);
+}
+.writing-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--muted);
+}
+.writing-card-excerpt {
+  margin: 0;
+  color: var(--text-2);
+}
+
+@media (min-width: 900px) {
+  .writing-card-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3rem;
+  }
+  .writing-card-list .writing-card-meta {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+}
+
+/* The three-part series is a real sequence, so it gets numbers. */
+.writing-series {
+  margin-top: clamp(3.5rem, 8vh, 5rem);
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+  border-radius: calc(var(--radius) + 6px);
+  background: var(--surface);
+}
+.series-heading {
+  margin: 0 0 2rem;
+  font-size: var(--step-3);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.series-heading span {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: var(--step-0);
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+.series-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2.25rem;
+  counter-reset: part;
+}
+.series-list .writing-card {
+  counter-increment: part;
+  position: relative;
+  padding-left: 3.25rem;
+}
+.series-list .writing-card::before {
+  content: counter(part);
+  position: absolute;
+  left: 0;
+  top: -0.2rem;
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+.series-list .writing-card:first-child::before {
+  color: var(--coral-text);
+}
+@media (min-width: 900px) {
+  .series-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem;
+  }
+  .series-list .writing-card {
+    padding: 3.75rem 0 0;
+  }
+}
+
+.writing-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem 3rem;
+  margin-top: 2.5rem;
+}
+.process-note {
+  margin: 0;
+  max-width: 38rem;
+  font-size: 0.9em;
+  font-style: italic;
+  color: var(--muted);
+}
+.writing-view-all {
+  margin: 0;
+}
+.writing-view-all a {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--accent);
+}
+.writing-view-all a:visited {
+  color: var(--accent);
+}
+.writing-view-all a:hover {
+  color: var(--coral-text);
+}
+
+/* ── Contact ── */
+.contact-lead {
+  margin: 0 0 0.5rem;
+  font-size: var(--step-1);
+  color: var(--text-2);
+}
+.contact-email {
+  margin: 0 0 2.5rem;
+}
+.contact-email a {
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 0.9rem + 3.6vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--coral);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.18em;
+  overflow-wrap: anywhere;
+}
+.contact-email a:visited {
+  color: var(--text);
+}
+.contact-email a:hover {
+  color: var(--coral-text);
+}
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+}
+.contact-resume {
+  margin: 0;
+  color: var(--text-2);
+}
+
+.icon-bar {
+  display: flex;
+  gap: 0.75rem;
+}
+.icon-bar a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  color: var(--text);
+  transition: border-color 0.2s, color 0.2s;
+}
+.icon-bar a svg {
+  width: 18px;
+  height: 18px;
+}
+.icon-bar a:hover {
+  border-color: var(--coral);
+  color: var(--coral-text);
+}
+
+/* ── Site footer (scoped so it never hits an article's footer) ── */
+body > footer {
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+}
+body > footer p {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.5rem var(--gutter);
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+}
+
+/* ── Back-to-top FAB ──────────────────────────────────────────
+   Quiet surface button so the coral chat launcher stays the one
+   accent in the corner. Scroll-timeline driven; JS fallback adds
+   .no-scroll-timeline / .visible. */
+.fab-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 20px -10px rgba(6, 4, 20, 0.5);
+  z-index: 40;
+}
+.fab-top svg {
+  width: 18px;
+  height: 18px;
+}
+.fab-top:hover {
+  border-color: var(--coral);
+  color: var(--coral-text);
+}
+
+html.no-scroll-timeline .fab-top {
+  opacity: 0;
+  visibility: hidden;
+  translate: 0 16px;
+  transition: opacity 0.3s, visibility 0.3s, translate 0.3s;
+}
+html.no-scroll-timeline .fab-top.visible {
+  opacity: 1;
+  visibility: visible;
+  translate: 0 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll(root)) {
+    .fab-top {
+      animation: fab-in linear both;
+      animation-timeline: scroll(root);
+      animation-range: 90vh 150vh;
+    }
+  }
+}
+@keyframes fab-in {
+  from {
+    opacity: 0;
+    visibility: hidden;
+    translate: 0 16px;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+    translate: 0 0;
   }
 }
 
 /* ── Agent-driven focus: highlights + guide sprite ─────────────
-   site-focus.js adds .is-agent-focused (plus data-agent-focus="<kind>")
-   to whatever an agent or the chat widget is currently talking about,
-   for a few seconds. The overlay canvas above it is guide-sprite.js's
-   firefly, which flies to the same element. Both are decorative — the
-   scroll and the live region below carry the actual meaning. */
+   site-focus.js adds .is-agent-focused (+ data-agent-focus) to
+   whatever the chat or an external agent is talking about; the
+   guide sprite (the firefly) flies to the same element. Both are
+   decorative — the scroll and live region carry the meaning. */
 .agent-focus-live {
   position: absolute;
   width: 1px;
@@ -1702,55 +1408,41 @@ html.no-scroll-timeline .fab-top.visible {
 
 .is-agent-focused {
   outline: 2px solid var(--coral);
-  outline-offset: 4px;
+  outline-offset: 10px;
   border-radius: var(--radius);
 }
 .tech-category li.is-agent-focused {
   outline-offset: 2px;
-  border-radius: 6px;
+  border-radius: 4px;
   color: var(--coral-text);
-  border-color: var(--coral);
 }
 .tech-category.is-agent-focused {
-  border-radius: 12px;
+  outline-offset: 0;
+  border-radius: 6px;
 }
-
-/* Sections get the quietest treatment: no ring around a full-bleed
-   band, just a coral wash under its heading. */
 .is-agent-focused[data-agent-focus="section"] {
   outline: none;
 }
-[data-agent-focus="section"] .header-container h2 {
+[data-agent-focus="section"] .section-title {
   color: var(--coral-text);
+  transition: color 0.3s;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .is-agent-focused {
+  .is-agent-focused:not([data-agent-focus="section"]) {
     animation: agent-focus-pulse 1.4s cubic-bezier(0.2, 0, 0, 1) 2;
   }
-  /* Reuse the card's existing conic border glow, held on and spinning
-     for the length of the highlight instead of only on hover. */
-  .project-card.is-agent-focused::after,
-  .writing-card.is-agent-focused::after {
-    opacity: 1;
-    animation: border-spin 5s linear infinite;
-  }
-  [data-agent-focus="section"] .header-container h2 {
-    transition: color 0.3s;
-  }
 }
-
 @keyframes agent-focus-pulse {
   from {
-    box-shadow: 0 0 0 0 var(--focus-ring), 0 20px 46px -20px var(--focus-ring);
+    box-shadow: 0 0 0 0 var(--focus-ring);
   }
   to {
-    box-shadow: 0 0 0 14px transparent, 0 20px 46px -20px transparent;
+    box-shadow: 0 0 0 16px transparent;
   }
 }
 
-/* The firefly's overlay. Fixed, click-through, and under the chat panel
-   (z-index 59) so it never covers the conversation it's illustrating. */
+/* The firefly's overlay: fixed, click-through, under the chat panel. */
 .guide-sprite-canvas {
   position: fixed;
   inset: 0;
@@ -1764,8 +1456,6 @@ html.no-scroll-timeline .fab-top.visible {
 .guide-sprite-canvas.is-flying {
   opacity: 1;
 }
-/* Between flights the canvas leaves the layer tree entirely — guide-sprite.js
-   drops its backing store at the same time. */
 .guide-sprite-canvas.is-parked {
   display: none;
 }

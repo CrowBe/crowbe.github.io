@@ -14,12 +14,13 @@
 // Career facts come from the resume; project facts also reflect the linked repos.
 const ABOUT_BEN = {
   summary: [
-    "Ben (Benjamin) Crow is a Full Stack AI Engineer based in Sydney, Australia.",
+    "Ben (Benjamin) Crow is a Senior Software Engineer (AI) at Culture Amp, based in Sydney, Australia. He works directly on Coach, the agentic AI system in Culture Amp's platform.",
     "He has 6+ years building production systems across TypeScript, React/Next.js, Ruby on Rails, Python, and event-driven architecture (Kafka, Temporal).",
     "He owns delivery end to end — from ambiguous product requirements through technical design, implementation, release, and iteration — with a focus on test coverage, performance, and maintainability.",
   ],
   experience: [
-    "Culture Amp, Sydney (Nov 2024 – present): Software Engineer working with LangChain, Next.js, Ruby on Rails, Python, and Kafka. Ships enterprise AI SaaS features end to end, led performance improvements ahead of a GA release, and helped drive company-wide adoption of AI-assisted development through tutorials and internal tooling.",
+    "Culture Amp, Sydney (Sep 2026 – present): Senior Software Engineer (AI), working directly on Coach, the agentic AI system in Culture Amp's platform.",
+    "Culture Amp, Sydney (Nov 2024 – Sep 2026): Software Engineer working with LangChain, Next.js, Ruby on Rails, Python, and Kafka. Shipped enterprise AI SaaS features end to end, led performance improvements ahead of a GA release, and helped drive company-wide adoption of AI-assisted development through tutorials and internal tooling.",
     "Mars United Commerce ANZ (Dec 2020 – Nov 2024): progressed from Junior Engineer to Software Engineer / Product Lead. Cut issue resolution time by ~40%, removed security vulnerabilities via major Ruby and Rails upgrades, reduced local dev startup time by ~30%, and migrated legacy UIs from Material-UI to Tailwind with zero production issues.",
     "Career transition (2019 – 2020): moved from outdoor recreation into software via a 6-month Coder Academy intensive (MERN stack, Ruby on Rails), freelanced while based in Japan, and owned the testing strategy for a pre-launch startup app, catching critical security and scalability issues.",
     "Outdoor recreation industry (2011 – 2018): progressed from guide to Program Coordinator, managing logistics, participant safety, and teams across multi-day programs.",
