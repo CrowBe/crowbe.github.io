@@ -28,7 +28,7 @@ const ABOUT_BEN = {
   skills: [
     "Full-stack product delivery: end-to-end ownership across React/Next.js, Ruby on Rails, and Node.js, from ideation through deployment.",
     "Platform and infrastructure: CI/CD pipeline ownership, AWS production deployment, GCP (including Maps API), monitoring, Kafka and Temporal for event-driven and async processing, and LaunchDarkly feature management.",
-    "AI-native engineering: daily agentic workflows and LLM tooling, MCP-connected products, and driving AI-assisted development adoption through tutorials, videos, and internal plugins.",
+    "AI-native engineering: daily agentic workflows and LLM tooling, prompt engineering, observability, MCP-connected products, and driving AI-assisted development adoption through tutorials, videos, and internal plugins. Has also worked on LLM evals and fine-tuning in personal projects (not at Culture Amp).",
     "Quality and testing: TDD practitioner who writes and maintains test suites and enforces coverage standards.",
     "Technical leadership: code review, cross-team pairing, internal documentation, and developer education.",
   ],

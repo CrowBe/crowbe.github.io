@@ -6,17 +6,89 @@
     "location": "Sydney, NSW",
     "email": "bennycrow91@gmail.com",
     "links": [
-      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/benjamin-crow1991", "text": "linkedin.com/in/benjamin-crow1991" },
-      { "label": "GitHub", "url": "https://github.com/CrowBe", "text": "github.com/CrowBe" },
-      { "label": "Portfolio", "url": "https://crowbe.github.io", "text": "crowbe.github.io" }
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/benjamin-crow1991",
+        "text": "linkedin.com/in/benjamin-crow1991"
+      },
+      {
+        "label": "GitHub",
+        "url": "https://github.com/CrowBe",
+        "text": "github.com/CrowBe"
+      },
+      {
+        "label": "Portfolio",
+        "url": "https://crowbe.github.io",
+        "text": "crowbe.github.io"
+      }
     ]
   },
   "summary": "Senior software engineer working in applied AI, with 6+ years building production systems across TypeScript, React/Next.js, Ruby on Rails, Python and event-driven architecture. At Culture Amp I work directly on Coach, the company's agentic AI system, where I prototyped and shipped a human-in-the-loop pattern for AI-written content that four product domains have adopted. Strong end-to-end operator, from product ambiguity through technical design, implementation, release and iteration, and I build the harnesses and tooling that help engineering teams work well with AI.",
   "skills": [
-    { "name": "AI and agents", "items": ["LLM integration", "Agentic systems", "Human-in-the-loop design", "Tool and function calling", "MCP and WebMCP", "LangChain", "OpenAI API", "Claude Code", "Context engineering", "Harness engineering", "Tracing"] },
-    { "name": "Languages and frameworks", "items": ["TypeScript", "JavaScript", "Python", "Ruby", "React", "Next.js", "Node.js", "Ruby on Rails", "Express", "Fastify", "Tailwind CSS", "three.js"] },
-    { "name": "Data and infrastructure", "items": ["PostgreSQL", "REST", "GraphQL", "Kafka", "Temporal", "AWS", "GCP", "Docker", "CI/CD", "LaunchDarkly", "Monitoring"] },
-    { "name": "Quality and delivery", "items": ["TDD", "RSpec", "Vitest", "Test strategy", "RFCs and technical design", "Code review", "Cross-team pairing", "Developer education"] }
+    {
+      "name": "AI and agents",
+      "items": [
+        "LLM integration",
+        "Agentic systems",
+        "Human-in-the-loop design",
+        "Tool and function calling",
+        "MCP and WebMCP",
+        "LangChain",
+        "OpenAI API",
+        "Claude Code",
+        "Prompt engineering",
+        "Context engineering",
+        "Harness engineering",
+        "Tracing",
+        "Evals and fine-tuning (personal projects)"
+      ]
+    },
+    {
+      "name": "Languages and frameworks",
+      "items": [
+        "TypeScript",
+        "JavaScript",
+        "Python",
+        "Ruby",
+        "React",
+        "Next.js",
+        "Node.js",
+        "Ruby on Rails",
+        "Express",
+        "Fastify",
+        "Tailwind CSS",
+        "three.js"
+      ]
+    },
+    {
+      "name": "Data and infrastructure",
+      "items": [
+        "PostgreSQL",
+        "REST",
+        "GraphQL",
+        "Kafka",
+        "Temporal",
+        "AWS",
+        "GCP",
+        "Docker",
+        "CI/CD",
+        "LaunchDarkly",
+        "Observability and monitoring"
+      ]
+    },
+    {
+      "name": "Quality and delivery",
+      "items": [
+        "TDD",
+        "RSpec",
+        "Vitest",
+        "Test strategy",
+        "RFCs and technical design",
+        "Code review",
+        "Cross-team pairing",
+        "Developer education"
+      ]
+    }
   ],
   "work": [
     {
@@ -110,41 +182,73 @@
       "name": "Reno Layouts",
       "status": "Live",
       "stack": "TypeScript, React, three.js, WebMCP",
-      "link": { "url": "https://layout-bench.vercel.app/", "text": "layout-bench.vercel.app" },
+      "link": {
+        "url": "https://layout-bench.vercel.app/",
+        "text": "layout-bench.vercel.app"
+      },
       "summary": "Browser-based floor-plan studio for renovation planning, forked from Alza. An agent works the same live 2D/3D model through WebMCP tools, covering surveyed geometry, wall build-ups, fixture rough-in, tile set-out and construction-stage sheets. Runs client-side with no backend."
     },
     {
       "name": "Weave",
       "status": "Active development",
       "stack": "TypeScript, agent runtime, evaluation",
-      "link": { "url": "https://github.com/CrowBe/weave", "text": "github.com/CrowBe/weave" },
+      "link": {
+        "url": "https://github.com/CrowBe/weave",
+        "text": "github.com/CrowBe/weave"
+      },
       "summary": "Experimental goal-directed runtime for software that can build the capabilities it needs and improve how it works, combining bounded model judgment with explicit authority, replayable evidence, capability crystallisation through TDD and measured optimisation."
     },
     {
       "name": "ScrolLess",
       "status": "Active development",
       "stack": "Preact, TypeScript, Fastify, MCP, Web Push",
-      "link": { "url": "https://github.com/CrowBe/ScrolLess", "text": "github.com/CrowBe/ScrolLess" },
+      "link": {
+        "url": "https://github.com/CrowBe/ScrolLess",
+        "text": "github.com/CrowBe/ScrolLess"
+      },
       "summary": "Device-first feed aggregator: a personal agent uses your logged-in browser sessions to collect content, while the server stays out of platform integration and only relays encrypted payloads to the PWA."
     },
     {
       "name": "Portfolio site agent",
       "status": "Live",
       "stack": "On-device LLM, WebMCP, tool use",
-      "link": { "url": "https://crowbe.github.io", "text": "crowbe.github.io" },
+      "link": {
+        "url": "https://crowbe.github.io",
+        "text": "crowbe.github.io"
+      },
       "summary": "An on-device browser model answers questions about my work through explicit site functions, with the same capabilities exposed as WebMCP tools and connected to page-level interactions."
     }
   ],
   "writing": {
-    "link": { "url": "https://crowbe.github.io/writing/", "text": "crowbe.github.io/writing" },
+    "link": {
+      "url": "https://crowbe.github.io/writing/",
+      "text": "crowbe.github.io/writing"
+    },
     "note": "AI-drafted with Claude and ChatGPT; I direct, source and edit.",
     "series": [
-      { "name": "When Agents Join the Team", "date": "May 2026", "summary": "Three-part essay series on how agents change HR, management and the way we design agents." },
-      { "name": "Agentic Content Apps", "date": "Apr 2026", "summary": "Three-part series on personal agents, the trust problems they raise, and device-first architecture." }
+      {
+        "name": "When Agents Join the Team",
+        "date": "May 2026",
+        "summary": "Three-part essay series on how agents change HR, management and the way we design agents."
+      },
+      {
+        "name": "Agentic Content Apps",
+        "date": "Apr 2026",
+        "summary": "Three-part series on personal agents, the trust problems they raise, and device-first architecture."
+      }
     ]
   },
   "education": [
-    { "qualification": "Diploma of Information Technology", "institution": "Coder Academy", "dates": "Feb 2019 – Aug 2019", "detail": "MERN stack, Ruby on Rails" },
-    { "qualification": "Diploma of Outdoor Recreation", "institution": "Avondale College", "dates": "2010 – 2011" }
+    {
+      "qualification": "Diploma of Information Technology",
+      "institution": "Coder Academy",
+      "dates": "Feb 2019 – Aug 2019",
+      "detail": "MERN stack, Ruby on Rails"
+    },
+    {
+      "qualification": "Diploma of Outdoor Recreation",
+      "institution": "Avondale College",
+      "dates": "2010 – 2011"
+    }
   ]
 }
