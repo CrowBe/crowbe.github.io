@@ -1,0 +1,150 @@
+{
+  "$comment": "Single source for Ben's resume. build.mjs renders resume.pdf (site-styled) and resume.docx (standard fonts) from this file. Every claim here is from Ben's own resume or confirmed by Ben — keep it that way.",
+  "basics": {
+    "name": "Benjamin Crow",
+    "label": "Senior Software Engineer (AI)",
+    "location": "Sydney, NSW",
+    "email": "bennycrow91@gmail.com",
+    "links": [
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/benjamin-crow1991", "text": "linkedin.com/in/benjamin-crow1991" },
+      { "label": "GitHub", "url": "https://github.com/CrowBe", "text": "github.com/CrowBe" },
+      { "label": "Portfolio", "url": "https://crowbe.github.io", "text": "crowbe.github.io" }
+    ]
+  },
+  "summary": "Senior software engineer working in applied AI, with 6+ years building production systems across TypeScript, React/Next.js, Ruby on Rails, Python and event-driven architecture. At Culture Amp I work directly on Coach, the company's agentic AI system, where I prototyped and shipped a human-in-the-loop pattern for AI-written content that four product domains have adopted. Strong end-to-end operator, from product ambiguity through technical design, implementation, release and iteration, and I build the harnesses and tooling that help engineering teams work well with AI.",
+  "skills": [
+    { "name": "AI and agents", "items": ["LLM integration", "Agentic systems", "Human-in-the-loop design", "Tool and function calling", "MCP and WebMCP", "LangChain", "OpenAI API", "Claude Code", "Context engineering", "Harness engineering", "Tracing"] },
+    { "name": "Languages and frameworks", "items": ["TypeScript", "JavaScript", "Python", "Ruby", "React", "Next.js", "Node.js", "Ruby on Rails", "Express", "Fastify", "Tailwind CSS", "three.js"] },
+    { "name": "Data and infrastructure", "items": ["PostgreSQL", "REST", "GraphQL", "Kafka", "Temporal", "AWS", "GCP", "Docker", "CI/CD", "LaunchDarkly", "Monitoring"] },
+    { "name": "Quality and delivery", "items": ["TDD", "RSpec", "Vitest", "Test strategy", "RFCs and technical design", "Code review", "Cross-team pairing", "Developer education"] }
+  ],
+  "work": [
+    {
+      "company": "Culture Amp",
+      "location": "Sydney, Hybrid",
+      "stack": "LangChain, Next.js, Ruby on Rails, Python, Kafka",
+      "roles": [
+        {
+          "title": "Senior Software Engineer (AI)",
+          "start": "Sep 2026",
+          "end": "Present",
+          "highlights": [
+            "Work directly on Coach, Culture Amp's agentic AI system.",
+            "Building an agent harness for my team that encodes our ways of working with AI: skills, scripts and deterministic checks for planning, sharing plans, dispatching work and reviewing it, plus trace capture so the harness itself keeps improving. Built for Claude Code Enterprise and other tools, and adopted by my team with good feedback."
+          ]
+        },
+        {
+          "title": "Software Engineer",
+          "start": "Nov 2024",
+          "end": "Sep 2026",
+          "highlights": [
+            "Prototyped, wrote the RFC for, and built and shipped most of Coach's human-in-the-loop pattern, which lets the agent write content such as reviews, feedback and conversation topics with guaranteed, audited human approval. Iterated on the pattern as it was adopted; four product domains use it so far.",
+            "Delivered complex enterprise AI product features in a SaaS environment, working through ambiguous requirements with product, design and engineering to ship production-ready outcomes.",
+            "Independently owned implementation across frontend, backend, infrastructure and event-driven architecture, so the team could adjust priorities quickly without heavy cross-team handoffs.",
+            "Led performance improvements for early-access features ahead of GA release: identified query bottlenecks, executed critical fixes and coordinated supporting work across the team.",
+            "Helped drive engineering adoption of AI-assisted development, a stated company priority, producing practical tutorials and tooling that improved confidence, repeatability and delivery speed."
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Mars United Commerce ANZ (XPO Brands / The Mars Agency)",
+      "location": "Australia, Hybrid",
+      "stack": "React, Ruby on Rails, CI/CD, Product Operations",
+      "roles": [
+        {
+          "title": "Software Engineer / Product Lead",
+          "start": "Jul 2022",
+          "end": "Nov 2024",
+          "highlights": [
+            "Identified and implemented improvements to the feedback and issue pipeline, reducing time to resolution by ~40%.",
+            "Eliminated security vulnerabilities by driving key upgrades, including major version upgrades of Ruby and Rails in the core backend service.",
+            "Reduced local development startup time by ~30% through targeted dependency pruning, with faster CI/CD pipelines as a secondary gain."
+          ]
+        },
+        {
+          "title": "Junior to Mid Software Engineer",
+          "start": "Dec 2020",
+          "end": "Jul 2022",
+          "highlights": [
+            "Promoted from junior to mid-level within 6 months on delivery quality and growing autonomy.",
+            "Migrated legacy codebases from Material-UI to Tailwind with zero production issues."
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Freelance Developer (career change into software)",
+      "location": "Australia and Japan",
+      "roles": [
+        {
+          "title": "Freelance Developer",
+          "start": "Feb 2019",
+          "end": "Nov 2020",
+          "highlights": [
+            "Completed a 6-month coding intensive at Coder Academy (MERN stack, Ruby on Rails) after teaching myself Python through structured online courses in 2018.",
+            "Took on freelance client work, including website design and build, while based in Japan.",
+            "Contracted with a pre-launch startup: owned the testing strategy for its pre-release application, catching critical security and scalability issues before launch, and rebuilt chat, notifications and search from a legacy jQuery app in React, making them web-native and mobile-friendly."
+          ]
+        }
+      ]
+    },
+    {
+      "company": "Outdoor Recreation Industry",
+      "location": "Australia",
+      "roles": [
+        {
+          "title": "Guide to Program Coordinator",
+          "start": "2011",
+          "end": "2018",
+          "highlights": [
+            "Progressed from guide to Program Coordinator across multiple organisations over eight years, coordinating teams delivering outdoor education and adventure programs.",
+            "Managed program logistics, participant safety and team coordination across multi-day programs with external stakeholders, requiring constant risk assessment and real-time decision-making."
+          ]
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Reno Layouts",
+      "status": "Live",
+      "stack": "TypeScript, React, three.js, WebMCP",
+      "link": { "url": "https://layout-bench.vercel.app/", "text": "layout-bench.vercel.app" },
+      "summary": "Browser-based floor-plan studio for renovation planning, forked from Alza. An agent works the same live 2D/3D model through WebMCP tools, covering surveyed geometry, wall build-ups, fixture rough-in, tile set-out and construction-stage sheets. Runs client-side with no backend."
+    },
+    {
+      "name": "Weave",
+      "status": "Active development",
+      "stack": "TypeScript, agent runtime, evaluation",
+      "link": { "url": "https://github.com/CrowBe/weave", "text": "github.com/CrowBe/weave" },
+      "summary": "Experimental goal-directed runtime for software that can build the capabilities it needs and improve how it works, combining bounded model judgment with explicit authority, replayable evidence, capability crystallisation through TDD and measured optimisation."
+    },
+    {
+      "name": "ScrolLess",
+      "status": "Active development",
+      "stack": "Preact, TypeScript, Fastify, MCP, Web Push",
+      "link": { "url": "https://github.com/CrowBe/ScrolLess", "text": "github.com/CrowBe/ScrolLess" },
+      "summary": "Device-first feed aggregator: a personal agent uses your logged-in browser sessions to collect content, while the server stays out of platform integration and only relays encrypted payloads to the PWA."
+    },
+    {
+      "name": "Portfolio site agent",
+      "status": "Live",
+      "stack": "On-device LLM, WebMCP, tool use",
+      "link": { "url": "https://crowbe.github.io", "text": "crowbe.github.io" },
+      "summary": "An on-device browser model answers questions about my work through explicit site functions, with the same capabilities exposed as WebMCP tools and connected to page-level interactions."
+    }
+  ],
+  "writing": {
+    "link": { "url": "https://crowbe.github.io/writing/", "text": "crowbe.github.io/writing" },
+    "note": "AI-drafted with Claude and ChatGPT; I direct, source and edit.",
+    "series": [
+      { "name": "When Agents Join the Team", "date": "May 2026", "summary": "Three-part essay series on how agents change HR, management and the way we design agents." },
+      { "name": "Agentic Content Apps", "date": "Apr 2026", "summary": "Three-part series on personal agents, the trust problems they raise, and device-first architecture." }
+    ]
+  },
+  "education": [
+    { "qualification": "Diploma of Information Technology", "institution": "Coder Academy", "dates": "Feb 2019 – Aug 2019", "detail": "MERN stack, Ruby on Rails" },
+    { "qualification": "Diploma of Outdoor Recreation", "institution": "Avondale College", "dates": "2010 – 2011" }
+  ]
+}
