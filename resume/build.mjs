@@ -16,7 +16,8 @@
 //
 // Usage:  npm install && npx playwright install chromium && npm run build
 
-import { readFile, writeFile, mkdir, copyFile } from "node:fs/promises";
+import { readFile, writeFile, mkdir, copyFile, rename } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import path from "node:path";
 import { createRequire } from "node:module";
@@ -378,6 +379,16 @@ try {
   await page.pdf({ path: pdfPath, format: "A4", preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
 } finally {
   await browser.close();
+}
+
+// Optional lossless squeeze (~35% smaller): object streams + max deflate.
+// Text, fonts and links are untouched. Skipped quietly if qpdf isn't installed.
+try {
+  const squeezed = `${pdfPath}.tmp`;
+  execFileSync("qpdf", ["--object-streams=generate", "--compress-streams=y", "--recompress-flate", "--compression-level=9", pdfPath, squeezed], { stdio: "ignore" });
+  await rename(squeezed, pdfPath);
+} catch {
+  console.log("qpdf not found: PDF left uncompressed (install qpdf for a ~35% smaller file).");
 }
 await copyFile(pdfPath, SITE_PDF);
 

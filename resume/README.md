@@ -4,7 +4,7 @@
 
 | File | For | Notes |
 |---|---|---|
-| `dist/Benjamin_Crow_Resume.pdf` | Email, the portfolio link | Site type and colour (Familjen Grotesk, Literata), embedded as TrueType. Also copied to `../resources/Benjamin_Crow_Resume.pdf`, the file the site links to. |
+| `dist/Benjamin_Crow_Resume.pdf` | Email, the portfolio link | Site type and colour (Familjen Grotesk, Literata), embedded as TrueType, losslessly compressed with qpdf when it is installed. Also copied to `../resources/Benjamin_Crow_Resume.pdf`, the file the site links to. |
 | `dist/Benjamin_Crow_Resume.docx` | Job portals | Same content in Arial and Georgia, which portals parse most reliably. |
 
 ## Build
