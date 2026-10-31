@@ -1,6 +1,7 @@
 /* ── Writing section — article and index styles ──
-   Depends on index.css being loaded first (tokens, nav, footer, fab,
-   view transitions, scroll progress bar). */
+   Depends on index.css being loaded first (tokens, type, nav, footer,
+   fab, view transitions, scroll progress bar). Reading text is set in
+   Literata (body default); names and navigation in Familjen Grotesk. */
 
 /* ── Writing index hero ── */
 .writing-hero {
@@ -17,10 +18,10 @@
 }
 
 .writing-hero h1 {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: var(--step-4);
-  font-weight: 750;
-  letter-spacing: -0.025em;
+  font-weight: 700;
+  letter-spacing: -0.035em;
   margin: 0 0 1rem;
 }
 
@@ -30,8 +31,8 @@
 }
 
 .writing-hero p {
-  font-family: var(--font-mono);
-  font-size: var(--step--1);
+  font-family: var(--font-serif);
+  font-size: var(--step-1);
   color: var(--muted);
   max-width: 56ch;
   margin: 0 auto;
@@ -53,32 +54,17 @@
 }
 
 .writing-list .list-heading {
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: 0.78rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--accent);
+  font-family: var(--font-display);
+  font-weight: 650;
+  font-size: var(--step-2);
+  letter-spacing: -0.02em;
+  color: var(--text);
   margin: 3.5rem 0 1.5rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--border);
   position: relative;
 }
 
-.writing-list .list-heading::before {
-  content: "// ";
-  color: var(--coral);
-}
-
-.writing-list .list-heading::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 3rem;
-  height: 2px;
-  background: linear-gradient(90deg, var(--coral), var(--indigo-bright));
-}
 
 .article-card {
   display: block;
@@ -90,7 +76,7 @@
 
 .article-card:hover .article-title,
 .article-card:focus-visible .article-title {
-  color: var(--coral);
+  color: var(--coral-text);
 }
 
 .article-card:focus-visible {
@@ -100,8 +86,9 @@
 }
 
 .article-meta {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
   color: var(--muted);
   margin-bottom: 0.5rem;
   display: flex;
@@ -110,11 +97,11 @@
 }
 
 .article-series {
-  color: var(--accent);
+  color: var(--muted);
 }
 
 .article-title {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: clamp(1.15rem, 2.5vw, 1.45rem);
   font-weight: 650;
   letter-spacing: -0.015em;
@@ -125,23 +112,11 @@
 }
 
 .article-excerpt {
-  font-size: 0.92rem;
-  color: var(--muted);
+  font-size: 1rem;
+  color: var(--text-2);
   line-height: 1.7;
   margin: 0;
   max-width: 62ch;
-}
-
-/* Index reveals — scroll-driven where supported */
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .article-card,
-    .writing-list .list-heading {
-      animation: rise-in linear both;
-      animation-timeline: view(block);
-      animation-range: entry 5% entry 40%;
-    }
-  }
 }
 
 /* ── Article page ── */
@@ -157,9 +132,9 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 500;
   color: var(--muted);
   text-decoration: none;
   margin-bottom: 3rem;
@@ -177,7 +152,7 @@
 
 .article-back:hover,
 .article-back:focus-visible {
-  color: var(--coral);
+  color: var(--coral-text);
 }
 
 .article-back:focus-visible {
@@ -195,23 +170,22 @@
 }
 
 .article-header h1 {
-  font-family: var(--font-sans);
-  font-size: var(--step-3);
+  font-family: var(--font-display);
+  font-size: var(--step-4);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
   margin: 0 0 1.5rem;
   color: var(--text);
 }
 
 .article-header .article-lede {
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  line-height: 1.75;
-  color: var(--muted);
+  font-family: var(--font-serif);
+  font-size: var(--step-1);
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--text-2);
   margin: 0;
-  border-left: 3px solid var(--coral);
-  padding-left: 1.15rem;
 }
 
 /* ── Series disclaimer ── */
@@ -220,18 +194,17 @@
   padding: 0.9rem 1.1rem;
   background: var(--tint);
   border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
-  border-radius: 0 8px 8px 0;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  line-height: 1.75;
+  border-radius: 10px;
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  line-height: 1.65;
   color: var(--muted);
 }
 
 .series-disclaimer p {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  line-height: 1.75;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
   margin: 0;
   max-width: 100%;
 }
@@ -259,10 +232,10 @@
   font-weight: 700;
 }
 
-/* ── Article body typography — sans measure ~68ch, mono accents ── */
+/* ── Article body typography — serif, measure ~68ch ── */
 .article-body {
   font-size: var(--step-0);
-  line-height: 1.8;
+  line-height: 1.75;
   color: var(--text);
 }
 
@@ -276,7 +249,7 @@
 }
 
 .article-body h2 {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: var(--step-2);
   font-weight: 700;
   letter-spacing: -0.015em;
@@ -287,18 +260,9 @@
   padding-bottom: 0.6rem;
 }
 
-.article-body h2::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 2.5rem;
-  height: 2px;
-  background: linear-gradient(90deg, var(--coral), var(--indigo-bright));
-}
 
 .article-body h3 {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: var(--step-1);
   font-weight: 650;
   margin: 2.25rem 0 0.75rem;
@@ -424,7 +388,7 @@
 .article-body .comparison-table thead th {
   background: var(--indigo-deep);
   color: var(--d-text);
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 0.72rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -462,7 +426,7 @@
 }
 
 .article-body .comparison-table td:first-child {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--text);
@@ -478,21 +442,21 @@
   margin-top: 4rem;
   padding-top: 2rem;
   border-top: 1px solid var(--border);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   color: var(--muted);
-  text-align: center;
 }
 
 .article-footer a {
   color: var(--accent);
-  font-size: 0.8rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 .article-footer a:hover {
-  color: var(--coral);
+  color: var(--coral-text);
 }
 
 /* ── Closing callout ── */
@@ -502,7 +466,7 @@
   border-left: 4px solid var(--coral);
   background: var(--tint);
   border-radius: 0 10px 10px 0;
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--text);
@@ -528,30 +492,13 @@
 }
 
 .article-figure figcaption {
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.85rem;
+  font-style: italic;
   color: var(--muted);
   margin-top: 0.75rem;
   line-height: 1.6;
 }
 
-.article-figure figcaption::before {
-  content: "fig. ";
-  color: var(--coral);
-}
-
-/* Article body reveals */
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .article-body h2,
-    .article-figure,
-    .article-closing {
-      animation: rise-in linear both;
-      animation-timeline: view(block);
-      animation-range: entry 5% entry 35%;
-    }
-  }
-}
 
 /* ── Responsive ── */
 @media (min-width: 768px) {
