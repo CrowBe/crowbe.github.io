@@ -74,17 +74,123 @@ if (!fabScrollDriven) {
   handleFabVisibility();
 }
 
-// ── Keyboard navigation for horizontal card rails ──
-document.querySelectorAll(".project-list, .writing-card-list").forEach((list) => {
-  list.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-      e.preventDefault();
-      const card = list.firstElementChild;
-      const step = card ? card.offsetWidth + 24 : 320;
-      list.scrollBy({ left: e.key === "ArrowRight" ? step : -step });
-    }
+// ── Two small moments with the guide firefly ──
+// The firefly normally only flies when the chat or an agent points at
+// something. It also makes two one-off visits per browsing session:
+//   1. the first time the projects come into view, it finds the first
+//      project's title (the one you can try live) and pops beside it;
+//   2. when someone reaches the bottom of the page, it spirals into the
+//      mail icon and the envelope seals.
+// guide-sprite.js does the flying and skips both under reduced motion.
+(() => {
+  if (!("IntersectionObserver" in window)) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const firstTime = (key) => {
+    try {
+      if (sessionStorage.getItem(key)) return false;
+      sessionStorage.setItem(key, "1");
+    } catch (e) {}
+    return true;
+  };
+  const visit = (detail) => document.dispatchEvent(new CustomEvent("guide-visit", { detail }));
+  const whenSeen = (target, options, run) => {
+    if (!target) return;
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      run();
+    }, options);
+    observer.observe(target);
+  };
+
+  // 1. Projects: wait until the title sits comfortably in view.
+  const firstProject = document.querySelector(".project-card");
+  const projectTitle = firstProject && firstProject.querySelector(".card-header h3");
+  whenSeen(projectTitle, { threshold: 1, rootMargin: "0px 0px -30% 0px" }, () => {
+    if (firstTime("guide-visit-projects")) setTimeout(() => visit({ element: firstProject }), 350);
   });
-});
+
+  // 2. The bottom: the footer only shows once you've read everything.
+  const mail = document.querySelector(".icon-bar .mail");
+  whenSeen(document.querySelector("body > footer"), { threshold: 0.6 }, () => {
+    if (!mail || !firstTime("guide-visit-mail")) return;
+    setTimeout(
+      () =>
+        visit({
+          element: mail,
+          anchor: mail,
+          dive: true,
+          onArrive: () => {
+            mail.classList.remove("is-sealed");
+            void mail.offsetWidth; // restart the animation if it ran before
+            mail.classList.add("is-sealed");
+          },
+        }),
+      250
+    );
+  });
+})();
+
+// ── Career route trail ──
+// Draws a wandering, dotted trail through each waypoint in the
+// "How I got here" list, like a walking track on a map. Each leg bulges
+// to alternate sides so the line meanders without ever leaving its
+// gutter. Decorative only: the list reads the same without it, and
+// CSS shows a straight dotted line until .has-trail is added.
+(() => {
+  const list = document.querySelector(".route-list");
+  if (!list || !("ResizeObserver" in window)) return;
+
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("class", "route-line");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  const path = document.createElementNS(NS, "path");
+  svg.appendChild(path);
+  list.prepend(svg);
+
+  // Fixed, hand-picked wobble so the trail looks walked, not generated.
+  const WOBBLE = [1, 0.65, 1.2, 0.8, 1.05, 0.7];
+
+  const draw = () => {
+    const stops = list.querySelectorAll(".route-stop");
+    if (stops.length < 2) return;
+    const box = list.getBoundingClientRect();
+    // Waypoint centres come from each stop's ::before dot, so CSS stays
+    // the single source of truth for where the dots sit.
+    const pts = Array.from(stops, (stop) => {
+      const dot = getComputedStyle(stop, "::before");
+      const r = stop.getBoundingClientRect();
+      return {
+        x: r.left - box.left + parseFloat(dot.left) + parseFloat(dot.width) / 2,
+        y: r.top - box.top + parseFloat(dot.top) + parseFloat(dot.height) / 2,
+      };
+    });
+    if (pts.some((p) => !Number.isFinite(p.x) || !Number.isFinite(p.y))) return;
+
+    // Max sideways swing (px) comes from CSS so it tracks the gutter width.
+    const reach = parseFloat(getComputedStyle(list).getPropertyValue("--trail-reach")) || 16;
+    let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const a = pts[i];
+      const b = pts[i + 1];
+      const dy = b.y - a.y;
+      const side = i % 2 === 0 ? 1 : -1;
+      const s = side * Math.min(reach * WOBBLE[i % WOBBLE.length], dy * 0.14);
+      d +=
+        ` C ${(a.x + s).toFixed(1)} ${(a.y + dy * 0.32).toFixed(1)},` +
+        ` ${(b.x + s).toFixed(1)} ${(b.y - dy * 0.32).toFixed(1)},` +
+        ` ${b.x.toFixed(1)} ${b.y.toFixed(1)}`;
+    }
+    path.setAttribute("d", d);
+    list.classList.add("has-trail");
+  };
+
+  new ResizeObserver(draw).observe(list);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+})();
 
 // ── WebGL2 shader hero ────────────────────────────────────────
 // Layered simplex/FBM flow field in the brand palette, with eased

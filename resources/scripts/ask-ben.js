@@ -53,7 +53,7 @@
       right: 2rem;
       bottom: 2rem;
       z-index: 60;
-      font-family: "Fira Mono", monospace;
+      font-family: var(--font-sans);
     }
 
     .ask-ben-fab {
@@ -100,7 +100,7 @@
       transform: translateY(0);
     }
 
-    .ask-ben-tooltip strong { display: block; font-family: "Montserrat", sans-serif; font-size: 0.88rem; }
+    .ask-ben-tooltip strong { display: block; font-family: var(--font-sans); font-size: 0.88rem; }
     .ask-ben-tooltip small { display: block; margin-top: 0.2rem; color: var(--d-muted); font-size: 0.68rem; }
 
     .ask-ben-panel {
@@ -118,7 +118,7 @@
       background: var(--surface);
       color: var(--text);
       box-shadow: 0 18px 55px rgba(13, 2, 33, 0.35);
-      font-family: "Fira Mono", monospace;
+      font-family: var(--font-sans);
       text-align: left;
     }
 
@@ -133,7 +133,7 @@
       color: var(--d-text);
     }
 
-    .ask-ben-header h2 { margin: 0; font-family: "Montserrat", sans-serif; font-size: 1rem; }
+    .ask-ben-header h2 { margin: 0; font-family: var(--font-sans); font-size: 1rem; }
     .ask-ben-close { border: 0; background: transparent; color: inherit; font-size: 1.5rem; line-height: 1; cursor: pointer; }
     .ask-ben-close:focus-visible { outline: 2px solid var(--contrast); outline-offset: 2px; }
 
@@ -179,7 +179,7 @@
       padding: 0.4rem 0.7rem;
       background: var(--bg);
       color: var(--text);
-      font: 700 0.7rem/1 "Fira Mono", monospace;
+      font: 700 0.7rem/1 var(--font-sans);
       cursor: pointer;
     }
     .ask-ben-download { border-color: var(--contrast); color: var(--contrast); }
@@ -196,7 +196,7 @@
       background: var(--bg);
       color: var(--text);
       padding: 0.65rem;
-      font: 0.78rem/1.4 "Fira Mono", monospace;
+      font: 0.78rem/1.4 var(--font-sans);
     }
 
     .ask-ben-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }

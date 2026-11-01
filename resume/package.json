@@ -1,0 +1,13 @@
+{
+  "name": "benjamin-crow-resume",
+  "private": true,
+  "type": "module",
+  "description": "Builds the resume PDF and DOCX from resume.json",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "docx": "^9.5.0",
+    "playwright": "^1.55.0"
+  }
+}

@@ -2,8 +2,13 @@
 // When site-focus.js highlights something, a small glowing character
 // launches from the chat launcher (or the nearest screen edge), arcs
 // across the viewport, orbits the highlighted element for a beat, pops,
-// and fades out. It only ever moves on a focus event — never idly, and
-// never under prefers-reduced-motion.
+// and fades out. It moves on a focus event, or on one of two one-off
+// "guide-visit" moments the page asks for (websitescripts.js) — never
+// idly, and never under prefers-reduced-motion.
+//
+// A visit can "dive": instead of orbiting and popping beside the target,
+// the firefly spirals into its centre and goes out, then calls back so
+// the page can react (the contact mail icon seals itself).
 //
 // Two renderers behind one interface:
 //   · WebGPU   — instanced glow quads, additive blend, WGSL. Preferred.
@@ -300,7 +305,8 @@ fn fs(in: VSOut) -> @location(0) vec4f {
 
   // Aim at the element's heading where it has one — the eye wants the
   // title, not the centre of a tall card. Resolved once per launch.
-  const anchorFor = (element) => element.querySelector(".card-header h3, h4, h2") || element;
+  // A visit can pass its own anchor (the mail icon is its own target).
+  const anchorFor = (element, anchor) => anchor || element.querySelector(".card-header h3, h4, h2") || element;
 
   const targetPoint = (anchor) => {
     const rect = anchor.getBoundingClientRect();
@@ -405,6 +411,33 @@ fn fs(in: VSOut) -> @location(0) vec4f {
       const flutter = (1 - t) * 9 * scale;
       x += Math.sin(elapsed * 0.021) * flutter;
       y += Math.cos(elapsed * 0.017) * flutter;
+    } else if (elapsed < TRAVEL_MS + ORBIT_MS && flight.dive) {
+      // Swirl: tighten from a wide loop to the exact centre, speeding up
+      // as it closes, then a small burst where it goes in.
+      const t = (elapsed - TRAVEL_MS) / ORBIT_MS;
+      const angle = flight.bend * easeInOut(t) * Math.PI * 4.4 - Math.PI / 2;
+      const radius = (1 - easeInOut(t)) * 46 * scale;
+      x = flight.to.x + Math.cos(angle) * radius * 1.25;
+      y = flight.to.y + Math.sin(angle) * radius;
+      if (!flight.popped && t > 0.94) {
+        flight.popped = true;
+        for (let i = 0; i < 10; i++) {
+          const a = (i / 10) * Math.PI * 2;
+          burst.push({
+            x: flight.to.x,
+            y: flight.to.y,
+            vx: Math.cos(a) * (0.5 + Math.random() * 0.7) * scale,
+            vy: Math.sin(a) * (0.5 + Math.random() * 0.7) * scale,
+            born: now,
+            hue: i % 2 ? "core" : "glow",
+          });
+        }
+        if (flight.onArrive) {
+          try {
+            flight.onArrive();
+          } catch (e) {}
+        }
+      }
     } else if (elapsed < TRAVEL_MS + ORBIT_MS) {
       const t = (elapsed - TRAVEL_MS) / ORBIT_MS;
       const angle = flight.bend * t * Math.PI * 2.1 - Math.PI / 2;
@@ -427,9 +460,15 @@ fn fs(in: VSOut) -> @location(0) vec4f {
       }
     } else {
       const t = (elapsed - TRAVEL_MS - ORBIT_MS) / FADE_MS;
-      lead = 1 - t;
       x = flight.to.x;
-      y = flight.to.y - t * 26 * scale;
+      if (flight.dive) {
+        // Already inside: go out fast and stay put.
+        lead = Math.max(0, 1 - t * 2.5);
+        y = flight.to.y;
+      } else {
+        lead = 1 - t;
+        y = flight.to.y - t * 26 * scale;
+      }
     }
 
     pushTrail(x, y);
@@ -478,10 +517,10 @@ fn fs(in: VSOut) -> @location(0) vec4f {
     rafId = requestAnimationFrame(step);
   };
 
-  const launch = (element) => {
+  const launch = (element, options = {}) => {
     unpark();
     resize();
-    const anchor = anchorFor(element);
+    const anchor = anchorFor(element, options.anchor);
     const to = targetPoint(anchor);
     if (!to) return;
     // Hand off from wherever the last flight left the firefly, so a
@@ -503,6 +542,9 @@ fn fs(in: VSOut) -> @location(0) vec4f {
       bend: Math.random() < 0.5 ? -1 : 1,
       start: performance.now(),
       popped: false,
+      ambient: Boolean(options.ambient),
+      dive: Boolean(options.dive),
+      onArrive: typeof options.onArrive === "function" ? options.onArrive : null,
     };
     canvas.classList.add("is-flying");
     if (!rafId) rafId = requestAnimationFrame(step);
@@ -562,6 +604,24 @@ fn fs(in: VSOut) -> @location(0) vec4f {
     // like it's leading the page, not landing before the page moves.
     ensureRenderer().then((created) => {
       if (created) setTimeout(() => launch(element), 90);
+    });
+  });
+
+  // One-off visits the page asks for (see websitescripts.js). They never
+  // cut into a flight the chat or an agent started; a visit that arrives
+  // mid-visit hands off from where the firefly is, like a multi-hop answer.
+  document.addEventListener("guide-visit", (event) => {
+    const detail = event.detail || {};
+    if (!detail.element) return;
+    if (flight && !flight.ambient) return;
+    ensureRenderer().then((created) => {
+      if (!created || (flight && !flight.ambient)) return;
+      launch(detail.element, {
+        anchor: detail.anchor,
+        dive: detail.dive,
+        onArrive: detail.onArrive,
+        ambient: true,
+      });
     });
   });
 
