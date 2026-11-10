@@ -1,14 +1,16 @@
 // Builds Ben's resume from resume.json, the single source of truth.
 //
-//   dist/Benjamin_Crow_Resume.pdf   site-styled (Familjen Grotesk + Literata,
-//                                   embedded), single column, A4. Copied to
-//                                   ../resources/ — the file the site links to.
-//   dist/Benjamin_Crow_Resume.docx  same content in standard fonts (Arial +
-//                                   Georgia) for job portals, which parse .docx
-//                                   most reliably.
-//   dist/resume.html                the page the PDF is printed from.
+//   dist/Benjamin_Crow_Resume.pdf      the designed version, for people: direct
+//                                      applications, email, the site. Laid out
+//                                      by designed.mjs. Copied to ../resources/,
+//                                      the file the site links to.
+//   dist/Benjamin_Crow_Resume_ATS.pdf  plain single-column version for job
+//                                      portals and applicant tracking systems.
+//   dist/Benjamin_Crow_Resume.docx     the ATS content in standard fonts (Arial +
+//                                      Georgia); portals parse .docx most reliably.
+//   dist/resume*.html                  the pages the PDFs are printed from.
 //
-// ATS rules applied to both (from the resumeskills formatter/optimizer
+// ATS rules applied to the ATS PDF and DOCX (from the resumeskills formatter/optimizer
 // guidance): one column, no tables or text boxes, nothing in page
 // headers/footers, contact details in the body, standard section names,
 // real text only, consistent "Mon YYYY" dates, plain bullets. Ligatures are
@@ -25,6 +27,7 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const docx = require("docx");
 const { chromium } = require("playwright");
+import { renderDesignedHtml } from "./designed.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const dist = path.join(here, "dist");
@@ -363,36 +366,56 @@ const renderDocx = (r) => {
 // ════════════════════════════════════════════════════════════════
 await mkdir(dist, { recursive: true });
 
-const htmlPath = path.join(dist, "resume.html");
-await writeFile(htmlPath, renderHtml(resume));
+const squeeze = (pdfPath) => {
+  // Optional lossless squeeze (~35% smaller): object streams + max deflate.
+  // Text, fonts and links are untouched. Skipped if qpdf isn't installed.
+  try {
+    const tmp = `${pdfPath}.tmp`;
+    execFileSync("qpdf", ["--object-streams=generate", "--compress-streams=y", "--recompress-flate", "--compression-level=9", pdfPath, tmp], { stdio: "ignore" });
+    return rename(tmp, pdfPath);
+  } catch {
+    console.log("qpdf not found: PDFs left uncompressed (install qpdf for smaller files).");
+  }
+};
 
-const pdfPath = path.join(dist, `${BASENAME}.pdf`);
-const browser = await chromium.launch();
-try {
+const printPdf = async (browser, html, htmlName, pdfName, { waitForLayout = false } = {}) => {
+  const htmlPath = path.join(dist, htmlName);
+  await writeFile(htmlPath, html);
+  const pdfPath = path.join(dist, pdfName);
   const page = await browser.newPage();
-  await page.goto(pathToFileURL(htmlPath).href, { waitUntil: "load" });
-  await page.evaluate(() => document.fonts.ready);
-  const missing = await page.evaluate(() =>
-    ["Familjen Grotesk", "Literata"].filter((f) => !document.fonts.check(`12px "${f}"`))
-  );
-  if (missing.length) throw new Error(`Fonts failed to load: ${missing.join(", ")}`);
-  await page.pdf({ path: pdfPath, format: "A4", preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+  try {
+    await page.goto(pathToFileURL(htmlPath).href, { waitUntil: "load" });
+    await page.evaluate(() => document.fonts.ready);
+    const missing = await page.evaluate(() =>
+      ["Familjen Grotesk", "Literata"].filter((f) => !document.fonts.check(`12px "${f}"`))
+    );
+    if (missing.length) throw new Error(`Fonts failed to load: ${missing.join(", ")}`);
+    if (waitForLayout) {
+      // designed.mjs paginates and draws its trails in the page, then reports.
+      const result = await page.waitForFunction(() => window.__resumeReady, null, { timeout: 15000 });
+      const status = await result.jsonValue();
+      if (status !== true) throw new Error(`Designed resume layout: ${status}`);
+    }
+    await page.pdf({ path: pdfPath, format: "A4", preferCSSPageSize: true, printBackground: true, tagged: true, outline: true });
+  } finally {
+    await page.close();
+  }
+  await squeeze(pdfPath);
+  return pdfPath;
+};
+
+const browser = await chromium.launch();
+let designedPdf, atsPdf;
+try {
+  designedPdf = await printPdf(browser, renderDesignedHtml(resume), "resume-designed.html", `${BASENAME}.pdf`, { waitForLayout: true });
+  atsPdf = await printPdf(browser, renderHtml(resume), "resume.html", `${BASENAME}_ATS.pdf`);
 } finally {
   await browser.close();
 }
-
-// Optional lossless squeeze (~35% smaller): object streams + max deflate.
-// Text, fonts and links are untouched. Skipped quietly if qpdf isn't installed.
-try {
-  const squeezed = `${pdfPath}.tmp`;
-  execFileSync("qpdf", ["--object-streams=generate", "--compress-streams=y", "--recompress-flate", "--compression-level=9", pdfPath, squeezed], { stdio: "ignore" });
-  await rename(squeezed, pdfPath);
-} catch {
-  console.log("qpdf not found: PDF left uncompressed (install qpdf for a ~35% smaller file).");
-}
-await copyFile(pdfPath, SITE_PDF);
+await copyFile(designedPdf, SITE_PDF);
 
 const docxPath = path.join(dist, `${BASENAME}.docx`);
 await writeFile(docxPath, await Packer.toBuffer(renderDocx(resume)));
 
-console.log(`Built:\n  ${path.relative(process.cwd(), pdfPath)}\n  ${path.relative(process.cwd(), docxPath)}\n  copied PDF to ${path.relative(process.cwd(), SITE_PDF)}`);
+const rel = (p) => path.relative(process.cwd(), p);
+console.log(`Built:\n  ${rel(designedPdf)}  (designed, for people)\n  ${rel(atsPdf)}  (ATS)\n  ${rel(docxPath)}  (ATS, for portals)\n  copied the designed PDF to ${rel(SITE_PDF)}`);
