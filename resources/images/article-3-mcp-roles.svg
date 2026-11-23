@@ -62,7 +62,7 @@
   <text x="592" y="236" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#4a5a7a">Ingestion Interface</text>
 
   <!-- ── Bottom caption ── -->
-  <text x="350" y="276" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#5a5a7a">The MCP server teaches the agent how to work with the app —</text>
+  <text x="350" y="276" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#5a5a7a">The MCP server teaches the agent how to work with the app,</text>
   <text x="350" y="290" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#5a5a7a">and validates what comes back in.</text>
   <text x="350" y="308" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#8a9bbd">One protocol. Two roles. One boundary between agent and app.</text>
 </svg>

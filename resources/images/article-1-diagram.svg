@@ -66,7 +66,7 @@
   <!-- Arrow with label -->
   <line x1="600" y1="164" x2="600" y2="182" stroke="#6b7fa3" stroke-width="1.5"/>
   <polygon points="594,179 600,192 606,179" fill="#6b7fa3"/>
-  <text x="625" y="177" font-family="'Courier New',monospace" font-size="10" fill="#6b7fa3">gathers + encrypts</text>
+  <text x="625" y="177" font-family="'Courier New',monospace" font-size="10" fill="#6b7fa3">gathers + structures</text>
 
   <!-- Node: Content Sources -->
   <rect x="460" y="192" width="280" height="40" rx="6" fill="#201c29" stroke="#2e2e42" stroke-width="1"/>
@@ -75,15 +75,15 @@
   <!-- Arrow with label -->
   <line x1="600" y1="232" x2="600" y2="250" stroke="#6b7fa3" stroke-width="1.5"/>
   <polygon points="594,247 600,260 606,247" fill="#6b7fa3"/>
-  <text x="625" y="245" font-family="'Courier New',monospace" font-size="10" fill="#fe5f55">encrypted</text>
+  <text x="625" y="245" font-family="'Courier New',monospace" font-size="10" fill="#7abd7a">structured feed</text>
 
   <!-- Node: Device Storage (user-owned) -->
   <rect x="460" y="260" width="280" height="40" rx="6" fill="#1b2e1b" stroke="#3d6e3d" stroke-width="1.5"/>
   <text x="600" y="285" text-anchor="middle" font-family="'Courier New',monospace" font-size="13" fill="#7abd7a">Device Storage</text>
 
   <!-- "user-owned" badge -->
-  <rect x="232" y="256" width="88" height="18" rx="9" fill="#1b3e1b" stroke="#3d6e3d" stroke-width="0.5"/>
-  <text x="276" y="268" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#7abd7a">user-owned</text>
+  <rect x="634" y="256" width="88" height="18" rx="9" fill="#1b3e1b" stroke="#3d6e3d" stroke-width="0.5"/>
+  <text x="678" y="268" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#7abd7a">user-owned</text>
 
   <!-- Arrow -->
   <line x1="600" y1="300" x2="600" y2="318" stroke="#6b7fa3" stroke-width="1.5"/>

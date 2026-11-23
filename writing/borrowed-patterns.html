@@ -69,48 +69,58 @@
     </nav>
 
     <main id="main-content" class="article-page" tabindex="-1">
-        <a href="/#writing" class="article-back">
+        <a href="/writing/" class="article-back">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Writing
         </a>
 
         <header class="article-header">
             <div class="article-meta">
-                <span>May 2026</span>
+                <span>May 2026 · Updated Sep 2026</span>
                 <span class="article-series">When Agents Join the Team — Part 3 of 3</span>
             </div>
             <h1 style="view-transition-name: vt-title-borrowed">Agents Get Better by Becoming More Human</h1>
             <p class="article-lede">
-                As agents become more capable, some of the most important improvements aren't happening inside the model.
-                We're rediscovering structures humans developed to make unreliable individual intelligence useful: review,
-                delegation, clarification, evaluation, reflection, approval, institutional memory. Agent architecture is
-                increasingly the process of turning those patterns into software.
+                Some of the biggest gains in agent reliability aren't happening inside the model. We're turning the
+                structures humans built around our own fallibility into software.
             </p>
         </header>
 
+        <aside class="series-disclaimer">
+            <p>This is a three-part series on how teams and work systems adapt to agents. Reading order:
+                <a href="/writing/hr-next-sociotechnical-moment.html">Part 1: AI Is Getting Better Faster Than Organisations Are</a>
+                &rarr; <a href="/writing/when-agents-join-the-team-managers-matter-differently.html">Part 2: AI Agents Make Management More Important, Not Less</a>
+                &rarr; <strong>Part 3: Agents Get Better by Becoming More Human</strong> (you are here)
+            </p>
+        </aside>
+
         <article class="article-body">
+            <p>
+                In <a href="/writing/hr-next-sociotechnical-moment.html">Part 1</a> and
+                <a href="/writing/when-agents-join-the-team-managers-matter-differently.html">Part 2</a>, I looked at how
+                organisations and managers have to adapt when agents enter the work system. Something parallel is happening
+                inside agent design itself.
+            </p>
+
             <p>
                 The more capable agents become, the more we're making them work like people.
             </p>
 
             <p>
-                I don't mean making them sound human. I mean giving them some of the structures humans use to make our own
+                I don't mean making them sound human. I mean giving them the structures humans use to make our own
                 intelligence more reliable.
             </p>
 
             <p>
                 None of this borrowing is new. Neural networks themselves were inspired by biological neurons, even if the
-                resemblance between the two is now fairly loose.
-            </p>
-
-            <p>
-                But we're increasingly borrowing from how humans think and work, not just from ideas about how the brain works.
+                resemblance between the two is now fairly loose. What's shifted is that we're increasingly borrowing from how
+                humans think and work together, not just from ideas about how the brain works.
             </p>
 
             <p>
                 Memory is a good example. Human memory isn't a complete transcript of everything we've experienced. We retain
                 some things, consolidate them over time, retrieve them when they're useful and forget others. Agent memory is
                 increasingly becoming a software process with many of the same concerns: what belongs in immediate context,
-                what should persist, and what should be retrieved later. Research into
+                what should persist and what should be retrieved later. Research into
                 <a href="https://www.nature.com/articles/nrn2762" target="_blank" rel="noopener noreferrer">sleep and memory consolidation</a>
                 has long described consolidation as part of biological memory, while experiments such as
                 <a href="https://arxiv.org/abs/2605.26099" target="_blank" rel="noopener noreferrer">Do Language Models Need Sleep?</a>
@@ -119,12 +129,9 @@
 
             <p>
                 The same thing is happening with patterns that aren't obviously cognitive. Review, delegation, clarification
-                and approval come from how humans organise work around each other's limitations.
-            </p>
-
-            <p>
-                We're not just borrowing ideas about how intelligence might work. We're borrowing what humans have learned
-                about making intelligence useful.
+                and approval come from how humans organise work around each other's limitations. We're not just borrowing
+                ideas about how intelligence might work. We're borrowing what humans have learned about making intelligence
+                useful.
             </p>
 
             <h2>Engineering as a Frontier</h2>
@@ -165,7 +172,9 @@
             <p>
                 That's what I find interesting about a lot of the progress in coding agents. We're not only making the
                 underlying intelligence more capable. We're rediscovering the practices humans already use to make intelligent
-                work reliable.
+                work reliable. I ran into the same lesson building personal software in
+                <a href="/writing/architecting-agentic-content-apps.html">ScrolLess</a>: reliability came less from a smarter
+                model than from explicit workflows, typed boundaries and clear review points.
             </p>
 
             <h2>Beyond Engineering</h2>
@@ -177,21 +186,20 @@
 
             <p>
                 I became interested in this while prototyping an AI-assisted tool for writing career goals and development plans.
+                Coding gives us unusually strong ways to evaluate agent output: tests, type systems, linters and code review.
+                Career development doesn't have those things.
             </p>
 
             <p>
-                Coding gives us unusually strong ways to evaluate agent output. We have tests, type systems, linters and code
-                review. Career development doesn't have those things. A career goal doesn't compile.
+                A career goal doesn't compile.
             </p>
 
             <p>
-                But the collaborative pattern still worked.
-            </p>
-
-            <p>
-                The AI chat and workflow inputs sat side by side. As the conversation unfolded, the agent populated the form
-                fields for the user to review, challenge and revise in context. The user wasn't chatting beside the product and
-                then copying the result back into the workflow. The conversation and the career goal shared the same surface.
+                But the collaborative pattern still worked. The AI chat and workflow inputs sat side by side. As the
+                conversation unfolded, the agent populated the form fields for the person to review, challenge and revise in
+                context. Without a test suite to tell you whether a draft is right, putting the judgement directly on the
+                shared surface mattered even more. You weren't chatting beside the product and copying results across; the
+                conversation and the artefact shared the same space.
             </p>
 
             <p>
@@ -200,12 +208,9 @@
 
             <p>
                 That makes me wonder how many of the patterns we're currently discovering through coding agents aren't really
-                coding patterns at all.
-            </p>
-
-            <p>
-                Humans didn't stop needing review, delegation, clarification or institutional memory as we became better at
-                our jobs. Those structures are part of how we make intelligence useful.
+                coding patterns at all. Humans didn't stop needing second pairs of eyes, clear handoffs, clarifying questions
+                or institutional memory as we got better at our jobs. Those structures are part of how we make intelligence
+                useful.
             </p>
 
             <p>
@@ -219,12 +224,12 @@
         </article>
 
         <footer class="article-footer">
-            <p class="process-note">Note on process: every piece here is AI-produced. Claude and ChatGPT do the drafting — Claude through the Claude mobile app, ChatGPT through OpenClaw over Telegram. I act as editor: setting direction, providing initial sources, and reviewing for style and cohesion. It's an experiment in extending the process that works for code production into other forms of writing.</p>
-            <p>A continuation of my writing on agentic work, evaluation, and software patterns moving beyond code.</p>
+            <p class="process-note">Note on process: every piece here is AI-drafted with Claude and ChatGPT. I direct, source and edit for style, accuracy and cohesion — extending agentic patterns from code into writing.</p>
+            <p>Part 3 of a three-part series: When Agents Join the Team.</p>
             <p>
-                <a href="/writing/when-agents-join-the-team-managers-matter-differently.html">&larr; AI Agents Make Management More Important, Not Less</a>
+                <a href="/writing/when-agents-join-the-team-managers-matter-differently.html">&larr; Part 2: AI Agents Make Management More Important, Not Less</a>
             </p>
-            <p><a href="/#writing">Back to Writing</a></p>
+            <p><a href="/writing/">All writing</a></p>
         </footer>
     </main>
 

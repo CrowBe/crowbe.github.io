@@ -69,7 +69,7 @@
     </nav>
 
     <main id="main-content" class="article-page" tabindex="-1">
-        <a href="/#writing" class="article-back">
+        <a href="/writing/" class="article-back">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Writing
         </a>
 
@@ -105,18 +105,18 @@
             <p>
                 Both are hard, in different ways. Building a creator ecosystem means convincing people to make content
                 before there's an audience to consume it. Building integrations means authentication, APIs, rate limits,
-                normalisation, and ongoing maintenance as the systems you're integrating with change.
+                normalisation and ongoing maintenance as the systems you're integrating with change.
             </p>
 
             <p>
-                Either way, a lot has to happen before you get to the part most users actually care about:
+                Either way, a lot has to happen before you get to the part most people actually care about:
                 content curation and the product experience around it.
             </p>
 
             <p>
-                Personal agents create another possibility. If an agent can gather and structure existing content on the
-                user's behalf, an app doesn't necessarily need to attract its own creators or own the integrations used
-                to reach it. That's the pattern I've been exploring with
+                Personal agents create another possibility. If an agent can gather and structure existing content on your
+                behalf, an app doesn't necessarily need to attract its own creators or own the integrations used to reach
+                it. That's the pattern I've been exploring with
                 <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">ScrolLess</a>:
                 the agent gathers the content, while the app focuses on what to do with it.
             </p>
@@ -124,25 +124,25 @@
             <h2>The Problem Apps Carry</h2>
 
             <p>
-                Look at the codebase of a news reader, social aggregator, or personal dashboard and you'll find a
-                substantial amount that has little to do with the experience the app is trying to deliver. OAuth flows,
-                API rate limits, token refresh logic, schema mappings that need updating when platforms change their
-                response formats. The plumbing required to reach the data becomes a substantial part of building the product.
+                Look at the codebase of a news reader, social aggregator or personal dashboard and you'll find a
+                substantial chunk that has little to do with the experience the app is trying to deliver. OAuth flows,
+                API rate limits, token refresh logic, schema mappings that break when platforms change their
+                response formats. The plumbing required to reach the data becomes a large part of building the product.
             </p>
 
             <p>
                 This wasn't always the shape of things. In the early web, apps often owned their data because they were
-                the source of it — you were putting information into them, not pulling it out of somewhere else. As more
-                of our data moved behind platforms and their APIs, applications increasingly became integration layers too:
-                authenticating, synchronising, and translating between external systems before they could do anything useful
+                the source of it: you were putting information into them, not pulling it out of somewhere else. As more
+                of our data moved behind platforms and their APIs, applications increasingly became integration layers too,
+                authenticating, synchronising and translating between external systems before they could do anything useful
                 with the result.
             </p>
 
             <p>
-                There's a less-visible cost for users. When an app owns your integrations, it will often hold the resulting
-                data too. Your history, preferences, saved items, and other state become tied to that application. Switching
+                There's a less-visible cost for users. When an app owns your integrations, it usually holds the resulting
+                data too. Your history, preferences, saved items and other state become tied to that application. Switching
                 to another app can mean starting again. That arrangement is normal enough that it barely registers as an
-                architectural choice. But it is one. Research into
+                architectural choice, yet it is one. Research into
                 <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10155150/" target="_blank" rel="noopener noreferrer">data sovereignty in the age of big tech</a>
                 has been examining the consequences of this kind of platform control for years.
             </p>
@@ -151,25 +151,25 @@
 
             <p>
                 What happens if a personal agent takes over the integration work? The agent authenticates with platforms,
-                gathers content, and structures it into a format the application understands. The application receives the
+                gathers content and structures it into a format the application understands. The application receives the
                 result and focuses on what to do with it.
             </p>
 
             <p>
                 In the model I'm exploring, the resulting data also lives on the user's device rather than in the
                 application's backend. That separates three responsibilities which are usually bundled together:
-                <strong>the agent gathers, the device owns, and the app presents.</strong>
+                <strong>the agent gathers, the device owns and the app presents.</strong>
             </p>
 
             <figure class="article-figure">
-                <img src="/resources/images/article-1-diagram.svg" alt="Left panel shows traditional app model: Platform APIs feed into App Backend and App Database (marked app-owned), then down to App UI and finally the User. Right panel shows agentic model: User at top schedules AI Agent which gathers from Content Sources, encrypts and sends to Device Storage (marked user-owned), read by App UI." width="800" height="440" loading="lazy" />
+                <img src="/resources/images/article-1-diagram.svg" alt="Left panel shows traditional app model: Platform APIs feed into App Backend and App Database (marked app-owned), then down to App UI and finally the User. Right panel shows agentic model: User at top schedules AI Agent which gathers and structures from Content Sources into Device Storage (marked user-owned), read by App UI." width="800" height="440" loading="lazy" />
                 <figcaption>The core inversion: data ownership moves from the app's backend to the user's device.</figcaption>
             </figure>
 
             <p>
                 For developers, integration complexity moves out of the application. Adding another source doesn't
                 necessarily require adding another API client to the app. For users, the relationship with their data
-                changes. The agent gathers on their behalf, their device holds the result, and using an application doesn't
+                changes. The agent gathers on their behalf, their device holds the result and using an application doesn't
                 inherently require making that application's backend the custodian of their content.
             </p>
 
@@ -227,7 +227,7 @@
             <h2>Apps Can Compete on the Experience</h2>
 
             <p>
-                If the integration work can move outside the application, the relationship between the number of
+                If the integration work can move outside the application, the link between the number of
                 integrations an app supports and the complexity of the app itself starts to come apart.
             </p>
 
@@ -240,22 +240,22 @@
 
             <p>
                 Instead of every competitor solving the same access problem before it can build the experience it actually
-                cares about, that access problem can move into the agent layer. If the user's data isn't trapped inside the
-                application providing the interface, switching applications becomes easier too. The data remains; the tool
+                cares about, that access problem can move into the agent layer. If your data isn't trapped inside the
+                application providing the interface, switching applications becomes easier too. The data stays; the tool
                 operating on it changes.
             </p>
 
             <p>
-                There's a user benefit beyond choosing a different interface. Platforms don't just provide content;
-                they also decide how it's ranked, how you move through it, and how difficult it is to stop.
+                There's a deeper user benefit beyond choosing a different interface. Platforms don't just provide content;
+                they also decide how it's ranked, how you move through it and how hard it is to stop.
                 If an agent gathers content independently, those decisions don't have to stay with the platform.
-                I could combine the sources I'm interested in, set my own rules for what matters, ask for summaries,
-                or limit how much time I spend reading.
+                For my own feeds, that means combining the sources I care about, setting my own rules for what matters,
+                asking for summaries or limiting how much time I spend reading.
             </p>
 
             <p>
                 None of that automatically makes the experience better. An agent that gathers everything might just
-                give me a bigger feed to scroll through. The opportunity is to build an experience around what I
+                give me a bigger feed to scroll through. The real opportunity is building an experience around what I
                 actually want from the content, rather than inheriting the incentives and interaction patterns of
                 the places it came from.
             </p>
@@ -264,9 +264,9 @@
 
             <p>
                 <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">ScrolLess</a>
-                is my experiment in this direction: a unified social and news feed built around the separation between
-                gathering content and deciding how to consume it. An external agent handles the platforms I follow and structures the
-                results into a common format. The application stores the resulting feed locally and renders it without
+                is my experiment in this direction: a unified social and news feed built around separating
+                how content is gathered from how I consume it. An external agent handles the platforms I follow and structures the
+                results into a common format. The application stores the resulting feed on the device and renders it without
                 having direct integrations with those platforms itself.
             </p>
 
@@ -278,9 +278,9 @@
 
             <p>
                 There are significant obstacles between that idea and ordinary consumer software. Platforms may not want
-                agents accessing them this way. Giving an agent broad access introduces its own trust problem. Local data
-                ownership only means much if the architecture actually enforces it. And today's personal-agent tooling still
-                asks considerably more of users than a normal application does.
+                agents accessing them this way. Giving an agent broad access introduces its own trust problem. On-device
+                data ownership only means much if the architecture actually enforces it. And today's personal-agent tooling still
+                asks considerably more of people than a normal application does.
             </p>
 
             <p>
@@ -289,18 +289,18 @@
             </p>
 
             <div class="article-closing">
-                Apps stop being data owners. They become tools again.
+                When apps stop owning the access layer, they have to earn your attention on the experience instead.
             </div>
 
         </article>
 
         <footer class="article-footer">
-            <p class="process-note">Note on process: every piece here is AI-produced. Claude and ChatGPT do the drafting — Claude through the Claude mobile app, ChatGPT through OpenClaw over Telegram. I act as editor: setting direction, providing initial sources, and reviewing for style and cohesion. It's an experiment in extending the process that works for code production into other forms of writing.</p>
-            <p>Part 1 of a three-part series on agentic content apps.</p>
+            <p class="process-note">Note on process: every piece here is AI-drafted with Claude and ChatGPT. I direct, source and edit for style, accuracy and cohesion — extending agentic patterns from code into writing.</p>
+            <p>Part 1 of a three-part series: Agentic Content Apps.</p>
             <p>
                 <a href="/writing/why-agentic-content-apps-arent-everywhere.html">Part 2: The Hard Part of Letting Agents Gather Content &rarr;</a>
             </p>
-            <p><a href="/#writing">Back to Writing</a></p>
+            <p><a href="/writing/">All writing</a></p>
         </footer>
     </main>
 
