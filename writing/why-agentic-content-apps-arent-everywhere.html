@@ -69,7 +69,7 @@
     </nav>
 
     <main id="main-content" class="article-page" tabindex="-1">
-        <a href="/#writing" class="article-back">
+        <a href="/writing/" class="article-back">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Writing
         </a>
 
@@ -81,13 +81,13 @@
             <h1 style="view-transition-name: vt-title-aca2">The Hard Part of Letting Agents Gather Content</h1>
             <p class="article-lede">
                 The pattern is technically visible, but not yet product-ready: access is contested,
-                trust has to be enforced architecturally, and the tooling still asks too much of ordinary users.
+                trust has to be enforced architecturally and the tooling still asks too much of ordinary users.
             </p>
         </header>
 
         <aside class="series-disclaimer">
             <p>This is a three-part series on agentic content apps. Reading order:
-                <a href="/writing/agentic-content-apps.html">Part 1: Personal Agents Let Content Apps Stop Owning Integrations</a>
+                <a href="/writing/agentic-content-apps.html">Part 1: Personal Agents Make Experience More Important Than Content Acquisition</a>
                 &rarr; <strong>Part 2: The Hard Part of Letting Agents Gather Content</strong> (you are here)
                 &rarr; <a href="/writing/architecting-agentic-content-apps.html">Part 3: Trustworthy Agentic Apps Need Device-First Architecture</a>
             </p>
@@ -97,29 +97,29 @@
 
             <h2>The Problems Don't Disappear</h2>
             <p>
-                <a href="/writing/agentic-content-apps.html">The first article</a> explored what happens when
+                <a href="/writing/agentic-content-apps.html">Part 1</a> explored what happens when
                 personal agents gather content independently of the apps we use to consume it. It could give us
-                more control over our feeds, our data, and the experience built around them.
+                more control over our feeds, our data and the experience built around them.
             </p>
             <p>
                 But moving content acquisition out of an app doesn't make the hard problems disappear.
                 It moves them. An agent still needs access to the source, still needs to gather the right
-                information reliably, and still needs to be trusted with what it can see. Even if all of
+                information reliably and still needs to be trusted with what it can see. Even if all of
                 that works, somebody has to make the result worth using.
             </p>
             <figure class="article-figure">
-                <img src="/resources/images/article-2-diagram.svg" alt="Access, trust and technical barriers between conventional apps and apps using independently gathered content." width="800" height="320" loading="lazy" />
+                <img src="/resources/images/article-2-diagram.svg" alt="Barriers between the traditional app model and a better experience: Access, Trust, and Reliability and UX, supported by deterministic workflows, MCP tools, on-device storage and deliberate UX." width="800" height="320" loading="lazy" />
                 <figcaption>Moving content access into an agent changes where the problems need to be solved.</figcaption>
             </figure>
 
             <h2>Access Is Still Access</h2>
             <p>
                 An agent needs some way to reach the content. Sometimes that's an API. Sometimes it's
-                browser automation or scraping an interface built for a person. Those approaches have
+                browser automation or reading an interface built for a person. Those approaches have
                 very different reliability and permission constraints.
             </p>
             <p>
-                Platforms can limit what their APIs expose, restrict unofficial clients, and change
+                Platforms can limit what their APIs expose, restrict unofficial clients and change
                 the interfaces that automation depends on. The legal position on scraping also varies
                 by jurisdiction and use case; <a href="https://www.browserless.io/blog/is-web-scraping-legal"
                 target="_blank" rel="noopener noreferrer">there isn't a universal answer</a>.
@@ -127,7 +127,7 @@
             </p>
             <p>
                 There's a product tension here too. A platform's interface is often where it delivers
-                recommendations, advertising, moderation, and the rest of its experience. Taking content
+                recommendations, advertising, moderation and the rest of its experience. Taking content
                 elsewhere changes that relationship, so we shouldn't assume platforms will make it easy.
                 Open banking offers a useful contrast: in regulated settings, users can authorise access
                 through supported interfaces. Content platforms generally don't offer an equivalent.
@@ -136,34 +136,35 @@
             <h2>Two Different Trust Problems</h2>
             <p>
                 The first is trusting the agent. An agent that can gather content across services
-                might have access to social accounts, email, subscriptions, financial information,
+                might have access to social accounts, email, subscriptions, financial information
                 or private documents. Where does it run? What does it retain? Who can read its logs?
                 What happens to credentials if the service changes hands or shuts down?
             </p>
             <p>
                 The second is trusting what receives the results. Once data from several sources
                 is combined, it can reveal more about someone than any individual source does.
-                Who stores that history? Can the developer read it? Can the user take it somewhere
-                else, or delete it?
+                Who stores that history? Can the developer read it? Can you take it somewhere
+                else or delete it?
             </p>
             <p>
                 I don't think a privacy policy is enough to answer those questions. If the argument
                 is that users should own their data, the architecture should make that credible.
-                In ScrolLess, that means trying to keep the resulting data on the device and the
-                relay unable to read what passes through it. The next article covers that design.
+                In ScrolLess, that means keeping the resulting data on the device and keeping the
+                relay unable to read what passes through it. <a href="/writing/architecting-agentic-content-apps.html">Part 3</a>
+                walks through that design.
             </p>
 
             <h2>It Has to Work Repeatedly</h2>
             <p>
                 A successful demo isn't the same as something you can rely on every day.
-                Websites change. Automated sessions fail. Content gets duplicated, misclassified,
+                Websites change. Automated sessions fail. Content gets duplicated, misclassified
                 or presented as fresh when it isn't. A feed that quietly misses things can be
                 harder to trust than one that fails outright.
             </p>
             <p>
                 That's why I want the repeatable parts to be deterministic. The agent can decide
-                what to gather and how to prioritise it, but source-specific operations and the
-                format passed to the app should be structured. Protocols such as
+                what to gather and how to prioritise it, while source-specific operations and the
+                format passed to the app stay structured. Protocols such as
                 <a href="https://www.anthropic.com/news/model-context-protocol"
                 target="_blank" rel="noopener noreferrer">MCP</a> can help expose reusable tools,
                 though a protocol alone doesn't make the underlying integration reliable.
@@ -171,22 +172,21 @@
             <p>
                 There's also a mismatch between scheduled collection and the expectation of a
                 live feed. Periodic updates might be enough for what I actually want from a
-                reading app, but the experience needs to make that trade-off understandable
+                reading app, yet the experience needs to make that trade-off clear
                 rather than looking like a broken version of a social platform.
             </p>
 
             <h2>Access Doesn't Make a Good Experience</h2>
             <p>
-                Most people don't want to configure an agent, manage credentials, or debug
+                Most people don't want to configure an agent, manage credentials or debug
                 a failed sync. They want an app that works. Setup and ongoing maintenance
                 are part of the product problem, not something we can hand-wave away.
             </p>
             <p>
-                More importantly, gathering everything I'm interested in doesn't mean I'll
-                want to consume it all. I could end up with a larger, noisier feed than the
-                ones I'm trying to escape. Independent access creates the option to curate
-                across sources, change ranking, limit screen time, or replace scrolling
-                with a digest. Somebody still has to design those choices well.
+                Even once setup is solved, designing a calmer experience is genuinely hard work.
+                Independent access opens up options platforms rarely optimise for: curating across
+                sources, transparent ranking, finite digests or deliberate stopping points. Turning
+                those options into defaults that feel effortless takes real product judgement.
             </p>
             <p>
                 That's the gap I'm exploring with
@@ -198,14 +198,14 @@
             <h2>What Comes Next</h2>
             <p>
                 I still think separating content access from the application opens up
-                more flexible, personal software. But access, trust, reliability, and
-                experience don't become optional because an agent is involved.
+                more flexible, personal software. But access, trust, reliability and
+                experience don't become optional just because an agent is involved.
             </p>
             <p>
-                <a href="/writing/architecting-agentic-content-apps.html">The next article</a>
-                looks at the ScrolLess architecture: how the agent, relay, and device fit
+                <a href="/writing/architecting-agentic-content-apps.html">Part 3</a>
+                looks at the ScrolLess architecture: how the agent, relay and device fit
                 together, and what it takes to make data ownership more than a promise.
-                That solves only part of the experience problem, but it's a foundation
+                That solves only part of the experience problem, yet it's a foundation
                 I want to be able to trust.
             </p>
             <div class="article-closing">
@@ -215,14 +215,14 @@
         </article>
 
         <footer class="article-footer">
-            <p class="process-note">Note on process: every piece here is AI-produced. Claude and ChatGPT do the drafting — Claude through the Claude mobile app, ChatGPT through OpenClaw over Telegram. I act as editor: setting direction, providing initial sources, and reviewing for style and cohesion. It's an experiment in extending the process that works for code production into other forms of writing.</p>
-            <p>Part 2 of a three-part series on agentic content apps.</p>
+            <p class="process-note">Note on process: every piece here is AI-drafted with Claude and ChatGPT. I direct, source and edit for style, accuracy and cohesion — extending agentic patterns from code into writing.</p>
+            <p>Part 2 of a three-part series: Agentic Content Apps.</p>
             <p>
-                <a href="/writing/agentic-content-apps.html">&larr; Part 1: Personal Agents Let Content Apps Stop Owning Integrations</a>
+                <a href="/writing/agentic-content-apps.html">&larr; Part 1: Personal Agents Make Experience More Important Than Content Acquisition</a>
                 &nbsp;&nbsp;&nbsp;
                 <a href="/writing/architecting-agentic-content-apps.html">Part 3: Trustworthy Agentic Apps Need Device-First Architecture &rarr;</a>
             </p>
-            <p><a href="/#writing">Back to Writing</a></p>
+            <p><a href="/writing/">All writing</a></p>
         </footer>
     </main>
 

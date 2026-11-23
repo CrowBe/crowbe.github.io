@@ -40,7 +40,7 @@
   <rect x="554" y="114" width="118" height="52" rx="6" fill="#201c29" stroke="#2e2e42" stroke-width="1.5"/>
   <text x="613" y="133" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="10" font-weight="700" fill="#9a9ab0">Sources</text>
   <text x="613" y="147" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#5a5a7a">RSS · YouTube</text>
-  <text x="613" y="158" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#5a5a7a">X · web scraping</text>
+  <text x="613" y="158" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#5a5a7a">X · browser sessions</text>
 
   <!-- Arrow down from Agent -->
   <line x1="350" y1="162" x2="350" y2="180" stroke="#6b7fa3" stroke-width="1.5"/>
@@ -86,10 +86,10 @@
   <!-- ── NODE: App UI ── -->
   <rect x="220" y="422" width="260" height="44" rx="8" fill="#1d1a2e" stroke="#4a3f7a" stroke-width="1.5"/>
   <text x="350" y="439" text-anchor="middle" font-family="'Trebuchet MS',Arial,sans-serif" font-size="11" font-weight="700" fill="#a89bcd">App UI</text>
-  <text x="350" y="455" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#6a5a9a">reads local storage · renders · no cloud round-trip</text>
+  <text x="350" y="455" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#6a5a9a">reads IndexedDB · renders · no cloud round-trip</text>
 
   <!-- Caption -->
   <text x="350" y="498" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#5a5a7a">Content is encrypted before it touches any server.</text>
-  <text x="350" y="512" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#5a5a7a">The relay cannot read it. The app holds nothing.</text>
-  <text x="350" y="526" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#fe5f55">The architectural guarantee isn't "we won't look." It's "we can't."</text>
+  <text x="350" y="512" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#5a5a7a">The relay can't read it. The app holds nothing.</text>
+  <text x="350" y="526" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" fill="#fe5f55">The guarantee isn't "we won't look." It's "we can't."</text>
 </svg>

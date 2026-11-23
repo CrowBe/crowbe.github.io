@@ -246,7 +246,8 @@ export const renderDesignedHtml = (r, { root = "../.." } = {}) => {
   }
   .strip strong { font-weight: 700; color: var(--moon); font-size: 10pt; letter-spacing: -0.01em; }
   .strip-contact { display: flex; gap: 6mm; }
-  .p2 .body { padding-top: 7mm; }
+  .p2 .body { padding-top: 6mm; }
+  .p2 .stop { padding-bottom: 3.4mm; }
 
   /* ── Two-column body ───────────────────────────────────────── */
   .body {
@@ -392,7 +393,7 @@ export const renderDesignedHtml = (r, { root = "../.." } = {}) => {
   .writing-link { margin-top: 1mm; font-family: var(--display); font-size: 7.6pt; font-weight: 600; color: var(--glow); }
 
   /* ── Projects (page 2, full width) ─────────────────────────── */
-  .projects { padding: 2mm var(--gutter) 0; }
+  .projects { padding: 1.5mm var(--gutter) 0; }
   .projects .section-title { margin-bottom: 3.4mm; }
   .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm 8mm; }
   .project { display: grid; grid-template-columns: 31mm minmax(0, 1fr); gap: 3.6mm; align-items: start; }

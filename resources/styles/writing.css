@@ -209,6 +209,10 @@
   max-width: 100%;
 }
 
+.series-disclaimer p + p {
+  margin-top: 0.65rem;
+}
+
 .series-disclaimer a {
   font-size: inherit;
   font-weight: inherit;

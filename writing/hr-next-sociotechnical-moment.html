@@ -69,13 +69,13 @@
     </nav>
 
     <main id="main-content" class="article-page" tabindex="-1">
-        <a href="/#writing" class="article-back">
+        <a href="/writing/" class="article-back">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Writing
         </a>
 
         <header class="article-header">
             <div class="article-meta">
-                <span>May 2026</span>
+                <span>May 2026 · Updated Sep 2026</span>
                 <span class="article-series">When Agents Join the Team — Part 1 of 3</span>
             </div>
             <h1 style="view-transition-name: vt-title-hr">AI Is Getting Better Faster Than Organisations Are</h1>
@@ -86,75 +86,68 @@
         </header>
 
         <aside class="series-disclaimer">
+            <p>This is a three-part series on how teams and work systems adapt to agents. Reading order:
+                <strong>Part 1: AI Is Getting Better Faster Than Organisations Are</strong> (you are here)
+                &rarr; <a href="/writing/when-agents-join-the-team-managers-matter-differently.html">Part 2: AI Agents Make Management More Important, Not Less</a>
+                &rarr; <a href="/writing/borrowed-patterns.html">Part 3: Agents Get Better by Becoming More Human</a>
+            </p>
             <p>
                 I work at Culture Amp, but this is personal thinking based only on public sources and my own views.
             </p>
         </aside>
 
         <article class="article-body">
-            <p>The productivity argument for AI is fairly intuitive. If an engineer with agents can do substantially more work than an engineer without them, the company has gained capacity.</p>
-            <p>What happens next is less obvious.</p>
-            <p>The company could decide it needs fewer engineers to produce the same amount of work. Or it could keep spending the same amount on engineering and become more ambitious.</p>
-            <p>The second option sounds like pure upside. If the people you already employ can suddenly accomplish substantially more, why wouldn't you just do more?</p>
+            <p>The productivity argument for AI is fairly intuitive. If an engineer with agents can get much more done than an engineer without them, the company has gained capacity.</p>
+            <p>What happens next is less obvious. The company could decide it needs fewer engineers to produce the same output, or it could keep spending the same amount on engineering and become more ambitious.</p>
+            <p>The second option sounds like pure upside. If the people you already employ can suddenly accomplish far more, why wouldn't you just do more?</p>
             <p>Because doing more is actually hard.</p>
 
             <h2>Individual Productivity Isn't Organisational Productivity</h2>
             <p>AI can increase the amount of work an individual can attempt without increasing an organisation's ability to absorb that work at the same rate.</p>
-            <p>There is already some evidence of this distinction. A <a href="https://www.nber.org/papers/w33795" target="_blank" rel="noopener noreferrer">six-month randomised experiment involving 7,137 knowledge workers</a> found that access to generative AI changed behaviours people could alter independently. Frequent users spent substantially less time on email and completed documents somewhat faster. But the researchers didn't find a significant change in time spent in meetings — behaviour that requires other people to change with you.</p>
-            <p>That's a useful distinction. An engineer might be able to produce substantially more code. That doesn't mean a product organisation can identify substantially more valuable things to build, or that a team can review changes at the same increased rate, or that customers can absorb substantially more change.</p>
+            <p>There's already some evidence of this distinction. A <a href="https://www.nber.org/papers/w33795" target="_blank" rel="noopener noreferrer">six-month randomised experiment involving 7,137 knowledge workers</a> found that access to generative AI changed behaviours people could alter independently. Frequent users spent substantially less time on email and completed documents somewhat faster. But the researchers didn't find a significant change in time spent in meetings: behaviour that requires other people to change with you.</p>
+            <p>That's a useful distinction. An engineer might be able to produce far more code. That doesn't mean a product organisation can identify more valuable things to build, or that a team can review changes at the same pace, or that customers can absorb that much more change.</p>
             <p>The limiting factor moves.</p>
-            <p>A <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6513481" target="_blank" rel="noopener noreferrer">2026 field experiment across 515 startups</a> gets even closer to this problem. The researchers call it the <em>mapping problem</em>: discovering where and how AI actually creates value within a firm's production process. Companies given information about how other firms had reorganised production around AI discovered 44% more AI use cases and subsequently completed more tasks, acquired more paying customers and generated more revenue.</p>
+            <p>A <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6513481" target="_blank" rel="noopener noreferrer">2026 field experiment across 515 startups</a> gets even closer to this problem. The researchers call it the <em>mapping problem</em>: discovering where and how AI actually creates value within a firm's production process. Companies given information about how other firms had reorganised production around AI discovered 44% more AI use cases and went on to complete more tasks, acquire more paying customers and generate more revenue.</p>
             <p>The interesting part isn't just that AI produced gains. It's that finding and reorganising work around those gains was itself a problem to solve.</p>
 
             <h2>Delegation Gets Complicated Quickly</h2>
             <p>Consider something fairly mundane: I ask a company-provided coding agent to make a change.</p>
             <p>It has access to the repository because my company gave it access. It may have instructions supplied by the organisation. It can use tools the organisation has made available to it. I give it a task, review the result and merge the change.</p>
-            <p>Then it causes an incident.</p>
-            <p>Who is responsible?</p>
+            <p>Then it causes an incident. Who is responsible?</p>
             <p>The simplest answer is me. I delegated the work and ultimately accepted it.</p>
             <p>But change the scenario slightly. What if the agent can merge its own changes? What if another agent reviewed them? What if the mistake came from centrally supplied instructions rather than my prompt? What if another engineer later builds on the agent's output without knowing how it was produced?</p>
-            <p>None of these questions make agents unusable. They demonstrate that using them creates work around the work.</p>
-            <p>Someone has to decide what can be delegated, what requires review, which permissions an agent should have, when it should escalate, how its actions are recorded and who ultimately owns the outcome.</p>
-            <p>This isn't entirely hypothetical infrastructure. Workday's <a href="https://newsroom.workday.com/2025-02-11-The-Next-Generation-of-Workforce-Management-is-Here-Workday-Unveils-New-Agent-System-of-Record" target="_blank" rel="noopener noreferrer">Agent System of Record</a>, for example, is explicitly designed around registering agents, defining their roles and responsibilities, governing their access and tracking their impact.</p>
+            <p>None of these questions make agents unusable. They show that using them creates work around the work. Someone has to decide what can be delegated, what requires review, which permissions an agent should have, when it should escalate, how its actions are recorded and who ultimately owns the outcome.</p>
+            <p>Software is already being built specifically for that surrounding work. Workday's <a href="https://newsroom.workday.com/2025-02-11-The-Next-Generation-of-Workforce-Management-is-Here-Workday-Unveils-New-Agent-System-of-Record" target="_blank" rel="noopener noreferrer">Agent System of Record</a>, for example, is designed around registering agents, defining their roles and responsibilities, governing their access and tracking their impact.</p>
             <p>As agents become more capable, some of the work shifts from performing tasks to designing the system in which those tasks can safely be delegated.</p>
 
             <h2>We've Seen This Kind of Problem Before</h2>
             <p>This isn't the first time organisations have discovered that improving the technical part of a work system doesn't automatically improve the whole thing.</p>
             <p>Research into British coal mining in the 1950s helped establish what became known as <a href="https://doi.org/10.1177/001872675100400101" target="_blank" rel="noopener noreferrer">sociotechnical systems theory</a>. Researchers studying the introduction of new mining technology found that outcomes depended on the relationship between the technical system and the social organisation around it. Changing one while ignoring the other could make the overall system worse.</p>
-            <p>The analogy to AI shouldn't be stretched too far. A coding agent is not mining equipment and a software company is not a coal mine.</p>
-            <p>But the underlying observation still seems useful.</p>
-            <p>AI is changing one part of the work system extraordinarily quickly. It changes how much work a person can attempt, what can be delegated, where judgement is applied and increasingly who or what can act.</p>
-            <p>The rest of the system has to adapt around that.</p>
+            <p>The analogy to AI shouldn't be stretched too far. A coding agent isn't mining equipment and a software company isn't a coal mine. Still, the underlying observation holds up.</p>
+            <p>AI is changing one part of the work system extraordinarily quickly. It changes how much work a person can attempt, what can be delegated, where judgement is applied and increasingly who or what can act. The rest of the system has to adapt around that.</p>
 
             <h2>The Work Hidden Inside the Efficiency Gain</h2>
             <p>Once you look at AI adoption this way, a lot of apparently separate questions start to look related.</p>
-            <p>How much should an employee be expected to review before accepting an agent's work? What happens when someone doesn't trust an agent their organisation expects them to use? How should an organisation monitor an agent's behaviour without turning that monitoring into surveillance of the person using it? When should an agent be allowed to act autonomously? Who decides whether it is behaving in a way the organisation actually wants?</p>
-            <p>There are questions about people too. Some employees will eagerly change how they work. Others won't. Some resistance will come from unfamiliarity, but some will come from reasonable disagreements about quality, judgement, privacy, craft or what parts of their work they are willing to delegate.</p>
-            <p>I'm not trying to answer all of those questions here.</p>
-            <p>Their existence is the point.</p>
-            <p>The difficult part of adopting AI isn't limited to making the technology work. Organisations have to change how work is delegated, reviewed, coordinated and understood around it.</p>
-            <p>That is significant work.</p>
+            <p>How much should an employee be expected to review before accepting an agent's work? What happens when someone doesn't trust an agent their organisation expects them to use? How should an organisation monitor an agent's behaviour without turning that monitoring into surveillance of the person using it? When should an agent be allowed to act autonomously? Who decides whether it's behaving in a way the organisation actually wants?</p>
+            <p>There are questions about people too. Some employees will eagerly change how they work. Others won't. Some resistance will come from unfamiliarity, and some will come from reasonable disagreements about quality, judgement, privacy, craft or what parts of their work they're willing to delegate.</p>
+            <p>I'm not trying to answer all of those questions here. Their existence is the point. The difficult part of adopting AI isn't limited to making the technology work: organisations have to change how work is delegated, reviewed, coordinated and understood around it. That's significant work.</p>
 
             <h2>Capability Is Moving Faster Than the System Around It</h2>
             <p>Microsoft's <a href="https://www.microsoft.com/en-us/worklab/work-trend-index/agents-human-agency-and-the-opportunity-for-every-organization" target="_blank" rel="noopener noreferrer">2026 Work Trend Index</a> provides a useful measure of the gap. In its survey of 20,000 AI users across ten countries, organisational factors such as culture, manager support and talent practices were more than twice as strongly associated with reported AI impact as individual factors such as mindset and behaviour.</p>
-            <p>Only 19% of AI users in the study had both high individual capability and high organisational readiness. Another 10% had developed strong individual capability but lacked the organisational conditions to apply it.</p>
-            <p>Microsoft describes this as a gap between what employees can do and what their organisations are built to support.</p>
-            <p>That seems close to what I'm experiencing from the inside.</p>
-            <p>If an engineer can do twice as much, the organisation doesn't automatically get twice as much value. It gets the <em>capacity</em> to attempt more.</p>
-            <p>Turning that capacity into something useful still requires deciding what to do with it and building a work system capable of supporting it.</p>
-            <p>This is where management becomes important. In <a href="/writing/when-agents-join-the-team-managers-matter-differently.html">the next essay</a>, I look at the same transition from the manager relationship: agents may automate some management work while the difficulty of changing how people work makes good management more valuable.</p>
-            <p>There is simply more change to manage.</p>
-            <p>And there is another question behind both essays. If agents themselves are becoming participants in these work systems, what can we borrow from the structures humans already use to make imperfect intelligence reliable? That's the thread I pick up in <a href="/writing/borrowed-patterns.html">Agents Get Better by Becoming More Human</a>.</p>
-            <p>Some of these problems will eventually become mundane. We will develop conventions, tooling and organisational patterns that make them easier. Things that currently require explicit thought will become assumptions built into how companies operate.</p>
+            <p>Only 19% of AI users in the study had both high individual capability and high organisational readiness. Another 10% had developed strong individual capability but lacked the organisational conditions to apply it. Microsoft describes this as a gap between what employees can do and what their organisations are built to support.</p>
+            <p>That seems close to what I'm experiencing from the inside. If an engineer can do twice as much, the organisation doesn't automatically get twice as much value. It gets the <em>capacity</em> to attempt more. Turning that capacity into something useful still requires deciding what to do with it and building a work system capable of supporting it.</p>
+            <p>This is where management becomes important. In <a href="/writing/when-agents-join-the-team-managers-matter-differently.html">Part 2</a>, I look at the same transition through the manager relationship: agents may automate some management work, while the difficulty of changing how people work makes good management more valuable. There's simply more change to manage.</p>
+            <p>And there's another question behind both essays. If agents themselves are becoming participants in these work systems, what can we borrow from the structures humans already use to make imperfect intelligence reliable? That's the thread I pick up in <a href="/writing/borrowed-patterns.html">Part 3: Agents Get Better by Becoming More Human</a>.</p>
+            <p>Some of these problems will eventually become mundane. We'll develop conventions, tooling and organisational patterns that make them easier, and things that currently require explicit thought will become assumptions built into how companies operate.</p>
             <p>We're not there yet.</p>
             <div class="article-closing">The technical capability is arriving faster than organisations are learning how to use it. The efficiency gain is real. So is the work required to capture it.</div>
         </article>
 
         <footer class="article-footer">
-            <p class="process-note">Note on process: every piece here is AI-produced. Claude and ChatGPT do the drafting — Claude through the Claude mobile app, ChatGPT through OpenClaw over Telegram. I act as editor: setting direction, providing initial sources, and reviewing for style and cohesion. It's an experiment in extending the process that works for code production into other forms of writing.</p>
-            <p>The first in a connected thread on organisational adaptation, management, and the human patterns emerging around agentic work.</p>
-            <p><a href="/writing/when-agents-join-the-team-managers-matter-differently.html">Next: AI Agents Make Management More Important, Not Less &rarr;</a></p>
-            <p><a href="/#writing">Back to Writing</a></p>
+            <p class="process-note">Note on process: every piece here is AI-drafted with Claude and ChatGPT. I direct, source and edit for style, accuracy and cohesion — extending agentic patterns from code into writing.</p>
+            <p>Part 1 of a three-part series: When Agents Join the Team.</p>
+            <p><a href="/writing/when-agents-join-the-team-managers-matter-differently.html">Part 2: AI Agents Make Management More Important, Not Less &rarr;</a></p>
+            <p><a href="/writing/">All writing</a></p>
         </footer>
     </main>
 

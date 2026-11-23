@@ -203,10 +203,10 @@
         "url": "https://github.com/CrowBe/weave",
         "text": "github.com/CrowBe/weave"
       },
-      "summary": "Experimental goal-directed runtime for software that can build the capabilities it needs and improve how it works, combining bounded model judgment with explicit authority, replayable evidence, capability crystallisation through TDD and measured optimisation.",
+      "summary": "Experimental goal-directed runtime for software that can build the capabilities it needs and improve how it works, combining bounded model judgement with explicit authority, replayable evidence, capability crystallisation through TDD and measured optimisation.",
       "image": "resources/images/weave-concept.svg",
       "imageAlt": "Weave concept diagram",
-      "tagline": "An experimental goal-directed runtime combining bounded model judgment with explicit authority, replayable evidence and capability crystallisation through TDD."
+      "tagline": "An experimental goal-directed runtime combining bounded model judgement with explicit authority, replayable evidence and capability crystallisation through TDD."
     },
     {
       "name": "ScrolLess",
@@ -245,10 +245,10 @@
       {
         "name": "When Agents Join the Team",
         "date": "May 2026",
-        "summary": "Three-part essay series on how agents change HR, management and the way we design agents.",
+        "summary": "Three-part series on organisational AI adoption, management and how we design agents.",
         "parts": [
           {
-            "title": "Headless Agents Make HR a Work-Architecture Problem",
+            "title": "AI Is Getting Better Faster Than Organisations Are",
             "url": "https://crowbe.github.io/writing/hr-next-sociotechnical-moment.html"
           },
           {
@@ -264,7 +264,7 @@
       {
         "name": "Agentic Content Apps",
         "date": "Apr 2026",
-        "summary": "Three-part series on personal agents, the trust problems they raise, and device-first architecture.",
+        "summary": "Three-part series on personal agents, the trust problems they raise and device-first architecture.",
         "parts": [
           {
             "title": "Personal Agents Make Experience More Important Than Content Acquisition",
