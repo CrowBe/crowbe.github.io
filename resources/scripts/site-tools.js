@@ -265,7 +265,9 @@ const ABOUT_BEN = {
         console.warn(`Site tools: failed to register "${tool.name}"`, error);
       }
     }
-    window.addEventListener("pagehide", () => controller.abort(), { once: true });
+    window.addEventListener("pagehide", (event) => {
+      if (!event.persisted) controller.abort();
+    });
   }
 
   window.BenSiteTools = { ABOUT_BEN, TOOLS };

@@ -71,42 +71,6 @@
   --hero-b: #c9d4f2;
   --scrim-base: #f3f6fd;
 
-  @media (prefers-color-scheme: dark) {
-    --bg: #151739;
-    --surface: #1d2049;
-    --surface-2: #262956;
-    --tint: #1d2049;
-    --text: #eceef9;
-    --text-2: #cdd0e2;
-    --muted: #a3a9c5;
-    --border: #393e67;
-    --accent: #acbaf5;
-    --accent-2: #a3a9c5;
-    --coral-text: var(--coral);
-    --trail: #8696dc;
-    --hero-a: var(--ink);
-    --hero-b: var(--indigo);
-    --scrim-base: var(--ink);
-  }
-
-  @supports (color: light-dark(white, black)) {
-    --bg: light-dark(#f3f6fd, #151739);
-    --surface: light-dark(#e8ecf9, #1d2049);
-    --surface-2: light-dark(#dde3f5, #262956);
-    --tint: light-dark(#e8ecf9, #1d2049);
-    --text: light-dark(#16193e, #eceef9);
-    --text-2: light-dark(#2d3254, #cdd0e2);
-    --muted: light-dark(#535977, #a3a9c5);
-    --border: light-dark(#cad0e5, #393e67);
-    --accent: light-dark(#3c54a3, #acbaf5);
-    --accent-2: light-dark(#535977, #a3a9c5);
-    --coral-text: light-dark(#ba3535, var(--coral));
-    --trail: light-dark(#7f90cf, #8696dc);
-    --hero-a: light-dark(#f3f6fd, var(--ink));
-    --hero-b: light-dark(#c9d4f2, var(--indigo));
-    --scrim-base: light-dark(#f3f6fd, var(--ink));
-  }
-
   /* legacy aliases still referenced by writing.css / ask-ben.js */
   --nav-bg: var(--bg);
   --card-bg: var(--surface);
@@ -139,12 +103,91 @@
 
   color-scheme: light dark;
   accent-color: var(--coral);
+}
 
-  &:has(> head > meta[name="color-scheme"][content="dark"]) {
-    color-scheme: dark;
+:root:has(> head > meta[name="color-scheme"][content="dark"]) {
+  color-scheme: dark;
+}
+:root:has(> head > meta[name="color-scheme"][content="light"]) {
+  color-scheme: light;
+}
+
+/* Fallback palettes for browsers without light-dark() or CSS nesting */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #151739;
+    --surface: #1d2049;
+    --surface-2: #262956;
+    --tint: #1d2049;
+    --text: #eceef9;
+    --text-2: #cdd0e2;
+    --muted: #a3a9c5;
+    --border: #393e67;
+    --accent: #acbaf5;
+    --accent-2: #a3a9c5;
+    --coral-text: var(--coral);
+    --trail: #8696dc;
+    --hero-a: var(--ink);
+    --hero-b: var(--indigo);
+    --scrim-base: var(--ink);
   }
-  &:has(> head > meta[name="color-scheme"][content="light"]) {
-    color-scheme: light;
+}
+
+@supports not (color: light-dark(white, black)) {
+  :root:has(> head > meta[name="color-scheme"][content="light"]) {
+    --bg: #f3f6fd;
+    --surface: #e8ecf9;
+    --surface-2: #dde3f5;
+    --tint: #e8ecf9;
+    --text: #16193e;
+    --text-2: #2d3254;
+    --muted: #535977;
+    --border: #cad0e5;
+    --accent: #3c54a3;
+    --accent-2: #535977;
+    --coral-text: #ba3535;
+    --trail: #7f90cf;
+    --hero-a: #f3f6fd;
+    --hero-b: #c9d4f2;
+    --scrim-base: #f3f6fd;
+  }
+
+  :root:has(> head > meta[name="color-scheme"][content="dark"]) {
+    --bg: #151739;
+    --surface: #1d2049;
+    --surface-2: #262956;
+    --tint: #1d2049;
+    --text: #eceef9;
+    --text-2: #cdd0e2;
+    --muted: #a3a9c5;
+    --border: #393e67;
+    --accent: #acbaf5;
+    --accent-2: #a3a9c5;
+    --coral-text: var(--coral);
+    --trail: #8696dc;
+    --hero-a: var(--ink);
+    --hero-b: var(--indigo);
+    --scrim-base: var(--ink);
+  }
+}
+
+@supports (color: light-dark(white, black)) {
+  :root {
+    --bg: light-dark(#f3f6fd, #151739);
+    --surface: light-dark(#e8ecf9, #1d2049);
+    --surface-2: light-dark(#dde3f5, #262956);
+    --tint: light-dark(#e8ecf9, #1d2049);
+    --text: light-dark(#16193e, #eceef9);
+    --text-2: light-dark(#2d3254, #cdd0e2);
+    --muted: light-dark(#535977, #a3a9c5);
+    --border: light-dark(#cad0e5, #393e67);
+    --accent: light-dark(#3c54a3, #acbaf5);
+    --accent-2: light-dark(#535977, #a3a9c5);
+    --coral-text: light-dark(#ba3535, var(--coral));
+    --trail: light-dark(#7f90cf, #8696dc);
+    --hero-a: light-dark(#f3f6fd, var(--ink));
+    --hero-b: light-dark(#c9d4f2, var(--indigo));
+    --scrim-base: light-dark(#f3f6fd, var(--ink));
   }
 }
 

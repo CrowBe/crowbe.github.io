@@ -405,7 +405,7 @@ if (heroEl && heroMotionToggle) {
   };
   resize();
 
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
 
   const draw = (timeSec) => {
@@ -429,37 +429,13 @@ if (heroEl && heroMotionToggle) {
     systemDark.addEventListener("change", sync);
   };
 
-  if (reduceMotion) {
-    // Single static, atmospheric frame — no loop, no pointer tracking.
-    draw(37.0);
-    reveal();
-    window.addEventListener("resize", () => {
-      resize();
-      draw(37.0);
-    });
-    watchTheme(() => {
-      lightNow = lightTarget;
-      draw(37.0);
-    });
-    return;
-  }
-
-  let pausedTimeSec = 0;
-  let lastFrameSec = 0;
-
-  window.addEventListener("resize", () => {
-    resize();
-    if (heroMotionPaused) draw(pausedTimeSec);
-  });
-  hero.addEventListener("pointermove", (e) => {
-    if (heroMotionPaused) return;
-    const rect = hero.getBoundingClientRect();
-    targetX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    targetY = 1 - ((e.clientY - rect.top) / rect.height) * 2;
-  });
-
+  let pausedTimeSec = 37.0;
+  let lastFrameSec = 37.0;
   let visible = true;
-  const shouldRun = () => visible && !document.hidden && !heroMotionPaused;
+
+  const isStatic = () => heroMotionPaused || reduceMotionQuery.matches;
+  const shouldRun = () => visible && !document.hidden && !isStatic();
+
   const loop = (now) => {
     if (contextLost) return;
     lastFrameSec = now / 1000;
@@ -476,8 +452,19 @@ if (heroEl && heroMotionToggle) {
     }
   };
 
+  window.addEventListener("resize", () => {
+    resize();
+    if (isStatic()) draw(pausedTimeSec);
+  });
+  hero.addEventListener("pointermove", (e) => {
+    if (isStatic()) return;
+    const rect = hero.getBoundingClientRect();
+    targetX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    targetY = 1 - ((e.clientY - rect.top) / rect.height) * 2;
+  });
+
   watchTheme(() => {
-    if (heroMotionPaused) {
+    if (isStatic()) {
       lightNow = lightTarget;
       draw(pausedTimeSec);
     }
@@ -486,6 +473,17 @@ if (heroEl && heroMotionToggle) {
   document.addEventListener("heromotionchange", () => {
     if (heroMotionPaused) pausedTimeSec = lastFrameSec || 37.0;
     setRunning(shouldRun());
+  });
+
+  reduceMotionQuery.addEventListener("change", () => {
+    if (reduceMotionQuery.matches) {
+      pausedTimeSec = lastFrameSec || 37.0;
+      setRunning(false);
+      draw(pausedTimeSec);
+      reveal();
+    } else {
+      setRunning(shouldRun());
+    }
   });
 
   if ("IntersectionObserver" in window) {
@@ -501,5 +499,10 @@ if (heroEl && heroMotionToggle) {
     setRunning(shouldRun());
   });
 
-  setRunning(shouldRun());
+  if (reduceMotionQuery.matches) {
+    draw(pausedTimeSec);
+    reveal();
+  } else {
+    setRunning(shouldRun());
+  }
 })();

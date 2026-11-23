@@ -400,9 +400,6 @@
 }
 
 .article-body .comparison-table thead th {
-  position: sticky;
-  inset-block-start: 0;
-  z-index: 1;
   background: var(--indigo-deep);
   color: var(--d-text);
   font-family: var(--font-display);
@@ -458,41 +455,41 @@
 }
 
 @container (width < 520px) {
-  .article-body .comparison-table,
-  .article-body .comparison-table tbody,
-  .article-body .comparison-table tr,
-  .article-body .comparison-table th,
-  .article-body .comparison-table td {
+  .article-body .comparison-table:has(td[data-label]),
+  .article-body .comparison-table:has(td[data-label]) tbody,
+  .article-body .comparison-table:has(td[data-label]) tr,
+  .article-body .comparison-table:has(td[data-label]) th,
+  .article-body .comparison-table:has(td[data-label]) td {
     display: block;
   }
 
-  .article-body .comparison-table thead {
+  .article-body .comparison-table:has(td[data-label]) thead {
     display: none;
   }
 
-  .article-body .comparison-table tbody tr {
+  .article-body .comparison-table:has(td[data-label]) tbody tr {
     margin-block-end: 1rem;
     border: 1px solid var(--border);
     border-radius: 8px;
     overflow: hidden;
   }
 
-  .article-body .comparison-table tbody th {
+  .article-body .comparison-table:has(td[data-label]) tbody th {
     background: var(--indigo-deep);
     color: var(--d-text);
     white-space: normal;
     border-bottom: 2px solid var(--coral);
   }
 
-  .article-body .comparison-table tbody td {
+  .article-body .comparison-table:has(td[data-label]) tbody td {
     border-bottom: 1px solid var(--border);
   }
 
-  .article-body .comparison-table tbody td:last-child {
+  .article-body .comparison-table:has(td[data-label]) tbody td:last-child {
     border-bottom: none;
   }
 
-  .article-body .comparison-table tbody td::before {
+  .article-body .comparison-table:has(td[data-label]) tbody td[data-label]::before {
     content: attr(data-label) ": ";
     display: block;
     font-family: var(--font-display);
@@ -555,6 +552,7 @@
 .article-figure img {
   width: 100%;
   max-width: 100%;
+  height: auto;
   border-radius: 6px;
   display: block;
 }

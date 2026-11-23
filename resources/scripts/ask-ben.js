@@ -5,6 +5,7 @@
   let availability;
   let session = null;
   let sessionPromise = null;
+  let sessionGeneration = 0;
   let isBusy = false;
   let modelReady = false;
   let downloadAbortController = null;
@@ -420,17 +421,23 @@
       };
     }
 
-    sessionPromise = self.LanguageModel.create(options)
+    const gen = sessionGeneration;
+    const pending = self.LanguageModel.create(options)
       .then((created) => {
+        if (gen !== sessionGeneration) {
+          created.destroy();
+          return null;
+        }
         session = created;
         availability = "available";
         ui.progress.hidden = true;
         return created;
       })
       .finally(() => {
-        sessionPromise = null;
+        if (sessionPromise === pending) sessionPromise = null;
       });
-    return sessionPromise;
+    sessionPromise = pending;
+    return pending;
   };
 
   const prewarmSession = (ui) => {
@@ -463,9 +470,12 @@
   // There's no page-level API to actually delete the cached weights — this
   // just drops our session and puts the UI back into a pre-download state.
   const removeModel = (ui) => {
+    sessionGeneration++;
     promptAbortController?.abort();
+    downloadAbortController?.abort();
     session?.destroy();
     session = null;
+    sessionPromise = null;
     availability = "downloadable";
     setModelState(ui, "needs-download");
   };
@@ -557,9 +567,10 @@
 
     ui.input.addEventListener("keydown", (event) => {
       if (event.key === "Enter" && !event.shiftKey) {
-        event.preventDefault();
-        // Guard IME composition (isComposing + keyCode 229 for Safari WebKit bug 165004)
+        // Guard IME composition before preventDefault so Enter still commits candidates
+        // (isComposing + keyCode 229 covers Safari WebKit bug 165004).
         if (event.isComposing || event.keyCode === 229) return;
+        event.preventDefault();
         ui.form.requestSubmit();
       }
     });
@@ -598,11 +609,18 @@
       }
     });
 
-    window.addEventListener("pagehide", () => {
+    window.addEventListener("pagehide", (event) => {
       promptAbortController?.abort();
       downloadAbortController?.abort();
-      session?.destroy();
-    }, { once: true });
+      // Keep the warm session intact when entering bfcache so Back navigation
+      // still works; destroy and clear references only on real unload.
+      if (!event.persisted) {
+        sessionGeneration++;
+        session?.destroy();
+        session = null;
+        sessionPromise = null;
+      }
+    });
   };
 
   const initialise = async () => {
