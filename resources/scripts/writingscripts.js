@@ -1,33 +1,44 @@
 // ── Ben Crow — writing pages scripts ──
-// Theme toggle, popover-nav fallback, FAB fallback.
+// Theme toggle (<meta name="color-scheme">), popover-nav fallback, FAB fallback.
 
-// ── Theme cycle: light → dark → system default ──
-// Initial state is set by an inline head script; "system" follows
+// ── Theme cycle: light → dark → system ("light dark") ──
+// Initial state is set by an inline head script; "light dark" follows
 // prefers-color-scheme live and stores nothing.
 const themeToggle = document.querySelector(".theme-toggle");
+const colorSchemeMeta = document.querySelector('meta[name="color-scheme"]');
 const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
-const applyThemeMode = (mode) => {
-  const theme = mode === "system" ? (systemDark.matches ? "dark" : "light") : mode;
-  document.documentElement.setAttribute("data-theme", theme);
-  document.documentElement.setAttribute("data-theme-mode", mode);
-  const label = mode === "system" ? "system default" : mode;
-  themeToggle.setAttribute("aria-label", "Theme: " + label + " — activate to change");
-  themeToggle.title = "Theme: " + label;
+
+const normalizeScheme = (value) => (value === "light" || value === "dark" ? value : "light dark");
+
+const applyColorScheme = (scheme) => {
+  const next = normalizeScheme(scheme);
+  if (colorSchemeMeta) colorSchemeMeta.content = next;
+  const resolved = next === "light dark" ? (systemDark.matches ? "dark" : "light") : next;
+  const label = next === "light dark" ? `system (currently ${resolved})` : next;
+  themeToggle.setAttribute("aria-label", `Theme: ${label} — activate to change`);
 };
+
 themeToggle.addEventListener("click", () => {
-  const order = ["light", "dark", "system"];
-  const current = document.documentElement.getAttribute("data-theme-mode") || "system";
+  const order = ["light", "dark", "light dark"];
+  const current = normalizeScheme(colorSchemeMeta?.content);
   const next = order[(order.indexOf(current) + 1) % order.length];
-  applyThemeMode(next);
+  applyColorScheme(next);
   try {
-    if (next === "system") localStorage.removeItem("theme");
-    else localStorage.setItem("theme", next);
+    localStorage.removeItem("theme");
+    if (next === "light dark") localStorage.removeItem("color-scheme");
+    else localStorage.setItem("color-scheme", next);
   } catch (e) {}
 });
+
 systemDark.addEventListener("change", () => {
-  if (document.documentElement.getAttribute("data-theme-mode") === "system") applyThemeMode("system");
+  if (normalizeScheme(colorSchemeMeta?.content) === "light dark") applyColorScheme("light dark");
 });
-applyThemeMode(document.documentElement.getAttribute("data-theme-mode") || "system");
+
+window.addEventListener("storage", (event) => {
+  if (event.key === "color-scheme") applyColorScheme(event.newValue);
+});
+
+applyColorScheme(colorSchemeMeta?.content);
 
 // ── Mobile nav: native Popover API where supported ──
 const navToggle = document.querySelector(".nav-toggle");

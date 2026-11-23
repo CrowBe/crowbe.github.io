@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ben Crow — Senior Software Engineer (AI) in Sydney, working on Coach at Culture Amp. Building with Next.js, TypeScript, Ruby on Rails, Python and LLM agents.">
+    <meta name="color-scheme" content="light dark">
     <script>
       (function () {
         try {
-          var stored = localStorage.getItem("theme");
-          var mode = stored === "light" || stored === "dark" ? stored : "system";
-          var theme = mode === "system" ? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : mode;
-          document.documentElement.setAttribute("data-theme", theme);
-          document.documentElement.setAttribute("data-theme-mode", mode);
+          var stored = localStorage.getItem("color-scheme") || localStorage.getItem("theme");
+          if (stored === "light" || stored === "dark") {
+            document.querySelector('meta[name="color-scheme"]').content = stored;
+          }
         } catch (e) {}
       })();
     </script>
@@ -27,22 +27,20 @@
     <title>Ben Crow — Senior Software Engineer (AI)</title>
     <script type="speculationrules">
     {
-      "prefetch": [{
-        "urls": [
-          "/writing/",
-          "/writing/borrowed-patterns.html",
-          "/writing/when-agents-join-the-team-managers-matter-differently.html",
-          "/writing/hr-next-sociotechnical-moment.html",
-          "/writing/agentic-content-apps.html",
-          "/writing/why-agentic-content-apps-arent-everywhere.html",
-          "/writing/architecting-agentic-content-apps.html"
-        ],
+      "prerender": [{
+        "where": {
+          "and": [
+            { "href_matches": "/*" },
+            { "not": { "href_matches": "/resources/*" } }
+          ]
+        },
         "eagerness": "moderate"
       }]
     }
     </script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link visually-hidden">Skip to main content</a>
     <div class="scroll-progress" aria-hidden="true"></div>
     <header id="top" class="hero">
         <canvas class="hero-canvas" aria-hidden="true"></canvas>
@@ -52,12 +50,17 @@
             <h2>Senior Software Engineer (AI)</h2>
             <p class="hero-prompt"><span class="prompt-glyph" aria-hidden="true">~</span> building with agents in Sydney<span class="prompt-caret" aria-hidden="true"></span></p>
         </div>
+        <button type="button" class="hero-motion-toggle" aria-label="Pause background animation">
+            <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+            <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+            <span class="hero-motion-label">Pause</span>
+        </button>
     </header>
-    <nav aria-label="Main navigation">
+    <nav aria-label="Primary">
         <div class="nav-surface">
             <div class="nav-inner">
                 <a href="#top" class="nav-brand">Ben Crow</a>
-                <button class="nav-toggle" popovertarget="nav-links" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
+                <button type="button" class="nav-toggle" popovertarget="nav-links" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
                     <span class="nav-toggle-bar"></span>
                     <span class="nav-toggle-bar"></span>
                     <span class="nav-toggle-bar"></span>
@@ -67,18 +70,17 @@
                     <a href="#projects">Projects</a>
                     <a href="#writing">Writing</a>
                     <a href="#contact">Contact</a>
-                    <button class="theme-toggle" aria-label="Change theme" title="Change theme">
+                    <button type="button" class="theme-toggle" aria-label="Change theme">
                         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
                         <svg class="icon-system" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                     </button>
-                    <span class="nav-indicator" aria-hidden="true"></span>
                 </div>
             </div>
             <div class="contrast-bar"></div>
         </div>
     </nav>
-    <main>
+    <main id="main-content" tabindex="-1">
     <section class="about-section" id="about">
         <div class="wrap">
             <h2 class="section-title">About</h2>
@@ -99,7 +101,11 @@
                     </p>
                 </div>
                 <div class="avatar-container">
-                    <img src="./resources/images/profile-graphic.png" alt="Illustrated portrait of Ben Crow" width="400" height="400" loading="lazy" />
+                    <picture>
+                        <source srcset="./resources/images/profile-graphic.avif" type="image/avif">
+                        <source srcset="./resources/images/profile-graphic.webp" type="image/webp">
+                        <img src="./resources/images/profile-graphic.png" alt="Illustrated portrait of Ben Crow" width="400" height="400" loading="lazy" />
+                    </picture>
                 </div>
             </div>
 
@@ -204,10 +210,15 @@
         <div class="wrap">
             <h2 class="section-title">Projects</h2>
             <p class="section-tagline">Deployed tools and active work on agent runtimes, personal agents, and agent-native interfaces.</p>
-            <div class="project-list" role="list">
-                <article class="project-card" role="listitem">
+            <ul class="project-list">
+                <li>
+                <article class="project-card">
                     <div class="project-image-container">
-                        <img src="resources/images/reno-layouts-stage-fit-out.png" alt="Reno Layouts 3D view of a bathroom renovation at the fit-out stage, with tiled walls, shower screen, bath, vanity and toilet" loading="lazy" />
+                        <picture>
+                            <source srcset="resources/images/reno-layouts-stage-fit-out.avif" type="image/avif">
+                            <source srcset="resources/images/reno-layouts-stage-fit-out.webp" type="image/webp">
+                            <img src="resources/images/reno-layouts-stage-fit-out.png" alt="Reno Layouts 3D view of a bathroom renovation at the fit-out stage, with tiled walls, shower screen, bath, vanity and toilet" width="1033" height="726" loading="lazy" />
+                        </picture>
                     </div>
                     <div class="project-body">
                         <header class="card-header">
@@ -224,15 +235,17 @@
                             <span>Agent Tools</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://layout-bench.vercel.app/" target="_blank" rel="noopener noreferrer">Try it live</a>
-                            <a href="https://github.com/CrowBe/layout-bench" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            <a href="https://layout-bench.vercel.app/" target="_blank" rel="noopener noreferrer">Try it live<span class="visually-hidden"> (Reno Layouts)</span></a>
+                            <a href="https://github.com/CrowBe/layout-bench" target="_blank" rel="noopener noreferrer">GitHub<span class="visually-hidden"> for Reno Layouts</span></a>
                         </div>
                     </div>
                 </article>
+                </li>
 
-                <article class="project-card" role="listitem">
+                <li>
+                <article class="project-card">
                     <div class="project-image-container">
-                        <img src="resources/images/weave-concept.svg" alt="Weave concept: Jev weighs options, policy bounds action, and inference returns evidence" loading="lazy" />
+                        <img src="resources/images/weave-concept.svg" alt="Weave concept: Jev weighs options, policy bounds action, and inference returns evidence" width="1200" height="675" loading="lazy" />
                     </div>
                     <div class="project-body">
                         <header class="card-header">
@@ -249,14 +262,20 @@
                             <span>Capability Crystallisation</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/CrowBe/weave" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            <a href="https://github.com/CrowBe/weave" target="_blank" rel="noopener noreferrer">GitHub<span class="visually-hidden"> for Weave</span></a>
                         </div>
                     </div>
                 </article>
+                </li>
 
-                <article class="project-card" role="listitem">
+                <li>
+                <article class="project-card">
                     <div class="project-image-container">
-                        <img src="resources/images/scrolless-feed-current.png" alt="ScrolLess app showing a populated feed from several sources" loading="lazy" />
+                        <picture>
+                            <source srcset="resources/images/scrolless-feed-current.avif" type="image/avif">
+                            <source srcset="resources/images/scrolless-feed-current.webp" type="image/webp">
+                            <img src="resources/images/scrolless-feed-current.png" alt="ScrolLess app showing a populated feed from several sources" width="390" height="844" loading="lazy" />
+                        </picture>
                     </div>
                     <div class="project-body">
                         <header class="card-header">
@@ -273,15 +292,21 @@
                             <span>Web Push</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">GitHub</a>
-                            <a href="/writing/agentic-content-apps.html">Read the article</a>
+                            <a href="https://github.com/CrowBe/ScrolLess" target="_blank" rel="noopener noreferrer">GitHub<span class="visually-hidden"> for ScrolLess</span></a>
+                            <a href="/writing/agentic-content-apps.html">Read the article<span class="visually-hidden"> on ScrolLess</span></a>
                         </div>
                     </div>
                 </article>
+                </li>
 
-                <article class="project-card" role="listitem">
+                <li>
+                <article class="project-card">
                     <div class="project-image-container">
-                        <img src="resources/images/portfolio-agent-demo.png" alt="Ask about Ben chat panel with a sample conversation using a mocked on-device model" loading="lazy" />
+                        <picture>
+                            <source srcset="resources/images/portfolio-agent-demo.avif" type="image/avif">
+                            <source srcset="resources/images/portfolio-agent-demo.webp" type="image/webp">
+                            <img src="resources/images/portfolio-agent-demo.png" alt="Ask about Ben chat panel with a sample conversation using a mocked on-device model" width="1280" height="720" loading="lazy" />
+                        </picture>
                     </div>
                     <div class="project-body">
                         <header class="card-header">
@@ -297,11 +322,12 @@
                             <span>Web APIs</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/CrowBe/crowbe.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            <a href="https://github.com/CrowBe/crowbe.github.io" target="_blank" rel="noopener noreferrer">GitHub<span class="visually-hidden"> for This Site's Agent</span></a>
                         </div>
                     </div>
                 </article>
-            </div>
+                </li>
+            </ul>
         </div>
     </section>
 
@@ -315,7 +341,7 @@
                     <li class="writing-card">
                         <a href="/writing/hr-next-sociotechnical-moment.html" class="writing-card-link">
                             <header class="card-header">
-                                <h3 style="view-transition-name: vt-title-hr">Headless Agents Make HR a Work-Architecture Problem</h3>
+                                <h4 style="view-transition-name: vt-title-hr">Headless Agents Make HR a Work-Architecture Problem</h4>
                             </header>
                             <p class="writing-card-meta">
                                 <span class="writing-card-series"><span class="visually-hidden">When Agents Join the Team, </span>Part 1 of 3, start here</span>
@@ -328,7 +354,7 @@
                     <li class="writing-card">
                         <a href="/writing/when-agents-join-the-team-managers-matter-differently.html" class="writing-card-link">
                             <header class="card-header">
-                                <h3 style="view-transition-name: vt-title-managers">AI Agents Make Management More Important, Not Less</h3>
+                                <h4 style="view-transition-name: vt-title-managers">AI Agents Make Management More Important, Not Less</h4>
                             </header>
                             <p class="writing-card-meta">
                                 <span class="writing-card-series"><span class="visually-hidden">When Agents Join the Team, </span>Part 2 of 3</span>
@@ -341,7 +367,7 @@
                     <li class="writing-card">
                         <a href="/writing/borrowed-patterns.html" class="writing-card-link">
                             <header class="card-header">
-                                <h3 style="view-transition-name: vt-title-borrowed">Agents Get Better by Becoming More Human</h3>
+                                <h4 style="view-transition-name: vt-title-borrowed">Agents Get Better by Becoming More Human</h4>
                             </header>
                             <p class="writing-card-meta">
                                 <span class="writing-card-series"><span class="visually-hidden">When Agents Join the Team, </span>Part 3 of 3</span>
@@ -360,7 +386,7 @@
                     <li class="writing-card">
                         <a href="/writing/agentic-content-apps.html" class="writing-card-link">
                             <header class="card-header">
-                                <h3 style="view-transition-name: vt-title-aca1">Personal Agents Make Experience More Important Than Content Acquisition</h3>
+                                <h4 style="view-transition-name: vt-title-aca1">Personal Agents Make Experience More Important Than Content Acquisition</h4>
                             </header>
                             <p class="writing-card-meta">
                                 <span class="writing-card-series"><span class="visually-hidden">Agentic Content Apps, </span>Part 1 of 3, start here</span>
@@ -373,7 +399,7 @@
                     <li class="writing-card">
                         <a href="/writing/why-agentic-content-apps-arent-everywhere.html" class="writing-card-link">
                             <header class="card-header">
-                                <h3 style="view-transition-name: vt-title-aca2">The Hard Part of Letting Agents Gather Content</h3>
+                                <h4 style="view-transition-name: vt-title-aca2">The Hard Part of Letting Agents Gather Content</h4>
                             </header>
                             <p class="writing-card-meta">
                                 <span class="writing-card-series"><span class="visually-hidden">Agentic Content Apps, </span>Part 2 of 3</span>
@@ -386,7 +412,7 @@
                     <li class="writing-card">
                         <a href="/writing/architecting-agentic-content-apps.html" class="writing-card-link">
                             <header class="card-header">
-                                <h3 style="view-transition-name: vt-title-aca3">Trustworthy Agentic Apps Need Device-First Architecture</h3>
+                                <h4 style="view-transition-name: vt-title-aca3">Trustworthy Agentic Apps Need Device-First Architecture</h4>
                             </header>
                             <p class="writing-card-meta">
                                 <span class="writing-card-series"><span class="visually-hidden">Agentic Content Apps, </span>Part 3 of 3</span>
@@ -431,16 +457,16 @@
     <footer>
         <p>&copy; 2026 Benjamin Crow.</p>
     </footer>
-    <button class="fab-top" aria-label="Back to top" title="Back to top">
+    <button type="button" class="fab-top" aria-label="Back to top">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
     </button>
-    <script src="resources/scripts/websitescripts.js"></script>
+    <script defer src="resources/scripts/websitescripts.js"></script>
     <!-- site-focus builds the index of what agents can point at; site-tools
          and ask-ben both call into it, and guide-sprite animates the result. -->
-    <script src="resources/scripts/site-focus.js"></script>
-    <script src="resources/scripts/site-tools.js"></script>
-    <script src="resources/scripts/ask-ben.js"></script>
-    <script src="resources/scripts/guide-sprite.js"></script>
-    <script src="/resources/scripts/view-transitions.js"></script>
+    <script defer src="resources/scripts/site-focus.js"></script>
+    <script defer src="resources/scripts/site-tools.js"></script>
+    <script defer fetchpriority="low" src="resources/scripts/ask-ben.js"></script>
+    <script defer fetchpriority="low" src="resources/scripts/guide-sprite.js"></script>
+    <script defer src="/resources/scripts/view-transitions.js"></script>
 </body>
 </html>
