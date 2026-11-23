@@ -86,56 +86,67 @@ const ABOUT_BEN = {
       return target ? `${line}\n  page id: ${target.id}` : line;
     });
 
+  const VALID_KINDS = ["section", "project", "writing", "skill-group", "tech"];
+
   const TOOLS = [
     {
       name: "get_summary",
       description:
-        "Get a short summary of who Ben Crow is and what he does. Also scrolls the visitor's screen to the About section.",
+        "Get a short summary of who Ben Crow is and what he does, and scroll the visitor's screen to the About section.",
       inputSchema: noArgsSchema,
       execute: async () => answerAndFocus(ABOUT_BEN.summary.join(" "), "section-about"),
+      annotations: { readOnlyHint: true },
     },
     {
       name: "list_experience",
       description:
-        "List Ben Crow's work experience and career history, most recent first. Also scrolls the visitor's screen to the About section.",
+        "List Ben Crow's work experience and career history, most recent first, and scroll the visitor's screen to the About section.",
       inputSchema: noArgsSchema,
       execute: async () => answerAndFocus(ABOUT_BEN.experience.join("\n\n"), "section-about"),
+      annotations: { readOnlyHint: true },
     },
     {
       name: "list_skills",
       description:
-        "List Ben Crow's technical skills and areas of expertise. Also scrolls the visitor's screen to the technologies grid. Pass `area` to highlight one group of it.",
+        "List Ben Crow's technical skills and areas of expertise, and scroll the visitor's screen to the technologies grid.",
       inputSchema: {
         type: "object",
         properties: {
           area: {
             type: "string",
-            description: "Optional skill area to highlight on the page, e.g. \"Frontend\", \"Backend\", \"AI & Agentic\", \"Infrastructure\", or a single technology like \"Ruby on Rails\".",
+            description: "Optional skill group or technology name to highlight on the page (e.g. \"Frontend\", \"AI & Agentic\", or \"Ruby on Rails\").",
           },
         },
       },
-      execute: async ({ area } = {}) => answerAndFocus(ABOUT_BEN.skills.join("\n\n"), "section-about", area ? [area] : []),
+      execute: async ({ area } = {}) => {
+        const query = typeof area === "string" ? area.trim() : "";
+        return answerAndFocus(ABOUT_BEN.skills.join("\n\n"), "section-about", query ? [query] : []);
+      },
+      annotations: { readOnlyHint: true },
     },
     {
       name: "list_projects",
       description:
-        "List projects Ben Crow has built or is building, each with the page id of its card. Also scrolls the visitor's screen to the projects rail. Pass `highlight` to bring one card to the front.",
+        "List projects Ben Crow has built or is building, each with its page id, and scroll the visitor's screen to the projects section.",
       inputSchema: {
         type: "object",
         properties: {
           highlight: {
             type: "string",
-            description: "Optional project name or page id to scroll to and highlight, e.g. \"Weave\" or \"project-reno-layouts\".",
+            description: "Optional project name or page id to scroll to and highlight (e.g. \"Weave\" or \"project-reno-layouts\").",
           },
         },
       },
-      execute: async ({ highlight } = {}) =>
-        answerAndFocus(projectLines().join("\n\n"), "section-projects", highlight ? [highlight] : []),
+      execute: async ({ highlight } = {}) => {
+        const query = typeof highlight === "string" ? highlight.trim() : "";
+        return answerAndFocus(projectLines().join("\n\n"), "section-projects", query ? [query] : []);
+      },
+      annotations: { readOnlyHint: true },
     },
     {
       name: "list_writing",
       description:
-        "List the articles Ben Crow has published on this site, each with the page id of its card and a link. Also scrolls the visitor's screen to the writing rail.",
+        "List the articles Ben Crow has published on this site, each with its page id and link, and scroll the visitor's screen to the writing section.",
       inputSchema: {
         type: "object",
         properties: {
@@ -148,7 +159,7 @@ const ABOUT_BEN = {
       execute: async ({ highlight } = {}) => {
         const cards = Array.from(document.querySelectorAll(".writing-card"), (card) => {
           const link = card.querySelector(".writing-card-link");
-          const title = card.querySelector(".card-header h3");
+          const title = card.querySelector(".card-header :is(h3, h4)");
           const excerpt = card.querySelector(".writing-card-excerpt");
           const series = card.querySelector(".writing-card-series");
           const id = focusApi()?.resolve(title ? title.textContent : "")?.id;
@@ -163,93 +174,98 @@ const ABOUT_BEN = {
             .join("\n");
         });
         const body = cards.length ? cards.join("\n\n") : "No articles are listed on this page.";
-        return answerAndFocus(body, "section-writing", highlight ? [highlight] : []);
+        const query = typeof highlight === "string" ? highlight.trim() : "";
+        return answerAndFocus(body, "section-writing", query ? [query] : []);
       },
+      annotations: { readOnlyHint: true },
     },
     {
       name: "list_education",
       description:
-        "List Ben Crow's education history. Also scrolls the visitor's screen to the About section.",
+        "List Ben Crow's education history and scroll the visitor's screen to the About section.",
       inputSchema: noArgsSchema,
       execute: async () => answerAndFocus(ABOUT_BEN.education.join("\n\n"), "section-about"),
+      annotations: { readOnlyHint: true },
     },
     {
       name: "get_contact_info",
       description:
-        "Get how to get in touch with Ben Crow. Also scrolls the visitor's screen to the Contact section.",
+        "Get how to get in touch with Ben Crow and scroll the visitor's screen to the Contact section.",
       inputSchema: noArgsSchema,
       execute: async () => answerAndFocus(ABOUT_BEN.contact, "section-contact"),
+      annotations: { readOnlyHint: true },
     },
     {
       name: "list_page_targets",
       description:
-        "List everything on this page that show_on_page can scroll to and highlight — sections, project cards, article cards, skill groups and individual technologies — with the page id of each.",
+        "List every element on this page that can be scrolled to and highlighted, along with its page id.",
       inputSchema: {
         type: "object",
         properties: {
           kind: {
             type: "string",
-            enum: ["section", "project", "writing", "skill-group", "tech"],
-            description: "Optional filter; omit to list every target.",
+            enum: VALID_KINDS,
+            description: "Optional category to narrow the returned targets.",
           },
         },
       },
       execute: async ({ kind } = {}) => {
+        if (kind !== undefined && !VALID_KINDS.includes(kind)) {
+          return { error: `Unsupported kind "${kind}".`, validKinds: VALID_KINDS };
+        }
         const focus = focusApi();
-        if (!focus) return textResult("This page has no highlightable targets.");
+        if (!focus) return { error: "This page has no highlightable targets." };
         const lines = focus.list(kind).map((target) => `${target.id} — ${target.label} (${target.kind})`);
         return textResult(lines.length ? lines.join("\n") : `No targets of kind "${kind}".`);
       },
+      annotations: { readOnlyHint: true },
     },
     {
       name: "show_on_page",
       description:
-        "Point the visitor at something on this page: scroll it into view, highlight it, and send the guide sprite to it. Use this whenever you mention a specific project, article, or technology, so the person reading sees what you are talking about. Accepts a page id from list_page_targets or a plain name like \"ScrolLess\".",
+        "Scroll a specific project, article, section, or technology into view, highlight it, and guide the visitor's eye to it. Use whenever referring to a specific item on the page.",
       inputSchema: {
         type: "object",
         properties: {
           target: {
             type: "string",
-            description: "Page id or name to show, e.g. \"project-scrolless\", \"ScrolLess\", or \"Ruby on Rails\".",
+            description: "Page id from list_page_targets or a plain name (e.g. \"project-scrolless\", \"ScrolLess\", or \"Ruby on Rails\").",
           },
         },
         required: ["target"],
       },
       execute: async ({ target } = {}) => {
+        if (typeof target !== "string" || !target.trim()) {
+          return { error: "Provide a non-empty target page id or name." };
+        }
         const focus = focusApi();
-        if (!focus) return textResult("This page cannot be navigated right now.");
+        if (!focus) return { error: "This page cannot be navigated right now." };
         const shown = focus.focus(target);
         if (!shown) {
-          return textResult(
-            `Nothing on this page matches "${target}". Call list_page_targets to see what can be shown.`
-          );
+          return {
+            error: `Nothing on this page matches "${target}".`,
+            hint: "Call list_page_targets to see valid page ids.",
+          };
         }
         const described = focus.get(shown.id) || shown;
         return textResult(`Showing ${described.label} (${described.kind}) — it is now scrolled into view and highlighted.`);
       },
+      annotations: { readOnlyHint: true },
     },
   ];
 
-  // No browser ships document.modelContext natively yet (Chrome, behind a flag,
-  // is first). Only install a fallback when nothing — native or a polyfill
-  // loaded earlier on the page — has already defined it.
-  if (!("modelContext" in document)) {
-    const registry = new Map();
-    document.modelContext = {
-      registerTool(tool, options) {
-        registry.set(tool.name, tool);
-        options?.signal?.addEventListener("abort", () => registry.delete(tool.name));
-      },
-      getTools: () => Array.from(registry.values()),
-    };
-  }
-
-  for (const tool of TOOLS) {
-    try {
-      document.modelContext.registerTool(tool);
-    } catch (error) {
-      console.warn(`Site tools: failed to register "${tool.name}"`, error);
+  // Register tools only when WebMCP is natively available (or polyfilled
+  // before this script runs), using AbortSignal for clean teardown.
+  if ("modelContext" in document && typeof document.modelContext?.registerTool === "function") {
+    const controller = new AbortController();
+    for (const tool of TOOLS) {
+      try {
+        document.modelContext.registerTool(tool, { signal: controller.signal });
+      } catch (error) {
+        console.warn(`Site tools: failed to register "${tool.name}"`, error);
+      }
     }
+    window.addEventListener("pagehide", () => controller.abort(), { once: true });
   }
 
   window.BenSiteTools = { ABOUT_BEN, TOOLS };

@@ -127,7 +127,7 @@
     // Writing cards — slug from the article link.
     document.querySelectorAll(".writing-card").forEach((card) => {
       const link = card.querySelector(".writing-card-link");
-      const label = text(card.querySelector(".card-header h3"));
+      const label = text(card.querySelector(".card-header :is(h3, h4)"));
       const slug = link ? slugFromHref(link.getAttribute("href")) : "";
       if (!label || !slug) return;
       addTarget({

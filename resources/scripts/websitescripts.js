@@ -1,34 +1,51 @@
 // ── Ben Crow — homepage scripts ──
-// Theme toggle, popover-nav fallback, FAB fallback, carousel keys,
-// and the WebGL2 shader hero. Everything degrades gracefully.
+// Theme toggle (<meta name="color-scheme">), popover-nav fallback,
+// FAB fallback, ambient motion pause control, and the WebGL2 shader hero.
+// Everything degrades gracefully.
 
-// ── Theme cycle: light → dark → system default ──
-// Initial state is set by an inline head script; "system" follows
+// ── Theme cycle: light → dark → system ("light dark") ──
+// Initial state is set by an inline head script; "light dark" follows
 // prefers-color-scheme live and stores nothing.
 const themeToggle = document.querySelector(".theme-toggle");
+const colorSchemeMeta = document.querySelector('meta[name="color-scheme"]');
 const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
-const applyThemeMode = (mode) => {
-  const theme = mode === "system" ? (systemDark.matches ? "dark" : "light") : mode;
-  document.documentElement.setAttribute("data-theme", theme);
-  document.documentElement.setAttribute("data-theme-mode", mode);
-  const label = mode === "system" ? "system default" : mode;
-  themeToggle.setAttribute("aria-label", "Theme: " + label + " — activate to change");
-  themeToggle.title = "Theme: " + label;
+
+const normalizeScheme = (value) => (value === "light" || value === "dark" ? value : "light dark");
+const isDarkResolved = () => {
+  const scheme = normalizeScheme(colorSchemeMeta?.content);
+  return scheme === "dark" || (scheme === "light dark" && systemDark.matches);
 };
+
+const applyColorScheme = (scheme) => {
+  const next = normalizeScheme(scheme);
+  if (colorSchemeMeta) colorSchemeMeta.content = next;
+  const resolved = next === "light dark" ? (systemDark.matches ? "dark" : "light") : next;
+  const label = next === "light dark" ? `system (currently ${resolved})` : next;
+  themeToggle.setAttribute("aria-label", `Theme: ${label} — activate to change`);
+  document.dispatchEvent(new CustomEvent("colorschemechange", { detail: { scheme: next, resolved } }));
+};
+
 themeToggle.addEventListener("click", () => {
-  const order = ["light", "dark", "system"];
-  const current = document.documentElement.getAttribute("data-theme-mode") || "system";
+  const order = ["light", "dark", "light dark"];
+  const current = normalizeScheme(colorSchemeMeta?.content);
   const next = order[(order.indexOf(current) + 1) % order.length];
-  applyThemeMode(next);
+  applyColorScheme(next);
   try {
-    if (next === "system") localStorage.removeItem("theme");
-    else localStorage.setItem("theme", next);
+    localStorage.removeItem("theme");
+    if (next === "light dark") localStorage.removeItem("color-scheme");
+    else localStorage.setItem("color-scheme", next);
   } catch (e) {}
 });
+
 systemDark.addEventListener("change", () => {
-  if (document.documentElement.getAttribute("data-theme-mode") === "system") applyThemeMode("system");
+  if (normalizeScheme(colorSchemeMeta?.content) === "light dark") applyColorScheme("light dark");
 });
-applyThemeMode(document.documentElement.getAttribute("data-theme-mode") || "system");
+
+window.addEventListener("storage", (event) => {
+  if (event.key === "color-scheme") applyColorScheme(event.newValue);
+});
+
+applyColorScheme(colorSchemeMeta?.content);
 
 // ── Mobile nav: native Popover API where supported ──
 const navToggle = document.querySelector(".nav-toggle");
@@ -192,14 +209,34 @@ if (!fabScrollDriven) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
 })();
 
+// ── Ambient hero animation pause/play (WCAG 2.2.2) ──
+// Pauses the CSS gradient drift, blinking prompt caret, and WebGL2 shader.
+const heroEl = document.getElementById("top");
+const heroMotionToggle = heroEl && heroEl.querySelector(".hero-motion-toggle");
+let heroMotionPaused = false;
+if (heroEl && heroMotionToggle) {
+  const toggleLabel = heroMotionToggle.querySelector(".hero-motion-label");
+  heroMotionToggle.addEventListener("click", () => {
+    heroMotionPaused = !heroMotionPaused;
+    heroEl.classList.toggle("is-paused", heroMotionPaused);
+    heroMotionToggle.setAttribute(
+      "aria-label",
+      heroMotionPaused ? "Play background animation" : "Pause background animation"
+    );
+    if (toggleLabel) toggleLabel.textContent = heroMotionPaused ? "Play" : "Pause";
+    document.dispatchEvent(new CustomEvent("heromotionchange", { detail: { paused: heroMotionPaused } }));
+  });
+}
+
 // ── WebGL2 shader hero ────────────────────────────────────────
 // Layered simplex/FBM flow field in the brand palette, with eased
-// pointer parallax. Pauses offscreen and on tab blur; renders one
-// static frame under prefers-reduced-motion. The animated CSS gradient
-// fallback stays in place until the first frame paints, and returns if
-// WebGL2 is unavailable, the shader fails, or the GPU context is lost.
+// pointer parallax. Pauses offscreen, on tab blur, and when paused by the
+// visitor; renders one static frame under prefers-reduced-motion. The
+// animated CSS gradient fallback stays in place until the first frame
+// paints, and returns if WebGL2 is unavailable, the shader fails, or the
+// GPU context is lost.
 (() => {
-  const hero = document.getElementById("top");
+  const hero = heroEl;
   const canvas = hero && hero.querySelector(".hero-canvas");
   if (!canvas) return;
 
@@ -323,7 +360,7 @@ if (!fabScrollDriven) {
   const uLight = gl.getUniformLocation(prog, "u_light");
 
   // Theme drives the shader palette; eased so toggling cross-fades.
-  const themeLight = () => (document.documentElement.getAttribute("data-theme") === "dark" ? 0 : 1);
+  const themeLight = () => (isDarkResolved() ? 0 : 1);
   let lightTarget = themeLight();
   let lightNow = lightTarget;
 
@@ -384,10 +421,12 @@ if (!fabScrollDriven) {
   };
 
   const watchTheme = (onChange) => {
-    new MutationObserver(() => {
+    const sync = () => {
       lightTarget = themeLight();
       if (onChange) onChange();
-    }).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    };
+    document.addEventListener("colorschemechange", sync);
+    systemDark.addEventListener("change", sync);
   };
 
   if (reduceMotion) {
@@ -404,19 +443,27 @@ if (!fabScrollDriven) {
     });
     return;
   }
-  watchTheme();
 
-  window.addEventListener("resize", resize);
+  let pausedTimeSec = 0;
+  let lastFrameSec = 0;
+
+  window.addEventListener("resize", () => {
+    resize();
+    if (heroMotionPaused) draw(pausedTimeSec);
+  });
   hero.addEventListener("pointermove", (e) => {
+    if (heroMotionPaused) return;
     const rect = hero.getBoundingClientRect();
     targetX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     targetY = 1 - ((e.clientY - rect.top) / rect.height) * 2;
   });
 
   let visible = true;
+  const shouldRun = () => visible && !document.hidden && !heroMotionPaused;
   const loop = (now) => {
     if (contextLost) return;
-    draw(now / 1000);
+    lastFrameSec = now / 1000;
+    draw(lastFrameSec);
     reveal();
     rafId = requestAnimationFrame(loop);
   };
@@ -429,18 +476,30 @@ if (!fabScrollDriven) {
     }
   };
 
+  watchTheme(() => {
+    if (heroMotionPaused) {
+      lightNow = lightTarget;
+      draw(pausedTimeSec);
+    }
+  });
+
+  document.addEventListener("heromotionchange", () => {
+    if (heroMotionPaused) pausedTimeSec = lastFrameSec || 37.0;
+    setRunning(shouldRun());
+  });
+
   if ("IntersectionObserver" in window) {
     new IntersectionObserver(
       (entries) => {
         visible = entries[0].isIntersecting;
-        setRunning(visible && !document.hidden);
+        setRunning(shouldRun());
       },
       { threshold: 0.01 }
     ).observe(hero);
   }
   document.addEventListener("visibilitychange", () => {
-    setRunning(visible && !document.hidden);
+    setRunning(shouldRun());
   });
 
-  setRunning(true);
+  setRunning(shouldRun());
 })();

@@ -39,7 +39,13 @@
     dark: { core: [1.0, 0.82, 0.55], glow: [1.0, 0.42, 0.36], accent: [0.45, 0.58, 1.0] },
     light: { core: [1.0, 0.43, 0.3], glow: [0.79, 0.26, 0.23], accent: [0.16, 0.24, 0.55] },
   };
-  const isLight = () => document.documentElement.getAttribute("data-theme") !== "dark";
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+  const isLight = () => {
+    const scheme = document.querySelector('meta[name="color-scheme"]')?.content;
+    if (scheme === "dark") return false;
+    if (scheme === "light") return true;
+    return !systemDark.matches;
+  };
 
   // ── Renderers ───────────────────────────────────────────────
   const WGSL = `
